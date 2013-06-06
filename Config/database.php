@@ -59,9 +59,9 @@ class DATABASE_CONFIG {
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
 		'host' => 'localhost',
-		'login' => 'chaa',
-		'password' => 'tijolo22',
-		'database' => 'chaaunic_banco_imagens',
+		'login' => '',
+		'password' => '',
+		'database' => '',
 		'prefix' => '',
 		//'encoding' => 'utf8',
 	);
