@@ -95,6 +95,14 @@ Configure::write('Dispatcher.filters', array(
 	'CacheDispatcher'
 ));
 
+Inflector::rules('plural', 
+                 array(
+                       'irregular' => array(
+                                            'instituicao' => 'instituicoes', 
+                                            'pais' => 'paises',
+                                            'artista' => 'artistas',
+                                            'iconografia' => 'iconografias')));
+
 /**
  * Configures default file logging options
  */
