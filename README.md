@@ -1,4 +1,4 @@
 chaa-warburg
 ============
 
-Site do banco de imagens Warburg do CHAA, Unicamp
+Site do banco de imagens Warburg do CHAA, UNICAMP
