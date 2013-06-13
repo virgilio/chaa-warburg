@@ -1,0 +1,74 @@
+/* Mini reset */
+* {
+    margin:0;
+    padding:0;
+    list-style:none;
+    vertical-align:baseline;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+/* Fim do mini reset */
+body{
+    background: url('../img/fundo.gif') 0 0 repeat;
+}
+h1{
+    padding: 10px;
+}
+a{
+    color: #990000;
+    text-decoration: none;
+}
+a:hover{
+    color: #222;
+}
+#container, #header{
+    background-color: #FFFFFF;
+}
+#container{
+    width: 960px;
+    margin: 0 auto;
+}
+
+#main-menu{
+    background-color: #cfcfcf;
+}
+#main-menu ul{
+    list-style: none;
+    text-transform: uppercase;
+    text-align: right;
+} 
+#main-menu ul li{
+    display: inline-block;
+    padding: 0.5em;
+}
+#main-menu a{
+    text-decoration: none;
+    color: #222;
+}
+#main-menu a:hover{
+    color: #990000;
+}
+
+.mini-obra{
+    float: left;
+    width: 192px;
+    height: 240px;
+    text-align: center;
+    padding: 10px;
+}
+.mini-obra p{
+    padding: 10px 0;
+}
+.mini-obra .nome-artista{
+    border-top: 1px dashed #cfcfcf;
+    font-size: 0.9em;
+    color: #666;
+}
+.nome-artista a{
+    color: #444;
+}
+
+.paging{
+    clear: both;
+}
