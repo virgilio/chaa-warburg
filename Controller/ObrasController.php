@@ -32,6 +32,14 @@ class ObrasController extends AppController {
 		$this->set('obra', $this->Obra->find('first', $options));
 	}
 
+	public function admin_view($id = null) {
+		if (!$this->Obra->exists($id)) {
+			throw new NotFoundException(__('Invalid obra'));
+		}
+		$options = array('conditions' => array('Obra.' . $this->Obra->primaryKey => $id));
+		$this->set('obra', $this->Obra->find('first', $options));
+	}
+
 /**
  * add method
  *

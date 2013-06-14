@@ -72,3 +72,26 @@ a:hover{
 .paging{
     clear: both;
 }
+
+/*View Obra*/
+
+.img_obra{
+    width: 40%;
+    float: left;
+}
+.img_obra img{
+    max-width: 100%;
+}
+.info_obra{
+    width: 60%;
+    float: right;
+}
+.related{
+    clear: both;
+    display: table;
+}
+h2.nome_obra{
+
+}
+
+/*Fim view obra*/
