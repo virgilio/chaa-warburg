@@ -22,10 +22,14 @@ a{
 a:hover{
     color: #222;
 }
+a.lnk_logo{
+    display: block;
+    height: 144px;
+}
 #container, #header{
     background-color: #FFFFFF;
 }
-#container{
+#container, .obra_container{
     width: 960px;
     margin: 0 auto;
 }
@@ -65,7 +69,7 @@ a:hover{
     font-size: 0.9em;
     color: #666;
 }
-.nome-artista a{
+.mini-obra .nome-artista a{
     color: #444;
 }
 
@@ -76,22 +80,85 @@ a:hover{
 /*View Obra*/
 
 .img_obra{
-    width: 40%;
+    width: 384px;
     float: left;
+    padding: 0 20px;
 }
 .img_obra img{
     max-width: 100%;
+    box-shadow: 2px 2px 5px #444;
 }
 .info_obra{
-    width: 60%;
+    width: 576px;
     float: right;
 }
 .related{
     clear: both;
     display: table;
 }
+.related h3{
+    color: #990000;
+}
 h2.nome_obra{
-
+    color: #990000;
+    font-size: 18px;
+}
+.obra_container{
+    display: table;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #990000;
+}
+.related h3 {
+    padding: 10px;
 }
 
+.info_obra p{
+    margin: 10px 0;
+    font-size: 16px;
+}
+.obra_container .nome_artista a{
+    color: #666;
+}
+.obra_container .nome_artista a:hover{
+    color: #990000;
+}
+.obra_descricao{
+    color: #444;
+    border-top: 1px solid #990000;
+    padding-top: 10px;
+}
+.modal_relacionadas .obra{
+    float: left;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+.obra img{
+    max-width: 100%;
+    max-height: 85%;
+}
 /*Fim view obra*/
+
+/*View artista*/
+.artistas{
+    color: #222;
+}
+.artistas h2{
+    padding: 10px;
+    color: #444;
+}
+.img_artista{
+    float: left;
+}
+.img_artista img{
+    border: 5px solid white;
+    border-radius: 2px;
+    margin: 10px;
+    box-shadow: 2px 2px 8px #ccc;
+}
+.desc_artista{
+    line-height: 25px;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+/*Fim view artista*/

@@ -31,6 +31,13 @@ class ArtistasController extends AppController {
 		$options = array('conditions' => array('Artista.' . $this->Artista->primaryKey => $id));
 		$this->set('artista', $this->Artista->find('first', $options));
 	}
+	public function admin_view($id = null) {
+		if (!$this->Artista->exists($id)) {
+			throw new NotFoundException(__('Invalid artista'));
+		}
+		$options = array('conditions' => array('Artista.' . $this->Artista->primaryKey => $id));
+		$this->set('artista', $this->Artista->find('first', $options));
+	}
 
 /**
  * add method

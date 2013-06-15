@@ -25,6 +25,7 @@ class ObrasController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+		$this->Obra->recursive = 2;
 		if (!$this->Obra->exists($id)) {
 			throw new NotFoundException(__('Invalid obra'));
 		}
