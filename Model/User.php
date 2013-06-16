@@ -12,41 +12,48 @@ class User extends AppModel {
   public $displayField = "nome";
 
 
-/**
- * Validation rules
- *
- * @var array
- */
-	public $validate = array(
-		'nome' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'email' => array(
-			'email' => array(
-				'rule' => array('email'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'password' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-	);
+  /**
+   * Validation rules
+   *
+   * @var array
+   */
+  public $validate = 
+    array(
+          'nome' => array (
+                 'notempty' => array(
+                       'rule' => 
+                       array('notempty'),
+                       ),
+                           ),
+          'email' => array(
+                'email' => array(
+                      'rule' => array('email'),
+                      ),
+                ),
+          'password' => array(
+                'required' => array(
+                      'rule' => array('notEmpty'),
+                      'message' => 'Insira a senha'
+                      ),
+                'notempty' => array(
+                      'rule' => array('notempty'),
+                      ),
+                ),
+          'role' => array(
+                'valid' => array(
+                      'rule' => array('inList', array('admin', 'author')),
+                      'message' => 'Please enter a valid role',
+                      'allowEmpty' => false
+                       )
+                )
+          );
+
+  public function beforeSave($options = array()) {
+    if (isset($this->data[$this->alias]['password'])) {
+      $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+    }
+    return true;
+  }
+
+
 }

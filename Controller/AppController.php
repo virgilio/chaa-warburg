@@ -21,6 +21,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 App::uses('Controller', 'Controller');
+App::uses('AuthComponent', 'Controller/Component');
 
 /**
  * Application Controller
@@ -32,4 +33,38 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+  public $components = array(
+                             'Session',
+                             'Auth' => array(
+                                             'loginRedirect' => array('controller' => 'obras', 'action' => 'index'),
+                                             'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
+                                             'authenticate' => array('Form' => array(
+                                                                                     'fields' => array('username' => 'email')
+                                                                                     )
+                                                                     ),
+                                             'authorize' => array('Controller')
+                                             ),
+                             );
+  
+  function beforeFilter() {
+    //$this->Auth->allow('index', 'view');
+    $this->Auth->allow();
+  }
+
+  public function isAuthorized($user = null) {
+    // Any registered user can access public functions
+    if (empty($this->request->params['admin'])) {
+      return true;
+    }
+
+    // Only admins can access admin functions
+    if (isset($this->request->params['admin'])) {
+      return (bool)($user['role'] === 'admin');
+    }
+
+    // Default deny
+    return false;
+  }
+
 }
