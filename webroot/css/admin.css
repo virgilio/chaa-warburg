@@ -1,0 +1,33 @@
+.lista_admin{
+    font-family: sans-serif;
+    margin: 20px;
+    border: 1px solid #CCC;
+    border-right: none;
+    border-bottom: none;
+}
+.lista_admin th{
+    background-color: #600;
+    text-transform: uppercase;
+    text-align: left;
+    border-right: 1px solid white;
+}
+.lista_admin th, .lista_admin th a{
+    color: white;
+}
+.lista_admin td{
+    color: #999;
+    font-size: 15px;
+    padding-left: 10px;
+    border-right: 1px solid #CCC;
+    border-bottom: 1px solid #CCC;
+}
+
+.lista_admin th, .lista_admin td{
+    padding: 10px;
+}
+.obras .lista_admin th, .obras .lista_admin td{
+    width: 40%;
+}
+.obras .lista_admin th:last-child, .obras .lista_admin td:last-child{
+    width: 10%;
+}

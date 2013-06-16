@@ -12,7 +12,7 @@ class InstituicoesController extends AppController {
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->Instituicao->recursive = 0;
 		$this->set('instituicoes', $this->paginate());
 	}

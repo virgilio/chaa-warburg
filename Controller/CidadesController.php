@@ -12,7 +12,7 @@ class CidadesController extends AppController {
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->Cidade->recursive = 0;
 		$this->set('cidades', $this->paginate());
 	}

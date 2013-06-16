@@ -16,6 +16,10 @@ class ObrasController extends AppController {
 		$this->Obra->recursive = 0;
 		$this->set('obras', $this->paginate());
 	}
+	public function admin_index() {
+		$this->Obra->recursive = 0;
+		$this->set('obras', $this->paginate());
+	}
 
 /**
  * view method

@@ -12,7 +12,7 @@ class IconografiasController extends AppController {
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->Iconografia->recursive = 0;
 		$this->set('iconografias', $this->paginate());
 	}

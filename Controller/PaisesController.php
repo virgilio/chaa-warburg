@@ -12,7 +12,7 @@ class PaisesController extends AppController {
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->Pais->recursive = 0;
 		$this->set('paises', $this->paginate());
 	}

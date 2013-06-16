@@ -12,7 +12,7 @@ class ArtistasController extends AppController {
  *
  * @return void
  */
-	public function index() {
+	public function admin_index() {
 		$this->Artista->recursive = 0;
 		$this->set('artistas', $this->paginate());
 	}

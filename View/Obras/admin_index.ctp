@@ -1,61 +1,24 @@
+<?php 
+	$this->Html->css("admin.css", null, array("inline" => false));
+?>
+
 <div class="obras index">
-	<h2><?php echo __('Obras'); ?></h2>
-	<table cellpadding="0" cellspacing="0">
+	<h2><?php echo __('Obras cadastradas'); ?></h2>
+	<table class="lista_admin" cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('nome'); ?></th>
-			<th><?php echo $this->Paginator->sort('imagem'); ?></th>
-			<th><?php echo $this->Paginator->sort('ano_inicio'); ?></th>
-			<th><?php echo $this->Paginator->sort('ano_fim'); ?></th>
-			<th><?php echo $this->Paginator->sort('tamanho_obra'); ?></th>
-			<th><?php echo $this->Paginator->sort('descricao'); ?></th>
-			<th><?php echo $this->Paginator->sort('tags'); ?></th>
-			<th><?php echo $this->Paginator->sort('obra_tipos_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('instituicao_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('pais_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('cidade_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('artista_id'); ?></th>
-			<th><?php echo $this->Paginator->sort('incerta'); ?></th>
-			<th><?php echo $this->Paginator->sort('circa'); ?></th>
-			<th><?php echo $this->Paginator->sort('aproximado'); ?></th>
-			<th><?php echo $this->Paginator->sort('iconografia_id'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($obras as $obra): ?>
 	<tr>
-		<td><?php echo h($obra['Obra']['id']); ?>&nbsp;</td>
 		<td><?php echo h($obra['Obra']['nome']); ?>&nbsp;</td>
-		<td><?php echo h($obra['Obra']['imagem']); ?>&nbsp;</td>
-		<td><?php echo h($obra['Obra']['ano_inicio']); ?>&nbsp;</td>
-		<td><?php echo h($obra['Obra']['ano_fim']); ?>&nbsp;</td>
-		<td><?php echo h($obra['Obra']['tamanho_obra']); ?>&nbsp;</td>
-		<td><?php echo h($obra['Obra']['descricao']); ?>&nbsp;</td>
-		<td><?php echo h($obra['Obra']['tags']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($obra['ObraTipo']['nome'], array('controller' => 'obra_tipos', 'action' => 'view', $obra['ObraTipo']['id'])); ?>
-		</td>
-		<td>
-			<?php echo $this->Html->link($obra['Instituicao']['nome'], array('controller' => 'instituicoes', 'action' => 'view', $obra['Instituicao']['id'])); ?>
-		</td>
-		<td>
-			<?php echo $this->Html->link($obra['Pais']['nome'], array('controller' => 'paises', 'action' => 'view', $obra['Pais']['id'])); ?>
-		</td>
-		<td>
-			<?php echo $this->Html->link($obra['Cidade']['nome'], array('controller' => 'cidades', 'action' => 'view', $obra['Cidade']['id'])); ?>
-		</td>
-		<td>
-			<?php echo $this->Html->link($obra['Artista']['nome'], array('controller' => 'artistas', 'action' => 'view', $obra['Artista']['id'])); ?>
-		</td>
-		<td><?php echo h($obra['Obra']['incerta']); ?>&nbsp;</td>
-		<td><?php echo h($obra['Obra']['circa']); ?>&nbsp;</td>
-		<td><?php echo h($obra['Obra']['aproximado']); ?>&nbsp;</td>
-		<td>
-			<?php echo $this->Html->link($obra['Iconografia']['nome'], array('controller' => 'iconografias', 'action' => 'view', $obra['Iconografia']['id'])); ?>
+			<?php echo $this->Html->link($obra['Artista']['nome'], array('controller' => 'artistas', 'action' => 'edit', $obra['Artista']['id'])); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View'), array('action' => 'view', $obra['Obra']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $obra['Obra']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $obra['Obra']['id']), null, __('Are you sure you want to delete # %s?', $obra['Obra']['id'])); ?>
+			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $obra['Obra']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Deletar'), array('action' => 'delete', $obra['Obra']['id']), null, __('Are you sure you want to delete # %s?', $obra['Obra']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
