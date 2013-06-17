@@ -1,5 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
+App::uses('Sanitize', 'Utility');
+
 /**
  * Obras Controller
  *
@@ -18,11 +20,44 @@ class ObrasController extends AppController {
 	}
 
 	public function admin_index() {
-		$this->Obra->recursive = 0;
-		$this->set('obras', $this->paginate());
+          $this->Obra->recursive = 0;
+          $this->set('obras', $this->paginate());
 	}
 
 
+
+        public function search() {
+          $this->Obra->recursive = 0;
+          $data = $this->request->query;
+          
+          if($this->request->is('get') && !empty($data)) {
+            //die(print_r($data, true));
+            $this->paginate = array(
+                                    'fields' => array(
+                                                      'Obra.id', 
+                                                      'Obra.nome', 
+                                                      'Obra.imagem', 
+                                                      'Artista.id',
+                                                      'Artista.nome', 
+                                                      'Obra.ano_inicio', 
+                                                      'Obra.ano_fim'),
+                                    'conditions' => array(
+                                                          'OR' => array(
+                                                                        'Artista.nome LIKE' => '%' . $data['query'] . '%',
+                                                                        'Obra.nome LIKE' => '%' . $data['query'] . '%',
+                                                                        'Obra.descricao LIKE' => '%' . $data['query'] . '%',
+                                                                        'Obra.ano_inicio LIKE' => '%' . $data['query'] . '%',
+                                                                        'Obra.ano_fim LIKE' => '%' . $data['query'] . '%',
+                                                                        'Instituicao.nome LIKE' => '%' . $data['query'] . '%',
+                                                                        'Iconografia.nome LIKE' => '%' . $data['query'] . '%',
+                                                                        )
+                                                          )
+                                    );
+          }
+          $obras = $this->paginate('Obra');
+          $this->set('obras', $obras);
+        }
+        
 /**
  * view method
  *

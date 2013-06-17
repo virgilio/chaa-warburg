@@ -58,7 +58,7 @@ class InstituicoesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$this->Instituicao->exists($id)) {
 			throw new NotFoundException(__('Invalid instituicao'));
 		}
