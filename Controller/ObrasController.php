@@ -55,14 +55,115 @@ class ObrasController extends AppController {
         
         public function insert() {
           if ($this->request->is('post')) {
-            echo "<pre>";
-            die(print_r($this->request, true));
-            echo "</pre>";
-            //Save image
-            //Redirect to edit if all Ok
+            $obra = array('nome' => '');
+
+            $data = $this->request->data;
+            $obra['nome'] =  $data['Obra']['nome'];
+            $obra['imagem'] =  $this->processFile($data['Obra']['imagem'], $data['Thumb']);
+            $obra['tamanho_obra'] = $data['Thumb']['filedim'];
+            $this->Obra->create();
+            if ($this->Obra->save($obra)) {
+              $this->Session->setFlash(__('A Imagem foi salva!'));
+              $this->redirect(array('action' => 'edit', $this->Obra->id));                          
+            } else {
+              $this->Session->setFlash(__('A obra Obra não pode ser salva, tente novamente'));
+            }
           }
         }
+        
+        
+        private function _ext($uploaded){ 
+           return strrchr($uploaded['name'],"."); 
+        }
+        
+        
+        private function processFile($uploaded, $thumb){ 
+          $uploaded['name'] = strtolower(str_replace(" ", "-", $uploaded['name'])); 
 
+                    
+          $up_dir = WWW_ROOT . "img/obras"; 
+          $thumb_up_dir = WWW_ROOT . "img/obras/thumbs"; 
+
+          $target_path = $up_dir . DS . $uploaded['name']; 
+          $thumb_target_path = $thumb_up_dir . DS . $uploaded['name']; 
+
+          $temp_path = substr($target_path, 0, strlen($target_path) - strlen($this->_ext($uploaded))); //temp path without the ext 
+          $thumb_temp_path = substr($thumb_target_path, 0, strlen($thumb_target_path) - strlen($this->_ext($uploaded))); //temp path without the ext 
+
+          $i = 1; 
+          while(file_exists($target_path)){ 
+            $target_path = $temp_path . "-" . $i . $this->_ext($uploaded); 
+            $thumb_target_path = $thumb_temp_path . "-" . $i . $this->_ext($uploaded); 
+            $i++; 
+          } 
+          
+          $save_data = array(); 
+          
+          if(move_uploaded_file($uploaded['tmp_name'], $target_path)){ 
+            //Final File Name 
+            $finalFile = basename($target_path); 
+            @chmod($target_path, 0644);
+            $this->createThumb($target_path, $thumb, $thumb_target_path);           
+          } else { 
+            //$this->_error('ObrasController::processFile() - Unable to save temp file to file system.'); 
+            die('ObrasController::processFile() - Unable to save temp file to file system.'); 
+          }
+          return $finalFile;
+        } 
+        
+
+        private function createThumb($sTempFileName, $thumb, $target){
+          if (file_exists($sTempFileName) && filesize($sTempFileName) > 0) {
+            $aSize = getimagesize($sTempFileName); // try to obtain image info
+            if (!$aSize) {
+              //@unlink($sTempFileName);
+              return;
+            }
+
+            // check for image type
+            switch($aSize[2]) {
+            case IMAGETYPE_JPEG:
+              $sExt = '.jpg';
+              $vImg = imagecreatefromjpeg($sTempFileName);
+              break;
+            case IMAGETYPE_GIF:
+                $sExt = '.gif';
+                $vImg = @imagecreatefromgif($sTempFileName);
+                break;
+            case IMAGETYPE_PNG:
+              $sExt = '.png';
+              $vImg = imagecreatefrompng($sTempFileName);
+              break;
+            default:
+              return;
+            }
+            
+            // create a new true color image
+            $vDstImg = imagecreatetruecolor((int)$thumb['w'], (int)$thumb['h']);
+            
+            // copy and resize part of an image with resampling
+            imagecopyresampled($vDstImg, $vImg, 
+                               0, 0, 
+                               (int)$thumb['x1'], (int)$thumb['y1'], 
+                               (int)$thumb['w'], (int)$thumb['h'], 
+                               (int)$thumb['w'], (int)$thumb['h']);
+            
+            // define a result image filename
+            //$sResultFileName = $sTempFileName . $sExt;
+            //            die($target);
+            $sResultFileName = $target;
+            //die($target);
+            // output image to file
+            if('.jpg' === $sExt) {
+              $iJpgQuality = 90;
+              imagejpeg($vDstImg, $sResultFileName, $iJpgQuality);
+              //@unlink($sTempFileName);
+            } else {
+              imagepng($vDstImg, $sResultFileName);
+            }
+          }
+        }
+        
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Obra->create();

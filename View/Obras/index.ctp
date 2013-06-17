@@ -118,7 +118,13 @@
     <h1><?php echo __('Lista de obras'); ?></h1>
     <?php foreach ($obras as $obra): ?>
         <div class="mini-obra">
-            <?php echo $this->Html->link($this->Html->image(('obras/'.$obra['Obra']['id'].'_thumb.jpg'), array('alt' => 'oie', 'border' => '0')), array('controller' => 'obras', 'action' => 'view', $obra['Obra']['id']), array('escape'=>false)); ?>
+            <?php 
+               echo $this->Html->link(
+                      $this->Html->image(('obras/thumbs/' . $obra['Obra']['imagem']), 
+                        array('alt' => $obra['Obra']['imagem'], 'border' => '0')), 
+                        array('controller' => 'obras', 'action' => 'view', $obra['Obra']['id']), 
+                        array('escape'=>false)); 
+/*echo $this->Html->link($this->Html->image(('obras/'.$obra['Obra']['id'].'_thumb.jpg'), array('alt' => 'oie', 'border' => '0')), array('controller' => 'obras', 'action' => 'view', $obra['Obra']['id']), array('escape'=>false));*/ ?>
             <p>
                 <?php echo $this->Html->link(
                     h(substr($obra['Obra']['nome'], 0, 40)) . (strlen($obra['Obra']['nome']) > 40 ? '...' : ''), 

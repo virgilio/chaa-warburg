@@ -14,33 +14,31 @@
         action="/warburg/obras/insert" onsubmit="return checkForm()">
     <!-- hidden crop params -->
     <?php echo $this->Form->input('nome'); ?>
-    <input type="hidden" id="x1" name="x1" />
-    <input type="hidden" id="y1" name="y1" />
-    <input type="hidden" id="x2" name="x2" />
-    <input type="hidden" id="y2" name="y2" />
+    <input type="hidden" id="x1" name="data[Thumb][x1]" />
+    <input type="hidden" id="y1" name="data[Thumb][y1]" />
+    <input type="hidden" id="x2" name="data[Thumb][x2]" />
+    <input type="hidden" id="y2" name="data[Thumb][y2]" />
 
-    <h2>Step1: Please select image file</h2>
-    <div><input type="file" name="imagefile" id="image_file"
-                onchange="fileSelectHandler()" /></div>
+    <h4>Escolha a imagem para Upload</h4>
+    <?php echo $this->Form->input('imagem', array('type' => 'file', 'id' =>
+    'image_file', 'onchange' => 'fileSelectHandler()')); ?>
 
     <div class="error"></div>
 
     <div class="step2">
-      <h2>Step2: Please select a crop region</h2>
-      <img id="preview" />
-
-      <div class="info">
-        <label>File size</label> <input type="text" id="filesize"
-                                        name="filesize" />
-        <label>Type</label> <input type="text" id="filetype"
-                                   name="filetype" />
-        <label>Image dimension</label> <input type="text" id="filedim"
-                                              name="filedim" />
-        <label>W</label> <input type="text" id="w" name="w" />
-        <label>H</label> <input type="text" id="h" name="h" />
+      <h4>Selecione o Thumbnail desejado</h4>
+      <div class="container">
+        <div class="span8 offset2">
+          <img id="preview" />
+        </div>
       </div>
-
-      <input type="submit" value="Upload" />
+      <input type="hidden" id="filesize" name="data[Thumb][filesize]" />
+      <input type="hidden" id="filetype" name="data[Thumb][filetype]" />
+      <input type="hidden" id="filedim" name="data[Thumb][filedim]" />
+      <input type="hidden" id="w" name="data[Thumb][w]" />
+      <input type="hidden" id="h" name="data[Thumb][h]" />
+      
+      <?php echo $this->Form->end('Enviar'); ?>
     </div>
   </form>
 </div>

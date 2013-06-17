@@ -65,34 +65,34 @@ class Obra extends AppModel {
 			),
 		),
 		'tamanho_obra' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+                                        //'notempty' => array(
+                                        //'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+                                        //),
 		),
 		'descricao' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+                                     //'notempty' => array(
+                                     //'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+                                     //),
 		),
 		'tags' => array(
-			'notempty' => array(
-				'rule' => array('notempty'),
+                                //'notempty' => array(
+				//'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+                                //),
 		),
 		'obra_tipos_id' => array(
 			'numeric' => array(
