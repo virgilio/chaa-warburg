@@ -26,7 +26,7 @@
 	<div class="control-group">
 	  <label class="control-label" for="singlebutton"></label>
 	  <div class="controls">
-	    <?php echo $this->Form->end(array('label' => 'Adicionar', 'class' => 'btn btn-primary')); ?>
+	    <?php echo $this->Form->end(array('label' => 'Adicionar', 'class' => 'btn')); ?>
 	  </div>
 	</div>
 </div>

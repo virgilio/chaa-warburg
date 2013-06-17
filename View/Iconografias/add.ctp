@@ -1,12 +1,20 @@
 <div class="iconografias form">
-<?php echo $this->Form->create('Iconografia'); ?>
+<?php echo $this->Form->create('Iconografia', array('class' => 'form-horizontal')); ?>
 	<fieldset>
-		<legend><?php echo __('Add Iconografia'); ?></legend>
-	<?php
-		echo $this->Form->input('nome');
-	?>
+		<legend><?php echo __('Adicionar Iconografia'); ?></legend>
+		<div class="control-group">
+		  <label class="control-label" for="nome">Nome da iconografia</label>
+		  <div class="controls">
+		    <?php echo $this->Form->input('nome', array('label' => '')); ?>		    
+		  </div>
+		</div>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+	<div class="control-group">
+	  <label class="control-label" for="singlebutton"></label>
+	  <div class="controls">
+	    <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn')); ?>
+	  </div>
+	</div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

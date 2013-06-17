@@ -1,13 +1,23 @@
 <div class="paises form">
-<?php echo $this->Form->create('Pais'); ?>
+<?php echo $this->Form->create('Pais', array('class' => 'form-horizontal')); ?>
 	<fieldset>
-		<legend><?php echo __('Edit Pais'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('nome');
-	?>
+		<legend><?php echo __('Editar País'); ?></legend>
+
+		<?php echo $this->Form->input('id');?>
+		<div class="control-group">
+		  <label class="control-label" for="nome">Nome do país</label>
+		  <div class="controls">
+		    <?php echo $this->Form->input('nome', array('label' => '')); ?>		    
+		  </div>
+		</div>
+
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+	<div class="control-group">
+	  <label class="control-label" for="singlebutton"></label>
+	  <div class="controls">
+	    <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn')); ?>
+	  </div>
+	</div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

@@ -1,13 +1,28 @@
 <div class="cidades form">
-<?php echo $this->Form->create('Cidade'); ?>
+<?php echo $this->Form->create('Cidade', array('class' => 'form-horizontal')); ?>
 	<fieldset>
-		<legend><?php echo __('Add Cidade'); ?></legend>
-	<?php
-		echo $this->Form->input('nome');
-		echo $this->Form->input('pais_id');
-	?>
+		<legend><?php echo __('Adicionar Cidade'); ?></legend>
+		<div class="control-group">
+		  <label class="control-label" for="nome">Nome da cidade</label>
+		  <div class="controls">
+		    <?php echo $this->Form->input('nome', array('label' => '')); ?>		    
+		  </div>
+		</div>
+		<div class="control-group">
+          <label class="control-label" for="pais_id">País</label>
+          <div class="controls">
+            <?php echo $this->Form->input('pais_id',
+                        array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione o país')); ?>
+          </div>
+        </div>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+
+	<div class="control-group">
+	  <label class="control-label" for="singlebutton"></label>
+	  <div class="controls">
+	    <?php echo $this->Form->end(array('label' => 'Adicionar', 'class' => 'btn')); ?>
+	  </div>
+	</div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
