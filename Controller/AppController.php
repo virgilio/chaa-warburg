@@ -50,6 +50,9 @@ class AppController extends Controller {
   function beforeFilter() {
     //$this->Auth->allow('index', 'view');
     $this->Auth->allow();
+    if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
+      $this->layout = 'admin';
+    } 
   }
 
   public function isAuthorized($user = null) {
