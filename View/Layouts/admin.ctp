@@ -73,7 +73,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			              <li class="<?php echo (strpos($this->here, 'iconografias') !== false) ? 'active' : ''; ?>">
 			                <?php echo $this->Html->link(__('Iconografias'), array('controller' => 'iconografias', 'action' => 'admin_index')); ?>
 			              </li>
-			              <li class="<?php echo (strpos($this->here, 'obratipos') !== false) ? 'active' : ''; ?>">
+			              <li class="<?php echo (strpos($this->here, 'obra_tipos') !== false) ? 'active' : ''; ?>">
 			                <?php echo $this->Html->link(__('Tipos de obra'), array('controller' => 'obra_tipos', 'action' => 'admin_index')); ?>
 			              </li>
 			            </ul>
@@ -85,7 +85,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 			<?php echo $this->Html->link(
 					$this->Html->image('cabecalhos/cabecalho-01.jpg', array('alt' => $cakeDescription, 'border' => '0')),
-					array('controller' => '', 'prefix' => null, 'action' => '/'),
+					array('controller' => '', 'admin' => false, 'action' => '/'),
 					array('class' => 'lnk_logo', 'escape' => false)
 				);
 			?>
@@ -96,7 +96,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					array('escape' => false)
 						);
 					?></li>
-					<li><?php echo $this->Html->link(__('Lista de Obras'), array('controller' => 'obras', 'prefix' => null, 'action' => 'index')); ?></li>
+					<li><?php echo $this->Html->link(__('Lista de Obras'), array('controller' => 'obras', 'admin' => false, 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Sobre a busca',
 					'#',
 					array('escape' => false)
