@@ -8,4 +8,6 @@ jQuery(document).ready(function() {
     });
 
     jQuery('.input_chosen').chosen();
+
+    jQuery('.carousel').carousel();
 })

@@ -31,7 +31,7 @@
             $i = 0;
             foreach ($obra['Relacionada'] as $relacionada): ?>
             <div class="mini-obra">
-                <a class="fancybox" href="#img_<?php echo $relacionada['id'] ?>" data-fancybox-group="gallery" title="titulo"><?php echo $this->Html->image('obras/'.$relacionada['id'].'_thumb.jpg'); ?>
+                <a class="fancybox" href="#img_<?php echo $relacionada['id'] ?>" data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$relacionada['id'].'_thumb.jpg'); ?>
                 </a>
 
                 <div id="img_<?php echo $relacionada['id'] ?>" style="display: none;" class="modal_relacionadas">

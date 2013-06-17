@@ -15,10 +15,10 @@
 		$i = 0;
 		foreach ($artista['Obra'] as $obra): ?>
 		<div class="mini-obra">
-			<a class="fancybox" href="#img_<?php echo $obra['id'] ?>" data-fancybox-group="gallery" title="titulo"><?php echo $this->Html->image('obras/'.$obra['id'].'_thumb.jpg'); ?>
+			<a class="fancybox" href="#img_<?php echo $obra['id'] ?>" data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$obra['id'].'_thumb.jpg'); ?>
             </a>
 
-            <div id="img_<?php echo $obra['id'] ?>" style="display: none;" class="modal_relacionadas">
+            <div id="img_<?php echo $obra['id'] ?>" style="display: none;" class="modal_obra">
                 <div>
                     <p><?php echo $this->Html->image(('obras/'.$obra['imagem']), array('alt' => 'oie', 'border' => '0')); ?></p>
                     <p><?php echo $artista['Artista']['nome']; ?> (<?php echo h($obra['ano_fim']); ?>)</p>

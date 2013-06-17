@@ -60,17 +60,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 				<ul>
 					<li><?php echo $this->Html->link('Administração',
 					'#',
-					array('target' => '_blank', 'escape' => false)
+					array('escape' => false)
 						);
 					?></li>
-					<li><?php echo $this->Html->link('Lista de obras',
-					'#',
-					array('target' => '_blank', 'escape' => false)
-						);
-					?></li>
+					<li><?php echo $this->Html->link(__('Lista de Obras'), array('controller' => 'obras', 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Sobre a busca',
 					'#',
-					array('target' => '_blank', 'escape' => false)
+					array('escape' => false)
 						);
 					?></li>
 				</ul>

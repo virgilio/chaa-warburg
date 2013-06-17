@@ -138,7 +138,7 @@
         <p>
             <?php
             echo $this->Paginator->counter(array(
-            'format' => __('Página {:page} de {:pages}, mostrando {:current} obras de {:count}, começando na {:start}a, terminando na {:end}a')
+            'format' => __('Página {:page} de {:pages}, mostrando {:current} obras de {:count}')
             ));
             ?>  
         </p>
