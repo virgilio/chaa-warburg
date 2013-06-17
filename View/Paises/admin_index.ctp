@@ -2,7 +2,7 @@
 	$this->Html->css("admin.css", null, array("inline" => false));
 ?>
 <div class="paises index">
-	<h2><?php echo __('Paises'); ?></h2>
+	<h2><?php echo __('Países'); ?></h2>
 	<table class="lista_admin" cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('nome'); ?></th>

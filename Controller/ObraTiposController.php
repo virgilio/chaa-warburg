@@ -16,6 +16,10 @@ class ObraTiposController extends AppController {
 		$this->ObraTipo->recursive = 0;
 		$this->set('obraTipos', $this->paginate());
 	}
+	public function admin_index() {
+		$this->ObraTipo->recursive = 0;
+		$this->set('obraTipos', $this->paginate());
+	}
 
 /**
  * view method

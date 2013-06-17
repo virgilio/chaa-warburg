@@ -6,9 +6,9 @@
 	<h2><?php echo __('Obras cadastradas'); ?></h2>
 	<table class="lista_admin" cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('nome'); ?></th>
-			<th><?php echo $this->Paginator->sort('artista_id'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
+		<th><?php echo $this->Paginator->sort('nome'); ?></th>
+		<th><?php echo $this->Paginator->sort('artista_id'); ?></th>
+		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($obras as $obra): ?>
 	<tr>

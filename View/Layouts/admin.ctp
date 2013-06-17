@@ -34,7 +34,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->css('jquery.fancybox');
 		echo $this->Html->css('chosen');
 		echo $this->Html->css('default');
-	
+		echo $this->Html->css('admin');
+
 		echo $this->Html->script('jquery-1.10.1.min.js');
 		echo $this->Html->script('bootstrap.min');
 		echo $this->Html->script('chosen.jquery.min');
@@ -44,15 +45,47 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
-
 	?>
 </head>
 <body>
-	<div id="container">
+	<div id="admin-container">
 		<div id="header">
+			<div class="navbar navbar-fixed-top">
+			  <div class="navbar-inner">
+			    <div class="container">
+			          <div class="nav-collapse collapse">
+			            <ul id="menu-topo" class="nav">
+			              <li class="<?php echo (strpos($this->here, 'obras') !== false) ? 'active' : ''; ?>">
+			                <?php echo $this->Html->link(__('Obras'), array('controller' => 'obras', 'action' => 'admin_index')); ?>
+			              </li>
+			              <li class="<?php echo (strpos($this->here, 'artistas') !== false) ? 'active' : ''; ?>">
+			                <?php echo $this->Html->link(__('Artistas'), array('controller' => 'artistas', 'action' => 'admin_index')); ?>
+			              </li>
+			              <li class="<?php echo (strpos($this->here, 'instituicoes') !== false) ? 'active' : ''; ?>" >
+			                <?php echo $this->Html->link(__('Instituições'), array('controller' => 'instituicoes', 'action' => 'admin_index')); ?>
+			              </li>
+			              <li class="<?php echo (strpos($this->here, 'cidades') !== false) ? 'active' : ''; ?>">
+			                <?php echo $this->Html->link(__('Cidades'), array('controller' => 'cidades', 'action' => 'admin_index')); ?>
+			              </li>
+			              <li class="<?php echo (strpos($this->here, 'paises') !== false) ? 'active' : ''; ?>">
+			                <?php echo $this->Html->link(__('Países'), array('controller' => 'paises', 'action' => 'admin_index')); ?>
+			              </li>
+			              <li class="<?php echo (strpos($this->here, 'iconografias') !== false) ? 'active' : ''; ?>">
+			                <?php echo $this->Html->link(__('Iconografias'), array('controller' => 'iconografias', 'action' => 'admin_index')); ?>
+			              </li>
+			              <li class="<?php echo (strpos($this->here, 'obratipos') !== false) ? 'active' : ''; ?>">
+			                <?php echo $this->Html->link(__('Tipos de obra'), array('controller' => 'obra_tipos', 'action' => 'admin_index')); ?>
+			              </li>
+			            </ul>
+			          </div>
+			        </div>
+			  </div>
+			</div>
+
+
 			<?php echo $this->Html->link(
 					$this->Html->image('cabecalhos/cabecalho-01.jpg', array('alt' => $cakeDescription, 'border' => '0')),
-					array('controller' => '', 'action' => '/'),
+					array('controller' => '', 'prefix' => null, 'action' => '/'),
 					array('class' => 'lnk_logo', 'escape' => false)
 				);
 			?>
@@ -63,7 +96,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					array('escape' => false)
 						);
 					?></li>
-					<li><?php echo $this->Html->link(__('Lista de Obras'), array('controller' => 'obras', 'action' => 'index')); ?></li>
+					<li><?php echo $this->Html->link(__('Lista de Obras'), array('controller' => 'obras', 'prefix' => null, 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Sobre a busca',
 					'#',
 					array('escape' => false)

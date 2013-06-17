@@ -1,3 +1,7 @@
+#admin-container{
+    margin: 40px auto 0 auto;
+    width: 960px;
+}
 .lista_admin{
     font-family: sans-serif;
     margin: 20px;

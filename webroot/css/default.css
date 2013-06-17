@@ -15,8 +15,9 @@ body{
 input[type='text'], input[type='number']{
     height: 30px;
 }
-h1{
+h1, h2{
     padding: 10px;
+    color: #666;
 }
 form legend{
     padding: 10px;
@@ -32,7 +33,7 @@ a.lnk_logo{
     display: block;
     height: 144px;
 }
-#container, #header{
+#container, #header, #admin-container{
     background-color: #FFFFFF;
 }
 #container, .obra_container{
@@ -85,7 +86,7 @@ a.lnk_logo{
     padding: 5px;
     /*background-color: #f5f5f5;*/
 }
-.paging p span{
+.paging span{
     padding: 4px;
     font-size: 15px;
 }
