@@ -12,11 +12,13 @@
 body{
     background: url('../img/fundo.gif') 0 0 repeat;
 }
-input[type='text']{
-    padding: 10px 6px;
+input[type='text'], input[type='number']{
     height: 30px;
 }
 h1{
+    padding: 10px;
+}
+form legend{
     padding: 10px;
 }
 a{
