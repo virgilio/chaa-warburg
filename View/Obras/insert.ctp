@@ -1,29 +1,46 @@
 <?php 
    $this->Html->script("main.js", array("inline" => false));
-   $this->Html->script("load-image.min.js", array("inline" => false));
    $this->Html->script("jquery.Jcrop.min.js", array("inline" => false));
+   $this->Html->script("script.js", array("inline" => false));
    $this->Html->css('jquery.Jcrop.min.css', null, array("inline" => false));
 ?>
 
-<div class="row">
-  <div class="span5">
-    <h2>Select an image file</h2>
-    <p><input type="file" id="file-input"></p>
-    <p><span class="label label-info">Notice</span> Or <strong>drag
-        &amp; drop</strong> an image file onto this webpage.</p>
-    <br>
-    <div id="exif" style="display:none;">
-      <h2>Exif meta data</h2>
-      <div class="well" id="thumbnail" style="display:none;"></div>
-      <table class="table table-striped" style="width:100%;
-                                                word-wrap:break-word;
-                                                table-layout:fixed;"></table>
+<div class="bbody">
+
+  <!-- upload form -->
+  <?php echo $this->Form->create('Obra', array('enctype' =>
+  'multipart/form-data', 'action' => 'insert')); ?>
+<!--  <form id="uploadForm" enctype="multipart/form-data" method="post"
+        action="/warburg/obras/insert" onsubmit="return checkForm()">
+    <!-- hidden crop params -->
+    <?php echo $this->Form->input('nome'); ?>
+    <input type="hidden" id="x1" name="x1" />
+    <input type="hidden" id="y1" name="y1" />
+    <input type="hidden" id="x2" name="x2" />
+    <input type="hidden" id="y2" name="y2" />
+
+    <h2>Step1: Please select image file</h2>
+    <div><input type="file" name="imagefile" id="image_file"
+                onchange="fileSelectHandler()" /></div>
+
+    <div class="error"></div>
+
+    <div class="step2">
+      <h2>Step2: Please select a crop region</h2>
+      <img id="preview" />
+
+      <div class="info">
+        <label>File size</label> <input type="text" id="filesize"
+                                        name="filesize" />
+        <label>Type</label> <input type="text" id="filetype"
+                                   name="filetype" />
+        <label>Image dimension</label> <input type="text" id="filedim"
+                                              name="filedim" />
+        <label>W</label> <input type="text" id="w" name="w" />
+        <label>H</label> <input type="text" id="h" name="h" />
+      </div>
+
+      <input type="submit" value="Upload" />
     </div>
-  </div>
-  <div class="span7">
-    <h2>Result</h2>
-    <div id="result">
-      
-    </div>
-  </div>
+  </form>
 </div>

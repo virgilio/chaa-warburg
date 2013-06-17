@@ -55,6 +55,9 @@ class ObrasController extends AppController {
         
         public function insert() {
           if ($this->request->is('post')) {
+            echo "<pre>";
+            die(print_r($this->request, true));
+            echo "</pre>";
             //Save image
             //Redirect to edit if all Ok
           }
