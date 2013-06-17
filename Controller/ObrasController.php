@@ -52,6 +52,14 @@ class ObrasController extends AppController {
  *
  * @return void
  */
+        
+        public function insert() {
+          if ($this->request->is('post')) {
+            //Save image
+            //Redirect to edit if all Ok
+          }
+        }
+
 	public function add() {
 		if ($this->request->is('post')) {
 			$this->Obra->create();
