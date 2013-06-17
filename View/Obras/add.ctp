@@ -3,7 +3,6 @@
 	<fieldset>
 		<legend><?php echo __('Adicionar obra'); ?></legend>
 	<div class="pull-left">
-		<?php echo $this->Form->input('id'); ?>
 		<div class="control-group">
 		  <label class="control-label" for="nome">Nome da obra</label>
 		  <div class="controls">

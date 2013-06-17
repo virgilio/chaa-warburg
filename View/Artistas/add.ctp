@@ -1,14 +1,34 @@
 <div class="artistas form">
-<?php echo $this->Form->create('Artista'); ?>
+<?php echo $this->Form->create('Artista', array('class' => 'form-horizontal')); ?>
 	<fieldset>
-		<legend><?php echo __('Add Artista'); ?></legend>
-	<?php
-		echo $this->Form->input('nome');
-		echo $this->Form->input('imagem');
-		echo $this->Form->input('biografia');
-	?>
+		<legend><?php echo __('Adicionar Artista'); ?></legend>
+		<div class="control-group">
+		  <label class="control-label" for="nome">Nome do artista</label>
+		  <div class="controls">
+		    <?php echo $this->Form->input('nome', array('label' => '')); ?>		    
+		  </div>
+		</div>
+		<div class="control-group">
+          <label class="control-label" for="imagem">Imagem</label>
+          <div class="controls">
+            <?php echo $this->Form->input('imagem',
+                        array('label' => '')); ?>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="biografia">Biografia</label>
+          <div class="controls">
+            <?php echo $this->Form->input('biografia',
+                        array('label' => '')); ?>
+          </div>
+        </div>
 	</fieldset>
-<?php echo $this->Form->end(__('Submit')); ?>
+	<div class="control-group">
+	  <label class="control-label" for="singlebutton"></label>
+	  <div class="controls">
+	    <?php echo $this->Form->end(array('label' => 'Adicionar', 'class' => 'btn btn-primary')); ?>
+	  </div>
+	</div>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>
