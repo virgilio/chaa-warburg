@@ -15,7 +15,7 @@ body{
 input[type='text'], input[type='number']{
     height: 30px;
 }
-h1, h2{
+h1{
     padding: 10px;
     color: #666;
 }

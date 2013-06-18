@@ -35,3 +35,19 @@
 .obras .lista_admin th:last-child, .obras .lista_admin td:last-child{
     width: 10%;
 }
+
+.add_btn{
+    padding: 10px;
+    margin: 10px;
+    font-size: 14px;
+    float: right;
+    text-transform: uppercase;
+    color: white;
+    text-decoration: none;
+    background-color: #990000;
+}
+.add_btn:hover{
+    text-decoration: none;
+    color: white;
+    background-color: #dd0000;
+}

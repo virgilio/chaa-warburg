@@ -2,8 +2,15 @@
 	$this->Html->css("admin.css", null, array("inline" => false));
 ?>
 
-<div class="obras index">
-	<h2><?php echo __('Obras cadastradas'); ?></h2>
+<div class="obras index container">
+	<div class="row">
+		<div class="span8">
+			<h2><?php echo __('Obras cadastradas'); ?></h2>
+		</div>
+		<div class="span4">
+			<?php echo $this->Html->link('Cadastrar obra', array('controller' => 'obras','action' => 'add'), array('class' => 'add_btn')); ?>
+		</div>
+	</div>
 	<table class="lista_admin" cellpadding="0" cellspacing="0">
 	<tr>
 		<th><?php echo $this->Paginator->sort('nome'); ?></th>

@@ -84,7 +84,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 
 			<?php echo $this->Html->link(
-					$this->Html->image('cabecalhos/cabecalho-01.jpg', array('alt' => $cakeDescription, 'border' => '0')),
+					$this->Html->image('cabecalhos/cabecalho-' . rand(1, 40) . '.jpg', array('alt' => $cakeDescription, 'border' => '0')),
 					array('controller' => '', 'admin' => false, 'action' => '/'),
 					array('class' => 'lnk_logo', 'escape' => false)
 				);
