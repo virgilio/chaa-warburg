@@ -36,7 +36,7 @@
     width: 10%;
 }
 
-.add_btn{
+.btn_admin{
     padding: 10px;
     margin: 10px;
     font-size: 14px;
@@ -46,7 +46,7 @@
     text-decoration: none;
     background-color: #990000;
 }
-.add_btn:hover{
+.btn_admin:hover{
     text-decoration: none;
     color: white;
     background-color: #dd0000;

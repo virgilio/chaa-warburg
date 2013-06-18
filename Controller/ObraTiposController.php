@@ -41,7 +41,7 @@ class ObraTiposController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->ObraTipo->create();
 			if ($this->ObraTipo->save($this->request->data)) {
@@ -60,7 +60,7 @@ class ObraTiposController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$this->ObraTipo->exists($id)) {
 			throw new NotFoundException(__('Invalid obra tipo'));
 		}
@@ -84,7 +84,7 @@ class ObraTiposController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		$this->ObraTipo->id = $id;
 		if (!$this->ObraTipo->exists()) {
 			throw new NotFoundException(__('Invalid obra tipo'));

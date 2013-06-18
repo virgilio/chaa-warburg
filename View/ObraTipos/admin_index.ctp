@@ -1,5 +1,12 @@
-<div class="obraTipos index">
-	<h2><?php echo __('Tipos de obra'); ?></h2>
+<div class="obraTipos index container">
+	<div class="row">
+		<div class="span8">
+			<h2><?php echo __('Técnicas'); ?></h2>
+		</div>
+		<div class="span4">
+			<?php echo $this->Html->link('Cadastrar técnica', array('controller' => 'obra_tipos','action' => 'add'), array('class' => 'btn_admin')); ?>
+		</div>
+	</div>
 	<table class="lista_admin" cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('nome'); ?></th>
@@ -28,10 +35,4 @@
 		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
 	?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Obra Tipo'), array('action' => 'add')); ?></li>
-	</ul>
 </div>
