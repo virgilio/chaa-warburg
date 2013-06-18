@@ -8,7 +8,7 @@
 			<h2><?php echo __('Obras cadastradas'); ?></h2>
 		</div>
 		<div class="span4">
-			<?php echo $this->Html->link('Cadastrar obra', array('controller' => 'obras','action' => 'add'), array('class' => 'add_btn')); ?>
+			<?php echo $this->Html->link('Cadastrar obra', array('controller' => 'obras','action' => 'insert'), array('class' => 'add_btn')); ?>
 		</div>
 	</div>
 	<table class="lista_admin" cellpadding="0" cellspacing="0">
