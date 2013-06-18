@@ -17,6 +17,10 @@ class ObrasController extends AppController {
 	public function index() {
 		$this->Obra->recursive = 0;
 		$this->set('obras', $this->paginate());
+                $obraTipos = $this->Obra->ObraTipo->find('list');
+                $iconografias = $this->Obra->Iconografia->find('list');
+                $this->set('obraTipos', $obraTipos);
+                $this->set('iconografias', $iconografias);
 	}
 
 	public function admin_index() {
@@ -27,6 +31,86 @@ class ObrasController extends AppController {
 
 
         public function search() {
+          $this->Obra->recursive = 0;
+          $data = $this->request->query;
+
+          if($this->request->is('get') && !empty($data)) {
+            if(isset($data['Search']['type']) && $data['Search']['type'] == 'fast'){
+              $query = $data['Search']['query'];
+              $this->paginate = array(
+                                      'fields' => array(
+                                                        'Obra.id', 
+                                                        'Obra.nome', 
+                                                        'Obra.imagem', 
+                                                        'Artista.id',
+                                                        'Artista.nome', 
+                                                        'Obra.ano_inicio', 
+                                                        'Obra.ano_fim'),
+                                      'conditions' => array(
+                                                            'OR' => array(
+                                                                          'Artista.nome LIKE' => '%' . $query . '%',
+                                                                          'Obra.nome LIKE' => '%' . $query . '%',
+                                                                          'Obra.descricao LIKE' => '%' . $query . '%',
+                                                                          'Obra.ano_inicio LIKE' => '%' . $query . '%',
+                                                                          'Obra.ano_fim LIKE' => '%' . $query . '%',
+                                                                          'Instituicao.nome LIKE' => '%' . $query . '%',
+                                                                          'Iconografia.nome LIKE' => '%' . $query . '%',
+                                                                          )
+                                                            )
+                                      );
+            } else if(isset($data['Search']['type']) && $data['Search']['type'] == 'advanced') {
+              $query = $data['Search'];
+              //die("<pre>" . print_r($data, true) . "</pre>");
+              $or = array();
+              if(!empty($query['artista']))
+                $or['Artista.nome LIKE'] = '%' . $query['artista'] . '%';
+              if(!empty($query['obra'])){
+                $or['Obra.nome LIKE'] = '%' . $query['obra'] . '%';
+                $or['Obra.descricao LIKE'] = '%' . $query['obra'] . '%';
+              }
+              if(!empty($query['instituicao']))
+                $or['Instituicao.nome LIKE'] = '%' . $query['instituicao'] . '%';
+              if(!empty($query['pais']))
+                $or['Pais.nome LIKE'] = '%' . $query['pais'] . '%';
+              if(!empty($query['cidade']))
+                $or['Cidade.nome LIKE'] = '%' . $query['cidade'] . '%';
+              if(!empty($query['tags']))
+                $or['Obra.tags LIKE'] = '%' . $query['tags'] . '%';
+              
+              $and = array();
+              if(!empty($data['ObraTipo']))
+                $and['Obra.obra_tipos_id'] = $data['ObraTipo'];
+              if(!empty($data['Iconografia']))
+                $and['Obra.iconografia_id'] = $data['Iconografia'];
+
+              $this->paginate = array(
+                                      'fields' => array(
+                                                        'Obra.id', 
+                                                        'Obra.nome', 
+                                                        'Obra.imagem', 
+                                                        'Artista.id',
+                                                        'Artista.nome', 
+                                                        'Obra.ano_inicio', 
+                                                        'Obra.ano_fim'),
+                                      'conditions' => array(
+                                                            'OR' => $or,
+                                                            'AND' => $and
+                                                            )
+                                      );
+            } else {
+              $this->Session->setFlash(__('Busca inválida'));
+            }
+          }
+          $obras = $this->paginate('Obra');
+          $this->set('obras', $obras);
+          $obraTipos = $this->Obra->ObraTipo->find('list');
+          $iconografias = $this->Obra->Iconografia->find('list');
+          $this->set('obraTipos', $obraTipos);
+          $this->set('iconografias', $iconografias);
+        }
+        
+
+        public function advanced_search() {
           $this->Obra->recursive = 0;
           $data = $this->request->query;
           
@@ -43,8 +127,8 @@ class ObrasController extends AppController {
                                                       'Obra.ano_fim'),
                                     'conditions' => array(
                                                           'OR' => array(
-                                                                        'Artista.nome LIKE' => '%' . $data['query'] . '%',
                                                                         'Obra.nome LIKE' => '%' . $data['query'] . '%',
+                                                                        'Artista.nome LIKE' => '%' . $data['query'] . '%',
                                                                         'Obra.descricao LIKE' => '%' . $data['query'] . '%',
                                                                         'Obra.ano_inicio LIKE' => '%' . $data['query'] . '%',
                                                                         'Obra.ano_fim LIKE' => '%' . $data['query'] . '%',
@@ -57,6 +141,7 @@ class ObrasController extends AppController {
           $obras = $this->paginate('Obra');
           $this->set('obras', $obras);
         }
+
         
 /**
  * view method
@@ -210,11 +295,11 @@ class ObrasController extends AppController {
 			}
 		}
 		$obraTipos = $this->Obra->ObraTipo->find('list');
+                $iconografias = $this->Obra->Iconografia->find('list');
 		$instituicoes = $this->Obra->Instituicao->find('list');
 		$paises = $this->Obra->Pais->find('list');
 		$cidades = $this->Obra->Cidade->find('list');
 		$artistas = $this->Obra->Artista->find('list');
-		$iconografias = $this->Obra->Iconografia->find('list');
 		$relacionadas = $this->Obra->Relacionada->find('list');
 		$this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 'artistas', 'iconografias', 'relacionadas'));
 	}
