@@ -4,6 +4,9 @@
    $this->Html->script("script.js", array("inline" => false));
    $this->Html->css('jquery.Jcrop.min.css', null, array("inline" => false));
 ?>
+<style type="text/css">
+  .jcrop img {max-width: none;}
+</style>
 <div class="obras form">
   <?php //echo $this->Form->create('Obra', array('class' => 'form-horizontal')); ?>
   <?php echo $this->Form->create('Obra', array('enctype' =>
@@ -23,7 +26,7 @@
       <div class="step2">
         <h4>Selecione o Thumbnail desejado</h4>
         <div class="container">
-          <div class="span8 offset2">            
+          <div class="span6 offset2 jcrop">            
             <?php echo $this->Html->image(('obras/' . $this->Form->value('Obra.imagem')), 
                         array('alt' => $this->Form->value('Obra.imagem'), 'border' =>
                               '0', 'id' => 'preview'));
@@ -41,9 +44,7 @@
         <input type="hidden" id="h" name="data[Thumb][h]" />
         
       </div>
-      
-    
-      
+   
       <div class="control-group">
 	<label class="control-label" for="nome">Nome da obra</label>
 	<div class="controls">

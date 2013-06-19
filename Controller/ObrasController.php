@@ -279,6 +279,14 @@ class ObrasController extends AppController {
       $vDstImg = imagecreatetruecolor((int)$thumb['w'], (int)$thumb['h']);
             
       // copy and resize part of an image with resampling
+      /*
+        imagecopyresampled ($dst_image, $src_image, 
+                          $dst_x, $dst_y, 
+                          $src_x, $src_y, 
+                          $dst_w, $dst_h,
+                          $src_w, $src_h )
+      */
+
       imagecopyresampled($vDstImg, $vImg, 
                          0, 0, 
                          (int)$thumb['x1'], (int)$thumb['y1'], 

@@ -13,7 +13,6 @@ var jcrop_api, boundx, boundy;
 
 jQuery(document).ready(
     function(){
-        console.log('whee');
         $('#preview').Jcrop({
                                 minSize: [32, 32], // min crop size
                                 aspectRatio : 15 / 9, // keep aspect ratio 1:1
@@ -21,7 +20,9 @@ jQuery(document).ready(
                                 bgOpacity: .3, // fade opacity
                                 onChange: updateInfo,
                                 onSelect: updateInfo,
-                                onRelease: clearInfo
+                                onRelease: clearInfo,
+                                boxWidth: 450, 
+//                                boxHeight: 400
                             }, function(){
                                 // use the Jcrop API to get the real image size
                                 var bounds = this.getBounds();

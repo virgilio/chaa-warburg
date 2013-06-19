@@ -69,6 +69,16 @@ class PagesController extends AppController {
 		if (!empty($path[$count - 1])) {
 			$title_for_layout = Inflector::humanize($path[$count - 1]);
 		}
+
+                $this->loadModel('Obra');
+
+                $obraTipos = $this->Obra->ObraTipo->find('list');
+                $iconografias = $this->Obra->Iconografia->find('list');
+                $this->set('obraTipos', $obraTipos);
+                $this->set('iconografias', $iconografias);
+                $obras = $this->Obra->find('all', array('fields' => array('Obra.imagem'), 'limit' => 3, 'order' => 'Obra.created desc'));
+                $this->set('lastObras', $obras);
+
 		$this->set(compact('page', 'subpage', 'title_for_layout'));
 		$this->render(implode('/', $path));
 	}
