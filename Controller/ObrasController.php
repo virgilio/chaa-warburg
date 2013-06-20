@@ -1,6 +1,7 @@
 <?php
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
+App::uses('AuthComponent', 'Controller/Component');
 
 /**
  * Obras Controller

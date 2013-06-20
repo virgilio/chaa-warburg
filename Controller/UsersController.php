@@ -7,13 +7,13 @@ App::uses('AppController', 'Controller');
  */
 class UsersController extends AppController {
 
-  public function beforeFilter() {
+  /*public function beforeFilter() {
     parent::beforeFilter();
-    $this->Auth->allow('add', 'logout');
-  }
+    $this->Auth->allow('logout');
+    }*/
 
 
-  public function add() {
+  public function admin_add() {
     if ($this->request->is('post')) {
       $this->User->create();
       if ($this->User->save($this->request->data)) {
@@ -21,6 +21,27 @@ class UsersController extends AppController {
         $this->redirect(array('action' => 'index'));
       } else {
         $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+      }
+    }
+  }
+
+  public function register(){
+    if($this->Auth->loggedIn()){
+      return $this->redirect($this->Auth->loginRedirect);
+    }
+    
+    if ($this->request->is('post')) {
+      if($this->request->data['User']['password'] != $this->request->data['User']['password_confirm']){
+        $this->Session->setFlash("Problemas na confirmação de senha");
+      } else {
+        $this->request->data['User']['active'] = 0; 
+        $this->request->data['User']['role'] = "author";
+        if ($this->User->save($this->request->data)) {
+          $id = $this->User->id;
+          $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
+          $this->Auth->login($this->request->data['User']);
+        }
+        return $this->redirect($this->Auth->loginRedirect);
       }
     }
   }
@@ -44,11 +65,11 @@ class UsersController extends AppController {
  *
  * @return void
  */
-	public function index() {
-		$this->User->recursive = 0;
-		$this->set('users', $this->paginate());
-	}
-
+  public function admin_index() {
+    $this->User->recursive = 0;
+    $this->set('users', $this->paginate());
+  }
+  
 /**
  * view method
  *

@@ -58,7 +58,7 @@ class CidadesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$this->Cidade->exists($id)) {
 			throw new NotFoundException(__('Invalid cidade'));
 		}

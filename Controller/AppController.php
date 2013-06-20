@@ -37,6 +37,7 @@ class AppController extends Controller {
   public $components = array(
                              'Session',
                              'Auth' => array(
+                                             'loginAction' => array('prefix' => false, 'admin' => false, 'controller' => 'users', 'action' => 'login'),
                                              'loginRedirect' => array('controller' => 'obras', 'action' => 'index'),
                                              'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
                                              'authenticate' => array('Form' => array(
@@ -48,26 +49,19 @@ class AppController extends Controller {
                              );
   
   function beforeFilter() {
-    //$this->Auth->allow('index', 'view');
-    $this->Auth->allow();
+    $this->Auth->allow('index', 'view', 'display', 'search', 'login', 'register');
     if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
       $this->layout = 'admin';
     } 
   }
-
-  public function isAuthorized($user = null) {
-    // Any registered user can access public functions
-    if (empty($this->request->params['admin'])) {
-      return true;
+  
+  function isAuthorized() {
+    if (!empty($this->params['prefix']) && $this->params['prefix'] == 'admin') {
+      if ($this->Auth->user('role') != 'admin') {
+        return false;
+      }
     }
-
-    // Only admins can access admin functions
-    if (isset($this->request->params['admin'])) {
-      return (bool)($user['role'] === 'admin');
-    }
-
-    // Default deny
-    return false;
+    return true;
   }
-
+  
 }

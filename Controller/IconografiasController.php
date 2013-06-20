@@ -56,7 +56,7 @@ class IconografiasController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$this->Iconografia->exists($id)) {
 			throw new NotFoundException(__('Invalid iconografia'));
 		}

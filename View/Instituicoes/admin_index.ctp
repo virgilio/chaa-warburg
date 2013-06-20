@@ -13,7 +13,7 @@
 	<tr>
 		<td><?php echo h($instituicao['Instituicao']['nome']); ?>&nbsp;</td>
 		<td>
-			<?php echo $this->Html->link($instituicao['Cidade']['nome'], array('controller' => 'cidades', 'action' => 'view', $instituicao['Cidade']['id'])); ?>
+			<?php echo $this->Html->link($instituicao['Cidade']['nome'], array('controller' => 'cidades', 'action' => 'edit', $instituicao['Cidade']['id'])); ?>
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $instituicao['Instituicao']['id'])); ?>

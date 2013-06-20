@@ -110,7 +110,7 @@ function fileSelectHandler() {
             
             // destroy Jcrop if it is existed
             if (typeof jcrop_api != 'undefined') {
-                console.log('wheee!');
+                // console.log('wheee!');
                 jcrop_api.destroy();
             }
 //            jcrop_api.destroy();
@@ -123,7 +123,8 @@ function fileSelectHandler() {
                                     bgOpacity: .3, // fade opacity
                                     onChange: updateInfo,
                                     onSelect: updateInfo,
-                                    onRelease: clearInfo
+                                    onRelease: clearInfo,
+                                    boxWidth: 450
                                 }, function(){
                                     // use the Jcrop API to get the real image size
                                     var bounds = this.getBounds();
