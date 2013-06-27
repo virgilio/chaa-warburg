@@ -38,17 +38,20 @@ class PaisesController extends AppController {
  * @return void
  */
 	public function admin_add() {
-		if ($this->request->is('post')) {
-			$this->Pais->create();
-			if ($this->Pais->save($this->request->data)) {
-				$this->Session->setFlash(__('The pais has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The pais could not be saved. Please, try again.'));
-			}
-		}
+          if($this->request->is('ajax') && $this->request->is('post')) {
+            
+          }
+          if ($this->request->is('post')) {
+            $this->Pais->create();
+            if ($this->Pais->save($this->request->data)) {
+              $this->Session->setFlash(__('The pais has been saved'));
+              $this->redirect(array('action' => 'index'));
+            } else {
+              $this->Session->setFlash(__('The pais could not be saved. Please, try again.'));
+            }
+          }
 	}
-
+      
 /**
  * edit method
  *
