@@ -44,7 +44,7 @@
     <tr>
       <th><?php echo $this->Paginator->sort('nome'); ?></th>
       <th><?php echo $this->Paginator->sort('artista_id'); ?></th>
-      <th class="actions"><?php echo __('Actions'); ?></th>
+      <th class="actions"><?php echo __('Ação'); ?></th>
     </tr>
     <?php foreach ($obras as $obra): ?>
     <tr>

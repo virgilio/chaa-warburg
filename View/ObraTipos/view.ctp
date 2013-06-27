@@ -23,12 +23,3 @@
 		</dd>
 	</dl>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Obra Tipo'), array('action' => 'edit', $obraTipo['ObraTipo']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Obra Tipo'), array('action' => 'delete', $obraTipo['ObraTipo']['id']), null, __('Are you sure you want to delete # %s?', $obraTipo['ObraTipo']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Obra Tipos'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Obra Tipo'), array('action' => 'add')); ?> </li>
-	</ul>
-</div>

@@ -1,7 +1,16 @@
-<div class="artistas form">
-<?php echo $this->Form->create('Artista', array('class' => 'form-horizontal')); ?>
+<div class="artistas form container">
+        <div class="row">
+            <div class="span7">
+                <h2><?php echo __('Editar Artista'); ?></h2>
+            </div>
+            <div class="span5">
+                <?php echo $this->Html->link('Ver artistas', array('controller' => 'artistas','action' => 'index'), array('class' => 'btn_admin')); ?>
+                <?php echo $this->Form->postLink(__('Deletar artista'), array('action' => 'delete', $this->request->data['Artista']['id']), 
+                array('class' => 'btn_admin'), __('Are you sure you want to delete # %s?', $this->request->data['Artista']['id'])); ?>
+            </div>
+        </div>
+    <?php echo $this->Form->create('Artista', array('class' => 'form-horizontal')); ?>
 	<fieldset>
-		<legend><?php echo __('Editar Artista'); ?></legend>
 		<?php echo $this->Form->input('id'); ?>		    
 		<div class="control-group">
 		  <label class="control-label" for="nome">Nome do artista</label>
@@ -30,14 +39,4 @@
 	    <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn btn-primary')); ?>
 	  </div>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Artista.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Artista.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Artistas'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Obras'), array('controller' => 'obras', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Obra'), array('controller' => 'obras', 'action' => 'add')); ?> </li>
-	</ul>
 </div>

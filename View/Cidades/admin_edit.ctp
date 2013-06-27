@@ -1,7 +1,16 @@
-<div class="cidades form">
+<div class="cidades form container">
+        <div class="row">
+            <div class="span7">
+                <h2><?php echo __('Editar Cidade'); ?></h2>
+            </div>
+            <div class="span5">
+                <?php echo $this->Html->link('Ver cidades', array('controller' => 'cidades','action' => 'index'), array('class' => 'btn_admin')); ?>
+                <?php echo $this->Form->postLink(__('Deletar cidade'), array('action' => 'delete', $this->request->data['Cidade']['id']), 
+                array('class' => 'btn_admin'), __('Are you sure you want to delete # %s?', $this->request->data['Cidade']['id'])); ?>
+            </div>
+        </div>
 <?php echo $this->Form->create('Cidade', array('class' => 'form-horizontal')); ?>
 	<fieldset>
-		<legend><?php echo __('Editar Cidade'); ?></legend>
 		<?php echo $this->Form->input('id');?>
 		<div class="control-group">
 		  <label class="control-label" for="nome">Nome da cidade</label>
@@ -23,18 +32,4 @@
 	    <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn')); ?>
 	  </div>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Cidade.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Cidade.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Cidades'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Paises'), array('controller' => 'paises', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Pais'), array('controller' => 'paises', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Instituicoes'), array('controller' => 'instituicoes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Instituicao'), array('controller' => 'instituicoes', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Obras'), array('controller' => 'obras', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Obra'), array('controller' => 'obras', 'action' => 'add')); ?> </li>
-	</ul>
 </div>

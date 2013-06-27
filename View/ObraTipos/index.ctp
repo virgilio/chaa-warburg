@@ -6,7 +6,7 @@
 			<th><?php echo $this->Paginator->sort('nome'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
-			<th class="actions"><?php echo __('Actions'); ?></th>
+			<th class="actions"><?php echo __('Ação'); ?></th>
 	</tr>
 	<?php foreach ($obraTipos as $obraTipo): ?>
 	<tr>
@@ -16,8 +16,8 @@
 		<td><?php echo h($obraTipo['ObraTipo']['modified']); ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $obraTipo['ObraTipo']['id'])); ?>
-			<?php echo $this->Html->link(__('Edit'), array('action' => 'edit', $obraTipo['ObraTipo']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $obraTipo['ObraTipo']['id']), null, __('Are you sure you want to delete # %s?', $obraTipo['ObraTipo']['id'])); ?>
+			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $obraTipo['ObraTipo']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Deletar'), array('action' => 'delete', $obraTipo['ObraTipo']['id']), null, __('Are you sure you want to delete # %s?', $obraTipo['ObraTipo']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -35,10 +35,4 @@
 		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
 	?>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('New Obra Tipo'), array('action' => 'add')); ?></li>
-	</ul>
 </div>

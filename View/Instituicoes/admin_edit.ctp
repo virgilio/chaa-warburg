@@ -1,7 +1,16 @@
-<div class="instituicoes form">
+<div class="instituicoes form container">
+        <div class="row">
+            <div class="span7">
+                <h2><?php echo __('Editar Instituição'); ?></h2>
+            </div>
+            <div class="span5">
+                <?php echo $this->Html->link('Ver Instituições', array('controller' => 'artistas','action' => 'index'), array('class' => 'btn_admin')); ?>
+                <?php echo $this->Form->postLink(__('Deletar Instituição'), array('action' => 'delete', $this->request->data['Instituicao']['id']), 
+                array('class' => 'btn_admin'), __('Are you sure you want to delete # %s?', $this->request->data['Instituicao']['id'])); ?>
+            </div>
+        </div>
 <?php echo $this->Form->create('Instituicao', array('class' => 'form-horizontal')); ?>
 	<fieldset>
-		<legend><?php echo __('Editar Instituição'); ?></legend>
 		<?php echo $this->Form->input('id');?>
 		<div class="control-group">
 		  <label class="control-label" for="nome">Nome da Instituição</label>
@@ -23,16 +32,4 @@
 	    <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn')); ?>
 	  </div>
 	</div>
-</div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-
-		<li><?php echo $this->Form->postLink(__('Delete'), array('action' => 'delete', $this->Form->value('Instituicao.id')), null, __('Are you sure you want to delete # %s?', $this->Form->value('Instituicao.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Instituicoes'), array('action' => 'index')); ?></li>
-		<li><?php echo $this->Html->link(__('List Cidades'), array('controller' => 'cidades', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cidade'), array('controller' => 'cidades', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Obras'), array('controller' => 'obras', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Obra'), array('controller' => 'obras', 'action' => 'add')); ?> </li>
-	</ul>
 </div>

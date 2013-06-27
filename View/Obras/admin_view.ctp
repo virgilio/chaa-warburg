@@ -88,29 +88,6 @@
 		</dd>
 	</dl>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Obra'), array('action' => 'edit', $obra['Obra']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Obra'), array('action' => 'delete', $obra['Obra']['id']), null, __('Are you sure you want to delete # %s?', $obra['Obra']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Obras'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Obra'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Obra Tipos'), array('controller' => 'obra_tipos', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Obra Tipo'), array('controller' => 'obra_tipos', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Instituicoes'), array('controller' => 'instituicoes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Instituicao'), array('controller' => 'instituicoes', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Paises'), array('controller' => 'paises', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Pais'), array('controller' => 'paises', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Cidades'), array('controller' => 'cidades', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cidade'), array('controller' => 'cidades', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Artistas'), array('controller' => 'artistas', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Artista'), array('controller' => 'artistas', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Iconografias'), array('controller' => 'iconografias', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Iconografia'), array('controller' => 'iconografias', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Obras'), array('controller' => 'obras', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Relacionada'), array('controller' => 'obras', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
 <div class="related">
 	<h3><?php echo __('Related Obras'); ?></h3>
 	<?php if (!empty($obra['Relacionada'])): ?>
@@ -133,7 +110,7 @@
 		<th><?php echo __('Circa'); ?></th>
 		<th><?php echo __('Aproximado'); ?></th>
 		<th><?php echo __('Iconografia Id'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
+		<th class="actions"><?php echo __('Ação'); ?></th>
 	</tr>
 	<?php
 		$i = 0;
@@ -158,17 +135,12 @@
 			<td><?php echo $relacionada['iconografia_id']; ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'obras', 'action' => 'view', $relacionada['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'obras', 'action' => 'edit', $relacionada['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'obras', 'action' => 'delete', $relacionada['id']), null, __('Are you sure you want to delete # %s?', $relacionada['id'])); ?>
+				<?php echo $this->Html->link(__('Editar'), array('controller' => 'obras', 'action' => 'edit', $relacionada['id'])); ?>
+				<?php echo $this->Form->postLink(__('Deletar'), array('controller' => 'obras', 'action' => 'delete', $relacionada['id']), null, __('Are you sure you want to delete # %s?', $relacionada['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Relacionada'), array('controller' => 'obras', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
 </div>

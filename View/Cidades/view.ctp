@@ -28,21 +28,6 @@
 		</dd>
 	</dl>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Cidade'), array('action' => 'edit', $cidade['Cidade']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Cidade'), array('action' => 'delete', $cidade['Cidade']['id']), null, __('Are you sure you want to delete # %s?', $cidade['Cidade']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Cidades'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Cidade'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Paises'), array('controller' => 'paises', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Pais'), array('controller' => 'paises', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Instituicoes'), array('controller' => 'instituicoes', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Instituicao'), array('controller' => 'instituicoes', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Obras'), array('controller' => 'obras', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Obra'), array('controller' => 'obras', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
 <div class="related">
 	<h3><?php echo __('Related Instituicoes'); ?></h3>
 	<?php if (!empty($cidade['Instituicao'])): ?>
@@ -53,7 +38,7 @@
 		<th><?php echo __('Cidade Id'); ?></th>
 		<th><?php echo __('Created'); ?></th>
 		<th><?php echo __('Modified'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
+		<th class="actions"><?php echo __('Ação'); ?></th>
 	</tr>
 	<?php
 		$i = 0;
@@ -66,19 +51,14 @@
 			<td><?php echo $instituicao['modified']; ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'instituicoes', 'action' => 'view', $instituicao['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'instituicoes', 'action' => 'edit', $instituicao['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'instituicoes', 'action' => 'delete', $instituicao['id']), null, __('Are you sure you want to delete # %s?', $instituicao['id'])); ?>
+				<?php echo $this->Html->link(__('Editar'), array('controller' => 'instituicoes', 'action' => 'edit', $instituicao['id'])); ?>
+				<?php echo $this->Form->postLink(__('Deletar'), array('controller' => 'instituicoes', 'action' => 'delete', $instituicao['id']), null, __('Are you sure you want to delete # %s?', $instituicao['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Instituicao'), array('controller' => 'instituicoes', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
 </div>
 <div class="related">
 	<h3><?php echo __('Related Obras'); ?></h3>
@@ -102,7 +82,7 @@
 		<th><?php echo __('Circa'); ?></th>
 		<th><?php echo __('Aproximado'); ?></th>
 		<th><?php echo __('Iconografia Id'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
+		<th class="actions"><?php echo __('Ação'); ?></th>
 	</tr>
 	<?php
 		$i = 0;
@@ -127,17 +107,12 @@
 			<td><?php echo $obra['iconografia_id']; ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'obras', 'action' => 'view', $obra['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'obras', 'action' => 'edit', $obra['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'obras', 'action' => 'delete', $obra['id']), null, __('Are you sure you want to delete # %s?', $obra['id'])); ?>
+				<?php echo $this->Html->link(__('Editar'), array('controller' => 'obras', 'action' => 'edit', $obra['id'])); ?>
+				<?php echo $this->Form->postLink(__('Deletar'), array('controller' => 'obras', 'action' => 'delete', $obra['id']), null, __('Are you sure you want to delete # %s?', $obra['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Obra'), array('controller' => 'obras', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
 </div>

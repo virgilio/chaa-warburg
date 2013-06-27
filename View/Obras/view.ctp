@@ -26,7 +26,7 @@
 
 <div class="related">
     <?php if (!empty($obra['Relacionada'])): ?>
-    <h3><?php echo __('Obras Relacionadas'); ?></h3>
+    <h3><?php echo __('Imagens Relacionadas'); ?></h3>
         <?php
             $i = 0;
             foreach ($obra['Relacionada'] as $relacionada): ?>

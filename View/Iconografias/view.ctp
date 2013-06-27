@@ -23,17 +23,6 @@
 		</dd>
 	</dl>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('Edit Iconografia'), array('action' => 'edit', $iconografia['Iconografia']['id'])); ?> </li>
-		<li><?php echo $this->Form->postLink(__('Delete Iconografia'), array('action' => 'delete', $iconografia['Iconografia']['id']), null, __('Are you sure you want to delete # %s?', $iconografia['Iconografia']['id'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Iconografias'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Iconografia'), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Obras'), array('controller' => 'obras', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Obra'), array('controller' => 'obras', 'action' => 'add')); ?> </li>
-	</ul>
-</div>
 <div class="related">
 	<h3><?php echo __('Related Obras'); ?></h3>
 	<?php if (!empty($iconografia['Obra'])): ?>
@@ -56,7 +45,7 @@
 		<th><?php echo __('Circa'); ?></th>
 		<th><?php echo __('Aproximado'); ?></th>
 		<th><?php echo __('Iconografia Id'); ?></th>
-		<th class="actions"><?php echo __('Actions'); ?></th>
+		<th class="actions"><?php echo __('Ação'); ?></th>
 	</tr>
 	<?php
 		$i = 0;
@@ -81,17 +70,12 @@
 			<td><?php echo $obra['iconografia_id']; ?></td>
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'obras', 'action' => 'view', $obra['id'])); ?>
-				<?php echo $this->Html->link(__('Edit'), array('controller' => 'obras', 'action' => 'edit', $obra['id'])); ?>
-				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'obras', 'action' => 'delete', $obra['id']), null, __('Are you sure you want to delete # %s?', $obra['id'])); ?>
+				<?php echo $this->Html->link(__('Editar'), array('controller' => 'obras', 'action' => 'edit', $obra['id'])); ?>
+				<?php echo $this->Form->postLink(__('Deletar'), array('controller' => 'obras', 'action' => 'delete', $obra['id']), null, __('Are you sure you want to delete # %s?', $obra['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New Obra'), array('controller' => 'obras', 'action' => 'add')); ?> </li>
-		</ul>
-	</div>
 </div>
