@@ -22,6 +22,13 @@ class ObrasController extends AppController {
     $iconografias = $this->Obra->Iconografia->find('list');
     $this->set('obraTipos', $obraTipos);
     $this->set('iconografias', $iconografias);
+
+    $letters = $this->Obra->query('SELECT count(DISTINCT SUBSTRING(`nome`, 1, 1)) FROM `obras` ORDER BY `nome`');
+
+    $links = array();
+    foreach ($letters as $row) {
+      array_push($links, current($row[0]));
+    }
   }
   
   public function admin_index() {
@@ -196,6 +203,7 @@ class ObrasController extends AppController {
       $obra = array('nome' => '');
             
       $data = $this->request->data;
+
       $obra['nome'] =  $data['Obra']['nome'];
       $obra['imagem'] =  $this->processFile($data['Obra']['imagem'], $data['Thumb']);
       $obra['tamanho_obra'] = $data['Thumb']['filedim'];

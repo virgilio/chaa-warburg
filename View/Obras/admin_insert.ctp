@@ -9,7 +9,7 @@
 
   <!-- upload form -->
   <?php echo $this->Form->create('Obra', array('enctype' =>
-  'multipart/form-data', 'action' => 'insert')); ?>
+  'multipart/form-data', 'action' => 'insert', 'onsubmit' => 'return checkForm()')); ?>
 <!--  <form id="uploadForm" enctype="multipart/form-data" method="post"
         action="/warburg/obras/insert" onsubmit="return checkForm()">
     <!-- hidden crop params -->
