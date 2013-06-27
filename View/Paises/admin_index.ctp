@@ -1,8 +1,15 @@
 <?php 
 	$this->Html->css("admin.css", null, array("inline" => false));
 ?>
-<div class="paises index">
-	<h2><?php echo __('Países'); ?></h2>
+<div class="paises index container">
+	<div class="row">
+	    <div class="span8">
+			<h2><?php echo __('Países'); ?></h2>
+		</div>
+	    <div class="span4">
+	      <?php echo $this->Html->link('Cadastrar país', array('controller' => 'paises','action' => 'add'), array('class' => 'btn_admin')); ?>
+	    </div>
+ 	</div>
 	<table class="lista_admin" cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('nome'); ?></th>

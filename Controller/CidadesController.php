@@ -37,7 +37,7 @@ class CidadesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Cidade->create();
 			if ($this->Cidade->save($this->request->data)) {
@@ -84,7 +84,7 @@ class CidadesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		$this->Cidade->id = $id;
 		if (!$this->Cidade->exists()) {
 			throw new NotFoundException(__('Invalid cidade'));

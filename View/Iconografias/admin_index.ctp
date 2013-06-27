@@ -1,8 +1,15 @@
 <?php 
 	$this->Html->css("admin.css", null, array("inline" => false));
 ?>
-<div class="iconografias index">
-	<h2><?php echo __('Iconografias'); ?></h2>
+<div class="iconografias index container">
+	<div class="row">
+	    <div class="span8">
+			<h2><?php echo __('Iconografias'); ?></h2>
+		</div>
+	    <div class="span4">
+	      <?php echo $this->Html->link('Cadastrar iconografia', array('controller' => 'iconografias','action' => 'add'), array('class' => 'btn_admin')); ?>
+	    </div>
+ 	</div>
 	<table class="lista_admin" cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('nome'); ?></th>

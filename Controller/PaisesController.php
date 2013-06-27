@@ -37,7 +37,7 @@ class PaisesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Pais->create();
 			if ($this->Pais->save($this->request->data)) {
@@ -80,7 +80,7 @@ class PaisesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		$this->Pais->id = $id;
 		if (!$this->Pais->exists()) {
 			throw new NotFoundException(__('Invalid pais'));

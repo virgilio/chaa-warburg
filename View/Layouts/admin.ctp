@@ -74,7 +74,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			                <?php echo $this->Html->link(__('Iconografias'), array('controller' => 'iconografias', 'action' => 'admin_index')); ?>
 			              </li>
 			              <li class="<?php echo (strpos($this->here, 'obra_tipos') !== false) ? 'active' : ''; ?>">
-			                <?php echo $this->Html->link(__('Tipos de obra'), array('controller' => 'obra_tipos', 'action' => 'admin_index')); ?>
+			                <?php echo $this->Html->link(__('Técnicas'), array('controller' => 'obra_tipos', 'action' => 'admin_index')); ?>
 			              </li>
 			            </ul>
 			          </div>

@@ -44,7 +44,7 @@ class ArtistasController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Artista->create();
 			if ($this->Artista->save($this->request->data)) {
@@ -87,7 +87,7 @@ class ArtistasController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		$this->Artista->id = $id;
 		if (!$this->Artista->exists()) {
 			throw new NotFoundException(__('Invalid artista'));

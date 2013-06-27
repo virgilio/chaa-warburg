@@ -37,7 +37,7 @@ class InstituicoesController extends AppController {
  *
  * @return void
  */
-	public function add() {
+	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Instituicao->create();
 			if ($this->Instituicao->save($this->request->data)) {
@@ -84,7 +84,7 @@ class InstituicoesController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		$this->Instituicao->id = $id;
 		if (!$this->Instituicao->exists()) {
 			throw new NotFoundException(__('Invalid instituicao'));
