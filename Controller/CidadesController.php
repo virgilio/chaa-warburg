@@ -37,19 +37,57 @@ class CidadesController extends AppController {
  *
  * @return void
  */
-	public function admin_add() {
-		if ($this->request->is('post')) {
-			$this->Cidade->create();
-			if ($this->Cidade->save($this->request->data)) {
-				$this->Session->setFlash(__('The cidade has been saved'));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The cidade could not be saved. Please, try again.'));
-			}
-		}
-		$paises = $this->Cidade->Pais->find('list');
-		$this->set(compact('paises'));
-	}
+	/*public function admin_add() {
+          if ($this->request->is('post')) {
+            $this->Cidade->create();
+            if ($this->Cidade->save($this->request->data)) {
+              $this->Session->setFlash(__('The cidade has been saved'));
+              $this->redirect(array('action' => 'index'));
+            } else {
+              $this->Session->setFlash(__('The cidade could not be saved. Please, try again.'));
+            }
+          }
+          $paises = $this->Cidade->Pais->find('list');
+          $this->set(compact('paises'));
+          }*/
+
+
+        public function admin_add() {
+          if ($this->request->is('post')) {
+            $this->Cidade->create();
+            if ($this->Cidade->save($this->request->data)) {
+              $this->Session->setFlash(__('A Cidade foi salva!'));
+              if(!$this->request->is('ajax')) {
+                $this->redirect(array('action' => 'index'));
+              } else {
+                $cidades = $this->Cidade->find('all', 
+                                               array(
+                                                     'fields' => 'Cidade.id, Cidade.nome, Pais.nome',
+                                                     'recursive' => 1
+                                                     )
+                                               );
+                $cidades_list = Set::combine($cidades, '{n}.Cidade.id', array('{0} - {1}', '{n}.Cidade.nome', '{n}.Pais.nome'));
+                $this->set('cidades', $cidades_list);
+
+                $this->set('cidade', $this->Cidade->id);
+
+                $this->autoRender = false;
+                $this->layout = 'ajax';
+                $this->render(DS.'Elements'.DS.'select_cidade');
+              }
+            } else {
+              if(!$this->request->is('ajax')) {
+                $this->Session->setFlash(__('A cidade não pode ser salva. Por favor, tente novamente.'));
+              } else {
+                $this->autoRender = false;
+                $this->layout = 'ajax';
+                return '{"error" : "Não foi possível adicionar cidade"}';
+              }
+            }
+          }
+          $paises = $this->Cidade->Pais->find('list');
+          $this->set(compact('paises'));
+        }
 
 /**
  * edit method

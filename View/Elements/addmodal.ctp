@@ -1,7 +1,7 @@
 <!-- Modal -->
-<div id="add-pais" class="modal hide fade" tabindex="-1" role="dialog"
+<div id="add-<?php echo $form; ?>" class="modal hide fade" tabindex="-1" role="dialog"
      aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="paises form">
+  <div class="form">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal"
               aria-hidden="true">×</button>

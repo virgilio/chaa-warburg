@@ -1,4 +1,4 @@
-<?php $this->Html->script("ajax-pais.js", array("inline" => false)); ?>
+<?php $this->Html->script("ajax-add-inline.js", array("inline" => false)); ?>
 <?php echo $this->Form->create('Pais', 
                 array('class' => 'form-horizontal', 
                       'action' => 'add',

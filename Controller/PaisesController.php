@@ -52,8 +52,7 @@ class PaisesController extends AppController {
 
                 $this->autoRender = false;
                 $this->layout = 'ajax';
-                //return '{"error" : "Não foi possível adicionar o país"}';
-                //return json_encode($paises);
+               
                 $this->render(DS.'Elements'.DS.'select_pais');
               }
             } else {
@@ -62,7 +61,7 @@ class PaisesController extends AppController {
               } else {
                 $this->autoRender = false;
                 $this->layout = 'ajax';
-                return "{'error' : 'Não foi possível adicionar o país'}";
+                return '{"error" : "Não foi possível adicionar o país"}';
               }
             }
           }
