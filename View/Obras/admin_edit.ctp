@@ -115,7 +115,11 @@
           array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione a Instituição')); ?>
         </div>
       </div>
-      <div class="control-group">
+      <a href="#add-cidade" role="button" class="btn"
+         data-toggle="modal">Nova cidade</a>
+      <a href="#add-pais" role="button" class="btn"
+         data-toggle="modal">Novo país</a>
+      <!--<div class="control-group">
         <label class="control-label" for="pais_id">País</label>
         <div class="controls">
           <?php echo $this->Form->input('pais_id',
@@ -128,7 +132,7 @@
           <?php echo $this->Form->input('cidade_id',
           array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione a cidade')); ?>
         </div>
-      </div>
+      </div>-->
       <div class="control-group">
 	<label class="control-label" for="incerta">Incerta</label>
 	<div class="controls">
@@ -143,11 +147,13 @@
       </div>
       <div class="control-group">
         <label class="control-label" for="tags">Iconografia</label>
-        <div class="controls">
+        <div id="select-iconografia" class="controls">
           <?php echo $this->Form->input('iconografia_id', 
           array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione a iconografia')); ?>
         </div>
       </div>
+      <a href="#add-iconografia" role="button" class="btn"
+         data-toggle="modal">Nova Iconografia</a>
     </div>
     <div class="pull-left">
       <div class="control-group">
@@ -166,5 +172,13 @@
       <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn')); ?>
     </div>
   </div>
-
 </div>
+<?php echo $this->element('addmodal', 
+                          array('titulo' => 'Adicionar Cidade', 
+                                'form' => 'cidade')); ?>
+<?php echo $this->element('addmodal', 
+                          array('titulo' => 'Adicionar País', 
+                                'form' => 'pais')); ?>
+<?php echo $this->element('addmodal', 
+                          array('titulo' => 'Adicionar Iconografia', 
+                                'form' => 'iconografia')); ?>

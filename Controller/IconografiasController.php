@@ -37,7 +37,7 @@ class IconografiasController extends AppController {
  *
  * @return void
  */
-	public function admin_add() {
+	/*public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->Iconografia->create();
 			if ($this->Iconografia->save($this->request->data)) {
@@ -47,6 +47,36 @@ class IconografiasController extends AppController {
 				$this->Session->setFlash(__('The iconografia could not be saved. Please, try again.'));
 			}
 		}
+                }*/
+
+        public function admin_add() {
+          if ($this->request->is('post')) {
+            $this->Iconografia->create();
+            if ($this->Iconografia->save($this->request->data)) {
+              $this->Session->setFlash(__('Iconografia Salva'));
+              if(!$this->request->is('ajax')) {
+                $this->redirect(array('action' => 'index'));
+              } else {
+                $iconografias = $this->Iconografia->find('list');
+		$this->set(compact('iconografias'));
+
+                $this->set('iconografia', $this->Iconografia->id);
+
+                $this->autoRender = false;
+                $this->layout = 'ajax';
+               
+                $this->render(DS.'Elements'.DS.'select_iconografia');
+              }
+            } else {
+              if(!$this->request->is('ajax')) {
+                $this->Session->setFlash(__('A iconografia não pode ser salva. Por favor, tente novamente.'));
+              } else {
+                $this->autoRender = false;
+                $this->layout = 'ajax';
+                return '{"error" : "Não foi possível adicionar a iconografia"}';
+              }
+            }
+          }
 	}
 
 /**

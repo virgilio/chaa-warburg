@@ -47,3 +47,28 @@ var addCidade =
                     });
         return false;
     };
+
+var addIconografia = 
+    function(form) {
+        jQuery.ajax({
+                        url: form.action,
+                        type: form.method,
+                        data: jQuery(form).serialize(),
+                        success: function (msg) {
+                            console.log(msg);
+                            try {
+                                var error = jQuery.parseJSON(msg);
+                                console.log(msg);
+                                return;
+                            } catch (x) {
+                                console.log(x);
+                            } 
+
+                            
+                            jQuery("#select-iconografia").html(msg);
+                            //jQuery("#select-pais .input_chosen").chosen();                            
+                            jQuery("#add-iconografia").modal('hide');
+                        }
+                    });
+        return false;
+    };
