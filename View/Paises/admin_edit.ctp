@@ -6,7 +6,7 @@
             <div class="span5">
                 <?php echo $this->Html->link('Ver países', array('controller' => 'paises','action' => 'index'), array('class' => 'btn_admin')); ?>
                 <?php echo $this->Form->postLink(__('Deletar país'), array('action' => 'delete', $this->request->data['Pais']['id']), 
-                array('class' => 'btn_admin'), __('Are you sure you want to delete # %s?', $this->request->data['Pais']['id'])); ?>
+                array('class' => 'btn_admin'), __('Tem certeza que deseja deletar # %s?', $this->request->data['Pais']['id'])); ?>
             </div>
         </div>
 <?php echo $this->Form->create('Pais', array('class' => 'form-horizontal')); ?>

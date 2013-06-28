@@ -6,7 +6,7 @@
             <div class="span5">
                 <?php echo $this->Html->link('Ver artistas', array('controller' => 'artistas','action' => 'index'), array('class' => 'btn_admin')); ?>
                 <?php echo $this->Form->postLink(__('Deletar artista'), array('action' => 'delete', $this->request->data['Artista']['id']), 
-                array('class' => 'btn_admin'), __('Are you sure you want to delete # %s?', $this->request->data['Artista']['id'])); ?>
+                array('class' => 'btn_admin'), __('Tem certeza que deseja deletar # %s?', $this->request->data['Artista']['id'])); ?>
             </div>
         </div>
     <?php echo $this->Form->create('Artista', array('class' => 'form-horizontal')); ?>

@@ -136,7 +136,7 @@
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'obras', 'action' => 'view', $relacionada['id'])); ?>
 				<?php echo $this->Html->link(__('Editar'), array('controller' => 'obras', 'action' => 'edit', $relacionada['id'])); ?>
-				<?php echo $this->Form->postLink(__('Deletar'), array('controller' => 'obras', 'action' => 'delete', $relacionada['id']), null, __('Are you sure you want to delete # %s?', $relacionada['id'])); ?>
+				<?php echo $this->Form->postLink(__('Deletar'), array('controller' => 'obras', 'action' => 'delete', $relacionada['id']), null, __('Tem certeza que deseja deletar # %s?', $relacionada['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>

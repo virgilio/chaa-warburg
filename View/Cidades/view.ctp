@@ -52,7 +52,7 @@
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'instituicoes', 'action' => 'view', $instituicao['id'])); ?>
 				<?php echo $this->Html->link(__('Editar'), array('controller' => 'instituicoes', 'action' => 'edit', $instituicao['id'])); ?>
-				<?php echo $this->Form->postLink(__('Deletar'), array('controller' => 'instituicoes', 'action' => 'delete', $instituicao['id']), null, __('Are you sure you want to delete # %s?', $instituicao['id'])); ?>
+				<?php echo $this->Form->postLink(__('Deletar'), array('controller' => 'instituicoes', 'action' => 'delete', $instituicao['id']), null, __('Tem certeza que deseja deletar # %s?', $instituicao['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>
@@ -108,7 +108,7 @@
 			<td class="actions">
 				<?php echo $this->Html->link(__('View'), array('controller' => 'obras', 'action' => 'view', $obra['id'])); ?>
 				<?php echo $this->Html->link(__('Editar'), array('controller' => 'obras', 'action' => 'edit', $obra['id'])); ?>
-				<?php echo $this->Form->postLink(__('Deletar'), array('controller' => 'obras', 'action' => 'delete', $obra['id']), null, __('Are you sure you want to delete # %s?', $obra['id'])); ?>
+				<?php echo $this->Form->postLink(__('Deletar'), array('controller' => 'obras', 'action' => 'delete', $obra['id']), null, __('Tem certeza que deseja deletar # %s?', $obra['id'])); ?>
 			</td>
 		</tr>
 	<?php endforeach; ?>

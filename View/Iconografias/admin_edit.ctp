@@ -6,7 +6,7 @@
             <div class="span5">
                 <?php echo $this->Html->link('Ver iconografias', array('controller' => 'iconografias','action' => 'index'), array('class' => 'btn_admin')); ?>
                 <?php echo $this->Form->postLink(__('Deletar iconografia'), array('action' => 'delete', $this->request->data['Iconografia']['id']), 
-                array('class' => 'btn_admin'), __('Are you sure you want to delete # %s?', $this->request->data['Iconografia']['id'])); ?>
+                array('class' => 'btn_admin'), __('Tem certeza que deseja deletar # %s?', $this->request->data['Iconografia']['id'])); ?>
             </div>
         </div>
 <?php echo $this->Form->create('Iconografia', array('class' => 'form-horizontal')); ?>

@@ -12,7 +12,7 @@
       <?php 
          echo $this->Form->postLink(__('Deletar Instituição'), 
       array('action' => 'delete', $this->request->data['Instituicao']['id']), 
-      array('class' => 'btn_admin'), __('Are you sure you want to delete # %s?', 
+      array('class' => 'btn_admin'), __('Tem certeza que deseja deletar # %s?', 
       $this->request->data['Instituicao']['id'])); 
       ?>
     </div>

@@ -21,7 +21,7 @@
 		<td class="actions">
 			<?php echo $this->Html->link(__('View'), array('action' => 'view', $artista['Artista']['id'])); ?>
 			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $artista['Artista']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Deletar'), array('action' => 'delete', $artista['Artista']['id']), null, __('Are you sure you want to delete # %s?', $artista['Artista']['id'])); ?>
+			<?php echo $this->Form->postLink(__('Deletar'), array('action' => 'delete', $artista['Artista']['id']), null, __('Tem certeza que deseja deletar # %s?', $artista['Artista']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
@@ -34,9 +34,9 @@
 	?>	</p>
 	<div class="paging">
 	<?php
-		echo $this->Paginator->prev('< ' . __('previous'), array(), null, array('class' => 'prev disabled'));
+		echo $this->Paginator->prev('< ' . __('anterior'), array(), null, array('class' => 'prev disabled'));
 		echo $this->Paginator->numbers(array('separator' => ''));
-		echo $this->Paginator->next(__('next') . ' >', array(), null, array('class' => 'next disabled'));
+		echo $this->Paginator->next(__('próxima') . ' >', array(), null, array('class' => 'next disabled'));
 	?>
 	</div>
 </div>
