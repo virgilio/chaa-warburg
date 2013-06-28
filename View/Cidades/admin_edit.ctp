@@ -20,12 +20,13 @@
     </div>
     <div class="control-group">
       <label class="control-label" for="pais_id">País</label>
-      <div class="controls">
+      <div id="select-pais" class="controls">
         <?php echo $this->Form->input('pais_id',
-        array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione o país')); ?>
+        array('label' => '', 'class' => 'input_chosen', 'data-placeholder' =>
+        'Selecione o país')); ?>
         <!-- Botao para abrir modal de adicionar item -->
-        <a href="#add-pais" role="button" class="btn" data-toggle="modal">Novo país</a>
       </div>
+      <a href="#add-pais" role="button" class="btn" data-toggle="modal">Novo país</a>
     </div>
   </fieldset>
   <div class="control-group">

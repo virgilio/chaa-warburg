@@ -38,16 +38,32 @@ class PaisesController extends AppController {
  * @return void
  */
 	public function admin_add() {
-          if($this->request->is('ajax') && $this->request->is('post')) {
-            
-          }
           if ($this->request->is('post')) {
             $this->Pais->create();
             if ($this->Pais->save($this->request->data)) {
               $this->Session->setFlash(__('The pais has been saved'));
-              $this->redirect(array('action' => 'index'));
+              if(!$this->request->is('ajax')) {
+                $this->redirect(array('action' => 'index'));
+              } else {
+                $paises = $this->Pais->find('list');
+		$this->set(compact('paises'));
+
+                $this->set('pais', $this->Pais->id);
+
+                $this->autoRender = false;
+                $this->layout = 'ajax';
+                //return '{"error" : "Não foi possível adicionar o país"}';
+                //return json_encode($paises);
+                $this->render(DS.'Elements'.DS.'select_pais');
+              }
             } else {
-              $this->Session->setFlash(__('The pais could not be saved. Please, try again.'));
+              if(!$this->request->is('ajax')) {
+                $this->Session->setFlash(__('O pais não pode ser salvo. Por favor, tente novamente.'));
+              } else {
+                $this->autoRender = false;
+                $this->layout = 'ajax';
+                return "{'error' : 'Não foi possível adicionar o país'}";
+              }
             }
           }
 	}
