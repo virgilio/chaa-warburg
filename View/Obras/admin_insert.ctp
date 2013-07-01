@@ -2,10 +2,17 @@
    $this->Html->script("main.js", array("inline" => false));
    $this->Html->script("jquery.Jcrop.min.js", array("inline" => false));
    $this->Html->script("script.js", array("inline" => false));
+   $this->Html->script("step-bar.js", array("inline" => false));
    $this->Html->css('jquery.Jcrop.min.css', null, array("inline" => false));
 ?>
 
-<div class="bbody">
+<ul class="nav nav-tabs" id="step-bar">
+  <li><a href="#home" data-toggle="tab"><i class="icon-picture"></i> Imagem <i class="icon-caret-right"></i></a></li>
+  <li><a href="#profile" class="disabled" data-toggle="tab"><i class="icon-file-text-alt"></i> Informações <i class="icon-caret-right"></i></a></li>
+  <li><a href="#messages"class="disabled" data-toggle="tab"><i class="icon-link"></i> Imagens relacionadas</a></li>
+</ul>
+
+<div class="bbody container insert-img">
 
   <!-- upload form -->
   <?php echo $this->Form->create('Obra', array('enctype' =>
@@ -13,7 +20,7 @@
 <!--  <form id="uploadForm" enctype="multipart/form-data" method="post"
         action="/warburg/obras/insert" onsubmit="return checkForm()">
     <!-- hidden crop params -->
-    <?php echo $this->Form->input('nome'); ?>
+    <?php echo $this->Form->input('nome', array('class'=>'input-xxlarge','label' => 'Nome da imagem')); ?>
     <input type="hidden" id="x1" name="data[Thumb][x1]" />
     <input type="hidden" id="y1" name="data[Thumb][y1]" />
     <input type="hidden" id="x2" name="data[Thumb][x2]" />
@@ -38,7 +45,7 @@
       <input type="hidden" id="w" name="data[Thumb][w]" />
       <input type="hidden" id="h" name="data[Thumb][h]" />
       
-      <?php echo $this->Form->end('Enviar'); ?>
+      <?php echo $this->Form->end(array('label' => 'Enviar', 'class' => 'btn')); ?>
     </div>
   </form>
 </div>

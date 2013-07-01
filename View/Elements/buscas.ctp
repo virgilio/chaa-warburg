@@ -17,9 +17,9 @@ $this->request->query['Search']['type'] : 'fast'; ?>
           <div class="controls">
             <input type="hidden" name="Search[type]" value="fast" /> 
             <input id="busca" name="Search[query]" type="text" placeholder=""
-                   class="input-large">
+                   class="input-large pull-left">
 	    <?php echo $this->Form->end(array('label' => 'Buscar', 'id' => 'singlebutton',
-	    'class' => 'btn btn-default')); ?>
+	    'class' => 'btn btn-default pull-left')); ?>
           </div>
         </div>
       </fieldset>

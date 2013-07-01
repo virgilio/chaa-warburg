@@ -1,7 +1,14 @@
 <div class="obras form">
+
+    <ul class="nav nav-tabs" id="step-bar">
+      <li><a href="#home" data-toggle="tab"><i class="icon-picture"></i> Imagem <i class="icon-caret-right"></i></a></li>
+      <li><a href="#profile" class="disabled" data-toggle="tab"><i class="icon-file-text-alt"></i> Informações <i class="icon-caret-right"></i></a></li>
+      <li><a href="#messages"class="disabled" data-toggle="tab"><i class="icon-link"></i> Imagens relacionadas</a></li>
+    </ul>
 <?php echo $this->Form->create('Obra', array('class' => 'form-horizontal')); ?>
 	<fieldset>
-		<legend><?php echo __('Adicionar obra'); ?></legend>
+		<legend><?php echo __('Adicionar obra'); ?></legend>   
+   
 	<div class="pull-left">
 		<div class="control-group">
 		  <label class="control-label" for="nome">Nome da obra</label>

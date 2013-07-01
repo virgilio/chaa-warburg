@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="span6">
+    <div class="span4">
       <?php 
          echo $this->Form->create('Obra', array('type' => 'get', 'class' => 'form-horizontal')); ?>
       <fieldset>
@@ -25,14 +25,14 @@
     </div>
     <div class="span6">
       <?php 
-         echo $this->Form->create('Obra', array('type' => 'get', 'class' => 'form-horizontal')); ?>
+         echo $this->Form->create('Obra', array('type' => 'get')); ?>
       <fieldset>
         <!-- Text input-->
         <div class="controls">
           <input type="hidden" name="Search[filter]" value="obra" /> 
           <input id="busca" name="Search[query]" type="text"
                  placeholder="Buscar por nome da Obra"
-                 class="input-large">
+                 class="input-large pull-left">
 	  <?php echo $this->Form->end(array('label' => 'Buscar', 'id' => 'singlebutton',
 	  'class' => 'btn btn-default')); ?>
         </div>        

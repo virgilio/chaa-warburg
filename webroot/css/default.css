@@ -1,4 +1,4 @@
-/* Mini reset */
+ Mini reset */
 * {
     margin:0;
     padding:0;
@@ -10,10 +10,11 @@
 }
 /* Fim do mini reset */
 body{
-    background: url('../img/fundo.gif') 0 0 repeat;
+    background: url('../img/fundo.gif') 0 0 repeat fixed;
 }
+
 input[type='text'], input[type='number']{
-    height: 30px;
+    min-height: 20px !important;
 }
 h1{
     padding: 10px;
@@ -79,6 +80,13 @@ a.lnk_logo{
 .mini-obra .nome-artista a{
     color: #444;
 }
+
+/*Busca*/
+#ObraSearchForm input[type="submit"]{
+    margin: 0 5px;
+}
+
+/*Fim Busca*/
 
 .paging{
     clear: both;
@@ -178,4 +186,4 @@ h2.nome_obra{
 .modal_obra{
     text-align: center;
 }
-/*Fim view artista*/
+/*Fim view artista

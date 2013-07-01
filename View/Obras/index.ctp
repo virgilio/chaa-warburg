@@ -25,7 +25,7 @@
         </div>
     <?php endforeach; ?>
     
-    <div class="paging">
+    <div class="paging pagination pagination-centered">
         <p>
             <?php
             echo $this->Paginator->counter(array(
