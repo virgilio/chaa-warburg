@@ -147,14 +147,16 @@
           </div>
           <div class="control-group">
             <label class="control-label" for="obra_tipos_id">Tipo de obra</label>
-            <div class="controls">
+            <div id="select-obratipo" class="controls">
               <?php echo $this->Form->input('obra_tipos_id',
               array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione o tipo de obra')); ?>
             </div>
           </div>
+          <a href="#add-obratipo" role="button" class="btn"
+             data-toggle="modal">Nova Técnica</a>
           <div class="control-group">
             <label class="control-label" for="instituicao_id">Instituição</label>
-            <div class="controls">
+            <div id="select-instituicao" class="controls">
               <?php echo $this->Form->input('instituicao_id',
               array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione a Instituição')); ?>
             </div>
@@ -224,4 +226,8 @@
 <?php echo $this->element('addmodal', 
                           array('titulo' => 'Adicionar Iconografia', 
                                 'form' => 'iconografia')); ?>
+<?php echo $this->element('addmodal', 
+                          array('titulo' => 'Adicionar Técnica', 
+                                'form' => 'obratipo')); ?>
+
 <?php $this->Html->script("admin.js", array("inline" => false)); ?>

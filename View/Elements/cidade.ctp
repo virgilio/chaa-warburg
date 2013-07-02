@@ -4,7 +4,6 @@
                       'action' => 'add',
                       'onsubmit' => 'return addCidade(this);')); ?>
 <fieldset>
-  <legend><?php echo __('Adicionar Cidade'); ?></legend>
   <div class="control-group">
     <label class="control-label" for="nome">Nome da cidade</label>
     <div class="controls">
@@ -19,8 +18,3 @@
     </div>
   </div>
 </fieldset>
-<style type="text/css">
- .input_chosen {
-   z-index: 5000;
- }
-</style>

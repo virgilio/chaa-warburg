@@ -282,19 +282,14 @@ class ObrasController extends AppController {
                                          )
                                    );
     $cidades = Set::combine($cidades, '{n}.Cidade.id', array('{0} - {1}', '{n}.Cidade.nome', '{n}.Pais.nome'));
-
-    //$this->Instituicao->Behaviors->attach('Containable');
-    $instituicoes = $this->Instituicao->find('all', 
-                                   array(
-                                         'contain'=> array('Cidade' => array('Pais' => array('fields' => 'Pais.nome'))),
-                                         'fields' => 'Instituicao.id, Instituicao.nome, Cidade.nome, Pais.nome',
-                                         'recursive' => 1
-                                         )
-                                   );
-    die(pr($instituicoes));
+    
+    $instituicoes = $this->Instituicao->find('all', array(
+                                                          'fields' => 'Instituicao.id, Instituicao.nome, Cidade.nome',
+                                                          'recursive' => 0
+                                                          ));
     $instituicoes = Set::combine($instituicoes, 
                                  '{n}.Instituicao.id', 
-                                 array('{0} - {1} - {2}', '{n}.Instituicao.nome', '{n}.Pais.nome', '{n}.Cidade.nome'));
+                                 array('{0} - {1}', '{n}.Instituicao.nome', '{n}.Cidade.nome'));
 
 
     $paises = $this->Pais->find('list');    

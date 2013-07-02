@@ -37,7 +37,7 @@ class InstituicoesController extends AppController {
  *
  * @return void
  */
-  public function admin_add() {
+  /*public function admin_add() {
     if ($this->request->is('post')) {
       $this->Instituicao->create();
       if ($this->Instituicao->save($this->request->data)) {
@@ -46,7 +46,50 @@ class InstituicoesController extends AppController {
       } else {
         $this->Session->setFlash(__('The instituicao could not be saved. Please, try again.'));
       }
+      }*/
+
+
+
+
+
+
+
+
+
+  public function admin_add() {
+    if ($this->request->is('post')) {
+      $this->Instituicao->create();
+      if ($this->Instituicao->save($this->request->data)) {
+        $this->Session->setFlash(__('A Instituicao foi salva!'));
+        if(!$this->request->is('ajax')) {
+          $this->redirect(array('action' => 'index'));
+        } else {
+          $instituicoes = $this->Instituicao->find('all', 
+                                         array(
+                                               'fields' => 'Instituicao.id, Instituicao.nome, Cidade.nome',
+                                               'recursive' => 1
+                                               )
+                                         );
+          $instituicoes = Set::combine($instituicoes, '{n}.Instituicao.id', array('{0} - {1}', '{n}.Instituicao.nome', '{n}.Cidade.nome'));
+          $this->set('instituicoes', $instituicoes);
+
+          $this->set('instituicao', $this->Instituicao->id);
+
+          $this->autoRender = false;
+          $this->layout = 'ajax';
+          $this->render(DS.'Elements'.DS.'select_instituicao');
+        }
+      } else {
+        if(!$this->request->is('ajax')) {
+          $this->Session->setFlash(__('A instituicao não pode ser salva. Por favor, tente novamente.'));
+        } else {
+          $this->autoRender = false;
+          $this->layout = 'ajax';
+          return '{"error" : "Não foi possível adicionar instituicao"}';
+        }
+      }
     }
+
     $this->loadModel('Pais');
     $this->loadModel('Cidade');
     $paises = $this->Pais->find('list');
