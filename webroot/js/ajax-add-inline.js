@@ -38,8 +38,6 @@ var addCidade =
                             } catch (x) {
                                 console.log(x);
                             } 
-
-                            
                             jQuery("#select-cidade").html(msg);
                             //jQuery("#select-pais .input_chosen").chosen();                            
                             jQuery("#add-cidade").modal('hide');

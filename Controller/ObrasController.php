@@ -205,8 +205,12 @@ class ObrasController extends AppController {
       $data = $this->request->data;
 
       $obra['nome'] =  $data['Obra']['nome'];
-      $obra['imagem'] =  $this->processFile($data['Obra']['imagem'], $data['Thumb']);
-      $obra['tamanho_obra'] = $data['Thumb']['filedim'];
+      $obra['imagem'] =  $this->processFile($data['Obra']['imagem'], $data['Thumbnail']);
+      $this->Obra->Thumbnail->create();
+      if($this->Obra->save($data['Thumbnail'])){
+        
+      }
+      $obra['tamanho_obra'] = $data['Thumbnail']['filedim'];
       $this->Obra->create();
       if ($this->Obra->save($obra)) {
         $this->Session->setFlash(__('A Imagem foi salva!'));
@@ -217,7 +221,111 @@ class ObrasController extends AppController {
     }
   }
         
+  /**
+   * edit method
+   *
+   * @throws NotFoundException
+   * @param string $id
+   * @return void
+   */
+  public function admin_edit($id = null) {
+    if (!$this->Obra->exists($id)) {
+      throw new NotFoundException(__('Obra inválida'));
+    }
+    if ($this->request->is('post') || $this->request->is('put')) {
+      //die("<pre>" . print_r($this->request->data, true) . "</pre>");
+      $data = $this->request->data;
+      if($this->request->data['Obra']['imagem']['error'] == 0){
+        $this->request->data['Obra']['imagem'] =  $this->processFile($this->request->data['Obra']['imagem'], 
+                                                                     $this->request->data['Thumbnail']);
         
+      } else {
+        if(!empty($this->request->data['Thumbnail']['w'])){
+          $this->Obra->id = $this->request->data['Obra']['id'];
+          //die($this->Obra->field('imagem'));
+          $this->createThumbnail((WWW_ROOT . "img/obras/" . $this->Obra->field('imagem')), 
+                                 $this->request->data['Thumbnail'], 
+                                 (WWW_ROOT . "img/obras/thumbs/" . $this->Obra->field('imagem')));
+        }              
+        unset($this->request->data['Obra']['imagem']);
+      }
+      if ($this->Obra->save($this->request->data)) {
+        $thumbnail = $this->Obra->Thumbnail->findByObraId($this->Obra->id);
+        
+        if(isset($thumbnail['Thumbnail'])) {
+          $this->Obra->Thumbnail->id = $thumbnail['Thumbnail']['id'];
+        }
+        
+        $data['Thumbnail']['obra_id'] = $this->Obra->id;
+        if($this->Obra->Thumbnail->save($data['Thumbnail'])){
+          //die(pr($data['Thumbnail']));
+        }
+        
+        $this->redirect(array('action' => 'index'));
+      } else {
+        $this->Session->setFlash(__('The obra could not be saved. Please, try again.'));
+      }
+    } else {
+      $options = array('conditions' => array('Obra.' . $this->Obra->primaryKey => $id));
+      $this->request->data = $this->Obra->find('first', $options);
+    }
+    
+    $obraTipos = $this->Obra->ObraTipo->find('list');
+
+    $this->loadModel('Pais');
+    $this->loadModel('Cidade');
+    $this->loadModel('Instituicao');
+    $cidades = $this->Cidade->find('all', 
+                                   array(
+                                         'fields' => 'Cidade.id, Cidade.nome, Pais.nome',
+                                         'recursive' => 1
+                                         )
+                                   );
+    $cidades = Set::combine($cidades, '{n}.Cidade.id', array('{0} - {1}', '{n}.Cidade.nome', '{n}.Pais.nome'));
+
+    //$this->Instituicao->Behaviors->attach('Containable');
+    $instituicoes = $this->Instituicao->find('all', 
+                                   array(
+                                         'contain'=> array('Cidade' => array('Pais' => array('fields' => 'Pais.nome'))),
+                                         'fields' => 'Instituicao.id, Instituicao.nome, Cidade.nome, Pais.nome',
+                                         'recursive' => 1
+                                         )
+                                   );
+    die(pr($instituicoes));
+    $instituicoes = Set::combine($instituicoes, 
+                                 '{n}.Instituicao.id', 
+                                 array('{0} - {1} - {2}', '{n}.Instituicao.nome', '{n}.Pais.nome', '{n}.Cidade.nome'));
+
+
+    $paises = $this->Pais->find('list');    
+    $artistas = $this->Obra->Artista->find('list');
+    $iconografias = $this->Obra->Iconografia->find('list');
+    $relacionadas = $this->Obra->Relacionada->find('list');
+    $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 'artistas', 'iconografias', 'relacionadas'));
+  }
+
+  /**
+   * delete method
+   *
+   * @throws NotFoundException
+   * @param string $id
+   * @return void
+   */
+  public function delete($id = null) {
+    $this->Obra->id = $id;
+    if (!$this->Obra->exists()) {
+      throw new NotFoundException(__('Invalid obra'));
+    }
+    $this->request->onlyAllow('post', 'delete');
+    if ($this->Obra->delete()) {
+      $this->Session->setFlash(__('Obra deleted'));
+      $this->redirect(array('action' => 'index'));
+    }
+    $this->Session->setFlash(__('Obra was not deleted'));
+    $this->redirect(array('action' => 'index'));
+  }
+
+
   private function _ext($uploaded){ 
     return strrchr($uploaded['name'],"."); 
   }
@@ -249,7 +357,7 @@ class ObrasController extends AppController {
       //Final File Name 
       $finalFile = basename($target_path); 
       @chmod($target_path, 0644);
-      $this->createThumb($target_path, $thumb, $thumb_target_path);           
+      $this->createThumbnail($target_path, $thumb, $thumb_target_path);           
     } else { 
       //$this->_error('ObrasController::processFile() - Unable to save temp file to file system.'); 
       die('ObrasController::processFile() - Unable to save temp file to file system.'); 
@@ -258,7 +366,7 @@ class ObrasController extends AppController {
   } 
         
 
-  private function createThumb($sTempFileName, $thumb, $target){
+  private function createThumbnail($sTempFileName, $thumb, $target){
     if (file_exists($sTempFileName) && filesize($sTempFileName) > 0) {
       $aSize = getimagesize($sTempFileName); // try to obtain image info
       if (!$aSize) {
@@ -290,10 +398,10 @@ class ObrasController extends AppController {
       // copy and resize part of an image with resampling
       /*
         imagecopyresampled ($dst_image, $src_image, 
-                          $dst_x, $dst_y, 
-                          $src_x, $src_y, 
-                          $dst_w, $dst_h,
-                          $src_w, $src_h )
+        $dst_x, $dst_y, 
+        $src_x, $src_y, 
+        $dst_w, $dst_h,
+        $src_w, $src_h )
       */
 
       imagecopyresampled($vDstImg, $vImg, 
@@ -317,112 +425,46 @@ class ObrasController extends AppController {
       }
     }
   }
-        
-  public function add() {
+
+  /*public function add() {
     if ($this->request->is('post')) {
-      $this->Obra->create();
-      if ($this->Obra->save($this->request->data)) {
-        $this->Session->setFlash(__('The obra has been saved'));
-        $this->redirect(array('action' => 'index'));
-      } else {
-        $this->Session->setFlash(__('The obra could not be saved. Please, try again.'));
-      }
-    }
-    $obraTipos = $this->Obra->ObraTipo->find('list');
-    $iconografias = $this->Obra->Iconografia->find('list');
-    $instituicoes = $this->Obra->Instituicao->find('list');
-    $paises = $this->Obra->Pais->find('list');
-    $cidades = $this->Obra->Cidade->find('list');
-    $artistas = $this->Obra->Artista->find('list');
-    $relacionadas = $this->Obra->Relacionada->find('list');
-    $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 'artistas', 'iconografias', 'relacionadas'));
-  }
-
-  public function admin_add() {
-    if ($this->request->is('post')) {
-      $this->Obra->create();
-      if ($this->Obra->save($this->request->data)) {
-        $this->Session->setFlash(__('The obra has been saved'));
-        $this->redirect(array('action' => 'index'));
-      } else {
-        $this->Session->setFlash(__('The obra could not be saved. Please, try again.'));
-      }
-    }
-    $obraTipos = $this->Obra->ObraTipo->find('list');
-    $instituicoes = $this->Obra->Instituicao->find('list');
-    $paises = $this->Obra->Pais->find('list');
-    $cidades = $this->Obra->Cidade->find('list');
-    $artistas = $this->Obra->Artista->find('list');
-    $iconografias = $this->Obra->Iconografia->find('list');
-    $relacionadas = $this->Obra->Relacionada->find('list');
-    $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 'artistas', 'iconografias', 'relacionadas'));
-  }
-
-  /**
-   * edit method
-   *
-   * @throws NotFoundException
-   * @param string $id
-   * @return void
-   */
-  public function admin_edit($id = null) {
-    if (!$this->Obra->exists($id)) {
-      throw new NotFoundException(__('Invalid obra'));
-    }
-    if ($this->request->is('post') || $this->request->is('put')) {
-      //die("<pre>" . print_r($this->request->data, true) . "</pre>");
-      if($this->request->data['Obra']['imagem']['error'] == 0){
-        $this->request->data['Obra']['imagem'] =  $this->processFile($this->request->data['Obra']['imagem'], 
-                                                                     $this->request->data['Thumb']);
-      } else {
-        if(!empty($this->request->data['Thumb']['w'])){
-          $this->Obra->id = $this->request->data['Obra']['id'];
-          //die($this->Obra->field('imagem'));
-          $this->createThumb((WWW_ROOT . "img/obras/" . $this->Obra->field('imagem')), 
-                             $this->request->data['Thumb'], 
-                             (WWW_ROOT . "img/obras/thumbs/" . $this->Obra->field('imagem')));
-        }              
-        unset($this->request->data['Obra']['imagem']);
-      }
-
-      if ($this->Obra->save($this->request->data)) {
-        $this->Session->setFlash(__('The obra has been saved'));
-        $this->redirect(array('action' => 'index'));
-      } else {
-        $this->Session->setFlash(__('The obra could not be saved. Please, try again.'));
-      }
-    } else {
-      $options = array('conditions' => array('Obra.' . $this->Obra->primaryKey => $id));
-      $this->request->data = $this->Obra->find('first', $options);
-    }
-    $obraTipos = $this->Obra->ObraTipo->find('list');
-    $instituicoes = $this->Obra->Instituicao->find('list');
-    $paises = $this->Obra->Pais->find('list');
-    $cidades = $this->Obra->Cidade->find('list');
-    $artistas = $this->Obra->Artista->find('list');
-    $iconografias = $this->Obra->Iconografia->find('list');
-    $relacionadas = $this->Obra->Relacionada->find('list');
-    $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 'artistas', 'iconografias', 'relacionadas'));
-  }
-
-  /**
-   * delete method
-   *
-   * @throws NotFoundException
-   * @param string $id
-   * @return void
-   */
-  public function delete($id = null) {
-    $this->Obra->id = $id;
-    if (!$this->Obra->exists()) {
-      throw new NotFoundException(__('Invalid obra'));
-    }
-    $this->request->onlyAllow('post', 'delete');
-    if ($this->Obra->delete()) {
-      $this->Session->setFlash(__('Obra deleted'));
-      $this->redirect(array('action' => 'index'));
-    }
-    $this->Session->setFlash(__('Obra was not deleted'));
+    $this->Obra->create();
+    if ($this->Obra->save($this->request->data)) {
+    $this->Session->setFlash(__('The obra has been saved'));
     $this->redirect(array('action' => 'index'));
-  }
+    } else {
+    $this->Session->setFlash(__('The obra could not be saved. Please, try again.'));
+    }
+    }
+    $obraTipos = $this->Obra->ObraTipo->find('list');
+    $iconografias = $this->Obra->Iconografia->find('list');
+    $instituicoes = $this->Obra->Instituicao->find('list');
+    $paises = $this->Obra->Pais->find('list');
+    $cidades = $this->Obra->Cidade->find('list');
+    $artistas = $this->Obra->Artista->find('list');
+    $relacionadas = $this->Obra->Relacionada->find('list');
+    $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 'artistas', 'iconografias', 'relacionadas'));
+    }
+
+    public function admin_add() {
+    if ($this->request->is('post')) {
+    $this->Obra->create();
+    if ($this->Obra->save($this->request->data)) {
+    $this->Session->setFlash(__('The obra has been saved'));
+    $this->redirect(array('action' => 'index'));
+    } else {
+    $this->Session->setFlash(__('The obra could not be saved. Please, try again.'));
+    }
+    }
+    $obraTipos = $this->Obra->ObraTipo->find('list');
+    $instituicoes = $this->Obra->Instituicao->find('list');
+    $paises = $this->Obra->Pais->find('list');
+    $cidades = $this->Obra->Cidade->find('list');
+    $artistas = $this->Obra->Artista->find('list');
+    $iconografias = $this->Obra->Iconografia->find('list');
+    $relacionadas = $this->Obra->Relacionada->find('list');
+    $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 'artistas', 'iconografias', 'relacionadas'));
+    }*/
+
+
 }

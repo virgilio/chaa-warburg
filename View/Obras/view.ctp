@@ -17,7 +17,7 @@
             <?php echo $this->Html->link('[DOWNLOAD DA OBRA]', '/img/obras/'.$obra['Obra']['imagem'], array('target' => 'blank')); ?>
         </p>
         <p class="obra_descricao">
-            <?php echo h($obra['Obra']['descricao']); ?>
+            <?php echo ($obra['Obra']['descricao']); ?>
         </p>
     </div>
 

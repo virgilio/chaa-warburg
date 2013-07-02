@@ -55,5 +55,5 @@ class User extends AppModel {
     return true;
   }
 
-
+  public $hasMany = 'Obra';
 }

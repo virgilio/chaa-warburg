@@ -37,6 +37,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->css('default');
 		echo $this->Html->css('admin');
 
+		//echo $this->Html->script('jquery-2.0.2.min.js');
 		echo $this->Html->script('jquery-1.10.1.min.js');
 		echo $this->Html->script('bootstrap.min');
 		echo $this->Html->script('chosen.jquery.min');

@@ -12,32 +12,42 @@
 var jcrop_api, boundx, boundy;
 
 
-
-jQuery(document).ready(
-    function(){
-        if (typeof jcrop_api != 'undefined') {        
-            $('#preview').Jcrop({
-                                    minSize: [150, 90], // min crop size
-                                    aspectRatio : 15 / 9, // keep aspect ratio 1:1
-                                    bgFade: true, // use fade effect
-                                    bgOpacity: .3, // fade opacity
-                                    onChange: updateInfo,
-                                    onSelect: updateInfo,
-                                    onRelease: clearInfo,
-                                    boxWidth: 450, 
-                                    //                                boxHeight: 400
-                                }, function(){
-                                    // use the Jcrop API to get the real image size
-                                    var bounds = this.getBounds();
-                                    boundx = bounds[0];
-                                    boundy = bounds[1];
-                                    
-                                    // Store the Jcrop API in the jcrop_api variable
-                                    jcrop_api = this;
-                                });
-        }
-    });
-
+var loadPreview = function(){
+    $('#preview').Jcrop({
+                            minSize: [150, 90], // min crop size
+                            aspectRatio : 15 / 9, // keep aspect ratio 1:1
+                            bgFade: true, // use fade effect
+                            bgOpacity: .3, // fade opacity
+                            onChange: updateInfo,
+                            onSelect: updateInfo,
+                            onRelease: clearInfo,
+//                            boxWidth: 450 
+                            //                                boxHeight: 400
+                        }, function(){
+                            // use the Jcrop API to get the real image size
+                            var bounds = this.getBounds();
+                            boundx = bounds[0];
+                            boundy = bounds[1];
+                            
+                            // Store the Jcrop API in the jcrop_api variable
+                            jcrop_api = this;
+                            console.log($('#x1').val()  
+                                        + ' -- ' 
+                                        +   $('#y1').val()  
+                                        + ' -- ' 
+                                        + $('#x2').val() 
+                                        + ' -- ' 
+                                        +  $('#y2').val());
+                            console.log(boundx + '--' + boundy);
+                            jcrop_api.setSelect([
+                                                    parseInt($('#x1').val()), 
+                                                    parseInt($('#y1').val()), 
+                                                    parseInt($('#x2').val()), 
+                                                    parseInt($('#y2').val()) 
+                                                ]);
+                            console.log(jcrop_api.tellSelect());
+                        });
+};
 
 
 // convert bytes into friendly format

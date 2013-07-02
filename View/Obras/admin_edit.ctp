@@ -34,10 +34,11 @@
   <?php //echo $this->Form->create('Obra', array('class' => 'form-horizontal')); ?>
   <?php echo $this->Form->create('Obra', array('enctype' =>
   'multipart/form-data', 'class' => 'form-horizontal')); ?>
-  <input type="hidden" id="x1" name="data[Thumb][x1]" />
-  <input type="hidden" id="y1" name="data[Thumb][y1]" />
-  <input type="hidden" id="x2" name="data[Thumb][x2]" />
-  <input type="hidden" id="y2" name="data[Thumb][y2]" />
+  
+  <input type="hidden" id="x1" name="data[Thumbnail][x1]" value="<?php echo $this->request->data['Thumbnail']['x1']; ?>" />
+  <input type="hidden" id="y1" name="data[Thumbnail][y1]" value="<?php echo $this->request->data['Thumbnail']['y1']; ?>" />
+  <input type="hidden" id="x2" name="data[Thumbnail][x2]" value="<?php echo $this->request->data['Thumbnail']['x2']; ?>" />
+  <input type="hidden" id="y2" name="data[Thumbnail][y2]" value="<?php echo $this->request->data['Thumbnail']['y2']; ?>" />
 
   <fieldset>
    
@@ -56,19 +57,18 @@
               <div class="span6 offset2 jcrop">            
                 <?php echo $this->Html->image(('obras/' . $this->Form->value('Obra.imagem')), 
                             array('alt' => $this->Form->value('Obra.imagem'), 'border' =>
-                                  '0', 'id' => 'preview'));
+                                  '0', 'id' => 'preview', 'onload' => 'loadPreview()'));
                 ?>
                 <?php echo $this->Html->image(('obras/thumbs/' . $this->Form->value('Obra.imagem')), 
-                            array('alt' => $this->Form->value('Obra.imagem'), 'border' =>
-                                  '0'));
+                            array('alt' => $this->Form->value('Obra.imagem'), 'border' => '0'));
                 ?>
               </div>
             </div>
-            <input type="hidden" id="filesize" name="data[Thumb][filesize]" />
-            <input type="hidden" id="filetype" name="data[Thumb][filetype]" />
-            <input type="hidden" id="filedim" name="data[Thumb][filedim]" />
-            <input type="hidden" id="w" name="data[Thumb][w]" />
-            <input type="hidden" id="h" name="data[Thumb][h]" />
+            <input type="hidden" id="filesize" name="data[Thumbnail][filesize]" />
+            <input type="hidden" id="filetype" name="data[Thumbnail][filetype]" />
+            <input type="hidden" id="filedim" name="data[Thumbnail][filedim]" />
+            <input type="hidden" id="w" name="data[Thumbnail][w]" />
+            <input type="hidden" id="h" name="data[Thumbnail][h]" />
             
           </div>
        </div>
@@ -159,6 +159,8 @@
               array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione a Instituição')); ?>
             </div>
           </div>
+          <a href="#add-instituicao" role="button" class="btn"
+             data-toggle="modal">Nova Instituição</a>
           <a href="#add-cidade" role="button" class="btn"
              data-toggle="modal">Nova cidade</a>
           <a href="#add-pais" role="button" class="btn"
@@ -210,6 +212,9 @@
       </div>
     </div>
 </div>
+<?php echo $this->element('addmodal', 
+                          array('titulo' => 'Adicionar Instituição', 
+                                'form' => 'instituicao')); ?>
 <?php echo $this->element('addmodal', 
                           array('titulo' => 'Adicionar Cidade', 
                                 'form' => 'cidade')); ?>
