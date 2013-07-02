@@ -76,7 +76,7 @@ class PagesController extends AppController {
                 $iconografias = $this->Obra->Iconografia->find('list');
                 $this->set('obraTipos', $obraTipos);
                 $this->set('iconografias', $iconografias);
-                $obras = $this->Obra->find('all', array('fields' => array('Obra.imagem'), 'limit' => 3, 'order' => 'Obra.created desc'));
+                $obras = $this->Obra->find('all', array('fields' => array('Obra.imagem', 'Obra.nome', 'Obra.id'), 'limit' => 5, 'order' => 'Obra.created desc'));
                 $this->set('lastObras', $obras);
 
 		$this->set(compact('page', 'subpage', 'title_for_layout'));

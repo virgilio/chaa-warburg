@@ -1,189 +1,219 @@
  Mini reset */
 * {
-    margin:0;
-    padding:0;
-    list-style:none;
-    vertical-align:baseline;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;         /* Opera/IE 8+ */
+  margin:0;
+  padding:0;
+  list-style:none;
+  vertical-align:baseline;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
 }
 /* Fim do mini reset */
 body{
-    background: url('../img/fundo.gif') 0 0 repeat fixed;
+  background: url('../img/fundo.gif') 0 0 repeat fixed;
 }
 
 input[type='text'], input[type='number']{
-    min-height: 20px !important;
+  min-height: 20px !important;
 }
 h1{
-    padding: 10px;
-    color: #666;
+  padding: 10px;
+  color: #666;
 }
 form legend{
-    padding: 10px;
+  padding: 10px;
 }
 a{
-    color: #990000;
-    text-decoration: none;
+  color: #990000;
+  text-decoration: none;
 }
 a:hover{
-    color: #222;
+  color: #222;
 }
 a.lnk_logo{
-    display: block;
-    height: 144px;
+  display: block;
+  height: 144px;
 }
 #container, #header, #admin-container{
-    background-color: #FFFFFF;
+  background-color: #FFFFFF;
 }
 #container, .obra_container{
-    width: 960px;
-    margin: 0 auto;
+  width: 960px;
+  margin: 0 auto;
 }
 
 #main-menu{
-    background-color: #cfcfcf;
+  background-color: #cfcfcf;
 }
 #main-menu ul{
-    list-style: none;
-    text-transform: uppercase;
-    text-align: right;
+  list-style: none;
+  text-transform: uppercase;
+  text-align: right;
 } 
 #main-menu ul li{
-    display: inline-block;
-    padding: 0.5em;
+  display: inline-block;
+  padding: 0.5em;
 }
 #main-menu a{
-    text-decoration: none;
-    color: #222;
+  text-decoration: none;
+  color: #222;
 }
 #main-menu a:hover{
-    color: #990000;
+  color: #990000;
 }
 
 .mini-obra{
-    float: left;
-    width: 192px;
-    height: 240px;
-    text-align: center;
-    padding: 10px;
+  float: left;
+  width: 192px;
+  height: 240px;
+  text-align: center;
+  padding: 10px;
 }
 .mini-obra p{
-    padding: 10px 0;
+  padding: 10px 0;
 }
 .mini-obra .nome-artista{
-    border-top: 1px dashed #cfcfcf;
-    font-size: 0.9em;
-    color: #666;
+  border-top: 1px dashed #cfcfcf;
+  font-size: 0.9em;
+  color: #666;
 }
 .mini-obra .nome-artista a{
-    color: #444;
+  color: #444;
 }
 
 /*Busca*/
 #ObraSearchForm input[type="submit"]{
-    margin: 0 5px;
+  margin: 0 5px;
 }
 
 /*Fim Busca*/
 
 .paging{
-    clear: both;
-    text-align: center;
-    padding: 5px;
-    /*background-color: #f5f5f5;*/
+  clear: both;
+  text-align: center;
+  padding: 5px;
+  /*background-color: #f5f5f5;*/
 }
 .paging span{
-    padding: 4px;
-    font-size: 15px;
+  padding: 4px;
+  font-size: 15px;
 }
 
 /*View Obra*/
 
 .img_obra{
-    width: 384px;
-    float: left;
-    padding: 0 20px;
+  width: 50%;
+  float: left;
+  padding: 0 20px;
 }
 .img_obra img{
-    max-width: 100%;
-    box-shadow: 2px 2px 5px #444;
+  max-width: 100%;
+  box-shadow: 2px 2px 5px #444;
 }
 .info_obra{
-    width: 576px;
-    float: right;
+  width: 45%;
+  float: right;
 }
 .related{
-    clear: both;
-    display: table;
+  clear: both;
+  display: table;
 }
 .related h3{
-    color: #990000;
+  color: #990000;
 }
 h2.nome_obra{
-    color: #990000;
-    font-size: 18px;
+  color: #990000;
+  font-size: 18px;
 }
 .obra_container{
-    display: table;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #990000;
+  display: table;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #990000;
 }
 .related h3 {
-    padding: 10px;
+  padding: 10px;
 }
 
 .info_obra p{
-    margin: 10px 0;
-    font-size: 16px;
+  margin: 10px 0;
+  font-size: 16px;
 }
 .obra_container .nome_artista a{
-    color: #666;
+  color: #666;
 }
 .obra_container .nome_artista a:hover{
-    color: #990000;
+  color: #990000;
 }
 .obra_descricao{
-    color: #444;
-    border-top: 1px solid #990000;
-    padding-top: 10px;
+  color: #444;
+  border-top: 1px solid #990000;
+  padding-top: 10px;
 }
 .modal_relacionadas .obra{
-    float: left;
-    width: 50%;
-    padding: 10px;
-    text-align: center;
+  float: left;
+  width: 50%;
+  padding: 10px;
+  text-align: center;
 }
 .obra img, .modal_obra img{
-    max-width: 100%;
-    max-height: 85%;
+  max-width: 100%;
+  max-height: 85%;
 }
 /*Fim view obra*/
 
 /*View artista*/
 .artistas{
-    color: #222;
+  color: #222;
 }
 .artistas h2{
-    padding: 10px;
-    color: #444;
+  padding: 10px;
+  color: #444;
 }
 .img_artista{
-    float: left;
+  float: left;
 }
 .img_artista img{
-    border: 5px solid white;
-    border-radius: 2px;
-    margin: 10px;
-    box-shadow: 2px 2px 8px #ccc;
+  border: 5px solid white;
+  border-radius: 2px;
+  margin: 10px;
+  box-shadow: 2px 2px 8px #ccc;
 }
 .desc_artista{
-    line-height: 25px;
-    margin-top: 10px;
-    padding: 0 10px;
+  line-height: 25px;
+  margin-top: 10px;
+  padding: 0 10px;
 }
 .modal_obra{
     text-align: center;
 }
 /*Fim view artista
+
+/*Slider inicial*/
+.title-home{
+  text-align: center;
+  font-size: 20px;
+  line-height: 20px;
+  border-top: 1px dashed #c5c5c5;
+  padding-top: 20px;
+}
+.slide-container{
+  margin-bottom: 30px;
+}
+#slider-home{
+  position: relative;
+  overflow: hidden;
+  height: 300px;
+  margin: 0;
+}
+#slider-home .carousel-inner>.item>img, #slider-home .carousel-inner>.item>a>img {
+  width: 100%;
+}
+#slider-home .carousel-caption{
+  top: 250px; 
+  background-color: #FFF; 
+  background-color: rgba(256,256,256,0.7);
+}
+#slider-home .carousel-caption h4{
+  color: #444;
+  font-size: 14px;
+}
