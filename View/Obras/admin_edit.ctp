@@ -15,13 +15,11 @@
   <li>
     <a href="#edit-img-step1">
       <i class="icon-picture"></i> Imagem 
-      <i class="icon-caret-right"></i>
     </a>
   </li>
   <li class="active">
     <a href="#edit-img-step2">
       <i class="icon-file-text-alt"></i> Informações 
-      <i class="icon-caret-right"></i>
     </a>
   </li>
   <li>
@@ -46,22 +44,28 @@
 
     <div class="obras form tab-content">
     <!-- Início step1 -->    
-        <div id="edit-img-step1" class="tab-pane">
-          <h3>Editar imagem e miniatura</h3>
-          <?php echo $this->Form->input('imagem', array('type' => 'file', 'id' =>
-        'image_file', 'onchange' => 'fileSelectHandler()')); ?>
-      
-          <div class="step2">
-            <h4>Selecione a miniatura desejada</h4>
-            <div class="container">
-              <div class="span6 offset2 jcrop">            
+        <div id="edit-img-step1" class="tab-pane container">
+          <div class="row">
+            <div class="span8">
+              <h3>Editar imagem e miniatura</h3>
+              <?php echo $this->Form->input('imagem', array('type' => 'file', 'id' =>
+                  'image_file', 'onchange' => 'fileSelectHandler()')); ?>
+            </div>
+            <div class="span3">
+                <label>Miniatura atual</label>
+                <?php echo $this->Html->image(('obras/thumbs/' . $this->Form->value('Obra.imagem')), 
+                      array('alt' => $this->Form->value('Obra.imagem'), 'border' => '0', 'class' => 'img-polaroid'));
+                ?>
+            </div>
+          </div>
+          <div class="row">
+            <div class="step2 span6 offset2">
+              <h4>Selecione a miniatura desejada</h4>
+              <div class="jcrop">            
                 <?php echo $this->Html->image(('obras/' . $this->Form->value('Obra.imagem')), 
                             array('alt' => $this->Form->value('Obra.imagem'), 'border' =>
                                   '0', 'id' => 'preview', 'onload' => 'loadPreview()'));
-                ?>
-                <?php echo $this->Html->image(('obras/thumbs/' . $this->Form->value('Obra.imagem')), 
-                            array('alt' => $this->Form->value('Obra.imagem'), 'border' => '0'));
-                ?>
+                ?>               
               </div>
             </div>
             <input type="hidden" id="filesize" name="data[Thumbnail][filesize]" />
@@ -109,12 +113,6 @@
           	</div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="aproximado">Aproximado</label>
-            <div class="controls">
-              <?php echo $this->Form->input('aproximado', array('label' => '')); ?>       
-            </div>
-          </div>
-          <div class="control-group">
             <label class="control-label" for="incerta">Incerta</label>
             <div class="controls">
               <?php echo $this->Form->input('incerta', array('label' => '')); ?>        
@@ -129,8 +127,13 @@
           <div class="control-group">
           	<label class="control-label" for="tamanho_obra">Tamanho da obra</label>
           	<div class="controls">
-          	  <?php echo $this->Form->input('tamanho_obra', array('label' => '')); ?>		    
-          	</div>
+          	  <?php echo $this->Form->input('tamanho_obra', array('label' => '')); ?>		   
+          	
+              <label class="control-label" for="aproximado">tamanho aproximado?</label>
+              <div class="controls">
+                <?php echo $this->Form->input('aproximado', array('label' => '')); ?>       
+              </div>
+            </div>
           </div>
           <!-- Textarea -->
           <div class="control-group">
@@ -146,27 +149,31 @@
           	</div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="obra_tipos_id">Tipo de obra</label>
+            <label class="control-label" for="obra_tipos_id">Técnica</label>
             <div id="select-obratipo" class="controls">
               <?php echo $this->Form->input('obra_tipos_id',
               array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione o tipo de obra')); ?>
-            </div>
-          </div>
-          <a href="#add-obratipo" role="button" class="btn"
+              <a href="#add-obratipo" role="button" class="btn"
              data-toggle="modal">Nova Técnica</a>
+            </div>
+
+          </div>
+         
           <div class="control-group">
             <label class="control-label" for="instituicao_id">Instituição</label>
             <div id="select-instituicao" class="controls">
               <?php echo $this->Form->input('instituicao_id',
               array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione a Instituição')); ?>
+
+              <a href="#add-instituicao" role="button" class="btn"
+             data-toggle="modal">Nova Instituição</a>
+              <a href="#add-cidade" role="button" class="btn"
+                 data-toggle="modal">Nova cidade</a>
+              <a href="#add-pais" role="button" class="btn"
+                 data-toggle="modal">Novo país</a>
             </div>
           </div>
-          <a href="#add-instituicao" role="button" class="btn"
-             data-toggle="modal">Nova Instituição</a>
-          <a href="#add-cidade" role="button" class="btn"
-             data-toggle="modal">Nova cidade</a>
-          <a href="#add-pais" role="button" class="btn"
-             data-toggle="modal">Novo país</a>
+          
           <!--<div class="control-group">
             <label class="control-label" for="pais_id">País</label>
             <div class="controls">
@@ -186,10 +193,11 @@
             <div id="select-iconografia" class="controls">
               <?php echo $this->Form->input('iconografia_id', 
               array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione a iconografia')); ?>
+              <a href="#add-iconografia" role="button" class="btn"
+               data-toggle="modal">Nova Iconografia</a>
             </div>
           </div>
-          <a href="#add-iconografia" role="button" class="btn"
-               data-toggle="modal">Nova Iconografia</a>
+          
         </div>
     <!-- Fim step2 -->
 

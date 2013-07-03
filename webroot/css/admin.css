@@ -53,62 +53,10 @@
 }
 
 /*Step bar*/
-#step-bar{
-  width: 100%;
-  text-align: center;
+.obras .tab-pane{
+  padding: 10px;
 }
-#step-bar li a{
-  display: inline-block;
-  padding: 8px 12px;
-  margin-bottom: 0;
-  font-size: 14px;
-  line-height: 20px;
-  color: #900;
-  text-align: center;
-  padding-left: 25px;
-  position: relative;
-  /*border: 1px solid #900;*/
-  background-color: #e5e5e5;
-  border-radius: none;
-}
-#step-bar li{
-  border-radius: 0;
-}
-#step-bar li:first-child{
-  border-right: none;
-  border-radius: 4px 0 0 4px;
-}
-#step-bar li a:last-child{
-  border-left: none;
- /* border-radius: 0 4px 4px 0;*/
-}
-#step-bar li a i.icon-caret-right{
-  color: #e5e5e5;
-}
-#step-bar li a:hover{
-  background-color: #fff;
-}
-#step-bar li a:hover i.icon-caret-right{
-  color: #fff;
-}
-#step-bar li a.disabled{
-  background-color: #f5f5f5;
-  color: #ccc;
-  cursor: default;
-}
-#step-bar li a.disabled i.icon-caret-right{
-  color: #f5f5f5;
-  text-shadow: 1px 0 #ccc;
-}
-#step-bar i.icon-caret-right{
-  position: absolute;
-  right: -20px;
-  top: -10px;
-  text-shadow: 1px 0 #900;
-  font-size: 64px;
-  color: #e6e6e6;
-  z-index: 1;
-}
+
 .insert-img{
   border: 1px solid #f5f5f5;
   padding: 10px;
@@ -124,4 +72,9 @@
 
 #ObraDescricao{
   width: 500px;
+}
+
+/*Inser obra*/
+#select-obratipo div, #select-instituicao div, #select-iconografia div{
+  display: inline-block;
 }
