@@ -60,7 +60,7 @@ class ObrasController extends AppController {
   public function search() {
     $this->Obra->recursive = 0;
     $data = $this->request->query;
-
+    pr($data);
     if($this->request->is('get') && !empty($data)) {
       if(isset($data['Search']['type']) && $data['Search']['type'] == 'fast'){
         $query = $data['Search']['query'];
@@ -131,6 +131,14 @@ class ObrasController extends AppController {
           $and['Obra.obra_tipos_id'] = $data['ObraTipo'];
         if(!empty($data['Iconografia']))
           $and['Obra.iconografia_id'] = $data['Iconografia'];
+
+        if(!empty($query['inicio'])){
+          $and['Obra.ano_inicio >= ?'] = array($query['inicio']);
+        }
+
+        if(!empty($query['fim'])){
+          $and['Obra.ano_fim <= ?'] = array($query['fim']);
+        }
 
         $this->paginate = array(
                                 'fields' => array(

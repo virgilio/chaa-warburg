@@ -1,3 +1,7 @@
+<?php 
+   $this->Html->script("jquery-ui.js", array("inline" => false)); 
+   $this->Html->css("jquery-ui.css", null, array("inline" => false)); 
+?>
 <?php $search_type = isset($this->request->query['Search']['type']) ?
 $this->request->query['Search']['type'] : 'fast'; ?>
 <div class="buscas" id="tabs">
@@ -127,16 +131,40 @@ $this->request->query['Search']['type'] : 'fast'; ?>
               'typeahead', 'value' => (isset($data['Iconografia']) ? $data['Iconografia'] : ""))); ?>
             </div>
           </div>
-          
-          <!-- Button -->
           <div class="control-group">
-            <label class="control-label" for="singlebutton"></label>
+            <label class="control-label" for="cidade">Ano</label>
             <div class="controls">
-              <?php echo $this->Form->end(array('label' => 'Buscar', 'id' => 'singlebutton',
-	      'class' => 'btn btn-default')); ?>
+              <input id="ano" 
+                     value="<?php echo $hasValues ? $data['Search']['ano'] : ""; ?>"
+                     name="Search[ano]" type="text" placeholder="" class="input-large">
             </div>
           </div>
-        </div>          
+        </div>
+        <div class="pull-left">
+          
+            <div class="control-group">
+              <label class="control-label" for="cidade">Intervalo</label>
+              <div class="controls">
+                <input id="intervalo" 
+                       type="text"
+                       value="<?php echo $hasValues ? $data['Search']['intervalo'] : ""; ?>"
+                       name="Search[intervalo]" type="text" />
+                <input id="int-inicio" name="Search[inicio]" type="hidden" />
+                <input id="int-fim" name="Search[fim]" type="hidden" />
+
+                <div id="slider-range"></div>
+              </div>
+            </div>
+            <!-- Button -->
+            <div class="control-group">
+              <label class="control-label" for="singlebutton"></label>
+              <div class="controls">
+                <?php echo $this->Form->end(array('label' => 'Buscar', 'id' => 'singlebutton',
+	        'class' => 'btn btn-default')); ?>
+              </div>
+            </div>
+          
+        </div>
       </fieldset>
       <?php echo $this->Form->end(); ?>
     </div>

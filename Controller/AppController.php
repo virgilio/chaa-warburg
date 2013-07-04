@@ -97,6 +97,12 @@ class AppController extends Controller {
       $cidades_list = array_merge($cidades_list, array($cidade['Cidade']['nome']));
     }
     $this->set('cidades_list', json_encode($cidades_list));
+
+    $ano_inicio = $this->Obra->query('select min(ano_inicio) from obras');
+    $ano_fim = $this->Obra->query('select max(ano_fim) from obras');
+
+    $letters = $this->Obra->query('SELECT count(DISTINCT SUBSTRING(`nome`, 1, 1)) FROM `obras` ORDER BY `nome`');
+    
   }
   
 }
