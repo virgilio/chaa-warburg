@@ -16,6 +16,8 @@ class ObrasController extends AppController {
    * @return void
    */
   public function index() {
+    parent::searchDataLoader();
+
     $this->Obra->recursive = 0;
     $this->set('obras', $this->paginate());
     $obraTipos = $this->Obra->ObraTipo->find('list');
@@ -85,7 +87,7 @@ class ObrasController extends AppController {
                                 );
       } else if(isset($data['Search']['type']) && $data['Search']['type'] == 'advanced') {
         $query = $data['Search'];
-        //die("<pre>" . print_r($data, true) . "</pre>");
+        
         $or = array();
         if(!empty($query['artista']))
           $or['Artista.nome LIKE'] = '%' . $query['artista'] . '%';
@@ -95,10 +97,32 @@ class ObrasController extends AppController {
         }
         if(!empty($query['instituicao']))
           $or['Instituicao.nome LIKE'] = '%' . $query['instituicao'] . '%';
-        if(!empty($query['pais']))
-          $or['Pais.nome LIKE'] = '%' . $query['pais'] . '%';
-        if(!empty($query['cidade']))
-          $or['Cidade.nome LIKE'] = '%' . $query['cidade'] . '%';
+        
+        /**
+         *  If there is city or country setted, we add a OR search 
+         *  on 'Obra.instituicao_id IN (ids)' too. To discover which ids, we should put
+         *  in the conditions array, we search for instituicoes which have
+         *  cidade_id that has Cidade.nome like $query['cidade'] or cidades
+         *  which has Cidade.pais_id which have Pais.nome like $query['pais']
+         *  
+         */
+
+        $paisQuery = "";
+        if(!empty($query['pais'])){
+          //create query to select Pais.id
+          $paisQuery = $this->getPaisIdsQuery($query);
+        }
+        
+        $cidadesQuery = "";
+        if(!empty($paisQuery) || !empty($query['cidade'])) {
+          //create query to select Cidade.id
+          $cidadesQuery = $this->getCidadeIdsQuery($query, $paisQuery);
+
+          $instituicaoQuery = '';
+          $instituicaoQuery = 'Obra.instituicao_id IN (' . $this->getInstituicaoIdsQuery($cidadesQuery) . ')';
+          $or = array_merge(array($instituicaoQuery), $or);
+        }
+
         if(!empty($query['tags']))
           $or['Obra.tags LIKE'] = '%' . $query['tags'] . '%';
               
@@ -118,14 +142,19 @@ class ObrasController extends AppController {
                                                   'Obra.ano_inicio', 
                                                   'Obra.ano_fim'),
                                 'conditions' => array(
-                                                      'OR' => $or,
-                                                      'AND' => $and
+                                                      //'OR' => $or,
+                                                      'AND' => array_merge($or, $and)
                                                       )
                                 );
       } else {
         $this->Session->setFlash(__('Busca inválida'));
       }
     }
+
+    $this->set('data', $data);
+
+    parent::searchDataLoader();
+
     $obras = $this->paginate('Obra');
     $this->set('obras', $obras);
     $obraTipos = $this->Obra->ObraTipo->find('list');
@@ -134,6 +163,76 @@ class ObrasController extends AppController {
     $this->set('iconografias', $iconografias);
   }
         
+
+  private function getPaisIdsQuery($query) {
+    $this->loadModel('Pais');
+    $csq['Pais.nome LIKE'] = '%' . $query['pais'] . '%';
+    
+    $db = $this->Pais->getDataSource();
+    $subQuery = $db->buildStatement(
+                                    array(
+                                          'fields'     => array('Pais.id'),
+                                          'table'      => $db->fullTableName($this->Pais),
+                                          'alias'      => 'Pais',
+                                          'limit'      => null,
+                                          'offset'     => null,
+                                          'joins'      => array(),
+                                          'conditions' => $csq,
+                                          'order'      => null,
+                                          'group'      => null
+                                          ),
+                                    $this->Pais);
+    return $db->expression($subQuery)->value;
+  }
+
+  private function getCidadeIdsQuery($query, $paisesQuery) {
+    $this->loadModel('Cidade');
+    
+    if(!empty($paisesQuery))
+      $or[0] = 'Cidade.pais_id IN (' . $paisesQuery . ')';
+    
+    if(!empty($query['cidade']))
+      $or['Cidade.nome LIKE'] = '%' . $query['cidade'] . '%';
+        
+    $db = $this->Cidade->getDataSource();
+    $subQuery = $db->buildStatement(
+                                    array(
+                                          'fields'     => array('Cidade.id'),
+                                          'table'      => $db->fullTableName($this->Cidade),
+                                          'alias'      => 'Cidade',
+                                          'limit'      => null,
+                                          'offset'     => null,
+                                          'joins'      => array(),
+                                          'conditions' => array('OR' => $or),
+                                          'order'      => null,
+                                          'group'      => null
+                                          ),
+                                    $this->Cidade);
+    return $db->expression($subQuery)->value;
+  }
+  
+  private function getInstituicaoIdsQuery($cidadesQuery) {
+    $this->loadModel('Instituicao');
+    
+    $conditions = 'Instituicao.cidade_id IN (' . $cidadesQuery . ')';
+    
+    $db = $this->Instituicao->getDataSource();
+    $subQuery = $db->buildStatement(
+                                    array(
+                                          'fields'     => array('Instituicao.id'),
+                                          'table'      => $db->fullTableName($this->Instituicao),
+                                          'alias'      => 'Instituicao',
+                                          'limit'      => null,
+                                          'offset'     => null,
+                                          'joins'      => array(),
+                                          'conditions' => $conditions,
+                                          'order'      => null,
+                                          'group'      => null
+                                          ),
+                                    $this->Instituicao);
+    return $db->expression($subQuery)->value;
+  }
+  
 
   public function advanced_search() {
     $this->Obra->recursive = 0;

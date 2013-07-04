@@ -30,56 +30,63 @@ App::uses('AppController', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers/pages-controller.html
  */
 class PagesController extends AppController {
+  
+  /**
+   * Controller name
+   *
+   * @var string
+   */
+  public $name = 'Pages';
+  
+  /**
+   * This controller does not use a model
+   *
+   * @var array
+   */
+  public $uses = array();
+  
+  /**
+   * Displays a view
+   *
+   * @param mixed What page to display
+   * @return void
+   */
+  public function display() {
+    $path = func_get_args();
+    
+    $count = count($path);
+    if (!$count) {
+      $this->redirect('/');
+    }
+    $page = $subpage = $title_for_layout = null;
 
-/**
- * Controller name
- *
- * @var string
- */
-	public $name = 'Pages';
+    if (!empty($path[0])) {
+      $page = $path[0];
+    }
+    if (!empty($path[1])) {
+      $subpage = $path[1];
+    }
+    if (!empty($path[$count - 1])) {
+      $title_for_layout = Inflector::humanize($path[$count - 1]);
+    }
 
-/**
- * This controller does not use a model
- *
- * @var array
- */
-	public $uses = array();
+    
+    parent::searchDataLoader();
 
-/**
- * Displays a view
- *
- * @param mixed What page to display
- * @return void
- */
-	public function display() {
-		$path = func_get_args();
+    $obraTipos = $this->Obra->ObraTipo->find('list');
+    $iconografias = $this->Obra->Iconografia->find('list');
+    $this->set('obraTipos', $obraTipos);
+    $this->set('iconografias', $iconografias);
+    $obras = $this->Obra->find('all', 
+                               array('fields' => array(
+                                                       'Obra.imagem', 
+                                                       'Obra.nome', 
+                                                       'Obra.id'), 
+                                     'limit' => 5, 
+                                     'order' => 'Obra.created desc'));
+    $this->set('lastObras', $obras);
 
-		$count = count($path);
-		if (!$count) {
-			$this->redirect('/');
-		}
-		$page = $subpage = $title_for_layout = null;
-
-		if (!empty($path[0])) {
-			$page = $path[0];
-		}
-		if (!empty($path[1])) {
-			$subpage = $path[1];
-		}
-		if (!empty($path[$count - 1])) {
-			$title_for_layout = Inflector::humanize($path[$count - 1]);
-		}
-
-                $this->loadModel('Obra');
-
-                $obraTipos = $this->Obra->ObraTipo->find('list');
-                $iconografias = $this->Obra->Iconografia->find('list');
-                $this->set('obraTipos', $obraTipos);
-                $this->set('iconografias', $iconografias);
-                $obras = $this->Obra->find('all', array('fields' => array('Obra.imagem', 'Obra.nome', 'Obra.id'), 'limit' => 5, 'order' => 'Obra.created desc'));
-                $this->set('lastObras', $obras);
-
-		$this->set(compact('page', 'subpage', 'title_for_layout'));
-		$this->render(implode('/', $path));
-	}
+    $this->set(compact('page', 'subpage', 'title_for_layout'));
+    $this->render(implode('/', $path));
+  }
 }

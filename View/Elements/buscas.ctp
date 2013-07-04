@@ -27,7 +27,9 @@ $this->request->query['Search']['type'] : 'fast'; ?>
     </div>
     <div class="tab-pane <?php echo $search_type === 'advanced' ? 'active' : '' ?>" id="busca_avancada">
       <?php echo $this->Form->create('Obra', array('action' => 'search', 'type'
-      => 'get', 'class' => 'form-horizontal')); ?>
+      => 'get', 'class' => 'form-horizontal')); 
+      $hasValues = isset($data['Search']);
+      ?>
       <input type="hidden" name="Search[type]" value="advanced" /> 
       <fieldset>
         <!-- Text input-->
@@ -35,14 +37,24 @@ $this->request->query['Search']['type'] : 'fast'; ?>
           <div class="control-group">
             <label class="control-label" for="artista">Artista</label>
             <div class="controls">
-              <input id="artista" name="Search[artista]" type="text" placeholder="" class="input-large">
+              <input id="artista" 
+                     data-provide="typeahead" 
+                     data-source='<?php echo h($artistas_list); ?>' 
+                     autocomplete="off"
+                     value="<?php echo $hasValues ? $data['Search']['artista'] :
+                     ""; ?>"
+                     name="Search[artista]" type="text" placeholder="" class="input-large">
             </div>
           </div>
           <!-- Text input-->
           <div class="control-group">
             <label class="control-label" for="obra">Obra</label>
             <div class="controls">
-              <input id="obra" name="Search[obra]" type="text" placeholder="" class="input-large">
+              <input id="obra" 
+                     name="Search[obra]" 
+                     value="<?php echo $hasValues ? $data['Search']['obra'] : ""; ?>"
+                     type="text" 
+                     placeholder="" class="input-large">
             </div>
           </div>
           
@@ -50,7 +62,13 @@ $this->request->query['Search']['type'] : 'fast'; ?>
           <div class="control-group">
             <label class="control-label" for="instituicao">Instituição da obra</label>
             <div class="controls">
-              <input id="instituicao" name="Search[instituicao]" type="text" placeholder="" class="input-large">
+              <input id="instituicao" 
+                     data-provide="typeahead" 
+                     autocomplete="off"
+                     value="<?php echo $hasValues ?
+                     $data['Search']['instituicao'] : ""; ?>"
+                     data-source='<?php echo h($instituicoes_list); ?>' 
+                     name="Search[instituicao]" type="text" placeholder="" class="input-large">
             </div>
           </div>
           
@@ -58,7 +76,12 @@ $this->request->query['Search']['type'] : 'fast'; ?>
           <div class="control-group">
             <label class="control-label" for="pais">País</label>
             <div class="controls">
-              <input id="pais" name="Search[pais]" type="text" placeholder="" class="input-large">
+              <input id="pais" 
+                     data-provide="typeahead" 
+                     autocomplete="off"
+                     value="<?php echo $hasValues ? $data['Search']['pais'] : ""; ?>"
+                     data-source='<?php echo h($paises_list); ?>' 
+                     name="Search[pais]" type="text" placeholder="" class="input-large">
             </div>
           </div>
           
@@ -66,7 +89,12 @@ $this->request->query['Search']['type'] : 'fast'; ?>
           <div class="control-group">
             <label class="control-label" for="cidade">Cidade</label>
             <div class="controls">
-              <input id="cidade" name="Search[cidade]" type="text" placeholder="" class="input-large">
+              <input id="cidade" 
+                     data-provide="typeahead" 
+                     autocomplete="off"
+                     value="<?php echo $hasValues ? $data['Search']['cidade'] : ""; ?>"
+                     data-source='<?php echo h($cidades_list); ?>' 
+                     name="Search[cidade]" type="text" placeholder="" class="input-large">
             </div>
           </div>
         </div>
@@ -75,7 +103,10 @@ $this->request->query['Search']['type'] : 'fast'; ?>
           <div class="control-group">
             <label class="control-label" for="tags">Palavras-chave</label>
             <div class="controls">
-              <input id="tags" name="Search[tags]" type="text" placeholder="" class="input-large">
+              <input id="tags" 
+                     name="Search[tags]" 
+                     value="<?php echo $hasValues ? $data['Search']['tags'] : ""; ?>"
+                     type="text" placeholder="" class="input-large">
             </div>
           </div>
           <div class="control-group">
@@ -83,7 +114,8 @@ $this->request->query['Search']['type'] : 'fast'; ?>
             <div class="controls">
               <?php echo $this->Form->input('ObraTipo',
               array('empty' => '', 'label' => '', 'class' => 'input_chosena',
-              'data-placeholder' => 'Selecione o tipo de obra')); ?>
+              'data-placeholder' => 'Selecione o tipo de obra', 'value' =>
+              (isset($data['ObraTipo']) ? $data['ObraTipo'] : ""))); ?>
             </div>
           </div>
           <div class="control-group">
@@ -91,7 +123,8 @@ $this->request->query['Search']['type'] : 'fast'; ?>
             <div class="controls">
               <?php echo $this->Form->input('Iconografia', 
               array('empty' => '', 'label' => '', 'class' => 'input_chosena',
-              'data-placeholder' => 'Selecione a iconografia')); ?>
+              'data-placeholder' => 'Selecione a iconografia', 'data-provide' =>
+              'typeahead', 'value' => (isset($data['Iconografia']) ? $data['Iconografia'] : ""))); ?>
             </div>
           </div>
           

@@ -63,5 +63,40 @@ class AppController extends Controller {
     }
     return true;
   }
+
+
+  function searchDataLoader(){
+    $this->loadModel('Obra');
+
+    $artistas = $this->Obra->Artista->find('all', array('recursive' => -1, 'fields' => array('Artista.nome')));
+    $artistas_list = array();
+    foreach($artistas as $artista) {
+      $artistas_list = array_merge($artistas_list, array($artista['Artista']['nome']));
+    }
+    $this->set('artistas_list', json_encode($artistas_list));
+
+    $instituicoes = $this->Obra->Instituicao->find('all', array('recursive' => -1, 'fields' => array('Instituicao.nome')));
+    $instituicoes_list = array();
+    foreach($instituicoes as $instituicao) {
+      $instituicoes_list = array_merge($instituicoes_list, array($instituicao['Instituicao']['nome']));
+    }
+    $this->set('instituicoes_list', json_encode($instituicoes_list));
+
+    $this->loadModel('Pais');
+    $paises = $this->Pais->find('all', array('recursive' => -1, 'fields' => array('Pais.nome')));
+    $paises_list = array();
+    foreach($paises as $pais) {
+      $paises_list = array_merge($paises_list, array($pais['Pais']['nome']));
+    }
+    $this->set('paises_list', json_encode($paises_list));
+
+    $this->loadModel('Cidade');
+    $cidades = $this->Cidade->find('all', array('recursive' => -1, 'fields' => array('Cidade.nome')));
+    $cidades_list = array();
+    foreach($cidades as $cidade) {
+      $cidades_list = array_merge($cidades_list, array($cidade['Cidade']['nome']));
+    }
+    $this->set('cidades_list', json_encode($cidades_list));
+  }
   
 }

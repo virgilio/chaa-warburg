@@ -5,6 +5,7 @@ jQuery(document).ready(
                 e.preventDefault();
                 jQuery(this).tab('show');
             });
+        jQuery('.typeahead').typeahead();
     });
 
 bkLib.onDomLoaded(function(){
