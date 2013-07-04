@@ -26,7 +26,7 @@ class ObrasRelacionadasController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->ObrasRelacionada->exists($id)) {
-			throw new NotFoundException(__('Invalid obras relacionada'));
+			throw new NotFoundException(__('Obra relacionada inválida'));
 		}
 		$options = array('conditions' => array('ObrasRelacionada.' . $this->ObrasRelacionada->primaryKey => $id));
 		$this->set('obrasRelacionada', $this->ObrasRelacionada->find('first', $options));
@@ -58,7 +58,7 @@ class ObrasRelacionadasController extends AppController {
  */
 	public function edit($id = null) {
 		if (!$this->ObrasRelacionada->exists($id)) {
-			throw new NotFoundException(__('Invalid obras relacionada'));
+			throw new NotFoundException(__('Obra relacionada inválida'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->ObrasRelacionada->save($this->request->data)) {
@@ -83,7 +83,7 @@ class ObrasRelacionadasController extends AppController {
 	public function delete($id = null) {
 		$this->ObrasRelacionada->id = $id;
 		if (!$this->ObrasRelacionada->exists()) {
-			throw new NotFoundException(__('Invalid obras relacionada'));
+			throw new NotFoundException(__('Obra relacionada inválida'));
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->ObrasRelacionada->delete()) {

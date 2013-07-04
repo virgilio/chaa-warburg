@@ -26,14 +26,14 @@ class ArtistasController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Artista->exists($id)) {
-			throw new NotFoundException(__('Invalid artista'));
+			throw new NotFoundException(__('Artista inválido'));
 		}
 		$options = array('conditions' => array('Artista.' . $this->Artista->primaryKey => $id));
 		$this->set('artista', $this->Artista->find('first', $options));
 	}
 	public function admin_view($id = null) {
 		if (!$this->Artista->exists($id)) {
-			throw new NotFoundException(__('Invalid artista'));
+			throw new NotFoundException(__('Artista inválido'));
 		}
 		$options = array('conditions' => array('Artista.' . $this->Artista->primaryKey => $id));
 		$this->set('artista', $this->Artista->find('first', $options));
@@ -48,10 +48,10 @@ class ArtistasController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Artista->create();
 			if ($this->Artista->save($this->request->data)) {
-				$this->Session->setFlash(__('The artista has been saved'));
+				$this->Session->setFlash(__('O artista foi salvo!'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The artista could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('O artista não foi salvo. Por favor, tente novamente.'));
 			}
 		}
 	}
@@ -65,14 +65,14 @@ class ArtistasController extends AppController {
  */
 	public function admin_edit($id = null) {
 		if (!$this->Artista->exists($id)) {
-			throw new NotFoundException(__('Invalid artista'));
+			throw new NotFoundException(__('Artista inválido'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Artista->save($this->request->data)) {
-				$this->Session->setFlash(__('The artista has been saved'));
+				$this->Session->setFlash(__('Artista salvo'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The artista could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('O artista não foi salvo. Por favor, tente novamente.'));
 			}
 		} else {
 			$options = array('conditions' => array('Artista.' . $this->Artista->primaryKey => $id));
@@ -90,14 +90,14 @@ class ArtistasController extends AppController {
 	public function admin_delete($id = null) {
 		$this->Artista->id = $id;
 		if (!$this->Artista->exists()) {
-			throw new NotFoundException(__('Invalid artista'));
+			throw new NotFoundException(__('Artista inválido'));
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Artista->delete()) {
-			$this->Session->setFlash(__('Artista deleted'));
+			$this->Session->setFlash(__('Artista deletado'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Artista was not deleted'));
+		$this->Session->setFlash(__('O artista não foi deletado'));
 		$this->redirect(array('action' => 'index'));
 	}
 }

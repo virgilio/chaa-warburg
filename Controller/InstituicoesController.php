@@ -26,7 +26,7 @@ class InstituicoesController extends AppController {
  */
   public function view($id = null) {
     if (!$this->Instituicao->exists($id)) {
-      throw new NotFoundException(__('Invalid instituicao'));
+      throw new NotFoundException(__('Instituição inválida'));
     }
     $options = array('conditions' => array('Instituicao.' . $this->Instituicao->primaryKey => $id));
     $this->set('instituicao', $this->Instituicao->find('first', $options));
@@ -81,11 +81,11 @@ class InstituicoesController extends AppController {
         }
       } else {
         if(!$this->request->is('ajax')) {
-          $this->Session->setFlash(__('A instituicao não pode ser salva. Por favor, tente novamente.'));
+          $this->Session->setFlash(__('A instituição não pode ser salva. Por favor, tente novamente.'));
         } else {
           $this->autoRender = false;
           $this->layout = 'ajax';
-          return '{"error" : "Não foi possível adicionar instituicao"}';
+          return '{"error" : "Não foi possível adicionar instituição"}';
         }
       }
     }
@@ -113,14 +113,14 @@ class InstituicoesController extends AppController {
  */
 	public function admin_edit($id = null) {
 		if (!$this->Instituicao->exists($id)) {
-			throw new NotFoundException(__('Invalid instituicao'));
+			throw new NotFoundException(__('Instituição inválida'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Instituicao->save($this->request->data)) {
-				$this->Session->setFlash(__('The instituicao has been saved'));
+				$this->Session->setFlash(__('A instituição foi salva!'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The instituicao could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('A instituição não foi salva. Por favor, tente novamente.'));
 			}
 		} else {
 			$options = array('conditions' => array('Instituicao.' . $this->Instituicao->primaryKey => $id));
@@ -144,14 +144,14 @@ class InstituicoesController extends AppController {
 	public function admin_delete($id = null) {
 		$this->Instituicao->id = $id;
 		if (!$this->Instituicao->exists()) {
-			throw new NotFoundException(__('Invalid instituicao'));
+			throw new NotFoundException(__('Instituição inválida'));
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Instituicao->delete()) {
-			$this->Session->setFlash(__('Instituicao deleted'));
+			$this->Session->setFlash(__('Instituição deletada'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Instituicao was not deleted'));
+		$this->Session->setFlash(__('A instituição não foi deletada!'));
 		$this->redirect(array('action' => 'index'));
 	}
 }

@@ -26,7 +26,7 @@ class CidadesController extends AppController {
    */
   public function view($id = null) {
     if (!$this->Cidade->exists($id)) {
-      throw new NotFoundException(__('Invalid cidade'));
+      throw new NotFoundException(__('Cidade inválida'));
     }
     $options = array('conditions' => array('Cidade.' . $this->Cidade->primaryKey => $id));
     $this->set('cidade', $this->Cidade->find('first', $options));
@@ -98,14 +98,14 @@ class CidadesController extends AppController {
  */
   public function admin_edit($id = null) {
     if (!$this->Cidade->exists($id)) {
-      throw new NotFoundException(__('Invalid cidade'));
+      throw new NotFoundException(__('Cidade inválida'));
     }
     if ($this->request->is('post') || $this->request->is('put')) {
       if ($this->Cidade->save($this->request->data)) {
-        $this->Session->setFlash(__('The cidade has been saved'));
+        $this->Session->setFlash(__('A cidade foi salva!'));
         $this->redirect(array('action' => 'index'));
       } else {
-        $this->Session->setFlash(__('The cidade could not be saved. Please, try again.'));
+        $this->Session->setFlash(__('A cidade não foi salva. Por favor, tente novamente.'));
       }
     } else {
       $options = array('conditions' => array('Cidade.' . $this->Cidade->primaryKey => $id));
@@ -125,14 +125,14 @@ class CidadesController extends AppController {
 	public function admin_delete($id = null) {
 		$this->Cidade->id = $id;
 		if (!$this->Cidade->exists()) {
-			throw new NotFoundException(__('Invalid cidade'));
+			throw new NotFoundException(__('Cidade inválida'));
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Cidade->delete()) {
-			$this->Session->setFlash(__('Cidade deleted'));
+			$this->Session->setFlash(__('Cidade deletada'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Cidade was not deleted'));
+		$this->Session->setFlash(__('A cidade não foi deletada.'));
 		$this->redirect(array('action' => 'index'));
 	}
 }

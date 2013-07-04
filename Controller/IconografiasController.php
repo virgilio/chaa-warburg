@@ -26,7 +26,7 @@ class IconografiasController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Iconografia->exists($id)) {
-			throw new NotFoundException(__('Invalid iconografia'));
+			throw new NotFoundException(__('Iconografia inválida'));
 		}
 		$options = array('conditions' => array('Iconografia.' . $this->Iconografia->primaryKey => $id));
 		$this->set('iconografia', $this->Iconografia->find('first', $options));
@@ -53,7 +53,7 @@ class IconografiasController extends AppController {
           if ($this->request->is('post')) {
             $this->Iconografia->create();
             if ($this->Iconografia->save($this->request->data)) {
-              $this->Session->setFlash(__('Iconografia Salva'));
+              $this->Session->setFlash(__('Iconografia salva'));
               if(!$this->request->is('ajax')) {
                 $this->redirect(array('action' => 'index'));
               } else {
@@ -88,14 +88,14 @@ class IconografiasController extends AppController {
  */
 	public function admin_edit($id = null) {
 		if (!$this->Iconografia->exists($id)) {
-			throw new NotFoundException(__('Invalid iconografia'));
+			throw new NotFoundException(__('Iconografia inválida'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Iconografia->save($this->request->data)) {
-				$this->Session->setFlash(__('The iconografia has been saved'));
+				$this->Session->setFlash(__('A iconografia foi salva!'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The iconografia could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('A iconografia não pode ser salva. Por favor, tente novamente.'));
 			}
 		} else {
 			$options = array('conditions' => array('Iconografia.' . $this->Iconografia->primaryKey => $id));
@@ -113,14 +113,14 @@ class IconografiasController extends AppController {
 	public function admin_delete($id = null) {
 		$this->Iconografia->id = $id;
 		if (!$this->Iconografia->exists()) {
-			throw new NotFoundException(__('Invalid iconografia'));
+			throw new NotFoundException(__('Iconografia inválida'));
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Iconografia->delete()) {
-			$this->Session->setFlash(__('Iconografia deleted'));
+			$this->Session->setFlash(__('Iconografia deletada'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Iconografia was not deleted'));
+		$this->Session->setFlash(__('Iconografia não foi deletada'));
 		$this->redirect(array('action' => 'index'));
 	}
 }

@@ -26,7 +26,7 @@ class PaisesController extends AppController {
  */
 	public function view($id = null) {
 		if (!$this->Pais->exists($id)) {
-			throw new NotFoundException(__('Invalid pais'));
+			throw new NotFoundException(__('País inválido'));
 		}
 		$options = array('conditions' => array('Pais.' . $this->Pais->primaryKey => $id));
 		$this->set('pais', $this->Pais->find('first', $options));
@@ -41,7 +41,7 @@ class PaisesController extends AppController {
           if ($this->request->is('post')) {
             $this->Pais->create();
             if ($this->Pais->save($this->request->data)) {
-              $this->Session->setFlash(__('The pais has been saved'));
+              $this->Session->setFlash(__('O país foi salvo com sucesso'));
               if(!$this->request->is('ajax')) {
                 $this->redirect(array('action' => 'index'));
               } else {
@@ -57,7 +57,7 @@ class PaisesController extends AppController {
               }
             } else {
               if(!$this->request->is('ajax')) {
-                $this->Session->setFlash(__('O pais não pode ser salvo. Por favor, tente novamente.'));
+                $this->Session->setFlash(__('O país não pode ser salvo. Por favor, tente novamente.'));
               } else {
                 $this->autoRender = false;
                 $this->layout = 'ajax';
@@ -76,14 +76,14 @@ class PaisesController extends AppController {
  */
 	public function admin_edit($id = null) {
 		if (!$this->Pais->exists($id)) {
-			throw new NotFoundException(__('Invalid pais'));
+			throw new NotFoundException(__('País inválido'));
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Pais->save($this->request->data)) {
-				$this->Session->setFlash(__('The pais has been saved'));
+				$this->Session->setFlash(__('O país foi salvo com sucesso!'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The pais could not be saved. Please, try again.'));
+				$this->Session->setFlash(__('O país não pode ser salvo. Por favor, tente novamente.'));
 			}
 		} else {
 			$options = array('conditions' => array('Pais.' . $this->Pais->primaryKey => $id));
@@ -101,14 +101,14 @@ class PaisesController extends AppController {
 	public function admin_delete($id = null) {
 		$this->Pais->id = $id;
 		if (!$this->Pais->exists()) {
-			throw new NotFoundException(__('Invalid pais'));
+			throw new NotFoundException(__('País inválido'));
 		}
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Pais->delete()) {
-			$this->Session->setFlash(__('Pais deleted'));
+			$this->Session->setFlash(__('País deletado'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Pais was not deleted'));
+		$this->Session->setFlash(__('O país não foi deletado.'));
 		$this->redirect(array('action' => 'index'));
 	}
 }

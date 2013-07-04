@@ -285,7 +285,7 @@ class ObrasController extends AppController {
 
   public function admin_view($id = null) {
     if (!$this->Obra->exists($id)) {
-      throw new NotFoundException(__('Invalid obra'));
+      throw new NotFoundException(__('Obra inválida'));
     }
     $options = array('conditions' => array('Obra.' . $this->Obra->primaryKey => $id));
     $this->set('obra', $this->Obra->find('first', $options));
@@ -315,7 +315,7 @@ class ObrasController extends AppController {
         $this->Session->setFlash(__('A Imagem foi salva!'));
         $this->redirect(array('action' => 'edit', $this->Obra->id));                          
       } else {
-        $this->Session->setFlash(__('A obra Obra não pode ser salva, tente novamente'));
+        $this->Session->setFlash(__('A obra não pode ser salva, tente novamente'));
       }
     }
   }
@@ -362,7 +362,7 @@ class ObrasController extends AppController {
         
         $this->redirect(array('action' => 'index'));
       } else {
-        $this->Session->setFlash(__('The obra could not be saved. Please, try again.'));
+        $this->Session->setFlash(__('A obra não foi salva. Por favor, tente novamente.'));
       }
     } else {
       $options = array('conditions' => array('Obra.' . $this->Obra->primaryKey => $id));
@@ -408,14 +408,14 @@ class ObrasController extends AppController {
   public function delete($id = null) {
     $this->Obra->id = $id;
     if (!$this->Obra->exists()) {
-      throw new NotFoundException(__('Invalid obra'));
+      throw new NotFoundException(__('Obra inválida'));
     }
     $this->request->onlyAllow('post', 'delete');
     if ($this->Obra->delete()) {
-      $this->Session->setFlash(__('Obra deleted'));
+      $this->Session->setFlash(__('Obra deletada'));
       $this->redirect(array('action' => 'index'));
     }
-    $this->Session->setFlash(__('Obra was not deleted'));
+    $this->Session->setFlash(__('A obra não foi deletada'));
     $this->redirect(array('action' => 'index'));
   }
 
@@ -527,7 +527,7 @@ class ObrasController extends AppController {
     $this->Session->setFlash(__('The obra has been saved'));
     $this->redirect(array('action' => 'index'));
     } else {
-    $this->Session->setFlash(__('The obra could not be saved. Please, try again.'));
+    $this->Session->setFlash(__('A obra não foi salva. Por favor, tente novamente.'));
     }
     }
     $obraTipos = $this->Obra->ObraTipo->find('list');
@@ -547,7 +547,7 @@ class ObrasController extends AppController {
     $this->Session->setFlash(__('The obra has been saved'));
     $this->redirect(array('action' => 'index'));
     } else {
-    $this->Session->setFlash(__('The obra could not be saved. Please, try again.'));
+    $this->Session->setFlash(__('A obra não foi salva. Por favor, tente novamente.'));
     }
     }
     $obraTipos = $this->Obra->ObraTipo->find('list');

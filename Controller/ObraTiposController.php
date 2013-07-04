@@ -30,7 +30,7 @@ class ObraTiposController extends AppController {
  */
   public function view($id = null) {
     if (!$this->ObraTipo->exists($id)) {
-      throw new NotFoundException(__('Invalid obra tipo'));
+      throw new NotFoundException(__('Técnica inválida'));
     }
     $options = array('conditions' => array('ObraTipo.' . $this->ObraTipo->primaryKey => $id));
     $this->set('obraTipo', $this->ObraTipo->find('first', $options));
@@ -64,7 +64,7 @@ class ObraTiposController extends AppController {
         }
       } else {
         if(!$this->request->is('ajax')) {
-          $this->Session->setFlash(__('A técnica não pode ser salvo. Por favor, tente novamente.'));
+          $this->Session->setFlash(__('A técnica não pode ser salva. Por favor, tente novamente.'));
         } else {
           $this->autoRender = false;
           $this->layout = 'ajax';
@@ -84,14 +84,14 @@ class ObraTiposController extends AppController {
    */
   public function admin_edit($id = null) {
     if (!$this->ObraTipo->exists($id)) {
-      throw new NotFoundException(__('Invalid obra tipo'));
+      throw new NotFoundException(__('Técnica inválida'));
     }
     if ($this->request->is('post') || $this->request->is('put')) {
       if ($this->ObraTipo->save($this->request->data)) {
-        $this->Session->setFlash(__('The obra tipo has been saved'));
+        $this->Session->setFlash(__('A técnica foi salva com sucesso!'));
         $this->redirect(array('action' => 'index'));
       } else {
-        $this->Session->setFlash(__('The obra tipo could not be saved. Please, try again.'));
+        $this->Session->setFlash(__('A técnica não foi salva. Por favor, tente novamente.'));
       }
     } else {
       $options = array('conditions' => array('ObraTipo.' . $this->ObraTipo->primaryKey => $id));
@@ -109,14 +109,14 @@ class ObraTiposController extends AppController {
   public function admin_delete($id = null) {
     $this->ObraTipo->id = $id;
     if (!$this->ObraTipo->exists()) {
-      throw new NotFoundException(__('Invalid obra tipo'));
+      throw new NotFoundException(__('Técnica inválida'));
     }
     $this->request->onlyAllow('post', 'delete');
     if ($this->ObraTipo->delete()) {
-      $this->Session->setFlash(__('Obra tipo deleted'));
+      $this->Session->setFlash(__('Técnica deletada'));
       $this->redirect(array('action' => 'index'));
     }
-    $this->Session->setFlash(__('Obra tipo was not deleted'));
+    $this->Session->setFlash(__('Técnica não deletada'));
     $this->redirect(array('action' => 'index'));
   }
 }

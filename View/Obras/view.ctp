@@ -14,6 +14,11 @@
             <?php echo h($obra['Obra']['ano_fim']); ?>
         </p>
         <p>
+            <?php echo $obra['Instituicao']['nome']; ?> |
+            <?php echo $obra['Instituicao']['Cidade']['nome']; ?> - 
+            <?php echo $obra['Pais']['nome']; ?>
+        </p>
+        <p>
             <?php echo $this->Html->link('[DOWNLOAD DA OBRA]', '/img/obras/'.$obra['Obra']['imagem'], array('target' => 'blank')); ?>
         </p>
         <p class="obra_descricao">

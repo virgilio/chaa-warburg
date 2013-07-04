@@ -61,7 +61,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			?>
 			<nav id="main-menu">
 				<ul>
-					<li><?php echo $this->Html->link(__('Administração'), array('controller' => 'obras', 'action' => 'admin_index', 'admin' => true)); ?></li>
+					<li><?php echo $this->Html->link(__('Administração'), array('controller' => 'users', 'action' => 'login')); ?></li>
 					<li><?php echo $this->Html->link(__('Lista de Obras'), array('controller' => 'obras', 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Sobre a busca',
 					'#',
