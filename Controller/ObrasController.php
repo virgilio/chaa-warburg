@@ -30,13 +30,6 @@ class ObrasController extends AppController {
     $iconografias = $this->Obra->Iconografia->find('list');
     $this->set('obraTipos', $obraTipos);
     $this->set('iconografias', $iconografias);
-
-    $letters = $this->Obra->query('SELECT DISTINCT SUBSTRING(`nome`, 1, 1) FROM `obras` ORDER BY `nome`');
-    $links = array();
-    foreach ($letters as $row) {
-      array_push($links, current($row[0]));
-    }
-    $this->set('letters', $links);        
   }
   
   public function admin_index() {
@@ -63,7 +56,7 @@ class ObrasController extends AppController {
     $this->set('artistas', $this->Artista->find('list'));
   }
 
-  public function search() {
+  public function search($letter = null) {
     $this->Obra->recursive = 0;
     $data = $this->request->query;
     
@@ -146,6 +139,12 @@ class ObrasController extends AppController {
           $and['Obra.ano_fim <= ?'] = array($query['fim']);
         }
 
+        if($letter != null){
+          $and['Obra.nome REGEXP'] = '^' . $letter;
+        }
+
+
+
         $this->paginate = array(
                                 'fields' => array(
                                                   'Obra.id', 
@@ -164,6 +163,8 @@ class ObrasController extends AppController {
         $this->Session->setFlash(__('Busca inválida'));
       }
     }
+
+    //die(pr($this->paginate));
 
     $this->set('data', $data);
     //    pr($data);

@@ -182,13 +182,29 @@ $this->request->query['Search']['type'] : 'fast'; ?>
     </div>
   </div>
 </div>
-<div>
-  <ul class="unstyled inline">
-    <?php foreach($letters as $letter){ ?>
-    <?php echo $this->Html->link($letter, array($letter)); ?>
-    <?php }?>
-  </ul>
+<?php if($this->request->params['controller'] == 'obras') { ?>
+<div class="container">
+  <div class="row-fluid">
+    <div class="span10 offset1">
+      <ul class="unstyled inline">
+        <?php foreach($letters as $letter){ ?>
+        <li>
+          <?php echo $this->Html->link($letter, array($letter, '?' =>
+          (!empty($this->request->query) ? $this->request->query : ''))); ?>
+        </li>  
+        <?php }?>
+        <li>
+          <?php echo $this->Html->link(('<i class="icon-repeat"></i>'), 
+                       array('', 
+                         '?' => (!empty($this->request->query) ?
+                                 $this->request->query : '')), 
+                       array('escape' => false)); ?>
+        </li>
+      </ul>
+    </div>
+  </div>
 </div>
+<?php } ?>
 <script type="text/javascript">
   loadslider(<?php echo $tosign; ?>);
 </script>
