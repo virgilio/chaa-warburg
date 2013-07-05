@@ -60,7 +60,7 @@ class ObrasController extends AppController {
   public function search() {
     $this->Obra->recursive = 0;
     $data = $this->request->query;
-    pr($data);
+    
     if($this->request->is('get') && !empty($data)) {
       if(isset($data['Search']['type']) && $data['Search']['type'] == 'fast'){
         $query = $data['Search']['query'];
@@ -160,7 +160,7 @@ class ObrasController extends AppController {
     }
 
     $this->set('data', $data);
-
+    //    pr($data);
     parent::searchDataLoader();
 
     $obras = $this->paginate('Obra');
@@ -240,41 +240,7 @@ class ObrasController extends AppController {
                                     $this->Instituicao);
     return $db->expression($subQuery)->value;
   }
-  
-
-  public function advanced_search() {
-    $this->Obra->recursive = 0;
-    $data = $this->request->query;
-          
-    if($this->request->is('get') && !empty($data)) {
-      //die(print_r($data, true));
-      $this->paginate = array(
-                              'fields' => array(
-                                                'Obra.id', 
-                                                'Obra.nome', 
-                                                'Obra.imagem', 
-                                                'Artista.id',
-                                                'Artista.nome', 
-                                                'Obra.ano_inicio', 
-                                                'Obra.ano_fim'),
-                              'conditions' => array(
-                                                    'OR' => array(
-                                                                  'Obra.nome LIKE' => '%' . $data['query'] . '%',
-                                                                  'Artista.nome LIKE' => '%' . $data['query'] . '%',
-                                                                  'Obra.descricao LIKE' => '%' . $data['query'] . '%',
-                                                                  'Obra.ano_inicio LIKE' => '%' . $data['query'] . '%',
-                                                                  'Obra.ano_fim LIKE' => '%' . $data['query'] . '%',
-                                                                  'Instituicao.nome LIKE' => '%' . $data['query'] . '%',
-                                                                  'Iconografia.nome LIKE' => '%' . $data['query'] . '%',
-                                                                  )
-                                                    )
-                              );
-    }
-    $obras = $this->paginate('Obra');
-    $this->set('obras', $obras);
-  }
-
-        
+            
   /**
    * view method
    *
@@ -318,7 +284,9 @@ class ObrasController extends AppController {
         
       }
       $obra['tamanho_obra'] = $data['Thumbnail']['filedim'];
+      $obra['user_id'] = $this->Auth->user('id');
       $this->Obra->create();
+      
       if ($this->Obra->save($obra)) {
         $this->Session->setFlash(__('A Imagem foi salva!'));
         $this->redirect(array('action' => 'edit', $this->Obra->id));                          

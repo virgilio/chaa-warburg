@@ -32,7 +32,7 @@ $this->request->query['Search']['type'] : 'fast'; ?>
     <div class="tab-pane <?php echo $search_type === 'advanced' ? 'active' : '' ?>" id="busca_avancada">
       <?php echo $this->Form->create('Obra', array('action' => 'search', 'type'
       => 'get', 'class' => 'form-horizontal')); 
-      $hasValues = isset($data['Search']);
+      $hasValues = isset($data['Search']) && 'advanced' === $data['Search']['type'];
       ?>
       <input type="hidden" name="Search[type]" value="advanced" /> 
       <fieldset>
@@ -149,9 +149,21 @@ $this->request->query['Search']['type'] : 'fast'; ?>
                        type="text"
                        value="<?php echo $hasValues ? $data['Search']['intervalo'] : ""; ?>"
                        name="Search[intervalo]" type="text" />
-                <input id="int-inicio" name="Search[inicio]" type="hidden" />
-                <input id="int-fim" name="Search[fim]" type="hidden" />
-
+                <input id="int-inicio" name="Search[inicio]" type="text"
+                       value="<?php echo $ano_min; ?>" />
+                <input id="int-fim" name="Search[fim]" type="text"
+                       value="<?php echo $ano_max; ?>" />
+                <?php 
+                   $tosign = $ano_min . ',' . $ano_max . ',';
+                   if($hasValues){
+                     $tosign .= (!empty($data['Search']['inicio']) ?
+                       $data['Search']['inicio'] : $ano_min)  . ',';
+                     $tosign .= (!empty($data['Search']['fim']) ? $data['Search']['fim']
+                       : $ano_min);
+                   } else {
+                     $tosign .= $ano_min . ',' .  $ano_max;
+                   }
+                 ?>
                 <div id="slider-range"></div>
               </div>
             </div>
@@ -170,3 +182,6 @@ $this->request->query['Search']['type'] : 'fast'; ?>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  loadslider(<?php echo $tosign; ?>);
+</script>
