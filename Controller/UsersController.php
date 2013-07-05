@@ -49,7 +49,7 @@ class UsersController extends AppController {
 
   public function login() {
     if ($this->Auth->login()) {
-      $this->redirect($this->Auth->redirect());
+      $this->redirect($this->Auth->loginRedirect);
     } else {
       if($this->request->is('post'))
         $this->Session->setFlash(__('Senha ou usuário inválidos. Tente novamente.'));
