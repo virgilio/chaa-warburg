@@ -348,7 +348,7 @@ class ObrasController extends AppController {
         $this->Session->setFlash(__('A obra não foi salva. Por favor, tente novamente.'));
       }
     } else {
-      $options = array('conditions' => array('Obra.' . $this->Obra->primaryKey => $id));
+      $options = array('conditions' => array('Obra.' . $this->Obra->primaryKey => $id), 'recursive' => 2);
       $this->request->data = $this->Obra->find('first', $options);
     }
     

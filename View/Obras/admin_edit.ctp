@@ -11,6 +11,9 @@
 
 <h2>Editar obra</h2>
 
+<?php echo $this->Form->create('Obra', array('enctype' =>
+  'multipart/form-data', 'class' => 'form-horizontal')); ?>
+
 <ul class="nav nav-tabs" id="step-bar">
   <li>
     <a href="#edit-img-step1">
@@ -27,24 +30,24 @@
       <i class="icon-link"></i> Imagens relacionadas
     </a>
   </li>
+  <li class="pull-right">
+    <?php echo $this->Form->button('Salvar', array('type' => 'submit', 'class' => 'btn btn-success')); ?>
+  </li>
 </ul>
-
-  <?php //echo $this->Form->create('Obra', array('class' => 'form-horizontal')); ?>
-  <?php echo $this->Form->create('Obra', array('enctype' =>
-  'multipart/form-data', 'class' => 'form-horizontal')); ?>
   
   <input type="hidden" id="x1" name="data[Thumbnail][x1]" value="<?php echo $this->request->data['Thumbnail']['x1']; ?>" />
   <input type="hidden" id="y1" name="data[Thumbnail][y1]" value="<?php echo $this->request->data['Thumbnail']['y1']; ?>" />
   <input type="hidden" id="x2" name="data[Thumbnail][x2]" value="<?php echo $this->request->data['Thumbnail']['x2']; ?>" />
   <input type="hidden" id="y2" name="data[Thumbnail][y2]" value="<?php echo $this->request->data['Thumbnail']['y2']; ?>" />
 
-  <fieldset>
    
     <?php echo $this->Form->input('id'); ?>
 
     <div class="obras form tab-content">
     <!-- Início step1 -->    
         <div id="edit-img-step1" class="tab-pane container">
+
+          <fieldset>
           <div class="row">
             <div class="span8">
               <h3>Editar imagem e miniatura</h3>
@@ -75,11 +78,13 @@
             <input type="hidden" id="h" name="data[Thumbnail][h]" />
             
           </div>
+        </fieldset>
        </div>
     <!-- Fim step1 -->
 
     <!-- Início step2 -->
        <div id="edit-img-step2" class="tab-pane active">
+        <fieldset>
           <h3>Informações da obra</h3>
           <div class="control-group">
           	<label class="control-label" for="nome">Nome da obra</label>
@@ -197,31 +202,66 @@
                data-toggle="modal">Nova Iconografia</a>
             </div>
           </div>
-          
+          </fieldset>
         </div>
     <!-- Fim step2 -->
 
     <!-- Início step3 -->
-        <div  id="edit-img-step3" class="tab-pane">
-          <div class="control-group">
-            <h3>Imagens relacionadas</h3>
-          	<label class="control-label" for="tags">Obras relacionadas</label>
-          	<div class="controls">
-          	  <?php echo $this->Form->input('Relacionada',
-          	  array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione o nome da obra')); ?>
-          	</div>
-          </div>
+      <div id="edit-img-step3" class="tab-pane">
+          <h3>Imagens relacionadas</h3>
+          <?php $relacionadas ?>
+          <div class="related">
+            <?php //pr($this->request->data['Relacionada']); ?>
+            <?php if (!empty($this->request->data['Relacionada'])): ?>
+              <?php $i = 0;
+                foreach ($this->request->data['Relacionada'] as $relacionada): ?>
+                <div class="mini-obra">
+                  <a class="fancybox" href="#img_<?php echo $relacionada['id'] ?>" data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$relacionada['id'].'_thumb.jpg'); ?>
+                  </a>
+
+                  <div id="img_<?php echo $relacionada['id'] ?>" style="display: none;" class="modal_relacionadas">
+                    <div class="obra">
+                      <p><?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']), array('alt' => 'oie', 'border' => '0')); ?></p>
+                      <p><?php echo $obra['Artista']['nome']; ?> (<?php echo h($obra['Obra']['ano_fim']); ?>)</p>
+                      <p><?php echo $obra['Obra']['nome']; ?></p>
+                    </div>
+                    <div class="obra">
+                      <?php echo $this->Html->image('obras/'.$relacionada['imagem']) ?>
+                      <p><?php echo $relacionada['Artista']['nome']; ?> (<?php echo h($relacionada['ano_fim']); ?>)</p>
+                      <p>
+                          <?php echo $this->Html->link(
+                          h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
+                          array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
+                          array('escape'=>false)); 
+                          ?>
+                      </p>
+                    </div>
+                  </div>
+                <p>
+                  <?php echo $this->Html->link(
+                    h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
+                    array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
+                    array('escape'=>false)); 
+                  ?>
+                </p>
+                <p class="nome-artista">
+                  <?php echo $this->Html->link($relacionada['Artista']['nome'], array('controller' => 'artistas', 'action' => 'view', $relacionada['Artista']['id'])); ?>
+                  (<?php echo h($relacionada['ano_fim']); ?>)
+                </p>
+                </div>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </div>
-    <!-- Fim step3 -->
-    </div>
-    </fieldset>
-    <div class="control-group">
-      <label class="control-label" for="singlebutton"></label>
-      <div class="controls">
-        <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn')); ?>
+
+
       </div>
-    </div>
+  <!-- Fim step3 -->
+  </div>
+    
 </div>
+
+<?php echo $this->Form->end(); ?>
+
 <?php echo $this->element('addmodal', 
                           array('titulo' => 'Adicionar Instituição', 
                                 'form' => 'instituicao')); ?>
