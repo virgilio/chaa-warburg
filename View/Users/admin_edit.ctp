@@ -15,18 +15,20 @@
 	<?php echo $this->Form->input('email', array('label' => '')); ?>		    
       </div>
     </div>
-    <div class="control-group">
-      <label class="control-label" for="password">Nova senha</label>
-      <div class="controls">
-	<?php echo $this->Form->input('password', array('label' => '')); ?>
+    <fieldset style="border: 1px solid #eee">
+      <div class="control-group">
+        <label class="control-label" for="password">Nova senha</label>
+        <div class="controls">
+	  <?php echo $this->Form->input('password', array('label' => '')); ?>
+        </div>
       </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="checkpassword">Confirmar senha</label>
-      <div class="controls">
-	<?php echo $this->Form->input('checkpassword', array('label' => '')); ?>
+      <div class="control-group">
+        <label class="control-label" for="checkpassword">Confirmar senha</label>
+        <div class="controls">
+	  <?php echo $this->Form->input('checkpassword', array('label' => '')); ?>
+        </div>
       </div>
-    </div>
+    </fieldset>
     <?php if($auth['role'] == 'admin'): ?>
     <div class="control-group">
       <label class="control-label" for="role">Papel</label>

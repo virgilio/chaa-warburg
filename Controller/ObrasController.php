@@ -15,22 +15,28 @@ class ObrasController extends AppController {
    *
    * @return void
    */
-  public function index() {
+
+  public $paginate = array();
+
+  public function index($letter = null) {
     parent::searchDataLoader();
 
     $this->Obra->recursive = 0;
+    if($letter != null){
+      $this->paginate['Obra']['conditions'] = array('Obra.nome REGEXP' => '^' . $letter);
+    }
     $this->set('obras', $this->paginate());
     $obraTipos = $this->Obra->ObraTipo->find('list');
     $iconografias = $this->Obra->Iconografia->find('list');
     $this->set('obraTipos', $obraTipos);
     $this->set('iconografias', $iconografias);
 
-    $letters = $this->Obra->query('SELECT count(DISTINCT SUBSTRING(`nome`, 1, 1)) FROM `obras` ORDER BY `nome`');
-
+    $letters = $this->Obra->query('SELECT DISTINCT SUBSTRING(`nome`, 1, 1) FROM `obras` ORDER BY `nome`');
     $links = array();
     foreach ($letters as $row) {
       array_push($links, current($row[0]));
     }
+    $this->set('letters', $links);        
   }
   
   public function admin_index() {

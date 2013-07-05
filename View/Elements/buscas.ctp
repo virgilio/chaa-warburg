@@ -182,6 +182,13 @@ $this->request->query['Search']['type'] : 'fast'; ?>
     </div>
   </div>
 </div>
+<div>
+  <ul class="unstyled inline">
+    <?php foreach($letters as $letter){ ?>
+    <?php echo $this->Html->link($letter, array($letter)); ?>
+    <?php }?>
+  </ul>
+</div>
 <script type="text/javascript">
   loadslider(<?php echo $tosign; ?>);
 </script>
