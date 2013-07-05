@@ -38,13 +38,16 @@ class AppController extends Controller {
                              'Session',
                              'Auth' => array(
                                              'loginAction' => array('prefix' => false, 'admin' => false, 'controller' => 'users', 'action' => 'login'),
-                                             'loginRedirect' => array('controller' => 'obras', 'action' => 'index'),
+                                             'loginRedirect' => array('controller' => 'obras', 'action' => 'index', 
+                                              'admin' => true,
+                                              'prefix' => 'admin'),
                                              'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
                                              'authenticate' => array('Form' => array(
                                                                                      'fields' => array('username' => 'email')
                                                                                      )
                                                                      ),
-                                             'authorize' => array('Controller')
+                                             'authorize' => array('Controller'),
+                                             'authError' => 'Você não está autorizado(a) a entrar aqui.'
                                              ),
                              );
   
@@ -53,6 +56,8 @@ class AppController extends Controller {
     if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
       $this->layout = 'admin';
     } 
+
+    $this->set('auth', $this->Auth->user());
   }
   
   function isAuthorized() {

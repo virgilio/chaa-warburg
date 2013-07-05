@@ -78,14 +78,36 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			              <li class="<?php echo (strpos($this->here, 'obra_tipos') !== false) ? 'active' : ''; ?>">
 			                <?php echo $this->Html->link(__('Técnicas'), array('controller' => 'obra_tipos', 'action' => 'admin_index')); ?>
 			              </li>
+			              <?php if($auth['role'] == 'admin'): ?>
+								<li class="<?php echo (strpos($this->here, 'users') !== false) ? 'active' : ''; ?>">
+				                  <?php echo $this->Html->link(__('Usuários'), array('controller' => 'users', 'action' => 'admin_index')); ?>
+				                </li>
+						  <?php endif; ?>
+			            </ul>
+			            <ul class="nav pull-right">
+			              <li class="dropdown">
+			                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="icon-user"></i><b class="caret"></b></a>
+			                <ul class="dropdown-menu">
+			                  <li id="profile">
+			                  	<?php
+			                      echo $this->Html->link('Perfil', array('controller'=>'users','action'=>'edit', $auth['id']));
+			                      ?>
+			                  </li>
+			                  <li id="logout">
+			                    <?php
+			                      echo $this->Html->link('Sair', array('controller'=>'users','action'=>'logout', 'admin' => false));
+			                      ?>
+			                  </li>
+			                </ul>
+			              </li>
 			            </ul>
 			          </div>
 			        </div>
 			  </div>
 			</div>
 
-
-			<?php echo $this->Html->link(
+			<?php 
+			echo $this->Html->link(
 					$this->Html->image('cabecalhos/cabecalho-' . rand(1, 40) . '.jpg', array('alt' => $cakeDescription, 'border' => '0')),
 					array('controller' => '', 'admin' => false, 'action' => '/'),
 					array('class' => 'lnk_logo', 'escape' => false)
@@ -94,7 +116,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			<nav id="main-menu">
 				<ul>
 					<li><?php echo $this->Html->link('Administração',
-					'#',
+					array('controller' => 'obras', 'admin' => true, 'action' => 'index'),
 					array('escape' => false)
 						);
 					?></li>

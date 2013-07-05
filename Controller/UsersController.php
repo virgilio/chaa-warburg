@@ -78,7 +78,7 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
-	public function view($id = null) {
+	public function admin_view($id = null) {
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Usuário inválido'));
 		}
@@ -110,7 +110,7 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
-	public function edit($id = null) {
+	public function admin_edit($id = null) {
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Usuário'));
 		}
@@ -122,7 +122,7 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Erro ao salvar usuário, por favor tente novamente'));
 			}
 		} else {
-			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id), 'recursive' => 2);
 			$this->request->data = $this->User->find('first', $options);
 		}
 	}
@@ -134,7 +134,7 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
-	public function delete($id = null) {
+	public function admin_delete($id = null) {
 		$this->User->id = $id;
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Usuário inválido'));
