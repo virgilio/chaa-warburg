@@ -110,6 +110,13 @@ class UsersController extends AppController {
  * @param string $id
  * @return void
  */
+        public $paginate = array(
+                                 'Obra' => array(
+                                                 'limit' => 25,
+                                                 'recursive'=> 0
+                                                 )
+                                 );
+
 	public function admin_edit($id = null) {
 		if (!$this->User->exists($id)) {
 			throw new NotFoundException(__('Usuário'));
@@ -122,8 +129,12 @@ class UsersController extends AppController {
 				$this->Session->setFlash(__('Erro ao salvar usuário, por favor tente novamente'));
 			}
 		} else {
-			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id), 'recursive' => 2);
-			$this->request->data = $this->User->find('first', $options);
+                  $options = array('conditions' => array('User.' . $this->User->primaryKey => $id), 'recursive' => 0);
+                  $this->request->data = $this->User->find('first', $options);
+                  $this->paginate['Obra']['conditions'] = array('Obra.user_id' => $id);
+                  
+                  $obras = $this->paginate('Obra');
+                  $this->set(compact('obras'));
 		}
 	}
 
