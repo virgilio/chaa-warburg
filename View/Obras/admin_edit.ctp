@@ -208,6 +208,9 @@
 
     <!-- Início step3 -->
       <div id="edit-img-step3" class="tab-pane">
+          <h3>Adicionar imagem</h3>
+            select
+            
           <h3>Imagens relacionadas</h3>
           <?php $relacionadas ?>
           <div class="related">
@@ -215,7 +218,11 @@
             <?php if (!empty($this->request->data['Relacionada'])): ?>
               <?php $i = 0;
                 foreach ($this->request->data['Relacionada'] as $relacionada): ?>
-                <div class="mini-obra">
+                <div class="mini-obra img-polaroid">
+                  <div class="btns-mini-obra">
+                    <a href="#"><i class="icon-edit-sign"></i></a>
+                    <a href="#"><i class="icon-remove"></i></a>
+                  </div>
                   <a class="fancybox" href="#img_<?php echo $relacionada['id'] ?>" data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$relacionada['id'].'_thumb.jpg'); ?>
                   </a>
 

@@ -8,6 +8,7 @@
     border: 1px solid #CCC;
     border-right: none;
     border-bottom: none;
+    width: 90%;
 }
 .lista_admin th{
     background-color: #600;
@@ -77,4 +78,22 @@
 /*Inser obra*/
 #select-obratipo div, #select-instituicao div, #select-iconografia div{
   display: inline-block;
+}
+
+/*Obras relacionadas*/
+.mini-obra{
+  position: relative;
+  /*border: 1px solid #f5f5f5;*/
+  margin: 0 6px;
+  padding-top: 28px;
+  border-radius: 4px;
+}
+.btns-mini-obra{
+  position: absolute;
+  right: 10px;
+  font-size: 24px;
+  top: 2px;
+}
+.btns-mini-obra a{
+  text-decoration: none;
 }
