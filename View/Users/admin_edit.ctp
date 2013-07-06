@@ -1,6 +1,4 @@
 <?php 
-   //$this->Html->css('bootstrap-combined.min.css', null, array('inline' =>
-   //false)); 
    $this->Html->css('bootstrapSwitch.css', null, array('inline' =>
    false)); 
    $this->Html->script('bootstrapSwitch.min.js', array('inline' => false));
