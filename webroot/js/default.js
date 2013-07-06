@@ -11,9 +11,8 @@ jQuery(document).ready(
         jQuery('.input_chosen').chosen();
         
         jQuery('.carousel').carousel();
-        
 
-        
+        jQuery('.img_obra a').swinxyzoom({mode:'lens', size: '100%', lens: { width: 250, height: 200 } });
  
     });
 

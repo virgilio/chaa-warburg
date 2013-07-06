@@ -2,7 +2,8 @@
 
 <div class="obra_container">
     <div class="img_obra">
-        <?php echo $this->Html->link($this->Html->image(('obras/'.$obra['Obra']['imagem']), array('alt' => 'oie', 'border' => '0')), array('controller' => 'obras', 'action' => 'view', $obra['Obra']['id']), array('escape'=>false)); ?>
+        <?php echo $this->Html->link($this->Html->image('obras/'.$obra['Obra']['imagem']), '/img/obras/'.$obra['Obra']['imagem'], array('class' => 'sxyzoom swinxylens','escape'=>false)); 
+        ?>
     </div>
     <div class="info_obra">
         <h2 class="nome_obra"><?php echo h($obra['Obra']['nome']); ?></h2>
