@@ -31,9 +31,13 @@
     <div class="span6">
       <?php echo $this->Form->create('User', array('action' => 'change_password', 'class' => 'form-horizontal')); ?>
       
-        <legend><a href="#" onclick="jQuery('#change-password').toggle('fade');"><?php echo __('Alterar Senha');
-        ?></a></legend>
-        <fieldset id="change-password" style="display: none;">
+      <legend>
+        <a href="#"
+           onclick="jQuery('#change-password').toggle('fade');">
+          <?php echo  __('Alterar Senha');?>
+        </a>
+      </legend>
+      <fieldset id="change-password" style="display: none;">
         <?php echo $this->Form->input('id'); ?>
         <div class="control-group">
           <label class="control-label" for="password">Senha Atual</label>

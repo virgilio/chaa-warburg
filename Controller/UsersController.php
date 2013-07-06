@@ -122,8 +122,12 @@ class UsersController extends AppController {
       throw new NotFoundException(__('Usuário'));
     }
     if ($this->request->is('post') || $this->request->is('put')) {
-      //unset($this->request->data['User']['password']);
-      //die(pr($this->request->data));
+      if(empty($this->request->data['User']['password']) || 
+         empty($this->request->data['User']['password_confirm'])){
+        unset($this->request->data['User']['password']);
+        unset($this->request->data['User']['password_confirm']);
+      }
+      
       $this->User->id = $this->request->data['User']['id'];
       if($this->User->save($this->request->data)) {
         $this->Session->setFlash(__('Usuário salvo com sucesso!'));
