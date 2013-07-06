@@ -248,9 +248,9 @@
 
                   <div id="img_<?php echo $relacionada['id'] ?>" style="display: none;" class="modal_relacionadas">
                     <div class="obra">
-                      <p><?php echo $this->Html->image(($this->Form->value('Obra.imagem')), array('alt' => 'oie', 'border' => '0')); ?></p>
-                      <p><?php echo $this->Form->value('Obra.artista'); ?> (<?php echo h($obra['Obra']['ano_fim']); ?>)</p>
-                      <p><?php echo $obra['Obra']['nome']; ?></p>
+                      <p><?php echo $this->Html->image(('obras/'. $this->Form->value('Obra.imagem')), array('alt' => 'oie', 'border' => '0')); ?></p>
+                      <p>(<?php echo $this->Form->value('ano_inicio') . ' - ' . $this->Form->value('ano_fim'); ?>)</p>
+                      <p><?php echo $this->Form->value('nome'); ?></p>
                     </div>
                     <div class="obra">
                       <?php echo $this->Html->image('obras/'.$relacionada['imagem']) ?>
@@ -258,8 +258,8 @@
                       <p>
                           <?php echo $this->Html->link(
                           h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
-                          array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
-                          array('escape'=>false)); 
+                          array('controller' => 'obras', 'action' => 'view', $relacionada['id'], 'admin' => false), 
+                          array('target' => '_blank', 'escape'=>false)); 
                           ?>
                       </p>
                     </div>
@@ -267,12 +267,12 @@
                 <p>
                   <?php echo $this->Html->link(
                     h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
-                    array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
-                    array('escape'=>false)); 
+                    array('controller' => 'obras', 'action' => 'view', $relacionada['id'], 'admin' => false), 
+                    array('target' => '_blank','escape'=>false)); 
                   ?>
                 </p>
                 <p class="nome-artista">
-                  <?php echo $this->Html->link($relacionada['Artista']['nome'], array('controller' => 'artistas', 'action' => 'view', $relacionada['Artista']['id'])); ?>
+                  <?php echo $this->Html->link($relacionada['Artista']['nome'], array('controller' => 'artistas', 'action' => 'view', $relacionada['Artista']['id'], 'admin' => false), array('target' => '_blank')); ?>
                   (<?php echo h($relacionada['ano_fim']); ?>)
                 </p>
                 </div>
