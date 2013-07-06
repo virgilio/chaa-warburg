@@ -208,14 +208,34 @@
 
     <!-- Início step3 -->
       <div id="edit-img-step3" class="tab-pane">
-          <h3>Adicionar imagem</h3>
-            select
-            
-          <h3>Imagens relacionadas</h3>
-          <?php $relacionadas ?>
+          <div class="row-fluid">
+            <div class="span6">
+              <h3>Adicionar imagem relacionada</h3>
+              <div class="chosen-container">
+              <?php 
+                echo $this->Form->input('relacionadas', array('label' => '', 'type' => 'select', 'options' => $relacionadas,'data-placeholder' => 'Selecione a obra', 'empty' => true, 'class' => 'input_chosen'));
+              ?>
+              </div>
+              <a href="#add-relacionada" role="button" class="btn"
+               data-toggle="modal">Adicionar</a>
+            </div>
+            <div class="span3 thumbs-relacionadas">
+              <label>Imagem principal</label>
+              <?php echo $this->Html->image(('obras/thumbs/' . $this->Form->value('Obra.imagem')), 
+                    array('alt' => $this->Form->value('Obra.imagem'), 'border' => '0', 'class' => 'img-polaroid'));
+              ?>
+            </div>
+            <div class="span3 thumbs-relacionadas">
+              <label>Imagem selecionada</label>
+              <?php echo $this->Html->image('semthumb.jpg', 
+                    array('alt' => 'Escolha uma imagem para relacionar', 'border' => '0', 'class' => 'img-polaroid'));
+              ?>
+            </div>
+          </div>
+
           <div class="related">
-            <?php //pr($this->request->data['Relacionada']); ?>
             <?php if (!empty($this->request->data['Relacionada'])): ?>
+              <h3>Imagens relacionadas</h3>
               <?php $i = 0;
                 foreach ($this->request->data['Relacionada'] as $relacionada): ?>
                 <div class="mini-obra img-polaroid">
@@ -228,8 +248,8 @@
 
                   <div id="img_<?php echo $relacionada['id'] ?>" style="display: none;" class="modal_relacionadas">
                     <div class="obra">
-                      <p><?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']), array('alt' => 'oie', 'border' => '0')); ?></p>
-                      <p><?php echo $obra['Artista']['nome']; ?> (<?php echo h($obra['Obra']['ano_fim']); ?>)</p>
+                      <p><?php echo $this->Html->image(($this->Form->value('Obra.imagem')), array('alt' => 'oie', 'border' => '0')); ?></p>
+                      <p><?php echo $this->Form->value('Obra.artista'); ?> (<?php echo h($obra['Obra']['ano_fim']); ?>)</p>
                       <p><?php echo $obra['Obra']['nome']; ?></p>
                     </div>
                     <div class="obra">

@@ -97,3 +97,43 @@
 .btns-mini-obra a{
   text-decoration: none;
 }
+.thumbs-relacionadas{
+  text-align: center;
+}
+.thumbs-relacionadas img{
+  width: 150px;
+  height: 90px;
+}
+
+.chzn-container-single .chzn-single {
+  padding: 3px 6px;
+  width: 260px;
+}
+
+.chzn-container-single .chzn-single div b {
+  background-position-y: 6px;
+}
+
+.chzn-container-active.chzn-with-drop .chzn-single div b {
+  background-position-y: 6px;
+}
+
+.chzn-container-single .chzn-single abbr {
+  height: 15px;
+  background-position-y: 5px;
+}
+
+.chzn-container-single .chzn-single abbr:hover {
+  background-position-y: 5px;
+}
+
+.control-group .controls {
+  min-height: 40px;
+}
+.chzn-container .chzn-drop{
+  width: 274px;
+}
+.chosen-container{
+  display: inline-block;
+  width: 280px;
+}
