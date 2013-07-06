@@ -1,5 +1,6 @@
 <?php
 App::uses('AppModel', 'Model');
+App::uses('AuthComponent', 'Controller/Component');
 /**
  * User Model
  *
@@ -31,20 +32,35 @@ class User extends AppModel {
                       ),
                 ),
           'password' => array(
-                'required' => array(
-                      'rule' => array('notEmpty'),
-                      'message' => 'Insira a senha'
-                      ),
-                'notempty' => array(
-                      'rule' => array('notempty'),
-                      ),
-                ),
+                              'required' => array(
+                                                  'rule' => array('notEmpty'),
+                                                  'message' => 'Insira a senha'
+                                                  ),
+                              'notempty' => array(
+                                                  'rule' => array('notempty'),
+                                                  ),
+                              ),
+          'password_confirm'  => array(
+                                       'match' => array(
+                                                        'rule' => array('matchPassword'),
+                                                        'message' => 'Senhas não conferem'
+                                                        )
+                                       ),
+          'newpassword' => array(
+                                 'rule' => array('checkCurrentPassword')
+                                 ),
+          'checkpassword' => array(
+                                 'match' => array(
+                                                  'rule' => array('matchNewPassword'),
+                                                  'message' => 'Senhas não conferem'
+                                                  )
+                                 ),
           'role' => array(
-                'valid' => array(
-                                 'rule' => array('inList', array('admin', 'author', 'user')),
-                                 'message' => 'Please enter a valid role',
-                                 'allowEmpty' => false
-                       )
+                          'allowedChoice' => array(
+                                           'rule' => array('inList', array('admin', 'author', 'user')),
+                                           'message' => 'Please enter a valid role',
+                                           'allowEmpty' => false
+                                           )
                 )
           );
 
@@ -55,5 +71,66 @@ class User extends AppModel {
     return true;
   }
 
+
+  public function matchNewPassword(){
+    return $this->data['User']['newpassword'] == $this->data['User']['checkpassword'];
+  }
+
+  public function matchPassword(){    
+    return $this->data['User']['password'] == $this->data['User']['password_confirm'];
+  }
+
+  public function checkCurrentPassword(){
+    if(AuthComponent::password($this->data['User']['currentpassword']) == User::get('password')){
+      $this->data['User']['password'] = $this->data['User']['newpassword'];
+      return true;
+    }
+    return false;
+  }
+
   public $hasMany = 'Obra';
+
+
+  function &getInstance($user = null) {
+    static $instance = array();
+    
+    if ($user) {
+      $instance[0] =& $user;
+    }
+    
+    if (!$instance) {
+      trigger_error(__("User not set.", true), E_USER_WARNING);
+      return false;
+    }
+    return $instance[0];
+  }
+
+  function store($user) {
+    if (empty($user)) {
+      return false;
+    }
+    User::getInstance($user);
+  }
+
+  function get($path) {
+    $_user =& User::getInstance();
+
+    $path = str_replace('.', '/', $path);
+    if (strpos($path, 'User') !== 0) {
+      $path = sprintf('User/%s', $path);
+    }
+    
+    if (strpos($path, '/') !== 0) {
+      $path = sprintf('/%s', $path);
+    }
+
+    $value = Set::extract($path, $_user);
+        
+    if (!$value) {
+      return false;
+    }
+
+    return $value[0];
+  }
+
 }

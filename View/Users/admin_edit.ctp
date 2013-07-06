@@ -16,6 +16,7 @@
       </div>
     </div>
     <fieldset style="border: 1px solid #eee">
+      <h5>Para altera a senha, preencha os dois campos abaixo</h5>
       <div class="control-group">
         <label class="control-label" for="password">Nova senha</label>
         <div class="controls">
@@ -25,7 +26,8 @@
       <div class="control-group">
         <label class="control-label" for="checkpassword">Confirmar senha</label>
         <div class="controls">
-	  <?php echo $this->Form->input('checkpassword', array('label' => '')); ?>
+	  <?php echo $this->Form->input('password_confirm', array('label' => '',
+	  'type' => 'password')); ?>
         </div>
       </div>
     </fieldset>
@@ -33,7 +35,9 @@
     <div class="control-group">
       <label class="control-label" for="role">Papel</label>
       <div class="controls">
-	<?php echo $this->Form->input('role', array('label' => '')); ?>
+        
+	<?php echo $this->Form->input('role', array('options' => array('admin'
+	=> 'Admin', 'author' => 'Author'), 'label' => '')); ?>
 	<p class="help-block">Opções: admin ou author.</p>		    
       </div>
     </div>
@@ -46,7 +50,9 @@
     <h3><?php echo __('Obras cadastradas pelo usuário'); ?></h3>
     <?php foreach ($obras as $obra): ?>
     <div class="mini-obra">
-      <a class="fancybox" href="#img_<?php echo $obra['Obra']['id'] ?>" data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$obra['Obra']['id'].'_thumb.jpg'); ?>
+      <a class="fancybox" 
+         href="#img_<?php echo $obra['Obra']['id'] ?>" 
+         data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$obra['Obra']['id'].'_thumb.jpg'); ?>
       </a>
 
       <div id="img_<?php echo $obra['Obra']['id'] ?>" style="display: none;" class="modal_obra">
@@ -69,21 +75,5 @@
     </div>
     <?php endforeach; ?>
     <?php endif; ?>
-    <div class="paging pagination pagination-centered">
-      <p>
-        <?php
-           echo $this->Paginator->counter(array(
-        'format' => __('Página {:page} de {:pages}, mostrando {:current} obras de {:count}')
-        ));
-        ?>  
-      </p>
-      <p>
-        <?php
-           echo $this->Paginator->prev('< ' . __('Anterior'), array(), null, array('class' => 'prev disabled'));
-          echo $this->Paginator->numbers(array('separator' => ''));
-          echo $this->Paginator->next(__('Próxima') . ' >', array(), null, array('class' => 'next disabled'));
-          ?>
-      </p>
-    </div>
   </div>
 </div>

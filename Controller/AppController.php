@@ -41,7 +41,7 @@ class AppController extends Controller {
                                              'loginRedirect' => array('controller' => 'obras', 'action' => 'index', 
                                               'admin' => true,
                                               'prefix' => 'admin'),
-                                             'logoutRedirect' => array('controller' => 'pages', 'action' => 'display', 'home'),
+                                             'logoutRedirect' => array('admin' => false, 'controller' => 'pages', 'action' => 'display', 'home'),
                                              'authenticate' => array('Form' => array(
                                                                                      'fields' => array('username' => 'email')
                                                                                      )
@@ -56,14 +56,35 @@ class AppController extends Controller {
     if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
       $this->layout = 'admin';
     } 
-
+    App::import('Model', 'User');
+    $this->loadModel('User');
+    if($this->Auth->loggedIn()){
+      $this->User->id = $this->Auth->user('id');
+      
+      User::store(array(
+                        'User' => array_merge(
+                                              $this->Auth->user(), 
+                                              array('password' => $this->User->field('password'))
+                                              )
+                        ));
+    }    
     $this->set('auth', $this->Auth->user());
   }
   
   function isAuthorized() {
     if (!empty($this->params['prefix']) && $this->params['prefix'] == 'admin') {
-      if ($this->Auth->user('role') != 'admin') {
-        return false;
+      if(!$this->Auth->user('active')) {
+        $this->Session->setFlash("Seu usuário não está ativo, favor entrar em contato com o Administrador");
+        $this->redirect($this->Auth->logout());
+      }
+      if('users' == $this->params['controller']){
+        if(('admin_edit' == $this->params['action'] || 'admin_index' == $this->params['action']) && $this->Auth->user('role') != 'admin'){
+          $this->Session->setFlash("Seu usuário não está autorizado a acessar essa área");
+          $this->redirect(array('action' => 'perfil'));
+        }
+      }
+      if($this->Auth->user('role') == 'admin' || $this->Auth->user('role') == 'author') {
+        return true;
       }
     }
     return true;

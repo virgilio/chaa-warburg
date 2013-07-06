@@ -1,46 +1,66 @@
 <div class="users form container">
-  <?php echo $this->Form->create('User', array('class' => 'form-horizontal')); ?>
-  <fieldset>
-    <legend><?php echo __('Editar conta'); ?></legend>
-    <?php echo $this->Form->input('id');?>
-    <div class="control-group">
-      <label class="control-label" for="nome">Nome</label>
-      <div class="controls">
-	<?php echo $this->Form->input('nome', array('label' => '')); ?>		    
-      </div>
-    </div>
-    <div class="control-group">
-      <label class="control-label" for="email">Email</label>
-      <div class="controls">
-	<?php echo $this->Form->input('email', array('label' => '')); ?>		    
-      </div>
-    </div>
-    <fieldset style="border: 1px solid #eee">
-      <div class="control-group">
-        <label class="control-label" for="password">Nova senha</label>
-        <div class="controls">
-	  <?php echo $this->Form->input('password', array('label' => '')); ?>
+  <div class="row-fluid">
+    <div class="span6">
+      <?php echo $this->Form->create('User', array('class' => 'form-horizontal')); ?>
+      <fieldset>
+        <legend><?php echo __('Editar conta'); ?></legend>
+        <?php echo $this->Form->input('id');?>
+        <div class="control-group">
+          <label class="control-label" for="nome">Nome</label>
+          <div class="controls">
+	    <?php 
+               echo $this->Form->input('nome', array('label' => '', 'style' => 'border: 0;'));
+            ?>		    
+          </div>
         </div>
-      </div>
-      <div class="control-group">
-        <label class="control-label" for="checkpassword">Confirmar senha</label>
-        <div class="controls">
-	  <?php echo $this->Form->input('checkpassword', array('label' => '')); ?>
+        <div class="control-group">
+          <label class="control-label" for="email">Email</label>
+          <div class="controls">
+	    <?php echo $this->Form->input('email', array('label' => '', 'style' => 'border: 0;')); ?>		    
+          </div>
         </div>
-      </div>
-    </fieldset>
-    <?php if($auth['role'] == 'admin'): ?>
-    <div class="control-group">
-      <label class="control-label" for="role">Papel</label>
-      <div class="controls">
-	<?php echo $this->Form->input('role', array('label' => '')); ?>
-	<p class="help-block">Opções: admin ou author.</p>		    
-      </div>
+        <!--<div class="control-group">
+          <label class="control-label" for="email">Email</label>
+          <div class="controls">
+	    <?php echo $this->Form->input('shortbio', array('label' => '', 'style' => 'border: 0;')); ?>		    
+          </div>
+        </div>-->
+      </fieldset>
+      <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn offset5')); ?>
+    </div>    
+    <div class="span6">
+      <?php echo $this->Form->create('User', array('action' => 'change_password', 'class' => 'form-horizontal')); ?>
+      
+        <legend><a href="#" onclick="jQuery('#change-password').toggle('fade');"><?php echo __('Alterar Senha');
+        ?></a></legend>
+        <fieldset id="change-password" style="display: none;">
+        <?php echo $this->Form->input('id'); ?>
+        <div class="control-group">
+          <label class="control-label" for="password">Senha Atual</label>
+          <div class="controls">
+	    <?php echo $this->Form->input('currentpassword', array('label' => '', 'value'
+	    => '', 'type' => 'password')); ?>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="password">Nova senha</label>
+          <div class="controls">
+	    <?php echo $this->Form->input('newpassword', array('label' => '', 'value'
+	    => '', 'type' => 'password')); ?>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" for="checkpassword">Confirmar senha</label>
+          <div class="controls">
+	    <?php echo $this->Form->input('checkpassword', array('label' => '', 'value'
+	    => '', 'type' => 'password')); ?>
+          </div>
+        </div>
+        <?php echo $this->Form->submit('Alterar Senha', array('class' => 'btn offset5')); ?>
+      </fieldset>
+      <?php echo $this->Form->end(); ?>
     </div>
-    <?php endif ?>
-  </fieldset>
-  <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn')); ?>
-  
+  </div>
   <div class="related">
     <?php if (!empty($obras)): ?>
     <h3><?php echo __('Obras cadastradas pelo usuário'); ?></h3>

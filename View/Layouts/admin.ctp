@@ -90,7 +90,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 			                <ul class="dropdown-menu">
 			                  <li id="profile">
 			                  	<?php
-			                      echo $this->Html->link('Perfil', array('controller'=>'users','action'=>'edit', $auth['id']));
+			                      echo $this->Html->link('Perfil', array('controller'=>'users','action'=>'perfil'));
 			                      ?>
 			                  </li>
 			                  <li id="logout">
