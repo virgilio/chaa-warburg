@@ -14,7 +14,7 @@
     <label class="control-label" for="cidade_id">Cidade</label>
     <div id="select-cidade" class="controls">
       <?php echo $this->Form->input('cidade_id',
-      array('label' => '', 'class' => 'fixmeinput_chosen', 'data-placeholder' => 'Selecione a cidade')); ?>
+      array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione a cidade')); ?>
     </div>
   </div>
 </fieldset>

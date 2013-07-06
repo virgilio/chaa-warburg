@@ -164,10 +164,7 @@ class ObrasController extends AppController {
       }
     }
 
-    //die(pr($this->paginate));
-
     $this->set('data', $data);
-    //    pr($data);
     parent::searchDataLoader();
 
     $obras = $this->paginate('Obra');
@@ -286,15 +283,15 @@ class ObrasController extends AppController {
 
       $obra['nome'] =  $data['Obra']['nome'];
       $obra['imagem'] =  $this->processFile($data['Obra']['imagem'], $data['Thumbnail']);
-      $this->Obra->Thumbnail->create();
-      if($this->Obra->save($data['Thumbnail'])){
-        
-      }
       $obra['tamanho_obra'] = $data['Thumbnail']['filedim'];
       $obra['user_id'] = $this->Auth->user('id');
       $this->Obra->create();
-      
       if ($this->Obra->save($obra)) {
+        $this->Obra->Thumbnail->create();
+        
+        $data['Thumbnail']['obra_id'] = $this->Obra->id;
+        $this->Obra->Thumbnail->save($data['Thumbnail']);
+        
         $this->Session->setFlash(__('A Imagem foi salva!'));
         $this->redirect(array('action' => 'edit', $this->Obra->id));                          
       } else {
@@ -315,7 +312,6 @@ class ObrasController extends AppController {
       throw new NotFoundException(__('Obra inválida'));
     }
     if ($this->request->is('post') || $this->request->is('put')) {
-      //die("<pre>" . print_r($this->request->data, true) . "</pre>");
       $data = $this->request->data;
       if($this->request->data['Obra']['imagem']['error'] == 0){
         $this->request->data['Obra']['imagem'] =  $this->processFile($this->request->data['Obra']['imagem'], 
@@ -324,7 +320,6 @@ class ObrasController extends AppController {
       } else {
         if(!empty($this->request->data['Thumbnail']['w'])){
           $this->Obra->id = $this->request->data['Obra']['id'];
-          //die($this->Obra->field('imagem'));
           $this->createThumbnail((WWW_ROOT . "img/obras/" . $this->Obra->field('imagem')), 
                                  $this->request->data['Thumbnail'], 
                                  (WWW_ROOT . "img/obras/thumbs/" . $this->Obra->field('imagem')));

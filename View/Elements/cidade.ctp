@@ -14,7 +14,7 @@
     <label class="control-label" for="pais_id">País</label>
     <div id="select-pais" class="controls">
       <?php echo $this->Form->input('pais_id',
-      array('label' => '', 'class' => 'fixme_input_chosen', 'data-placeholder' => 'Selecione o país')); ?>
+      array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione o país')); ?>
     </div>
   </div>
 </fieldset>
