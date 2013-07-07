@@ -36,8 +36,8 @@
         <?php
             $i = 0;
             foreach ($obra['Relacionada'] as $relacionada): ?>
-            <div class="mini-obra">
-                <a class="fancybox" href="#img_<?php echo $relacionada['id'] ?>" data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$relacionada['id'].'_thumb.jpg'); ?>
+            <div class="mini-obra-related <?php echo ($i%4 == 0) ? 'clear-miniobra':''; ?>">
+                <a class="fancybox" href="#img_<?php echo $relacionada['id'] ?>" data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$relacionada['imagem']); ?>
                 </a>
 
                 <div id="img_<?php echo $relacionada['id'] ?>" style="display: none;" class="modal_relacionadas">
@@ -70,6 +70,7 @@
                 (<?php echo h($relacionada['ano_fim']); ?>)
             </p>
             </div>
-        <?php endforeach; ?>
+        <?php $i++;
+            endforeach; ?>
     <?php endif; ?>
 </div>
