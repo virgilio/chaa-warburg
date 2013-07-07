@@ -16,7 +16,7 @@ var addPais =
 
                             
                             jQuery("#select-pais").html(msg);
-                            //jQuery("#select-pais .input_chosen").chosen();                            
+                            jQuery("#select-pais .input_chosen").chosen();                            
                             jQuery("#add-pais").modal('hide');
                         }
                     });
@@ -39,7 +39,7 @@ var addCidade =
                                 console.log(x);
                             } 
                             jQuery("#select-cidade").html(msg);
-                            //jQuery("#select-pais .input_chosen").chosen();                            
+                            jQuery("#select-cidade .input_chosen").chosen();                            
                             jQuery("#add-cidade").modal('hide');
                         }
                     });
@@ -64,7 +64,7 @@ var addIconografia =
 
                             
                             jQuery("#select-iconografia").html(msg);
-                            //jQuery("#select-pais .input_chosen").chosen();                            
+                            jQuery("#select-iconografia .input_chosen").chosen();                            
                             jQuery("#add-iconografia").modal('hide');
                         }
                     });
@@ -87,7 +87,7 @@ var addInstituicao =
                                 console.log(x);
                             } 
                             jQuery("#select-instituicao").html(msg);
-                            //jQuery("#select-pais .input_chosen").chosen();                            
+                            jQuery("#select-instituicao .input_chosen").chosen();                            
                             jQuery("#add-instituicao").modal('hide');
                         }
                     });
@@ -112,7 +112,7 @@ var addObraTipo =
 
                             
                             jQuery("#select-obratipo").html(msg);
-                            //jQuery("#select-pais .input_chosen").chosen();                            
+                            jQuery("#select-obratipo .input_chosen").chosen();                            
                             jQuery("#add-obratipo").modal('hide');
                         }
                     });
