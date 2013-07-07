@@ -253,14 +253,27 @@ class ObrasController extends AppController {
    * @return void
    */
   public function view($id = null) {
-    $this->Obra->recursive = 2;
+    //$this->Obra->recursive = 2;
     if (!$this->Obra->exists($id)) {
       throw new NotFoundException(__('Obra não encontrada'));
     }
-    $options = array('conditions' => array('Obra.' . $this->Obra->primaryKey => $id));
-    $this->set('obra', $this->Obra->find('first', $options));
+    
+    $this->Obra->Behaviors->load('Containable');
+    $result = $this->Obra->find('first', array(
+                                                      'conditions' => array('Obra.' . $this->Obra->primaryKey => $id),
+                                                      'contain' => array(
+                                                                         'Artista' => array('fields' => array('id', 'nome')),
+                                                                         'Instituicao' => array(
+                                                                                                'Cidade' => array('Pais')
+                                                                                                ),
+                                                                         'Iconografia',
+                                                                         'ObraTipo'
+                                                                         ),
+                                               )
+                                );
+    $this->set('obra', $result);
   }
-
+  
   public function admin_view($id = null) {
     if (!$this->Obra->exists($id)) {
       throw new NotFoundException(__('Obra inválida'));

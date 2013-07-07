@@ -1,6 +1,11 @@
+<style type="text/css">
+  .modal .modal-body {
+    overflow-y: visible;
+  }
+</style>
 <!-- Modal -->
 <div id="add-<?php echo $form; ?>" class="modal hide fade" tabindex="-1" role="dialog"
-     aria-labelledby="myModalLabel" aria-hidden="true">
+     aria-labelledby="myModalLabel" aria-hidden="false">
   <div class="form">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal"

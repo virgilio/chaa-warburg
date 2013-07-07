@@ -17,7 +17,7 @@
         <p>
             <?php echo $obra['Instituicao']['nome']; ?> |
             <?php echo isset($obra['Instituicao']['Cidade']['nome'])?$obra['Instituicao']['Cidade']['nome']. ' - ' :'Local indefinido'; ?> 
-            <?php echo isset($obra['Pais']['nome'])?$obra['Pais']['nome']:''; ?>
+            <?php echo isset($obra['Instituicao']['Cidade']['Pais']['nome'])?$obra['Instituicao']['Cidade']['Pais']['nome']:''; ?>
         </p>
         <p>
             <?php echo $this->Html->link('[DOWNLOAD DA OBRA]', '/img/obras/'.$obra['Obra']['imagem'], array('target' => 'blank')); ?>
