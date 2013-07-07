@@ -42,6 +42,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->script('chosen.jquery.min');
 		echo $this->Html->script('fancyBox/source/jquery.fancybox.js?v=2.1.5');
 		echo $this->Html->script('swinxyzoom/jquery.swinxy-combined.min.js');
+		echo $this->Html->script('callswinxy.js');
 		echo $this->Html->script('default');
 
 		echo $this->fetch('meta');
