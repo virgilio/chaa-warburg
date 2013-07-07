@@ -267,7 +267,11 @@ class ObrasController extends AppController {
                                                                                                 'Cidade' => array('Pais')
                                                                                                 ),
                                                                          'Iconografia',
-                                                                         'ObraTipo'
+                                                                         'ObraTipo',
+                                                                         'Relacionada' => array(
+                                                                                                'Artista',
+                                                                                                'User'
+                                                                                                )
                                                                          ),
                                                )
                                 );
