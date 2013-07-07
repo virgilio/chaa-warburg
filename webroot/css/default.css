@@ -11,6 +11,8 @@
 /* Fim do mini reset */
 body{
   background: url('../img/fundo.gif') 0 0 repeat fixed;
+  font-family: 'Average', serif;
+  font-size: 16px;
 }
 
 input[type='text'], input[type='number']{
@@ -29,6 +31,7 @@ a{
 }
 a:hover{
   color: #222;
+  text-decoration: none;
 }
 a.lnk_logo{
   display: block;
@@ -57,6 +60,7 @@ a.lnk_logo{
 #main-menu a{
   text-decoration: none;
   color: #222;
+  font-weight: bold;
 }
 #main-menu a:hover{
   color: #990000;
@@ -215,5 +219,31 @@ h2.nome_obra{
 }
 #slider-home .carousel-caption h4{
   color: #444;
-  font-size: 14px;
+}
+
+/*pag sobre a busca*/
+span.question{
+  color: #900;
+  font-weight: bold;
+  line-height: 32px;
+  font-style: italic;
+  font-size: 18px;
+}
+.sobre-busca h1{
+  font-size: 20px;
+  color: #900;
+  line-height: 20px;
+  margin: 10px 0;
+  padding: 0;
+}
+.sobre-busca p, .sobre-busca span, .sobre-busca h1{
+  padding: 5px 20px;
+}
+.sobre-busca p.print{
+  text-align: center;
+}
+.sobre-busca p{
+  color: #666;
+  font-size: 16px;
+  line-height: 24px;
 }

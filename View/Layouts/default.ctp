@@ -27,6 +27,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<?php echo $cakeDescription ?>:
 		<?php echo $title_for_layout; ?>
 	</title>
+	<link href='http://fonts.googleapis.com/css?family=Average' rel='stylesheet' type='text/css'>
 	<?php
 		echo $this->Html->meta('icon');
 
@@ -67,7 +68,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					<li><?php echo $this->Html->link(__('Administração'), array('controller' => 'users', 'action' => 'login')); ?></li>
 					<li><?php echo $this->Html->link(__('Lista de Obras'), array('controller' => 'obras', 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Sobre a busca',
-					'#',
+					array('controller' => 'pages', 'action' => 'sobre-busca'),
 					array('escape' => false)
 						);
 					?></li>

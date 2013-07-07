@@ -5,9 +5,8 @@
 /* Global */
 
 .sxy-zoom-container { /* -moz-box-shadow: 0 1px 6px #aaa; -webkit-box-shadow: 0 1px 6px #aaa; box-shadow:  0 1px 6px #aaa; */
-  cursor: none;
 }
-.sxy-zoom-container .sxy-zoom-viewport { z-index: 1000; }
+.sxy-zoom-container .sxy-zoom-viewport { z-index: 1000; cursor: crosshair;}
 
 .sxy-zoom-container img { border: 0; }
 .sxy-zoom-container div { margin: 0; padding: 0; border: 0; }
