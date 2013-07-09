@@ -342,11 +342,11 @@ class ObrasController extends AppController {
     }
     if ($this->request->is('post') || $this->request->is('put')) {
       $data = $this->request->data;
-      if($this->request->data['Obra']['imagem']['error'] == 0){
+      if($this->request->data['Obra']['imagem']['error'] == 0){ //Nova imagem
         $this->request->data['Obra']['imagem'] =  $this->processFile($this->request->data['Obra']['imagem'], 
                                                                      $this->request->data['Thumbnail']);
         
-      } else {
+      } else { //Mesma imagem utilizada, só cria thumb
         if(!empty($this->request->data['Thumbnail']['w'])){
           $this->Obra->id = $this->request->data['Obra']['id'];
           $this->createThumbnail((WWW_ROOT . "img/obras/" . $this->Obra->field('imagem')), 
@@ -515,8 +515,8 @@ class ObrasController extends AppController {
       @chmod($target_path, 0644);
       $this->createThumbnail($target_path, $thumb, $thumb_target_path);           
     } else { 
-      //$this->_error('ObrasController::processFile() - Unable to save temp file to file system.'); 
-      die('ObrasController::processFile() - Unable to save temp file to file system.'); 
+       $this->Session->setFlash(__('ObrasController::processFile() - Unable to save temp file to file system.'));
+       $this->redirect(array('action' => 'index'));
     }
     return $finalFile;
   } 
@@ -550,6 +550,7 @@ class ObrasController extends AppController {
             
       // create a new true color image
       $vDstImg = imagecreatetruecolor((int)$thumb['w'], (int)$thumb['h']);
+      if(!$vDstImg) return false;
             
       // copy and resize part of an image with resampling
       /*
@@ -570,7 +571,7 @@ class ObrasController extends AppController {
       //$sResultFileName = $sTempFileName . $sExt;
       //            die($target);
       $sResultFileName = $target;
-      //die($target);
+      
       // output image to file
       if('.jpg' === $sExt) {
         $iJpgQuality = 90;

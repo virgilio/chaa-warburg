@@ -40,10 +40,10 @@ var loadPreview = function(){
                                         +  $('#y2').val());
                             console.log(boundx + '--' + boundy);*/
                             jcrop_api.setSelect([
-                                                    parseInt($('#x1').val()), 
-                                                    parseInt($('#y1').val()), 
-                                                    parseInt($('#x2').val()), 
-                                                    parseInt($('#y2').val()) 
+                                                    validNumber($('#x1').val()), 
+                                                    validNumber($('#y1').val()), 
+                                                    validNumber($('#x2').val()), 
+                                                    validNumber($('#y2').val()) 
                                                 ]);
                             console.log(jcrop_api.tellSelect());
                         });
@@ -57,6 +57,13 @@ function bytesToSize(bytes) {
     var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
     return (bytes / Math.pow(1024, i)).toFixed(1) + ' ' + sizes[i];
 };
+
+function validNumber(n){
+    if(isNaN(n) || n === ''){
+        // console.log('whee');
+        return 1;
+    } else return parseInt(n, 10);
+}
 
 // check for selected crop region
 function checkForm() {

@@ -1,4 +1,3 @@
-<?php //pr(array_merge($obra['Relacionada'], $obra['Relacionada2'])); ?>
 <h1>Detalhes da obra</h1>
 
 <div class="obra_container">
@@ -38,40 +37,54 @@
         <?php
             $i = 0;
             foreach ($relacionadas as $relacionada): ?>
-            <div class="mini-obra-related <?php echo ($i%4 == 0) ? 'clear-miniobra':''; ?>">
-                <a class="fancybox" href="#img_<?php echo $relacionada['id'] ?>" data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$relacionada['imagem']); ?>
-                </a>
-
-                <div id="img_<?php echo $relacionada['id'] ?>" style="display: none;" class="modal_relacionadas">
-                    <div class="obra">
-                        <p><?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']), array('alt' => 'oie', 'border' => '0')); ?></p>
-                        <p><?php echo $obra['Artista']['nome']; ?> (<?php echo h($obra['Obra']['ano_fim']); ?>)</p>
-                        <p><?php echo $obra['Obra']['nome']; ?></p>
-                    </div>
-                    <div class="obra">
-                        <?php echo $this->Html->image('obras/'.$relacionada['imagem']) ?>
-                        <p><?php echo $relacionada['Artista']['nome']; ?> (<?php echo h($relacionada['ano_fim']); ?>)</p>
-                        <p>
-                            <?php echo $this->Html->link(
-                            h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
-                            array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
-                            array('escape'=>false)); 
-                            ?>
-                        </p>
-                    </div>
-                </div>
-             <p>
-                <?php echo $this->Html->link(
-                    h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
-                    array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
-                    array('escape'=>false)); 
-                ?>
-            </p>
-            <p class="nome-artista">
-                <?php echo $this->Html->link($relacionada['Artista']['nome'], array('controller' => 'artistas', 'action' => 'view', $relacionada['Artista']['id'])); ?>
-                (<?php echo h($relacionada['ano_fim']); ?>)
-            </p>
+        <div class="mini-obra-related <?php echo ($i%4 == 0) ? 'clear-miniobra':''; ?>">
+          <a class="fancybox" 
+             href="#img_<?php echo $relacionada['id'] ?>" 
+             data-fancybox-group="gallery">
+            <?php echo $this->Html->image('obras/'.$relacionada['imagem']); ?>
+          </a>
+          
+          <div id="img_<?php echo $relacionada['id'] ?>" style="display: none;" class="modal_relacionadas">
+            <div class="obra">
+              <p><?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']), array('alt' => '', 'border' => '0')); ?></p>
+              <p><?php echo $obra['Artista']['nome']; ?> (<?php echo h($obra['Obra']['ano_fim']); ?>)</p>
+              <p><?php echo $obra['Obra']['nome']; ?></p>
             </div>
+            <div class="obra">
+              <?php echo $this->Html->image('obras/'.$relacionada['imagem']) ?>
+              <p><?php echo $relacionada['Artista']['nome']; ?> (<?php echo h($relacionada['ano_fim']); ?>)</p>
+              <p>
+                <?php echo $this->Html->link(
+                h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
+                array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
+                array('escape'=>false)); 
+                ?>
+              </p>
+              <div class="clearfix" style="color: #000; position: absolute; max-width: 30%; top: 30px;
+                right: 0; background-color: #fff; opacity: 0.8; padding: 5px 10px;
+                border-radius: 5px;">
+                <h5> Relação proposta por: 
+                  <?php echo $relacionada['User']['nome']; ?>
+                </h5>
+                <p>
+                  <?php echo $relacionada['ObrasRelacionada']['descricao']; ?>
+                </p>
+              </div>
+
+            </div>
+          </div>
+          <p>
+            <?php echo $this->Html->link(
+            h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
+            array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
+            array('escape'=>false)); 
+            ?>
+          </p>
+          <p class="nome-artista">
+            <?php echo $this->Html->link($relacionada['Artista']['nome'], array('controller' => 'artistas', 'action' => 'view', $relacionada['Artista']['id'])); ?>
+            (<?php echo h($relacionada['ano_fim']); ?>)
+          </p>
+        </div>
         <?php $i++;
             endforeach; ?>
     <?php endif; ?>

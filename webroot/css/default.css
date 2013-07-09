@@ -259,3 +259,7 @@ span.question{
   font-size: 16px;
   line-height: 24px;
 }
+
+div.obra:hover div {
+    display: none;
+}
