@@ -1,3 +1,4 @@
+<?php //pr(array_merge($obra['Relacionada'], $obra['Relacionada2'])); ?>
 <h1>Detalhes da obra</h1>
 
 <div class="obra_container">
@@ -31,11 +32,12 @@
 
 
 <div class="related">
-    <?php if (!empty($obra['Relacionada'])): ?>
+    <?php if (!empty($obra['Relacionada']) || !empty($obra['Relacionada2'])): ?>
+    <?php $relacionadas = array_merge($obra['Relacionada'], $obra['Relacionada2']); ?>
     <h3><?php echo __('Imagens Relacionadas'); ?></h3>
         <?php
             $i = 0;
-            foreach ($obra['Relacionada'] as $relacionada): ?>
+            foreach ($relacionadas as $relacionada): ?>
             <div class="mini-obra-related <?php echo ($i%4 == 0) ? 'clear-miniobra':''; ?>">
                 <a class="fancybox" href="#img_<?php echo $relacionada['id'] ?>" data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$relacionada['imagem']); ?>
                 </a>

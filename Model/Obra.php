@@ -95,25 +95,25 @@ class Obra extends AppModel {
                                                                         ),
                                                      ),
                            /*'pais_id' => array(
-                                              'numeric' => array(
-                                                                 'rule' => array('numeric'),
-                                                                 //'message' => 'Your custom message here',
-                                                                 //'allowEmpty' => false,
-                                                                 //'required' => false,
-                                                                 //'last' => false, // Stop validation after this rule
-                                                                 //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                                                                 ),
-                                              ),
-                           'cidade_id' => array(
-                                                'numeric' => array(
-                                                                   'rule' => array('numeric'),
-                                                                   //'message' => 'Your custom message here',
-                                                                   //'allowEmpty' => false,
-                                                                   //'required' => false,
-                                                                   //'last' => false, // Stop validation after this rule
-                                                                   //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                                                                   ),
-                                                                   ),*/
+                             'numeric' => array(
+                             'rule' => array('numeric'),
+                             //'message' => 'Your custom message here',
+                             //'allowEmpty' => false,
+                             //'required' => false,
+                             //'last' => false, // Stop validation after this rule
+                             //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                             ),
+                             ),
+                             'cidade_id' => array(
+                             'numeric' => array(
+                             'rule' => array('numeric'),
+                             //'message' => 'Your custom message here',
+                             //'allowEmpty' => false,
+                             //'required' => false,
+                             //'last' => false, // Stop validation after this rule
+                             //'on' => 'create', // Limit validation to 'create' or 'update' operations
+                             ),
+                             ),*/
                            'artista_id' => array(
                                                  'numeric' => array(
                                                                     'rule' => array('numeric'),
@@ -165,13 +165,6 @@ class Obra extends AppModel {
                                             'fields' => '',
                                             'order' => ''
                                             ),
-                            /*'Cidade' => array(
-                                              'className' => 'Cidade',
-                                              'foreignKey' => 'cidade_id',
-                                              'conditions' => '',
-                                              'fields' => '',
-                                              'order' => ''
-                                              ),*/
                             'Artista' => array(
                                                'className' => 'Artista',
                                                'foreignKey' => 'artista_id',
@@ -197,10 +190,16 @@ class Obra extends AppModel {
                                   'foreignKey' => 'obra_id',
                                   'associationForeignKey'  => 'relacionada_id',
                                   'unique'=> true
+                                  ),
+          'Relacionada2' => array(
+                                  'className'  => 'Obra',
+                                  'joinTable'  => 'obras_relacionadas',
+                                  'foreignKey' => 'relacionada_id',
+                                  'associationForeignKey'  => 'obra_id',
+                                  'unique'=> true
                                   )
           );
 
   public $hasOne = 'Thumbnail';
-        
-
+       
 }

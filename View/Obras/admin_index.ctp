@@ -48,13 +48,17 @@
     </tr>
     <?php foreach ($obras as $obra): ?>
     <tr>
-      <td><?php echo $this->Html->link($obra['Obra']['nome'], array('controller' => 'Obras', 'action' => 'view', $obra['Obra']['id'], 'admin' => false), array('target'=>'blank')); ?>&nbsp;</td>
+      <td>
+        <?php echo $this->Html->link($obra['Obra']['nome'], array(
+          'controller' => 'Obras', 'action' => 'view', $obra['Obra']['id'], 
+          'admin' => false), array('target'=>'blank')); ?>&nbsp;</td>
       <td>
 	       <?php echo $this->Html->link($obra['Artista']['nome'], array('controller' => 'artistas', 'action' => 'edit', $obra['Artista']['id'])); ?>
       </td>
       <td class="actions">
       	<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $obra['Obra']['id'])); ?>
-      	<?php echo $this->Form->postLink(__('Deletar'), array('action' => 'delete', $obra['Obra']['id']), null, __('Tem certeza que deseja deletar # %s?', $obra['Obra']['id'])); ?>
+      	<?php echo $this->Form->postLink(__('Deletar'), array('action' =>
+      	'delete', $obra['Obra']['id']), null, __('Tem certeza que deseja deletar # %s?', $obra['Obra']['id'])); ?>
       </td>
     </tr>
     <?php endforeach; ?>

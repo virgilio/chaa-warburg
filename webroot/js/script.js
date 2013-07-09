@@ -21,7 +21,7 @@ var loadPreview = function(){
                             onChange: updateInfo,
                             onSelect: updateInfo,
                             onRelease: clearInfo,
-//                            boxWidth: 450 
+                            boxWidth: 900 
                             //                                boxHeight: 400
                         }, function(){
                             // use the Jcrop API to get the real image size
@@ -31,14 +31,14 @@ var loadPreview = function(){
                             
                             // Store the Jcrop API in the jcrop_api variable
                             jcrop_api = this;
-                            console.log($('#x1').val()  
+                            /*console.log($('#x1').val()  
                                         + ' -- ' 
                                         +   $('#y1').val()  
                                         + ' -- ' 
                                         + $('#x2').val() 
                                         + ' -- ' 
                                         +  $('#y2').val());
-                            console.log(boundx + '--' + boundy);
+                            console.log(boundx + '--' + boundy);*/
                             jcrop_api.setSelect([
                                                     parseInt($('#x1').val()), 
                                                     parseInt($('#y1').val()), 
@@ -109,9 +109,10 @@ function fileSelectHandler() {
     oReader.onload = function(e) {
 
         // e.target.result contains the DataURL which we can use as a source of the image
+        oImage.style.height = 'auto';
         oImage.src = e.target.result;
-        oImage.onload = function () { // onload event handler
-            
+        oImage.onload = function () { // onload event handler            
+
             // display step 2
             $('.step2').fadeIn(500);
             // display some basic image info
@@ -138,7 +139,7 @@ function fileSelectHandler() {
                                     onChange: updateInfo,
                                     onSelect: updateInfo,
                                     onRelease: clearInfo,
-                                    boxWidth: 450
+                                    boxWidth: 900
                                 }, function(){
                                     // use the Jcrop API to get the real image size
                                     var bounds = this.getBounds();
