@@ -20,19 +20,21 @@
     </div>
     <div class="control-group">
       <label class="control-label" for="pais_id">País</label>
-      <div id="select-pais" class="controls">
-        <?php echo $this->Form->input('pais_id',
-        array('label' => '', 'class' => 'input_chosen', 'data-placeholder' =>
-        'Selecione o país')); ?>
+      <div class="controls">
+        <span id="select-pais">
+          <?php echo $this->Form->input('pais_id',
+          array('label' => '', 'class' => 'input_chosen', 'data-placeholder' =>
+          'Selecione o país')); ?>
+        </span>
         <!-- Botao para abrir modal de adicionar item -->
       </div>
-      <a href="#add-pais" role="button" class="btn" data-toggle="modal">Novo país</a>
+      <a href="#add-pais" role="button" class="btn btn-info offset2" data-toggle="modal">Novo país</a>
     </div>
   </fieldset>
   <div class="control-group">
     <label class="control-label" for="singlebutton"></label>
     <div class="controls">
-      <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn')); ?>
+      <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn btn-success')); ?>
     </div>
   </div>
 </div>

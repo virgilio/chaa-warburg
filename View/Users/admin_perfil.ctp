@@ -20,13 +20,14 @@
           </div>
         </div>
         <!--<div class="control-group">
-          <label class="control-label" for="email">Email</label>
-          <div class="controls">
-	    <?php echo $this->Form->input('shortbio', array('label' => '', 'style' => 'border: 0;')); ?>		    
-          </div>
+            <label class="control-label" for="email">Email</label>
+            <div class="controls">
+	      <?php echo $this->Form->input('shortbio', array('label' => '', 'style' => 'border: 0;')); ?>		    
+            </div>
         </div>-->
       </fieldset>
-      <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn offset5')); ?>
+      <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn
+      offset5 btn-success')); ?>
     </div>    
     <div class="span6">
       <?php echo $this->Form->create('User', array('action' => 'change_password', 'class' => 'form-horizontal')); ?>
@@ -60,7 +61,8 @@
 	    => '', 'type' => 'password')); ?>
           </div>
         </div>
-        <?php echo $this->Form->submit('Alterar Senha', array('class' => 'btn offset5')); ?>
+        <?php echo $this->Form->submit('Alterar Senha', array('class' => 'btn
+        offset5 btn-success')); ?>
       </fieldset>
       <?php echo $this->Form->end(); ?>
     </div>

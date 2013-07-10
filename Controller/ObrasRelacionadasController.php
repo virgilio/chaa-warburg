@@ -30,6 +30,7 @@ class ObrasRelacionadasController extends AppController {
   public function admin_add() {
     if ($this->request->is('post')) {
       $this->ObrasRelacionada->create();
+      $this->request->data['ObrasRelacionada']['user_id'] = $this->Auth->user('id');
       if($this->ObrasRelacionada->save($this->request->data)) {
         $obra_id = $this->request->data['ObrasRelacionada']['obra_id'];
         $relacionada_id = $this->request->data['ObrasRelacionada']['relacionada_id'];

@@ -16,8 +16,10 @@
       <?php echo $this->element($form); ?>
     </div>
     <div class="modal-footer">
-      <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-      <?php echo $this->Form->submit('Adicionar', array('class' => 'btn')); ?>
+      <ul class="unstyled inline">
+        <li><button class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Close</button></li>
+        <li><?php echo $this->Form->submit('Adicionar', array('class' => 'btn btn-success')); ?></li>
+      </ul>
     </div>
     <?php echo $this->Form->end(); ?>
   </div>

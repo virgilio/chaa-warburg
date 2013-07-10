@@ -5,9 +5,18 @@
    $this->Html->script("nicedit/nicEdit.js", array("inline" => false));
    $this->Html->css('jquery.Jcrop.min.css', null, array("inline" => false));
    $this->Html->script("ajax-relacionadas.js", array("inline" => false));
+
+   $this->Html->css('bootstrapSwitch.css', null, array('inline' =>
+   false)); 
+   $this->Html->script('bootstrapSwitch.min.js', array('inline' => false));
 ?>
 <style type="text/css">
   .jcrop img {max-width: none;}
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
 </style>
 
 <h2>Editar obra <?php echo h(substr($this->request->data['Obra']['nome'], 0, 40))
@@ -104,13 +113,34 @@
         <div class="control-group">
           <label class="control-label" for="ano_inicio">Ano início</label>
           <div class="controls">
-            <?php echo $this->Form->input('ano_inicio', array('label' => '')); ?>		    
+            <?php echo $this->Form->input('ano_inicio', array('label' => '',
+            'style' => 'float: left; margin-left: 5px;', 'class' => 'input-mini'));
+            ?>		    
+            <div class="switch"
+                 data-on="primary" 
+                 data-off="warning"  
+                 data-on-label="d.C." 
+                 data-off-label="a.C.">
+              <?php echo $this->Form->input('ano_inicio_signal', array('label' => false,
+              'hiddenField' => true, 'div' => false, 'type' => 'checkbox',
+                 'checked' => 'checked')); ?>
+            </div>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="ano_fim">Ano fim</label>
           <div class="controls">
-            <?php echo $this->Form->input('ano_fim', array('label' => '')); ?>		    
+            <?php echo $this->Form->input('ano_fim', array('label' => '',
+            'style' => 'float: left; margin-left: 5px;', 'class' => 'input-mini')); ?>
+            <div class="switch"
+                 data-on="primary" 
+                 data-off="warning"  
+                 data-on-label="d.C." 
+                 data-off-label="a.C.">
+              <?php echo $this->Form->input('ano_fim_signal', array('label' => false,
+              'hiddenField' => true, 'div' => false, 'type' => 'checkbox',
+              'checked' => 'checked')); ?>
+            </div>            
           </div>
         </div>
         <div class="control-group">
@@ -151,39 +181,61 @@
         </div>
         <div class="control-group">
           <label class="control-label" for="obra_tipos_id">Técnica</label>
-          <div id="select-obratipo" class="controls">
-            <?php echo $this->Form->input('obra_tipos_id',
-            array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione o tipo de obra')); ?>
-            <a href="#add-obratipo" role="button" class="btn"
-               data-toggle="modal">Nova Técnica</a>
+          <div class="controls">
+            <span id="select-obratipo">
+              <?php echo $this->Form->input('obra_tipos_id',
+              array('label' => '', 'class' => 'input_chosen', 'data-placeholder'
+              => 'Selecione o tipo de obra')); ?>
+            </span>
+            <ul class="unstyled inline pull-right">
+              <li>
+                <a href="#add-obratipo" role="button" class="btn btn-info"
+                   data-toggle="modal">Nova Técnica</a>
+              </li>
+            </ul>
           </div>
-
         </div>
         
         <div class="control-group">
           <label class="control-label" for="instituicao_id">Instituição</label>
-          <div id="select-instituicao" class="controls">
-            <?php echo $this->Form->input('instituicao_id',
-            array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione a Instituição')); ?>
-
-            <a href="#add-instituicao" role="button" class="btn"
-               data-toggle="modal">Nova Instituição</a>
-            <a href="#add-cidade" role="button" class="btn"
-               data-toggle="modal">Nova cidade</a>
-            <a href="#add-pais" role="button" class="btn"
-               data-toggle="modal">Novo país</a>
+          <div class="controls">
+            <span id="select-instituicao" >
+              <?php echo $this->Form->input('instituicao_id',
+              array('label' => '', 'class' => 'input_chosen', 'data-placeholder'
+              => 'Selecione a Instituição')); ?>
+            </span>
+            <ul class="unstyled inline pull-right">
+              <li>
+                <a href="#add-instituicao" role="button" class="btn btn-info"
+                   data-toggle="modal">Nova Instituição</a>
+              </li>
+              <li>
+                <a href="#add-cidade" role="button" class="btn btn-info"
+                   data-toggle="modal">Nova cidade</a>
+              </li>
+              <li>
+                <a href="#add-pais" role="button" class="btn btn-info"
+                   data-toggle="modal">Novo país</a>
+              </li>
+            </ul>
           </div>
         </div>
         
         <div class="control-group">
           <label class="control-label" for="tags">Iconografia</label>
-          <div id="select-iconografia" class="controls">
-            <?php echo $this->Form->input('iconografia_id', 
-            array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione a iconografia')); ?>
-            <a href="#add-iconografia" role="button" class="btn"
-               data-toggle="modal">Nova Iconografia</a>
+          <div class="controls">
+            <span id="select-iconografia">
+              <?php echo $this->Form->input('iconografia_id', 
+              array('label' => '', 'class' => 'input_chosen', 'data-placeholder'
+              => 'Selecione a iconografia')); ?>
+            </span>
+            <ul class="unstyled inline pull-right">
+              <li>                
+                <a href="#add-iconografia" role="button" class="btn btn-info"
+                   data-toggle="modal">Nova Iconografia</a>
+              </li>
+            </ul>
           </div>
-        </div>
       </fieldset>
     </div>
     <!-- Fim step2 -->
@@ -206,7 +258,7 @@
             'empty'  => true, 'class' => 'input-chosen'));
             ?>
           </div>
-          <a href="#add-relacionada" role="button" class="btn"
+          <a href="#add-relacionada" role="button" class="btn  btn-info"
              data-toggle="modal">Adicionar</a>
         </div>
         <div class="span3 thumbs-relacionadas">

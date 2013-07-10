@@ -88,7 +88,7 @@ class User extends AppModel {
     return false;
   }
 
-  public $hasMany = 'Obra';
+  public $hasMany = array('Obra', 'ObrasRelacionada');
 
 
   function &getInstance($user = null) {

@@ -97,14 +97,17 @@ class ObrasController extends AppController {
         $query = $data['Search'];
         
         $or = array();
+        $and = array();
+
         if(!empty($query['artista']))
-          $or['Artista.nome LIKE'] = '%' . $query['artista'] . '%';
+          $and['Artista.nome LIKE'] = '%' . $query['artista'] . '%';
+        
         if(!empty($query['obra'])){
-          $or['Obra.nome LIKE'] = '%' . $query['obra'] . '%';
-          $or['Obra.descricao LIKE'] = '%' . $query['obra'] . '%';
+          $and['Obra.nome LIKE'] = '%' . $query['obra'] . '%';
+          $and['Obra.descricao LIKE'] = '%' . $query['obra'] . '%';
         }
         if(!empty($query['instituicao']))
-          $or['Instituicao.nome LIKE'] = '%' . $query['instituicao'] . '%';
+          $and['Instituicao.nome LIKE'] = '%' . $query['instituicao'] . '%';
         
         /**
          *  If there is city or country setted, we add a OR search 
@@ -132,9 +135,8 @@ class ObrasController extends AppController {
         }
 
         if(!empty($query['tags']))
-          $or['Obra.tags LIKE'] = '%' . $query['tags'] . '%';
+          $and['Obra.tags LIKE'] = '%' . $query['tags'] . '%';
               
-        $and = array();
         if(!empty($data['ObraTipo']))
           $and['Obra.obra_tipos_id'] = $data['ObraTipo'];
         if(!empty($data['Iconografia']))
@@ -147,12 +149,15 @@ class ObrasController extends AppController {
         if(!empty($query['fim'])){
           $and['Obra.ano_fim <= ?'] = array($query['fim']);
         }
+        
+        if(!empty($query['ano'])){
+          $or['Obra.ano_fim'] = $query['ano'];
+          $or['Obra.ano_inicio'] = $query['ano'];
+        }
 
         if($letter != null){
           $and['Obra.nome REGEXP'] = '^' . $letter;
         }
-
-
 
         $this->paginate = array(
                                 'fields' => array(
@@ -164,8 +169,8 @@ class ObrasController extends AppController {
                                                   'Obra.ano_inicio', 
                                                   'Obra.ano_fim'),
                                 'conditions' => array(
-                                                      //'OR' => $or,
-                                                      'AND' => array_merge($or, $and)
+                                                      'OR' => $or,
+                                                      'AND' => $and
                                                       )
                                 );
       } else {
@@ -266,7 +271,9 @@ class ObrasController extends AppController {
       throw new NotFoundException(__('Obra não encontrada'));
     }
     
+    
     $this->Obra->Behaviors->load('Containable');
+    
     $result = $this->Obra->find('first', array(
                                                'conditions' => array('Obra.' . $this->Obra->primaryKey => $id),
                                                'contain' => array(
@@ -276,17 +283,31 @@ class ObrasController extends AppController {
                                                                                          ),
                                                                   'Iconografia',
                                                                   'ObraTipo',
-                                                                  'Relacionada' => array(
-                                                                                         'Artista',
-                                                                                         'User'
-                                                                                         ),
-                                                                  'Relacionada2' => array(
-                                                                                         'Artista',
-                                                                                         'User'
-                                                                                         ),
                                                                   ),
                                                )
                                 );
+    $this->loadModel('ObrasRelacionada');
+    $this->ObrasRelacionada->Behaviors->load('Containable');
+    $this->ObrasRelacionada->bindModel(array('belongsTo' => array('User', 'Obra',  'Relacionada' => array(
+                                                                                                          'className' => 'Obra',
+                                                                                                          'foreignKey' => 'relacionada_id',
+                                                                                                          'conditions' => '',
+                                                                                                          'fields' => '',
+                                                                                                          'order' => ''
+                                                                                                          ),)));
+    $relacionadas = $this->ObrasRelacionada->find('all', array(
+                                                               'conditions' => array('or' => array(
+                                                                                                   'ObrasRelacionada.relacionada_id' => $id, 
+                                                                                                   'ObrasRelacionada.obra_id' => $id, 
+                                                                                                   )
+                                                                                     ),
+                                                               'contain' => array(
+                                                                                  'User', 
+                                                                                  'Obra' => array('Artista'),
+                                                                                  'Relacionada' => array('Artista'),
+                                                                                  ),
+                                                               ));
+    $this->set('relacionadas', $relacionadas);
     $this->set('obra', $result);
   }
   
@@ -425,10 +446,12 @@ class ObrasController extends AppController {
     foreach($result['Relacionada'] as $rel){
       unset($relacionadas[$rel['id']]);
     }
-
+    
     foreach($result['Relacionada2'] as $rel){
       unset($relacionadas[$rel['id']]);
     }
+
+    unset($relacionadas[$result['Obra']['id']]);
 
     $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 'artistas', 'iconografias', 'relacionadas'));
   }

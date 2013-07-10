@@ -140,21 +140,25 @@ $this->request->query['Search']['type'] : 'fast'; ?>
             </div>
           </div>
         </div>
-        <div class="pull-left">
-          
-            <div class="control-group">
-              <label class="control-label" for="cidade">Intervalo</label>
-              <div class="controls">
-                <input id="intervalo" 
-                       type="text"
-                       value="<?php echo $hasValues ? $data['Search']['intervalo'] : ""; ?>"
-                       name="Search[intervalo]" type="text" />
+        <div class="row">
+          <div class="span12" style="margin-bottom: 20px;">
+            <label class="control-label" for="cidade">Intervalo</label>
+            <div class="controls">
+              <span>
                 <input id="int-inicio" name="Search[inicio]" type="text"
-                       value="<?php echo $ano_min; ?>" />
+                       value="<?php echo $ano_min; ?>" class="input-mini search-query" />
                 <input id="int-fim" name="Search[fim]" type="text"
-                       value="<?php echo $ano_max; ?>" />
-                <?php 
-                   $tosign = $ano_min . ',' . $ano_max . ',';
+                       value="<?php echo $ano_max; ?>" class="input-mini
+                                                              search-query" />
+              </span>
+              <input id="intervalo" 
+                     type="text"
+                     value="<?php echo $hasValues ? $data['Search']['intervalo'] : ""; ?>"
+                     name="Search[intervalo]" type="text" 
+                     style="border: 0; width: auto;"
+                     />
+              <?php 
+                 $tosign = $ano_min . ',' . $ano_max . ',';
                    if($hasValues){
                      $tosign .= (!empty($data['Search']['inicio']) ?
                        $data['Search']['inicio'] : $ano_min)  . ',';
@@ -164,19 +168,19 @@ $this->request->query['Search']['type'] : 'fast'; ?>
                      $tosign .= $ano_min . ',' .  $ano_max;
                    }
                  ?>
-                <div id="slider-range"></div>
-              </div>
             </div>
-            <!-- Button -->
-            <div class="control-group">
+            <div class="control-group offset7 clearfix">
               <label class="control-label" for="singlebutton"></label>
               <div class="controls">
                 <?php echo $this->Form->end(array('label' => 'Buscar', 'id' => 'singlebutton',
 	        'class' => 'btn btn-default')); ?>
               </div>
             </div>
-          
+          </div>
+          <div id="slider-range" class="span10 offset1 clearfix" 
+               style="margin-bottom:  20px;"></div>
         </div>
+        <!-- Button -->
       </fieldset>
       <?php echo $this->Form->end(); ?>
     </div>

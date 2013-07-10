@@ -94,26 +94,6 @@ class Obra extends AppModel {
                                                                         //'on' => 'create', // Limit validation to 'create' or 'update' operations
                                                                         ),
                                                      ),
-                           /*'pais_id' => array(
-                             'numeric' => array(
-                             'rule' => array('numeric'),
-                             //'message' => 'Your custom message here',
-                             //'allowEmpty' => false,
-                             //'required' => false,
-                             //'last' => false, // Stop validation after this rule
-                             //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                             ),
-                             ),
-                             'cidade_id' => array(
-                             'numeric' => array(
-                             'rule' => array('numeric'),
-                             //'message' => 'Your custom message here',
-                             //'allowEmpty' => false,
-                             //'required' => false,
-                             //'last' => false, // Stop validation after this rule
-                             //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                             ),
-                             ),*/
                            'artista_id' => array(
                                                  'numeric' => array(
                                                                     'rule' => array('numeric'),
@@ -200,6 +180,5 @@ class Obra extends AppModel {
                                   )
           );
 
-  public $hasOne = 'Thumbnail';
-       
+  public $hasOne = 'Thumbnail';       
 }

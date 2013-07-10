@@ -6,7 +6,7 @@
     <div class="span5">
       <?php 
          echo $this->Html->link('Ver Instituições', 
-      array('controller' => 'artistas','action' => 'index'), array('class' =>
+      array('controller' => 'instituicoes', 'action' => 'index'), array('class' =>
       'btn_admin')); 
       ?>
       <?php 
@@ -28,20 +28,23 @@
     </div>
     <div class="control-group">
       <label class="control-label" for="cidade_id">Cidade</label>
-      <div id="select-cidade" class="controls">
-        <?php echo $this->Form->input('cidade_id',
-        array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione a cidade')); ?>
+      <div class="controls">
+        <span id="select-cidade">
+          <?php echo $this->Form->input('cidade_id',
+          array('label' => '', 'class' => 'input_chosen', 'data-placeholder' =>
+          'Selecione a cidade')); ?>
+        </span>
       </div>
-      <a href="#add-cidade" role="button" class="btn"
+      <a href="#add-cidade" role="button" class="btn btn-info offset2"
          data-toggle="modal">Nova cidade</a>
-      <a href="#add-pais" role="button" class="btn"
+      <a href="#add-pais" role="button" class="btn btn-info"
          data-toggle="modal">Novo país</a>
     </div>
   </fieldset>
   <div class="control-group">
     <label class="control-label" for="singlebutton"></label>
     <div class="controls">
-      <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn')); ?>
+      <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn btn-success')); ?>
     </div>
   </div>
 </div>

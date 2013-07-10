@@ -68,7 +68,8 @@
     
     <?php endif ?>
   </fieldset>
-  <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn')); ?>
+  <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn
+  btn-success offset2')); ?>
 </div>
 <div class="related">
   <?php if (!empty($obras)): ?>
