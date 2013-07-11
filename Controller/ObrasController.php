@@ -376,6 +376,14 @@ class ObrasController extends AppController {
         }              
         unset($this->request->data['Obra']['imagem']);
       }
+      
+      if(!empty($this->request->data['Obra']['ano_inicio'])){
+        $this->request->data['Obra']['ano_inicio'] = $this->request->data['Obra']['ano_inicio'] * $this->request->data['Obra']['ano_inicio_signal'];
+      }
+      if(!empty($this->request->data['Obra']['ano_fim'])){
+        $this->request->data['Obra']['ano_fim'] = $this->request->data['Obra']['ano_fim'] * $this->request->data['Obra']['ano_fim_signal'];
+      }
+      
       if ($this->Obra->save($this->request->data)) {
         $thumbnail = $this->Obra->Thumbnail->findByObraId($this->Obra->id);
         
@@ -385,7 +393,7 @@ class ObrasController extends AppController {
         
         $data['Thumbnail']['obra_id'] = $this->Obra->id;
         if($this->Obra->Thumbnail->save($data['Thumbnail'])){
-          //die(pr($data['Thumbnail']));
+         
         }
         
         $this->redirect(array('action' => 'index'));
@@ -408,13 +416,33 @@ class ObrasController extends AppController {
                                                                                            'Artista' => array('id', 'nome'),
                                                                                            ),
                                                                     'Relacionada2' => array(
-                                                                                            'Artista',
-                                                                                            'User'
+                                                                                            'Artista' => array('id', 'nome'),
                                                                                             ),
                                                                     ),
                                                  )
                                   );
       
+      if(!empty($result['Obra']['ano_inicio'])){
+        if($result['Obra']['ano_inicio'] == 0) {
+          $result['Obra']['ano_inicio_signal'] = 0;
+        } else if($result['Obra']['ano_inicio'] < 0){
+          $result['Obra']['ano_inicio_signal'] = -1;
+          $result['Obra']['ano_inicio'] = -1 * $result['Obra']['ano_inicio'];
+        } else {
+          $result['Obra']['ano_inicio_signal'] = 1;
+        }
+      }
+      
+      if(!empty($result['Obra']['ano_fim'])){
+        if($result['Obra']['ano_fim'] == 0) {
+          $result['Obra']['ano_fim_signal'] = 0;
+        } else if($result['Obra']['ano_fim'] < 0){
+          $result['Obra']['ano_fim_signal'] = -1;
+          $result['Obra']['ano_fim'] = -1 * $result['Obra']['ano_fim'];
+        } else {
+          $result['Obra']['ano_fim_signal'] = 1;
+      }
+      }
       $this->request->data = $result;
     }
     

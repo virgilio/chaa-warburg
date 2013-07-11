@@ -140,3 +140,8 @@
 .tab-content{
   overflow: visible;
 }
+
+.acdc {
+    cursor: pointer;
+}
+

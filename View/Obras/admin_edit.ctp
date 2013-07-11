@@ -108,77 +108,121 @@
         <div class="controls">
           <?php echo $this->Form->input('artista_id',
           array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione o artista')); ?>
-          </div>
         </div>
-        <div class="control-group">
+      </div>
+      <fieldset class="clearfix row-fluid">
+        <div class="control-group span4">
           <label class="control-label" for="ano_inicio">Ano início</label>
           <div class="controls">
-            <?php echo $this->Form->input('ano_inicio', array('label' => '',
-            'style' => 'float: left; margin-left: 5px;', 'class' => 'input-mini'));
-            ?>		    
-            <div class="switch"
-                 data-on="primary" 
-                 data-off="warning"  
-                 data-on-label="d.C." 
-                 data-off-label="a.C.">
-              <?php echo $this->Form->input('ano_inicio_signal', array('label' => false,
-              'hiddenField' => true, 'div' => false, 'type' => 'checkbox',
-                 'checked' => 'checked')); ?>
+            <div class="input-append">
+              <?php echo $this->Form->input('ano_inicio', array('label' => false,
+              'style' => 'text-align: right;', 'class' => 'input-mini', 'div' => false, 'min' => 0));
+              ?>
+              <span class="add-on acdc" id="ano_inicio_signal">	    
+                <?php echo $this->Form->input('ano_inicio_signal', 
+                array('label' => false, 'hiddenField' => false, 'div' => false, 
+                    'type' => 'hidden', 
+                    'style' => 'display: none;', 
+                    'value' => (isset($this->request->data['Obra']['ano_inicio_signal']) ?
+                                $this->request->data['Obra']['ano_inicio_signal'] : '')));
+                ?>
+                <span id="ano_inicio_signal_label">
+                  <?php 
+                     if(isset($this->request->data['Obra']['ano_inicio_signal']) && $this->request->data['Obra']['ano_inicio_signal'] != 0) {
+                       echo $this->request->data['Obra']['ano_inicio_signal'] == 1 ? 
+                          'd.C' :
+                          'a.C'; 
+                     }
+                  ?>
+                </span>
+              </span>
             </div>
           </div>
         </div>
-        <div class="control-group">
-          <label class="control-label" for="ano_fim">Ano fim</label>
-          <div class="controls">
-            <?php echo $this->Form->input('ano_fim', array('label' => '',
-            'style' => 'float: left; margin-left: 5px;', 'class' => 'input-mini')); ?>
-            <div class="switch"
-                 data-on="primary" 
-                 data-off="warning"  
-                 data-on-label="d.C." 
-                 data-off-label="a.C.">
-              <?php echo $this->Form->input('ano_fim_signal', array('label' => false,
-              'hiddenField' => true, 'div' => false, 'type' => 'checkbox',
-              'checked' => 'checked')); ?>
-            </div>            
-          </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label" for="incerta">Incerta</label>
-          <div class="controls">
-            <?php echo $this->Form->input('incerta', array('label' => '')); ?>        
-          </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label" for="circa">Circa</label>
-          <div class="controls">
-            <?php echo $this->Form->input('circa', array('label' => '')); ?>        
-          </div>
-        </div>
-        <div class="control-group">
-          <label class="control-label" for="tamanho_obra">Tamanho da obra</label>
-          <div class="controls">
-            <?php echo $this->Form->input('tamanho_obra', array('label' => '')); ?>		   
-            
-            <label class="control-label" for="aproximado">tamanho aproximado?</label>
-            <div class="controls">
-              <?php echo $this->Form->input('aproximado', array('label' => '')); ?>       
+        <div class="control-group span3" id="ObraAnoFimFieldset">
+          <label style="float: left;padding-top: 5px; text-align: right;" 
+                 for="ano_fim">Ano fim</label>
+          <div class="controls" style="margin-left: 65px;">
+            <div class="input-append">
+              <?php echo $this->Form->input('ano_fim', array('label' => false,
+              'style' => 'text-align: right;', 'class' =>  'input-mini', 'div' => false, 'min' => 0)); ?>
+              <span class="add-on acdc" id="ano_fim_signal">
+                <?php echo $this->Form->input('ano_fim_signal', array('label' => false,
+                'hiddenField' => false, 'div' => false, 'type' => 'hidden',
+                'value' => (isset($this->request->data['Obra']['ano_fim_signal']) ?
+                $this->request->data['Obra']['ano_fim_signal'] : ''),
+                'style' => 'display: none;')); ?>
+                <span id="ano_fim_signal_label">
+                  <?php 
+                   if(isset($this->request->data['Obra']['ano_fim_signal']) && 
+                        $this->request->data['Obra']['ano_fim_signal'] != 0) {
+                     echo $this->request->data['Obra']['ano_fim_signal'] == 1 ? 
+                          'd.C' :
+                          'a.C'; 
+                   }
+                  ?>
+                </span>
+              </span>
             </div>
           </div>
         </div>
-        <!-- Textarea -->
-        <div class="control-group">
-          <label class="control-label" for="descricao">Descrição</label>
-          <div class="controls">                     
-            <?php echo $this->Form->input('descricao', array('label' => '')); ?>		    
+      </fieldset>
+      <div class="control-group">
+        <label class="control-label" for="circa">Circa</label>
+        <div class="controls">
+          <div class="switch"
+               data-on="success" 
+               data-off="danger"  
+               data-on-label="<i class='icon-ok icon-white'></i>" 
+               data-off-label="<i class='icon-remove'></i>">
+            <?php echo $this->Form->input('circa', array('label' => false,
+               'hiddenField' => true, 'div' => false, )); ?>        
           </div>
         </div>
-        <div class="control-group">
-          <label class="control-label" for="tags">Palavras-chave</label>
-          <div class="controls">
-            <?php echo $this->Form->input('tags', array('label' => '')); ?>		    
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="incerta">Incerta</label>
+        <div class="controls">
+          <div class="switch"
+               data-on="success" 
+               data-off="danger"  
+               data-on-label="<i class='icon-ok icon-white'></i>" 
+               data-off-label="<i class='icon-remove'></i>">
+            <?php echo $this->Form->input('incerta', array('label' => false, 'hiddenField' => true, 'div' => false)); ?>        
           </div>
         </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="tamanho_obra">Tamanho da obra</label>
+        <div class="controls">
+          <?php echo $this->Form->input('tamanho_obra', array('label' => '')); ?>	
+        </div>	   
+        <label class="control-label" for="aproximado">Aproximado?</label>
+        <div class="controls">          
+          <div class="switch"
+               data-on="success" 
+               data-off="danger"  
+               data-on-label="<i class='icon-ok icon-white'></i>" 
+               data-off-label="<i class='icon-remove'></i>">
+            <?php echo $this->Form->input('aproximado', array('label' => false, 'hiddenField' => true, 'div' => false)); ?>       
+          </div>
+        </div>
+      </div>
+      
+      <!-- Textarea -->
+      <div class="control-group">
+        <label class="control-label" for="descricao">Descrição</label>
+        <div class="controls">                     
+          <?php echo $this->Form->input('descricao', array('label' => '')); ?>		    
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="tags">Palavras-chave</label>
+        <div class="controls">
+          <?php echo $this->Form->input('tags', array('label' => '')); ?>		    
+        </div>
+      </div>
         <div class="control-group">
           <label class="control-label" for="obra_tipos_id">Técnica</label>
           <div class="controls">
@@ -314,5 +358,9 @@
 <?php echo $this->element('addmodal', 
                           array('titulo' => 'Relacionar Obra', 
                                 'form' => 'relacionada')); ?>
+
+<?php echo $this->element('editmodal', 
+                          array('titulo' => 'Editar Relacionamento', 
+                                'form' => 'edit_relacionada')); ?>
 
 <?php $this->Html->script("admin.js", array("inline" => false)); ?>
