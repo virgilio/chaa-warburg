@@ -1,7 +1,11 @@
 <div class="mini-obra img-polaroid" 
      id="box-<?php echo $relacionada['ObrasRelacionada']['id']; ?>">
   <div class="btns-mini-obra">
-    <a href="#"><i class="icon-edit-sign"></i></a>
+    <a href="#edit-relacao" data-toggle="modal" class="relacionada-link-edit"
+       data-id="<?php echo $relacionada['ObrasRelacionada']['id']; ?>"
+       data-descricao="<?php echo $relacionada['ObrasRelacionada']['descricao']; ?>">
+       <i class="icon-edit-sign"></i>
+    </a>
     <?php 
        echo $this->Html->link('<i class="icon-remove"></i>', 
     array('controller' => 'obras_relacionadas', 

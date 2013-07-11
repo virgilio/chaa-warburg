@@ -54,7 +54,7 @@ class ObrasRelacionadasController extends AppController {
         $this->set('obra', $obra);
         $this->set('relacionada', $relacionada);
         $this->set('relacao_id', $this->ObrasRelacionada->id);
-        
+        $this->set('relacao_descricao', $this->request->data['ObrasRelacionada']['descricao']);
         
         $this->autoRender = false;
         $this->layout = 'ajax';
@@ -74,21 +74,24 @@ class ObrasRelacionadasController extends AppController {
  * @param string $id
  * @return void
  */
-  public function admin_edit($id = null) {
-    if (!$this->ObrasRelacionada->exists($id)) {
-      throw new NotFoundException(__('Obra relacionada inválida'));
-    }
+  public function admin_edit() {
     if ($this->request->is('post') || $this->request->is('put')) {
-      if ($this->ObrasRelacionada->save($this->request->data)) {
-        $this->Session->setFlash(__('The obras relacionada has been saved'));
-        $this->redirect(array('action' => 'index'));
-      } else {
-        $this->Session->setFlash(__('The obras relacionada could not be saved. Please, try again.'));
+      $data = $this->request->data;
+      if (!$this->ObrasRelacionada->exists($data['ObrasRelacionada']['id'])) {
+        $this->autoRender = false;
+        $this->layout = 'ajax';
+        return '{"error" : "Relacionamento não encontrado"}';
       }
-    } else {
-      $options = array('conditions' => array('ObrasRelacionada.' . $this->ObrasRelacionada->primaryKey => $id));
-      $this->request->data = $this->ObrasRelacionada->find('first', $options);
-    }
+      if ($this->ObrasRelacionada->save($this->request->data)) {
+        $this->autoRender = false;
+        $this->layout = 'ajax';
+        return '{"success" : "Descrição atualizada", "descricao" : "' . $data['ObrasRelacionada']['descricao'] . '"}';
+      } else {
+        $this->autoRender = false;
+        $this->layout = 'ajax';
+        return '{"error" : "Erro ao atualizar a descrição"}';
+      }
+    } 
   }
 
   /**

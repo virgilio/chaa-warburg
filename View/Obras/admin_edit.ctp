@@ -361,6 +361,6 @@
 
 <?php echo $this->element('editmodal', 
                           array('titulo' => 'Editar Relacionamento', 
-                                'form' => 'edit_relacionada')); ?>
+                                'form' => 'relacao')); ?>
 
 <?php $this->Html->script("admin.js", array("inline" => false)); ?>

@@ -15,6 +15,13 @@ jQuery(document).ready(
             function(e){                
                 deleteButton(e, jQuery(this));
             });
+
+        jQuery(".relacionada-link-edit")
+            .click(
+                function(){
+                    jQuery("#edit-relacao form input#ObrasRelacionadaId").val(jQuery(this).attr('data-id'));
+                    jQuery("#edit-relacao form textarea#ObrasRelacionadaDescricao").val(jQuery(this).attr('data-descricao'));
+                });        
     });
 
 
@@ -26,7 +33,6 @@ var deleteButton =
         }
         return false;
     };
-
 
 var removeRelacionada = 
     function(url, parent){
@@ -88,6 +94,12 @@ var addRelacionada =
                                 function(e){                
                                     deleteButton(e, jQuery(this));
                                 });
+
+                            jQuery("#obras-relacionadas .mini-obra:last-child a.relacionada-link-edit").click(
+                                function(){
+                                    jQuery("#edit-relacao form input#ObrasRelacionadaId").val(jQuery(this).attr('data-id'));
+                                    jQuery("#edit-relacao form textarea#ObrasRelacionadaDescricao").val(jQuery(this).attr('data-descricao'));
+                                });        
                             
                             jQuery("#add-relacionada").modal('hide');
                             jQuery("#ObrasRelacionadaAddForm").each(
@@ -103,24 +115,26 @@ var addRelacionada =
         return false;
     };
 
-var editRelacionada = 
+var editRelacao = 
     function(form) {
         jQuery.ajax({
                         url: form.action,
                         type: form.method,
                         data: jQuery(form).serialize(),
                         success: function (msg) {
-                            console.log(msg);
                             try {
-                                var error = jQuery.parseJSON(msg);
+                                msg = jQuery.parseJSON(msg);
                                 console.log(msg);
                             } catch (x) {
                                 console.log(x);
                             } 
                             
-                            //jQuery("#obras-relacionadas").append(msg);
-                            //jQuery("#select-pais .input_chosen").chosen();
-                            //jQuery("#add-relacionada").modal('hide');
+                            if(typeof msg.success != 'undefined') {
+                                var selector = '.relacionada-link-edit[data-id="' + form[2].value + '"]';
+                                jQuery(selector).attr('data-descricao', msg.descricao);
+                            }
+
+                            jQuery("#edit-relacao").modal('hide');
                         }
                     });
         return false;
