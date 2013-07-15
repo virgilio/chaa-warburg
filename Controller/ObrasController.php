@@ -36,7 +36,7 @@ class ObrasController extends AppController {
   public function admin_index() {
     $this->Obra->recursive = 0;
     $data = $this->request->query;
-
+    $this->paginate['Obra']['order'] = 'Artista.nome asc';
     if($this->request->is('get') && !empty($data) && isset($data['Search']['filter'])){
       if('artista' == $data['Search']['filter']){
         $this->paginate = array(
@@ -93,7 +93,8 @@ class ObrasController extends AppController {
                                                                     'Instituicao.nome LIKE' => '%' . $query . '%',
                                                                     'Iconografia.nome LIKE' => '%' . $query . '%',
                                                                     )
-                                                      )
+                                                      ),
+                                'order' => 'Artista.nome asc',
                                 );
       } else if(isset($data['Search']['type']) && $data['Search']['type'] == 'advanced') {
         $query = $data['Search'];
@@ -173,7 +174,8 @@ class ObrasController extends AppController {
                                 'conditions' => array(
                                                       'OR' => $or,
                                                       'AND' => $and
-                                                      )
+                                                      ),
+                                'order' => 'Artista.nome asc',
                                 );
       } else {
         $this->Session->setFlash(__('Busca inválida'));
@@ -522,7 +524,7 @@ class ObrasController extends AppController {
    * @param string $id
    * @return void
    */
-  public function delete($id = null) {
+  public function admin_delete($id = null) {
     $this->Obra->id = $id;
     if (!$this->Obra->exists()) {
       throw new NotFoundException(__('Obra inválida'));
