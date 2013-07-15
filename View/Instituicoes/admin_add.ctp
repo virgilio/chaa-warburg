@@ -13,8 +13,8 @@
       <div class="controls">
         <span id="select-cidade">
           <?php echo $this->Form->input('cidade_id',
-          array('label' => '', 'class' => 'input_chosen', 'data-placeholder' =>
-          'Selecione a cidade')); ?>
+          array('label' => '', 'class' => 'input_chosen', 'empty' => true,
+          'data-placeholder' => 'Selecione a cidade')); ?>
         </span>
       </div>
       <a href="#add-cidade" role="button" class="btn btn-info offset2"

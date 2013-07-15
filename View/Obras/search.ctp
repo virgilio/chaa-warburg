@@ -1,6 +1,15 @@
 <?php echo $this->element('buscas'); ?>
 <div class="obras index">
     <h1><?php echo __('Lista de obras'); ?></h1>
+  <div class="span12 clearfix">
+    <p style="float: left;">Ordenar por: </p>
+    <ul class="unstyled inline clearfix">
+      <li><?php echo $this->Paginator->sort('Obra.nome', 'Nome da Obra'); ?> | </li>
+      <li><?php echo $this->Paginator->sort('Artista.nome', 'Autor'); ?> | </li>
+      <li><?php echo $this->Paginator->sort('Obra.ano_fim', 'Ano de conclusão'); ?></li>
+    </ul>
+  </div>
+
     <?php foreach ($obras as $obra): ?>
         <div class="mini-obra">
             <?php 
@@ -18,8 +27,14 @@
                 ?>
             </p>
             <p class="nome-artista">
-                <?php echo $this->Html->link($obra['Artista']['nome'], array('controller' => 'artistas', 'action' => 'view', $obra['Artista']['id'])); ?>
-                (<?php echo h($obra['Obra']['ano_fim']); ?>)
+                <?php echo $this->Html->link($obra['Artista']['nome'],
+                array('controller' => 'artistas', 'action' => 'view',
+                $obra['Artista']['id'])); ?>
+                (<?php 
+                    if(!empty($obra['Obra']['ano_inicio'])) {
+                      echo $obra['Obra']['ano_inicio'] ?>
+                - 
+                      <?php } ?><?php echo h($obra['Obra']['ano_fim']); ?>)
             </p>
             
         </div>

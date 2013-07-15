@@ -8,7 +8,7 @@ jQuery(document).ready(
                 jQuery(this).tab('show');
             });
         
-        jQuery('.input_chosen').chosen();
+        jQuery('.input_chosen').chosen({allow_single_deselect: true});
         
         jQuery('.carousel').carousel();
 

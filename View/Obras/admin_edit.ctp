@@ -100,14 +100,14 @@
       <div class="control-group">
         <label class="control-label" for="nome">Nome da obra</label>
         <div class="controls">
-          <?php echo $this->Form->input('nome', array('class'=>'input-xlarge','label' => '')); ?>		    
+          <?php echo $this->Form->input('nome', array('type' => 'textarea', 'class'=>'input-xlarge','label' => '')); ?>		    
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="artista_id">Artista</label>
         <div class="controls">
           <?php echo $this->Form->input('artista_id',
-          array('label' => '', 'class' => 'input_chosen', 'data-placeholder' => 'Selecione o artista')); ?>
+          array('label' => false, 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder' => 'Selecione o artista')); ?>
         </div>
       </div>
       <fieldset class="clearfix row-fluid">
@@ -228,7 +228,7 @@
           <div class="controls">
             <span id="select-obratipo">
               <?php echo $this->Form->input('obra_tipos_id',
-              array('label' => '', 'class' => 'input_chosen', 'data-placeholder'
+              array('label' => '', 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder'
               => 'Selecione o tipo de obra')); ?>
             </span>
             <ul class="unstyled inline pull-right">
@@ -245,7 +245,7 @@
           <div class="controls">
             <span id="select-instituicao" >
               <?php echo $this->Form->input('instituicao_id',
-              array('label' => '', 'class' => 'input_chosen', 'data-placeholder'
+              array('label' => '', 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder'
               => 'Selecione a Instituição')); ?>
             </span>
             <ul class="unstyled inline pull-right">
@@ -270,7 +270,7 @@
           <div class="controls">
             <span id="select-iconografia">
               <?php echo $this->Form->input('iconografia_id', 
-              array('label' => '', 'class' => 'input_chosen', 'data-placeholder'
+              array('label' => '', 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder'
               => 'Selecione a iconografia')); ?>
             </span>
             <ul class="unstyled inline pull-right">
@@ -297,13 +297,13 @@
             echo $this->Form->input('imagem_url', array('type' => 'hidden',
             'value' => Router::url(array('admin' => false, 'controller' => '', 'action'
             => 'img'))));
-            echo $this->Form->input('relacionadas', array('label' => '',
+            echo $this->Form->input('relacionadas', array('label' => false,
             'type' => 'select', 'options' => $relacionadas,'data-placeholder' => 'Selecione a obra', 
             'empty'  => true, 'class' => 'input-chosen'));
             ?>
           </div>
           <a href="#add-relacionada" role="button" class="btn  btn-info"
-             data-toggle="modal">Adicionar</a>
+             data-toggle="modal">Adicionar descrição</a>
         </div>
         <div class="span3 thumbs-relacionadas">
           <label>Imagem principal</label>

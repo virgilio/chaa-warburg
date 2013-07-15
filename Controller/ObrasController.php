@@ -25,6 +25,7 @@ class ObrasController extends AppController {
     if($letter != null){
       $this->paginate['Obra']['conditions'] = array('Obra.nome REGEXP' => '^' . $letter);
     }
+    $this->paginate['Obra']['order'] = 'Artista.nome asc';
     $this->set('obras', $this->paginate());
     $obraTipos = $this->Obra->ObraTipo->find('list');
     $iconografias = $this->Obra->Iconografia->find('list');
@@ -86,6 +87,7 @@ class ObrasController extends AppController {
                                                                     'Artista.nome LIKE' => '%' . $query . '%',
                                                                     'Obra.nome LIKE' => '%' . $query . '%',
                                                                     'Obra.descricao LIKE' => '%' . $query . '%',
+                                                                    'Obra.tags LIKE' => '%' . $query . '%',
                                                                     'Obra.ano_inicio LIKE' => '%' . $query . '%',
                                                                     'Obra.ano_fim LIKE' => '%' . $query . '%',
                                                                     'Instituicao.nome LIKE' => '%' . $query . '%',
@@ -471,6 +473,8 @@ class ObrasController extends AppController {
     $iconografias = $this->Obra->Iconografia->find('list');
     
     $relacionadas = $this->Obra->Relacionada->find('list');
+
+
     foreach($result['Relacionada'] as $rel){
       unset($relacionadas[$rel['id']]);
     }

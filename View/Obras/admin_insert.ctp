@@ -7,9 +7,20 @@
 ?>
 
 <ul class="nav nav-tabs" id="step-bar">
-  <li><a href="#home" data-toggle="tab"><i class="icon-picture"></i> Imagem <i class="icon-caret-right"></i></a></li>
-  <li><a href="#profile" class="disabled" data-toggle="tab"><i class="icon-file-text-alt"></i> Informações <i class="icon-caret-right"></i></a></li>
-  <li><a href="#messages"class="disabled" data-toggle="tab"><i class="icon-link"></i> Imagens relacionadas</a></li>
+  <li class="active"><a href="#" 
+         data-toggle="tab">
+      <i class="icon-picture"></i> Imagem <i class="icon-caret-right"></i>
+    </a>
+  </li>
+  <li class="disabled"><a href="#" 
+    
+         data-toggle="tab">
+      <i class="icon-file-text-alt"></i>
+      Informações <i class="icon-caret-right"></i>
+    </a>
+  </li>
+  <li class="disabled"><a href="#" 
+         data-toggle="tab"><i class="icon-link"></i> Imagens relacionadas</a></li>
 </ul>
 
 <div class="bbody container insert-img">
@@ -20,7 +31,7 @@
 <!--  <form id="uploadForm" enctype="multipart/form-data" method="post"
         action="/warburg/obras/insert" onsubmit="return checkForm()">
     <!-- hidden crop params -->
-    <?php echo $this->Form->input('nome', array('class'=>'input-xxlarge','label' => 'Nome da imagem')); ?>
+    <?php echo $this->Form->input('nome', array('type' => 'textarea', 'class'=>'input-xxlarge','label' => 'Nome da imagem')); ?>
     <input type="hidden" id="x1" name="data[Thumbnail][x1]" />
     <input type="hidden" id="y1" name="data[Thumbnail][y1]" />
     <input type="hidden" id="x2" name="data[Thumbnail][x2]" />
