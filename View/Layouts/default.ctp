@@ -81,10 +81,14 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 			<?php echo $this->fetch('content'); ?>
 		</div>
-		<div id="footer">
-			
-		</div>
+		<div id="rodape">
+		 © 1994-<?php echo date('Y'); ?> CHAA – Centro de História da Arte e Arqueologia |  
+		 <a href="mailto:martinho@chaa-unicamp.com.br">CONTATO</a> | <?php echo $this->Html->link('SOBRE O SITE',
+					array('controller' => 'pages', 'action' => 'sobre-site'),
+					array('escape' => false)
+						);
+					?>
+    	</div>
 	</div>
-	<?php echo $this->element('sql_dump'); ?>
 </body>
 </html>

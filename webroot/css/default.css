@@ -260,6 +260,22 @@ span.question{
   line-height: 24px;
 }
 
+/* Rodapé */
+
+#rodape {
+  background-color: #333333;
+  color: white;
+  font-size: 14px;
+  padding: 5px 0;
+  margin-bottom: 10px;
+  text-align: center;
+}
+#rodape a{
+  color: #FFF;
+}
+#rodape a:hover{
+  color: #c5c5c5;
+}
 div.obra:hover div {
     display: none;
 }
