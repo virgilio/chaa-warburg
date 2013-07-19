@@ -75,7 +75,8 @@
 }
 
 /*Inser obra*/
-#select-obratipo div, #select-instituicao div, #select-iconografia div{
+#select-obratipo div, #select-instituicao div, 
+#select-iconografia div, #select-artista div {
   display: inline-block;
 }
 

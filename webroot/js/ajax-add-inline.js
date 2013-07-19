@@ -1,3 +1,37 @@
+var addArtista = 
+    function(form) {
+        try {
+            var addForm = jQuery("form#ArtistaAddForm")[0];
+            var oFormData = new FormData(addForm);
+
+            jQuery.ajax({
+                            url: form.action,
+                            data: oFormData,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            type: 'POST',
+                            success: function (msg) {
+                                try {
+                                    var error = jQuery.parseJSON(msg);
+                                    console.log(msg);
+                                    return;
+                                } catch (x) {
+                                    console.log(x.message);
+                                } 
+
+                                jQuery("#select-artista").html(msg);
+                                jQuery("#select-artista .input_chosen").chosen();                            
+                                jQuery("#add-artista").modal('hide');
+                            }
+                        });
+        } catch (x) {
+            console.log(x.message);
+            return false;
+        }
+        return false;
+    };
+
 var addPais = 
     function(form) {
         jQuery.ajax({

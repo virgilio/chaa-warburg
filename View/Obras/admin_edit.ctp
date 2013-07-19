@@ -106,8 +106,17 @@
       <div class="control-group">
         <label class="control-label" for="artista_id">Artista</label>
         <div class="controls">
-          <?php echo $this->Form->input('artista_id',
-          array('label' => false, 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder' => 'Selecione o artista')); ?>
+          <span id="select-artista">
+            <?php echo $this->Form->input('artista_id',
+            array('label' => '', 'class' => 'input_chosen', 'empty'  => true,
+            'data-placeholder' => 'Selecione o artista')); ?>
+          </span>
+          <ul class="unstyled inline pull-right">
+            <li>                
+              <a href="#add-artista" role="button" class="btn btn-info"
+                 data-toggle="modal">Novo Artista</a>
+            </li>
+          </ul>
         </div>
       </div>
       <fieldset class="clearfix row-fluid">
@@ -223,69 +232,70 @@
           <?php echo $this->Form->input('tags', array('label' => '')); ?>		    
         </div>
       </div>
-        <div class="control-group">
-          <label class="control-label" for="obra_tipos_id">Técnica</label>
-          <div class="controls">
-            <span id="select-obratipo">
-              <?php echo $this->Form->input('obra_tipos_id',
-              array('label' => '', 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder'
-              => 'Selecione o tipo de obra')); ?>
-            </span>
-            <ul class="unstyled inline pull-right">
-              <li>
-                <a href="#add-obratipo" role="button" class="btn btn-info"
-                   data-toggle="modal">Nova Técnica</a>
-              </li>
-            </ul>
-          </div>
+      <div class="control-group">
+        <label class="control-label" for="obra_tipos_id">Técnica</label>
+        <div class="controls">
+          <span id="select-obratipo">
+            <?php echo $this->Form->input('obra_tipos_id',
+            array('label' => '', 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder'
+            => 'Selecione o tipo de obra')); ?>
+          </span>
+          <ul class="unstyled inline pull-right">
+            <li>
+              <a href="#add-obratipo" role="button" class="btn btn-info"
+                 data-toggle="modal">Nova Técnica</a>
+            </li>
+          </ul>
         </div>
-        
-        <div class="control-group">
-          <label class="control-label" for="instituicao_id">Instituição</label>
-          <div class="controls">
-            <span id="select-instituicao" >
-              <?php echo $this->Form->input('instituicao_id',
-              array('label' => '', 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder'
-              => 'Selecione a Instituição')); ?>
-            </span>
-            <ul class="unstyled inline pull-right">
-              <li>
-                <a href="#add-instituicao" role="button" class="btn btn-info"
-                   data-toggle="modal">Nova Instituição</a>
-              </li>
-              <li>
-                <a href="#add-cidade" role="button" class="btn btn-info"
-                   data-toggle="modal">Nova cidade</a>
-              </li>
-              <li>
-                <a href="#add-pais" role="button" class="btn btn-info"
-                   data-toggle="modal">Novo país</a>
-              </li>
-            </ul>
-          </div>
+      </div>
+      
+      <div class="control-group">
+        <label class="control-label" for="instituicao_id">Instituição</label>
+        <div class="controls">
+          <span id="select-instituicao" >
+            <?php echo $this->Form->input('instituicao_id',
+            array('label' => '', 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder'
+            => 'Selecione a Instituição')); ?>
+          </span>
+          <ul class="unstyled inline pull-right">
+            <li>
+              <a href="#add-instituicao" role="button" class="btn btn-info"
+                 data-toggle="modal">Nova Instituição</a>
+            </li>
+            <li>
+              <a href="#add-cidade" role="button" class="btn btn-info"
+                 data-toggle="modal">Nova cidade</a>
+            </li>
+            <li>
+              <a href="#add-pais" role="button" class="btn btn-info"
+                 data-toggle="modal">Novo país</a>
+            </li>
+          </ul>
         </div>
-        
-        <div class="control-group">
-          <label class="control-label" for="tags">Iconografia</label>
-          <div class="controls">
-            <span id="select-iconografia">
-              <?php echo $this->Form->input('iconografia_id', 
-              array('label' => '', 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder'
-              => 'Selecione a iconografia')); ?>
-            </span>
-            <ul class="unstyled inline pull-right">
-              <li>                
-                <a href="#add-iconografia" role="button" class="btn btn-info"
-                   data-toggle="modal">Nova Iconografia</a>
-              </li>
-            </ul>
-          </div>
-      </fieldset>
-    </div>
-    <!-- Fim step2 -->
-
-    <!-- Início step3 -->
-    <div id="edit-img-step3" class="tab-pane">
+      </div>
+      
+      <div class="control-group">
+        <label class="control-label" for="tags">Iconografia</label>
+        <div class="controls">
+          <span id="select-iconografia">
+            <?php echo $this->Form->input('iconografia_id', 
+            array('label' => '', 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder'
+            => 'Selecione a iconografia')); ?>
+          </span>
+          <ul class="unstyled inline pull-right">
+            <li>                
+              <a href="#add-iconografia" role="button" class="btn btn-info"
+                 data-toggle="modal">Nova Iconografia</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+  <!-- Fim step2 -->
+  
+  <!-- Início step3 -->
+  <div id="edit-img-step3" class="tab-pane">
       <div class="row-fluid">
         <div class="span6">
           <h3>Adicionar imagem relacionada</h3>
@@ -358,6 +368,10 @@
 <?php echo $this->element('addmodal', 
                           array('titulo' => 'Relacionar Obra', 
                                 'form' => 'relacionada')); ?>
+
+<?php echo $this->element('addmodal', 
+                          array('titulo' => 'Adicionar Artista', 
+                                'form' => 'artista')); ?>
 
 <?php echo $this->element('editmodal', 
                           array('titulo' => 'Editar Relacionamento', 

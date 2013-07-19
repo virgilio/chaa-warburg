@@ -70,6 +70,8 @@ class ObrasController extends AppController {
     $this->Obra->recursive = 0;
     $data = $this->request->query;
     
+    //die(pr($this->passedArgs));
+
     if($this->request->is('get') && !empty($data)) {
       if(isset($data['Search']['type']) && $data['Search']['type'] == 'fast'){
         $query = $data['Search']['query'];
@@ -382,10 +384,12 @@ class ObrasController extends AppController {
       }
       
       if(!empty($this->request->data['Obra']['ano_inicio'])){
-        $this->request->data['Obra']['ano_inicio'] = $this->request->data['Obra']['ano_inicio'] * $this->request->data['Obra']['ano_inicio_signal'];
+        $this->request->data['Obra']['ano_inicio'] = 
+          $this->request->data['Obra']['ano_inicio'] * $this->request->data['Obra']['ano_inicio_signal'];
       }
       if(!empty($this->request->data['Obra']['ano_fim'])){
-        $this->request->data['Obra']['ano_fim'] = $this->request->data['Obra']['ano_fim'] * $this->request->data['Obra']['ano_fim_signal'];
+        $this->request->data['Obra']['ano_fim'] = 
+          $this->request->data['Obra']['ano_fim'] * $this->request->data['Obra']['ano_fim_signal'];
       }
       
       if ($this->Obra->save($this->request->data)) {

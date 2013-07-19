@@ -45,7 +45,7 @@ var loadPreview = function(){
                                                     validNumber($('#x2').val()), 
                                                     validNumber($('#y2').val()) 
                                                 ]);
-                            console.log(jcrop_api.tellSelect());
+                            //console.log(jcrop_api.tellSelect());
                         });
 };
 
