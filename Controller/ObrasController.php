@@ -478,7 +478,15 @@ class ObrasController extends AppController {
     $artistas = $this->Obra->Artista->find('list');
     $iconografias = $this->Obra->Iconografia->find('list');
     
-    $relacionadas = $this->Obra->Relacionada->find('list');
+    $this->Obra->Relacionada->Behaviors->load('Containable');
+    $relacionadas = $this->Obra->Relacionada->find('list', array(
+                                                                 'fields' => array(
+                                                                                   'Relacionada.id', 
+                                                                                   'Relacionada.nome', 
+                                                                                   'Artista.nome'
+                                                                                   ),
+                                                                 'contain' => array('Artista'),
+                                                                 ));
 
 
     foreach($result['Relacionada'] as $rel){
