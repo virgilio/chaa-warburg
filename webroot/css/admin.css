@@ -146,3 +146,7 @@
     cursor: pointer;
 }
 
+div#add-artista.modal {
+    width: 900px;
+    margin-left: -450px;
+}

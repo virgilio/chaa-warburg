@@ -45,19 +45,22 @@
        }
        ?>
     <div class="mini-obra-related <?php echo ($i%4 == 0) ? 'clear-miniobra':''; ?>">
-      <a class="fancybox" 
+      <a class="fancybox tooltip-helper" 
          href="#img_<?php echo $relacionada['id'] ?>" 
+         data-toggle="tootip"
+         title="Clique para comparar imagens"
          data-fancybox-group="gallery">
         <?php echo $this->Html->image('obras/'.$relacionada['imagem']); ?>
       </a>
       
       <div id="img_<?php echo $relacionada['id'] ?>" style="display: none;" class="modal_relacionadas">
         <div class="obra">
-          <p><?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']), array('alt' => '', 'border' => '0')); ?></p>
+          <p><?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']),
+          array('alt' => '', 'border' => '0',)); ?></p>
           <p><?php echo $obra['Artista']['nome']; ?> (<?php echo h($obra['Obra']['ano_fim']); ?>)</p>
           <p><?php echo $obra['Obra']['nome']; ?></p>
         </div>
-        <div class="obra">
+        <div class="obra pull-left">
           <?php echo $this->Html->image('obras/'.$relacionada['imagem']) ?>
           <p><?php echo $relacionada['Artista']['nome']; ?> (<?php echo h($relacionada['ano_fim']); ?>)</p>
           <p>
@@ -67,9 +70,7 @@
             array('escape'=>false)); 
             ?>
           </p>
-          <div class="clearfix" style="color: #000; position: absolute; max-width: 30%; top: 30px;
-                                       right: 0; background-color: #fff; opacity: 0.8; padding: 5px 10px;
-                                       border-radius: 5px;">
+          <div class="clearfix" style="">
             <h5> Relação proposta por: 
               <?php echo $user['nome']; ?>
             </h5>
@@ -84,11 +85,19 @@
         <?php echo $this->Html->link(
         h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
         array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
-        array('escape'=>false)); 
+        array('escape' => false, 'class' => 'tooltip-helper', 
+              'title' => ('Ir para imagem <span>' . $relacionada['nome'] . '</span>'),
+              'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 
+              'target' => '_blank')); 
         ?>
       </p>
       <p class="nome-artista">
-        <?php echo $this->Html->link($relacionada['Artista']['nome'], array('controller' => 'artistas', 'action' => 'view', $relacionada['Artista']['id'])); ?>
+        <?php echo $this->Html->link($relacionada['Artista']['nome'],
+        array('controller' => 'artistas', 'action' => 'view',
+        $relacionada['Artista']['id']), 
+        array('escape' => false,
+              'title' => ('Ir para perfil do autor'),
+              'target' => '_blank')); ?>
         (<?php echo h($relacionada['ano_fim']); ?>)
       </p>
     </div>

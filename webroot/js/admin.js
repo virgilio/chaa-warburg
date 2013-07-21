@@ -8,9 +8,15 @@ jQuery(document).ready(
         jQuery('.typeahead').typeahead();
     });
 
-bkLib.onDomLoaded(function(){
-  var myEditor = new nicEditor({fullPanel : true }).panelInstance('ObraDescricao');
-  /*myEditor.addEvent('add', function() {
-    alert( myEditor.instanceById('ObraDescricao').getContent() );
-  });*/
-});
+bkLib.onDomLoaded(
+    function(){
+        var myEditor = new nicEditor({fullPanel : true })
+            .panelInstance('ObraDescricao')
+            .panelInstance('ArtistaBiografia');
+
+
+        myEditor.addEvent('blur', 
+                          function() {
+                              myEditor.instanceById('ArtistaBiografia').saveContent();
+                          });
+    });

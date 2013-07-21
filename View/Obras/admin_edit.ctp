@@ -223,13 +223,13 @@
       <div class="control-group">
         <label class="control-label" for="descricao">Descrição</label>
         <div class="controls">                     
-          <?php echo $this->Form->input('descricao', array('label' => '')); ?>		    
+          <?php echo $this->Form->input('descricao', array('label' => false)); ?>		    
         </div>
       </div>
       <div class="control-group">
         <label class="control-label" for="tags">Palavras-chave</label>
         <div class="controls">
-          <?php echo $this->Form->input('tags', array('label' => '')); ?>		    
+          <?php echo $this->Form->input('tags', array('label' => false)); ?>		    
         </div>
       </div>
       <div class="control-group">

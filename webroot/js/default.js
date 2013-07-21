@@ -2,6 +2,8 @@ jQuery(document).ready(
     function() {
         jQuery('.fancybox').fancybox();
         
+        jQuery(".tooltip-helper").tooltip({html : true});
+        
         jQuery('#tab_buscas a').click(
             function (e) {
                 e.preventDefault();
@@ -110,4 +112,4 @@ function acdc (value){
 
 var acdcChanger = function (){
     
-}
+};

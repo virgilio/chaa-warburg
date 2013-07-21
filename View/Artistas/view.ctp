@@ -1,11 +1,12 @@
-<div class="artistas view">
-	<h2><?php echo h($artista['Artista']['nome']); ?></h2>
-	<div class="img_artista">
-		<?php echo $this->Html->image('artistas/'.$artista['Artista']['imagem']); ?>
-	</div>
-	<div class="desc_artista">
-		<?php echo $artista['Artista']['biografia']; ?>
-	</div>
+<div class="artistas row-fluid">
+  <h2><?php echo h($artista['Artista']['nome']); ?></h2>
+  <div class="img_artista" >
+    <?php echo $this->Html->image('artistas/'.$artista['Artista']['imagem'],
+    array("style" => "max-width: 300px;")); ?>
+  </div>
+  <div class="desc_artista">
+    <?php echo $artista['Artista']['biografia']; ?>
+  </div>
 </div>
 
 <div class="related">
@@ -15,12 +16,15 @@
 		$i = 0;
 		foreach ($artista['Obra'] as $obra): ?>
 		<div class="mini-obra">
-			<a class="fancybox" href="#img_<?php echo $obra['id'] ?>" data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$obra['id'].'_thumb.jpg'); ?>
-            </a>
+		  <a class="fancybox" 
+                     href="#img_<?php echo $obra['id'] ?>" 
+                     data-fancybox-group="gallery">
+                    <?php echo $this->Html->image('obras/thumbs/' . $obra['imagem']); ?>
+                  </a>
 
             <div id="img_<?php echo $obra['id'] ?>" style="display: none;" class="modal_obra">
                 <div>
-                    <p><?php echo $this->Html->image(('obras/'.$obra['imagem']), array('alt' => 'oie', 'border' => '0')); ?></p>
+                    <p><?php echo $this->Html->image(('obras/'.$obra['imagem']), array('alt' => '', 'border' => '0')); ?></p>
                     <p><?php echo $artista['Artista']['nome']; ?> (<?php echo h($obra['ano_fim']); ?>)</p>
                     <p><?php echo $obra['nome']; ?></p>
                 </div>

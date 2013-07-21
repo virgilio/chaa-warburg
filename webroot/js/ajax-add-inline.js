@@ -52,6 +52,11 @@ var addPais =
                             jQuery("#select-pais").html(msg);
                             jQuery("#select-pais .input_chosen").chosen();                            
                             jQuery("#add-pais").modal('hide');
+                            
+                            jQuery("#ArtistaAddForm").each(
+                                function(){
+                                    this.reset();
+                                });
                         }
                     });
         return false;
