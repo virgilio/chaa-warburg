@@ -196,7 +196,7 @@ h2.nome_obra{
   color: #222;
 }
 .artistas h2{
-  padding: 10px;
+  padding: 0 10px;
   color: #444;
 }
 .img_artista{
@@ -207,6 +207,7 @@ h2.nome_obra{
   border-radius: 2px;
   margin: 10px;
   box-shadow: 2px 2px 8px #ccc;
+  max-width: 250px;
 }
 .desc_artista{
   line-height: 25px;
