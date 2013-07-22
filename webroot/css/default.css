@@ -256,7 +256,7 @@ span.question{
   font-style: italic;
   font-size: 18px;
 }
-.sobre-busca h1{
+.sobre-busca h1, .sobre-site h1{
   font-size: 20px;
   color: #900;
   line-height: 20px;
@@ -274,7 +274,9 @@ span.question{
   font-size: 16px;
   line-height: 24px;
 }
-
+.sobre-site{
+  padding: 0 30px;
+}
 /* Rodapé */
 
 #rodape {
