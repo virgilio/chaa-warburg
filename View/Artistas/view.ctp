@@ -2,7 +2,7 @@
   <h2><?php echo h($artista['Artista']['nome']); ?></h2>
   <div class="img_artista" >
     <?php echo $this->Html->image('artistas/'.$artista['Artista']['imagem'],
-    array("style" => "max-width: 300px;")); ?>
+    array("style" => "max-with: 300px; min-width: 250px;")); ?>
   </div>
   <div class="desc_artista">
     <?php echo $artista['Artista']['biografia']; ?>

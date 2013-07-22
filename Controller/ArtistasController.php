@@ -48,8 +48,13 @@ class ArtistasController extends AppController {
   public function admin_add() {
     if ($this->request->is('post')) {
       $data = $this->request->data;
-      $data['Artista']['imagem'] =  $this->processFile($data['Artista']['imagem']);
       
+      if(isset($data['Artista']['imagem']) && $data['Artista']['imagem']['error'] != 4){
+        $data['Artista']['imagem'] =  $this->processFile($data['Artista']['imagem']);
+      } else {
+        unset($data['Artista']['imagem']);
+      }
+
       $this->Artista->create();
       
       if ($this->Artista->save($data)) {
