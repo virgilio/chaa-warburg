@@ -1,12 +1,12 @@
-<div class="artistas row-fluid">
-  <h2><?php echo h($artista['Artista']['nome']); ?></h2>
-  <div class="img_artista" >
-    <?php echo $this->Html->image('artistas/'.$artista['Artista']['imagem'],
-    array("style" => "max-with: 300px; min-width: 250px;")); ?>
-  </div>
-  <div class="desc_artista">
-    <?php echo $artista['Artista']['biografia']; ?>
-  </div>
+<div class="artistas view">
+	<h2><?php echo h($artista['Artista']['nome']); ?></h2>
+	<div class="img_artista">
+		<?php echo $this->Html->image('artistas/'.(is_null($artista['Artista']['imagem']) ? 'semthumb.jpg' : $artista['Artista']['imagem'])); 
+        ?>
+	</div>
+	<div class="desc_artista">
+		<?php echo $artista['Artista']['biografia']; ?>
+	</div>
 </div>
 
 <div class="related">
