@@ -11,11 +11,21 @@
             <?php echo $this->Html->link($obra['Artista']['nome'], array('controller' => 'artistas', 'action' => 'view', $obra['Artista']['id'])); ?>
         </p>
         <p>
-            <?php echo $obra['ObraTipo']['nome']; ?> |
-            <?php echo h($obra['Obra']['ano_fim']); ?>
+            <?php echo($obra['ObraTipo']['nome']) ? $obra['ObraTipo']['nome'] . ' |' : ''; ?>
+            <?php 
+              if(h($obra['Obra']['incerta']) == 1) {
+                echo '(data incerta)';
+              } else {
+                echo '(';
+                echo (h($obra['Obra']['circa']) == 1) ? 'Circa ' : ''; 
+                echo (h($obra['Obra']['ano_inicio']) != 0) ? h($obra['Obra']['ano_inicio']) . ' - ': ''; 
+                echo h($obra['Obra']['ano_fim']); 
+                echo ')';
+              }             
+            ?>
         </p>
         <p>
-            <?php echo $obra['Instituicao']['nome']; ?> |
+            <?php echo ($obra['Instituicao']['nome']) ? $obra['Instituicao']['nome'] . ' |' : ''; ?>
             <?php echo isset($obra['Instituicao']['Cidade']['nome'])?$obra['Instituicao']['Cidade']['nome']. ' - ' :'Local indefinido'; ?> 
             <?php echo isset($obra['Instituicao']['Cidade']['Pais']['nome'])?$obra['Instituicao']['Cidade']['Pais']['nome']:''; ?>
         </p>

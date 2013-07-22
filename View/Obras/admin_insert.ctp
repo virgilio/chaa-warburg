@@ -7,21 +7,23 @@
 ?>
 
 <ul class="nav nav-tabs" id="step-bar">
-  <li class="active"><a href="#" 
-         data-toggle="tab">
-      <i class="icon-picture"></i> Imagem <i class="icon-caret-right"></i>
+  <li class="active">
+    <a href="#edit-img-step1">
+      <i class="icon-picture"></i> Imagem 
     </a>
   </li>
-  <li class="disabled"><a href="#" 
-    
-         data-toggle="tab">
-      <i class="icon-file-text-alt"></i>
-      Informações <i class="icon-caret-right"></i>
+  <li class="disabled">
+    <a href="#">
+      <i class="icon-file-text-alt"></i> Informações 
     </a>
   </li>
-  <li class="disabled"><a href="#" 
-         data-toggle="tab"><i class="icon-link"></i> Imagens relacionadas</a></li>
+  <li class="disabled">
+    <a href="#">
+      <i class="icon-link"></i> Imagens relacionadas
+    </a>
+  </li>
 </ul>
+
 
 <div class="bbody container insert-img">
 
@@ -47,7 +49,7 @@
       <h4>Selecione o Thumbnailnail desejado</h4>
       <div class="container">
         <div class="span8 offset2">
-          <img id="preview" />
+          <?php echo $this->Html->image('semthumb.jpg', array('id' => 'preview', 'class' => 'img-polaroid'));?>
         </div>
       </div>
       <input type="hidden" id="filesize" name="data[Thumbnail][filesize]" />
