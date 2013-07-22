@@ -129,7 +129,11 @@ class AppController extends Controller {
     $ano_max = $this->Obra->query('select max(ano_fim) from obras');
     $this->set('ano_max', $ano_max[0][0]["max(ano_fim)"]);
 
-    $letters = $this->Obra->query('SELECT DISTINCT SUBSTRING(`nome`, 1, 1) FROM `obras` ORDER BY `nome`');
+    if(isset($this->passedArgs['sort']) && 'Artista.nome' == $this->passedArgs['sort']){
+      $letters = $this->Obra->query('SELECT DISTINCT SUBSTRING(`nome`, 1, 1) FROM `artistas` ORDER BY `nome`');
+    } else {
+      $letters = $this->Obra->query('SELECT DISTINCT SUBSTRING(`nome`, 1, 1) FROM `obras` ORDER BY `nome`');
+    }
     $links = array();
     foreach ($letters as $row) {
       array_push($links, current($row[0]));

@@ -193,8 +193,12 @@ $this->request->query['Search']['type'] : 'fast'; ?>
       <ul class="unstyled inline">
         <?php foreach($letters as $letter){ ?>
         <li>
-          <?php echo $this->Html->link($letter, array($letter, '?' =>
-          (!empty($this->request->query) ? $this->request->query : ''))); ?>
+          <?php echo $this->Html->link(strtoupper($letter), 
+          array_merge(
+            array($letter, 
+                  '?' => (!empty($this->request->query) ? $this->request->query : '')),
+            $this->request->named));
+          ?>
         </li>  
         <?php }?>
         <li>

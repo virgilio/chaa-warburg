@@ -22,9 +22,15 @@ class ObrasController extends AppController {
     parent::searchDataLoader();
 
     $this->Obra->recursive = 0;
+
     if($letter != null){
-      $this->paginate['Obra']['conditions'] = array('Obra.nome REGEXP' => '^' . $letter);
+      if(isset($this->passedArgs['sort']) && 'Artista.nome' == $this->passedArgs['sort']){
+        $this->paginate['Obra']['conditions'] = array('Artista.nome REGEXP' => '^' . $letter);
+      } else {
+        $this->paginate['Obra']['conditions'] = array('Obra.nome REGEXP' => '^' . $letter);
+      }
     }
+
     $this->paginate['Obra']['order'] = 'Artista.nome asc';
     $this->set('obras', $this->paginate());
     $obraTipos = $this->Obra->ObraTipo->find('list');
@@ -70,11 +76,17 @@ class ObrasController extends AppController {
     $this->Obra->recursive = 0;
     $data = $this->request->query;
     
-    //die(pr($this->passedArgs));
-
     if($this->request->is('get') && !empty($data)) {
       if(isset($data['Search']['type']) && $data['Search']['type'] == 'fast'){
         $query = $data['Search']['query'];
+        $and = array();
+        if($letter != null){
+          if(isset($this->passedArgs['sort']) && 'Artista.nome' == $this->passedArgs['sort']){
+            $and['Artista.nome REGEXP'] = '^' . $letter;
+          } else {
+            $and['Obra.nome REGEXP'] = '^' . $letter;
+          }
+        }
         $this->paginate = array(
                                 'fields' => array(
                                                   'Obra.id', 
@@ -94,7 +106,8 @@ class ObrasController extends AppController {
                                                                     'Obra.ano_fim LIKE' => '%' . $query . '%',
                                                                     'Instituicao.nome LIKE' => '%' . $query . '%',
                                                                     'Iconografia.nome LIKE' => '%' . $query . '%',
-                                                                    )
+                                                                    ),
+                                                      'AND' => $and,
                                                       ),
                                 'order' => 'Artista.nome asc',
                                 );
@@ -159,11 +172,15 @@ class ObrasController extends AppController {
           $or['Obra.ano_fim'] = $query['ano'];
           $or['Obra.ano_inicio'] = $query['ano'];
         }
-
+        
         if($letter != null){
-          $and['Obra.nome REGEXP'] = '^' . $letter;
+          if(isset($this->passedArgs['sort']) && 'Artista.nome' == $this->passedArgs['sort']){
+            $and['Artista.nome REGEXP'] = '^' . $letter;
+          } else {
+            $and['Obra.nome REGEXP'] = '^' . $letter;
+          }
         }
-
+        
         $this->paginate = array(
                                 'fields' => array(
                                                   'Obra.id', 
