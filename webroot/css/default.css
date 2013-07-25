@@ -9,6 +9,13 @@
   box-sizing: border-box;         /* Opera/IE 8+ */
 }
 /* Fim do mini reset */
+html { height: 100%; }
+
+body {
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+}
 body{
   background: url('../img/fundo.gif') 0 0 repeat fixed;
   font-family: 'Average', serif;
@@ -181,11 +188,44 @@ h2.nome_obra{
   width: 50%;
   /*padding: 10px;*/
   text-align: center;
+  height: 100%;
 }
-.obra img, .modal_obra img{
-    max-width: 90%;
-    max-height: 85%;
+.modal_relacionadas{
+  height: 100%;
+  width: 100%;
 }
+.modal-img{
+  /* For general browser */
+  max-width: 90%;
+  max-height: 88%;
+
+  /* For Firefox browser */
+  -moz-width: 90%;
+  -moz-height:88%;
+
+  /* For Chrome and Safari browser */
+  -webkit-width: 90%;
+  -webkit-height:88%;
+
+  /* For Opera browser */
+  -o-width: 90%;
+  -o-height:88%;
+
+  overflow: hidden;
+}
+
+.modal-img img{
+  max-height: 100%;
+  max-width: 100%;
+
+  height: 100%;
+} 
+/*
+.modal-img img, .obra img, .modal_obra img {
+  max-height: 100%;
+  max-width: 100%;
+} */
+.obra img, .modal_obra img {}
 .clear-miniobra{
   clear: both;
 }
@@ -295,7 +335,7 @@ span.question{
 }
 
 
-div.obra div {
+div.obra div.relacionado-por {
     color: #000; 
     position: absolute; 
     max-width: 30%; 
@@ -308,6 +348,6 @@ div.obra div {
     display: none;
 }
 
-div.obra:hover div {
+div.obra:hover div.relacionado-por {
     display: block;
 }

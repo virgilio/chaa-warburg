@@ -65,13 +65,17 @@
       
       <div id="img_<?php echo $relacionada['id'] ?>" style="display: none;" class="modal_relacionadas">
         <div class="obra">
-          <p><?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']),
-          array('alt' => '', 'border' => '0',)); ?></p>
+          <div class="modal-img">
+            <?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']),
+          array('alt' => '', 'border' => '0',)); ?>
+          </div>
           <p><?php echo $obra['Artista']['nome']; ?> (<?php echo h($obra['Obra']['ano_fim']); ?>)</p>
           <p><?php echo $obra['Obra']['nome']; ?></p>
         </div>
         <div class="obra pull-left">
-          <?php echo $this->Html->image('obras/'.$relacionada['imagem']) ?>
+          <div class="modal-img">
+            <?php echo $this->Html->image('obras/'.$relacionada['imagem']) ?>
+          </div>
           <p><?php echo $relacionada['Artista']['nome']; ?> (<?php echo h($relacionada['ano_fim']); ?>)</p>
           <p>
             <?php echo $this->Html->link(
@@ -80,7 +84,7 @@
             array('escape'=>false)); 
             ?>
           </p>
-          <div class="clearfix" style="">
+          <div class="clearfix relacionado-por" style="">
             <h5> Relação proposta por: 
               <?php echo $user['nome']; ?>
             </h5>
