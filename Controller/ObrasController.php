@@ -290,6 +290,8 @@ class ObrasController extends AppController {
    * @return void
    */
   public function view($id = null) {
+    parent::searchDataLoader();
+
     if (!$this->Obra->exists($id)) {
       throw new NotFoundException(__('Obra não encontrada'));
     }

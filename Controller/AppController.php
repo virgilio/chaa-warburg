@@ -14,11 +14,13 @@
  * For full copyright and license information, please see the LICENSE.txt
  * Redistributions of files must retain the above copyright notice.
  *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
+ * @copyright     Copyright (c) Cake Software Foundation,
+ * Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
  * @package       app.Controller
  * @since         CakePHP(tm) v 0.2.9
- * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+ * @license       MIT License
+ * (http://www.opensource.org/licenses/mit-license.php) 
  */
 App::uses('Controller', 'Controller');
 App::uses('AuthComponent', 'Controller/Component');
@@ -30,30 +32,47 @@ App::uses('AuthComponent', 'Controller/Component');
  * will inherit them.
  *
  * @package		app.Controller
- * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
+ * @link
+ * http://book.cakephp.org/2.0/en/controllers.html#the-app-controller 
  */
 class AppController extends Controller {
 
-  public $components = array(
-                             'Session',
-                             'Auth' => array(
-                                             'loginAction' => array('prefix' => false, 'admin' => false, 'controller' => 'users', 'action' => 'login'),
-                                             'loginRedirect' => array('controller' => 'obras', 'action' => 'index', 
-                                              'admin' => true,
-                                              'prefix' => 'admin'),
-                                             'logoutRedirect' => array('admin' => false, 'controller' => 'pages', 'action' => 'display', 'home'),
-                                             'authenticate' => array('Form' => array(
-                                                                                     'fields' => array('username' => 'email')
-                                                                                     )
-                                                                     ),
-                                             'authorize' => array('Controller'),
-                                             'authError' => 'Você não está autorizado(a) a entrar aqui.'
-                                             ),
-                             );
+  public $components = 
+    array(
+      'Session',
+      'Auth' => array(
+        'loginAction' => array(
+          'prefix' => false, 
+          'admin' => false, 
+          'controller' => 'users', 
+          'action' => 'login'),
+        'loginRedirect' => array(
+          'controller' => 'obras', 
+          'action' => 'index', 
+          'admin' => true,
+          'prefix' => 'admin'),
+        'logoutRedirect' => array(
+          'admin' => false, 
+          'controller' => 'pages', 
+          'action' => 'display', 
+          'home'),
+        'authenticate' => array(
+          'Form' => array(
+            'fields' => 
+            array(
+              'username' => 'email')
+          )
+        ),
+        'authorize' => array('Controller'),
+        'authError' => 'Você não está autorizado(a) a entrar aqui.'
+      ),
+    );
   
   function beforeFilter() {
-    $this->Auth->allow('index', 'view', 'display', 'search', 'login', 'register');
-    if (isset($this->params['prefix']) && $this->params['prefix'] == 'admin') {
+    $this->Auth->allow('index', 'view', 'display', 
+                       'search', 'login', 'register');
+    if (isset($this->params['prefix']) 
+        && $this->params['prefix'] == 'admin') {
       $this->layout = 'admin';
     } 
     App::import('Model', 'User');
@@ -62,11 +81,11 @@ class AppController extends Controller {
       $this->User->id = $this->Auth->user('id');
       
       User::store(array(
-                        'User' => array_merge(
-                                              $this->Auth->user(), 
-                                              array('password' => $this->User->field('password'))
-                                              )
-                        ));
+        'User' => array_merge(
+          $this->Auth->user(), 
+          array('password' => $this->User->field('password'))
+        )
+      ));
     }    
     $this->set('auth', $this->Auth->user());
   }

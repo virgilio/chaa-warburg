@@ -312,8 +312,8 @@
             'empty'  => true, 'class' => 'input-chosen'));
             ?>
           </div>
-          <a href="#add-relacionada" role="button" class="btn  btn-info"
-             data-toggle="modal">Adicionar descrição</a>
+          <a id="add-relacionada-button" href="#add-relacionada" role="button" class="btn  btn-info"
+             data-toggle="no-modal">Adicionar</a>
         </div>
         <div class="span3 thumbs-relacionadas">
           <label>Imagem principal</label>

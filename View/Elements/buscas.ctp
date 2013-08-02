@@ -169,18 +169,18 @@ $this->request->query['Search']['type'] : 'fast'; ?>
                    }
                  ?>
             </div>
-            <div class="control-group offset7 clearfix">
-              <label class="control-label" for="singlebutton"></label>
-              <div class="controls">
-                <?php echo $this->Form->end(array('label' => 'Buscar', 'id' => 'singlebutton',
-	        'class' => 'btn btn-default')); ?>
-              </div>
-            </div>
           </div>
           <div id="slider-range" class="span10 offset1 clearfix" 
                style="margin-bottom:  20px;"></div>
         </div>
         <!-- Button -->
+        <div class="control-group offset7 clearfix">
+          <label class="control-label" for="singlebutton"></label>
+          <div class="controls">
+            <?php echo $this->Form->end(array('label' => 'Buscar', 'id' => 'singlebutton',
+	    'class' => 'btn btn-default')); ?>
+          </div>
+        </div>
       </fieldset>
       <?php echo $this->Form->end(); ?>
     </div>

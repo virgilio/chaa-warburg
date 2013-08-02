@@ -1,3 +1,4 @@
+<?php echo $this->element('buscas'); ?>
 <h1>Detalhes da obra</h1>
 
 <div class="obra_container">
