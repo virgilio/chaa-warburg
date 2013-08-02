@@ -24,7 +24,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
+		Warburg - Banco Comparativo de Imagens:
 		<?php echo $title_for_layout; ?>
 	</title>
 	<link href='http://fonts.googleapis.com/css?family=Average' rel='stylesheet' type='text/css'>
