@@ -6,6 +6,12 @@ jQuery(document).ready(
                 jQuery(this).tab('show');
             });
         jQuery('.typeahead').typeahead();
+
+
+        $('.postantequam').on('switch-change', function () {
+            $('.postantequam').bootstrapSwitch('toggleRadioStateAllowUncheck', true);
+        });
+
     });
 
 bkLib.onDomLoaded(

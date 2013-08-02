@@ -96,6 +96,8 @@
   <!-- Início step2 -->
   <div id="edit-img-step2" class="tab-pane active">
     <fieldset>
+      
+
       <h3>Informações da obra</h3>
       <div class="control-group">
         <label class="control-label" for="nome">Nome da obra</label>
@@ -119,49 +121,24 @@
           </ul>
         </div>
       </div>
-      <fieldset class="clearfix row-fluid">
-        <div class="control-group span4">
-          <label class="control-label" for="ano_inicio">Ano início</label>
+      <div class="fieldset-data row-fluid">
+        <h4><i class="icon-calendar"></i> Dados de data da obra</h4>
+        <span>(deixe os campos abaixo em branco caso a data seja indeterminada)</span>
+        <div class="control-group span5" id="ObraAnoFimFieldset">
+          <label class="control-label" 
+                 for="ano_fim">Ano da obra</label>
+          
           <div class="controls">
             <div class="input-append">
-              <?php echo $this->Form->input('ano_inicio', array('label' => false,
-              'style' => 'text-align: right;', 'class' => 'input-mini', 'div' => false, 'min' => 0));
-              ?>
-              <span class="add-on acdc" id="ano_inicio_signal">	    
-                <?php echo $this->Form->input('ano_inicio_signal', 
-                array('label' => false, 'hiddenField' => false, 'div' => false, 
-                    'type' => 'hidden', 
-                    'style' => 'display: none;', 
-                    'value' => (isset($this->request->data['Obra']['ano_inicio_signal']) ?
-                                $this->request->data['Obra']['ano_inicio_signal'] : '')));
-                ?>
-                <span id="ano_inicio_signal_label">
-                  <?php 
-                     if(isset($this->request->data['Obra']['ano_inicio_signal']) && $this->request->data['Obra']['ano_inicio_signal'] != 0) {
-                       echo $this->request->data['Obra']['ano_inicio_signal'] == 1 ? 
-                          'd.C' :
-                          'a.C'; 
-                     }
-                  ?>
-                </span>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="control-group span3" id="ObraAnoFimFieldset">
-          <label style="float: left;padding-top: 5px; text-align: right;" 
-                 for="ano_fim">Ano fim</label>
-          <div class="controls" style="margin-left: 65px;">
-            <div class="input-append">
               <?php echo $this->Form->input('ano_fim', array('label' => false,
-              'style' => 'text-align: right;', 'class' =>  'input-mini', 'div' => false, 'min' => 0)); ?>
+              'style' => 'text-align: right;', 'class' =>  'input-mini', 'title' => 'Para data Antes de Cristo coloque o ano em negativo', 'div' => false, 'min' => 0)); ?>
               <span class="add-on acdc" id="ano_fim_signal">
                 <?php echo $this->Form->input('ano_fim_signal', array('label' => false,
                 'hiddenField' => false, 'div' => false, 'type' => 'hidden',
                 'value' => (isset($this->request->data['Obra']['ano_fim_signal']) ?
                 $this->request->data['Obra']['ano_fim_signal'] : ''),
                 'style' => 'display: none;')); ?>
-                <span id="ano_fim_signal_label">
+                <span id="ano_fim_signal_label" title="Clique para alternar entre d.C. e a.C.">
                   <?php 
                    if(isset($this->request->data['Obra']['ano_fim_signal']) && 
                         $this->request->data['Obra']['ano_fim_signal'] != 0) {
@@ -174,34 +151,87 @@
               </span>
             </div>
           </div>
+        
+          <label class="control-label" for="ano_inicio">Ano de início</label>
+          <div class="controls">
+            <div class="input-append">
+              <?php echo $this->Form->input('ano_inicio', array('label' => false,
+              'style' => 'text-align: right;', 'class' => 'input-mini', 'title' => 'Para data Antes de Cristo coloque o ano em negativo', 'div' => false, 'min' => 0));
+              ?>
+              <span class="add-on acdc" id="ano_inicio_signal">	    
+                <?php echo $this->Form->input('ano_inicio_signal', 
+                array('label' => false, 'hiddenField' => false, 'div' => false, 
+                    'type' => 'hidden', 
+                    'style' => 'display: none;', 
+                    'value' => (isset($this->request->data['Obra']['ano_inicio_signal']) ?
+                                $this->request->data['Obra']['ano_inicio_signal'] : '')));
+                ?>
+                <span id="ano_inicio_signal_label" title="Clique para alternar entre d.C. e a.C.">
+                  <?php 
+                     if(isset($this->request->data['Obra']['ano_inicio_signal']) && $this->request->data['Obra']['ano_inicio_signal'] != 0) {
+                       echo $this->request->data['Obra']['ano_inicio_signal'] == 1 ? 
+                          'd.C' :
+                          'a.C'; 
+                     }
+                  ?>
+                </span>
+              </span>
+            </div>
+          </div>       
         </div>
-      </fieldset>
-      <div class="control-group">
-        <label class="control-label" for="circa">Circa</label>
-        <div class="controls">
-          <div class="switch"
-               data-on="success" 
-               data-off="danger"  
-               data-on-label="<i class='icon-ok icon-white'></i>" 
-               data-off-label="<i class='icon-remove'></i>">
-            <?php echo $this->Form->input('circa', array('label' => false,
-               'hiddenField' => true, 'div' => false, )); ?>        
-          </div>
-        </div>
-      </div>
+        <div class="span6">
+          <div class="control-group">
+              <label class="control-label" for="option1">PostQuam (depois de)</label>
+              <div class="controls">
+                <div id="option1" class="make-switch postantequam" 
+                data-on="success" 
+                data-off="danger" 
+                data-on-label="<i class='icon-ok icon-white'></i>" 
+                data-off-label="<i class='icon-remove'></i>">
+                    <input type="radio" name="postantequam" value="option1" />
+                </div>
+              </div>
+              <label class="control-label" for="option2">AnteQuam (antes de)</label>
+              <div class="controls"> 
+                <div id="option2" class="make-switch postantequam" 
+                data-on="success" 
+                data-off="danger" 
+                data-on-label="<i class='icon-ok icon-white'></i>" 
+                data-off-label="<i class='icon-remove'></i>">
+                    <input type="radio" name="postantequam" value="option2"/>
+                </div>
+              </div>
+          </div>            
 
-      <div class="control-group">
-        <label class="control-label" for="incerta">Incerta</label>
-        <div class="controls">
-          <div class="switch"
-               data-on="success" 
-               data-off="danger"  
-               data-on-label="<i class='icon-ok icon-white'></i>" 
-               data-off-label="<i class='icon-remove'></i>">
-            <?php echo $this->Form->input('incerta', array('label' => false, 'hiddenField' => true, 'div' => false)); ?>        
+          <div class="control-group">
+            <label class="control-label" for="circa">Circa</label>
+            <div class="controls">
+              <div class="make-switch"
+                   data-on="success" 
+                   data-off="danger"  
+                   data-on-label="<i class='icon-ok icon-white'></i>" 
+                   data-off-label="<i class='icon-remove'></i>">
+                <?php echo $this->Form->input('circa', array('label' => false,
+                   'hiddenField' => true, 'div' => false, )); ?>        
+              </div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label" for="incerta">Incerta</label>
+            <div class="controls">
+              <div class="make-switch"
+                   data-on="success" 
+                   data-off="danger"  
+                   data-on-label="<i class='icon-ok icon-white'></i>" 
+                   data-off-label="<i class='icon-remove'></i>">
+                <?php echo $this->Form->input('incerta', array('label' => false, 'hiddenField' => true, 'div' => false)); ?>        
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+    </div> <!-- Fim do fieldset de data -->
+
       <div class="control-group">
         <label class="control-label" for="tamanho_obra">Tamanho da obra</label>
         <div class="controls">
@@ -209,7 +239,7 @@
         </div>	   
         <label class="control-label" for="aproximado">Aproximado?</label>
         <div class="controls">          
-          <div class="switch"
+          <div class="make-switch"
                data-on="success" 
                data-off="danger"  
                data-on-label="<i class='icon-ok icon-white'></i>" 
@@ -345,7 +375,6 @@
       </div>
     </div>
   <!-- Fim step3 -->
-  </div>
 </div>
 
 <?php echo $this->Form->end(); ?>

@@ -24,9 +24,10 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 <head>
 	<?php echo $this->Html->charset(); ?>
 	<title>
-		<?php echo $cakeDescription ?>:
+		[Administração] Warburg - Banco Comparativo de Imagens:
 		<?php echo $title_for_layout; ?>
 	</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8;" />
 	<link href='http://fonts.googleapis.com/css?family=Average' rel='stylesheet' type='text/css'>
 	<?php
 		echo $this->Html->meta('icon');
@@ -124,7 +125,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 					?></li>
 					<li><?php echo $this->Html->link(__('Lista de Obras'), array('controller' => 'obras', 'admin' => false, 'action' => 'index')); ?></li>
 					<li><?php echo $this->Html->link('Sobre a busca',
-					'#',
+					array('controller' => 'pages', 'action' => 'sobre-busca', 'admin' => false),
 					array('escape' => false)
 						);
 					?></li>
@@ -140,7 +141,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		<div id="rodape">
 		 © 1994-<?php echo date('Y'); ?> CHAA – Centro de História da Arte e Arqueologia |  
 		 <a href="mailto:martinho@chaa-unicamp.com.br">CONTATO</a> | <?php echo $this->Html->link('SOBRE O SITE',
-					array('controller' => 'pages', 'action' => 'sobre-site'),
+					array('controller' => 'pages', 'action' => 'sobre-site', 'admin' => false),
 					array('escape' => false)
 						);
 					?>
