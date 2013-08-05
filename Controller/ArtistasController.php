@@ -28,6 +28,9 @@ class ArtistasController extends AppController {
     if (!$this->Artista->exists($id)) {
       throw new NotFoundException(__('Artista inválido'));
     }
+    
+    parent::searchDataLoader();
+        
     $options = array('conditions' => array('Artista.' . $this->Artista->primaryKey => $id));
     $this->set('artista', $this->Artista->find('first', $options));
   }
@@ -36,6 +39,7 @@ class ArtistasController extends AppController {
     if (!$this->Artista->exists($id)) {
       throw new NotFoundException(__('Artista inválido'));
     }
+
     $options = array('conditions' => array('Artista.' . $this->Artista->primaryKey => $id));
     $this->set('artista', $this->Artista->find('first', $options));
   }

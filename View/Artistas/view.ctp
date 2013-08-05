@@ -1,3 +1,4 @@
+<?php echo $this->element('buscas'); ?>
 <div class="artistas view">
 	<h2><?php echo h($artista['Artista']['nome']); ?></h2>
 	<div class="img_artista">

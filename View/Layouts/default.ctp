@@ -29,27 +29,30 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	</title>
 	<link href='http://fonts.googleapis.com/css?family=Average' rel='stylesheet' type='text/css'>
 	<?php
-		echo $this->Html->meta('icon');
+          echo $this->Html->meta('icon');
+          
+          echo $this->Html->css("jquery-ui.css");
 
-		echo $this->Html->css('bootstrap.min');
-		echo $this->Html->css('jquery.fancybox');
-		echo $this->Html->css('chosen');
-		echo $this->Html->css('font-awesome/css/font-awesome.min.css');
-		echo $this->Html->css('swinxyzoom/jquery.swinxy-combined.css');
-		echo $this->Html->css('default');
-	
-		echo $this->Html->script('jquery-1.10.1.min.js');
-		echo $this->Html->script('bootstrap.min');
-		echo $this->Html->script('chosen.jquery.min');
-		echo $this->Html->script('fancyBox/source/jquery.fancybox.js?v=2.1.5');
-		echo $this->Html->script('swinxyzoom/jquery.swinxy-combined.min.js');
-		echo $this->Html->script('callswinxy.js');
-		echo $this->Html->script('default');
-
-		echo $this->fetch('meta');
-		echo $this->fetch('css');
-		echo $this->fetch('script');
-
+          echo $this->Html->css('bootstrap.min');
+          echo $this->Html->css('jquery.fancybox');
+          echo $this->Html->css('chosen');
+          echo $this->Html->css('font-awesome/css/font-awesome.min.css');
+          echo $this->Html->css('swinxyzoom/jquery.swinxy-combined.css');
+          echo $this->Html->css('default');
+          
+          echo $this->Html->script('jquery-1.10.1.min.js');
+          echo $this->Html->script("jquery-ui.js"); 
+          echo $this->Html->script('bootstrap.min');
+          echo $this->Html->script('chosen.jquery.min');
+          echo $this->Html->script('fancyBox/source/jquery.fancybox.js?v=2.1.5');
+          echo $this->Html->script('swinxyzoom/jquery.swinxy-combined.min.js');
+          echo $this->Html->script('callswinxy.js');
+          echo $this->Html->script('default');
+          
+          echo $this->fetch('meta');
+          echo $this->fetch('css');
+          echo $this->fetch('script');
+          
 	?>
 </head>
 <body>

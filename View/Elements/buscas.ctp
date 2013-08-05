@@ -1,7 +1,4 @@
-<?php 
-   $this->Html->script("jquery-ui.js", array("inline" => false)); 
-   $this->Html->css("jquery-ui.css", null, array("inline" => false)); 
-?>
+
 <?php $search_type = isset($this->request->query['Search']['type']) ?
 $this->request->query['Search']['type'] : 'fast'; ?>
 <div class="buscas" id="tabs">
@@ -186,7 +183,9 @@ $this->request->query['Search']['type'] : 'fast'; ?>
     </div>
   </div>
 </div>
-<?php if($this->request->params['controller'] == 'obras') { ?>
+<?php if($this->request->params['controller'] == 'obras'
+          && ('search' == $this->request->params['action']
+              || 'index' == $this->request->params['action'])) { ?>
 <div class="container">
   <div class="row-fluid">
     <div class="span10 offset1">
