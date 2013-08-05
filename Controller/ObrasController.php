@@ -388,6 +388,9 @@ class ObrasController extends AppController {
     }
     if ($this->request->is('post') || $this->request->is('put')) {
       $data = $this->request->data;
+      if(!isset($this->request->data['Obra']['ante_post_quam'])) {
+        $this->request->data['Obra']['ante_post_quam'] = NULL;
+      }
       if($this->request->data['Obra']['imagem']['error'] == 0){ //Nova imagem
         $this->request->data['Obra']['imagem'] =  $this->processFile($this->request->data['Obra']['imagem'], 
                                                                      $this->request->data['Thumbnail']);

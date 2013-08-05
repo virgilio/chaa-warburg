@@ -23,12 +23,14 @@ jQuery(document).ready(
             });
         jQuery('#ObraAnoFim').change(
             function(){
-                if(jQuery(this).val() == 0) {
-                    jQuery('#ano_fim_signal_label').text(""); 
-                    jQuery('#ObraAnoFimSignal').val(0);
-                } else if(jQuery('#ObraAnoFimSignal').val() == 0){
-                    jQuery('#ano_fim_signal_label').text("d.C");
-                    jQuery('#ObraAnoFimSignal').val(1);
+                var year = jQuery(this).val();
+                
+                if(year <= 0 ||  jQuery('#ObraAnoFimSignal').val() == 0){
+                    jQuery('#ano_fim_signal_label').text(acdc(jQuery(this).val()));
+                    jQuery('#ObraAnoFimSignal').val(acdcSignal(jQuery(this).val()));
+                    if(year) {
+                        jQuery(this).val(Math.abs(jQuery(this).val()));                        
+                    }
                 }
             });
 
@@ -42,14 +44,17 @@ jQuery(document).ready(
             });
         jQuery('#ObraAnoInicio').change(
             function(){
-                if(jQuery(this).val() == 0) {
-                    jQuery('#ano_inicio_signal_label').text(""); 
-                    jQuery('#ObraAnoInicioSignal').val(0);
-                } else if(jQuery('#ObraAnoInicioSignal').val() == 0){
-                    jQuery('#ano_inicio_signal_label').text("d.C");
-                    jQuery('#ObraAnoInicioSignal').val(1);
+                var year = jQuery(this).val();
+                
+                if(year <= 0 ||  jQuery('#ObraAnoInicioSignal').val() == 0){
+                    jQuery('#ano_inicio_signal_label').text(acdc(jQuery(this).val()));
+                    jQuery('#ObraAnoInicioSignal').val(acdcSignal(jQuery(this).val()));
+                    if(year) {
+                        jQuery(this).val(Math.abs(jQuery(this).val()));                        
+                    }
                 }
-            });
+            }
+        );
         
     });
 
@@ -108,6 +113,10 @@ var loadslider = function (min, max, inicio, fim){
 function acdc (value){
     if(value == 0) return "";
     return value > 0 ? " d.C" : " a.C";
+}
+
+function acdcSignal (value){
+    return value >= 0 ? 1 : -1;
 }
 
 var acdcChanger = function (){
