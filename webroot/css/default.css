@@ -9,7 +9,7 @@
   box-sizing: border-box;         /* Opera/IE 8+ */
 }
 /* Fim do mini reset */
-html { height: 100%; }
+html { height: 100%; min-height: 100%;}
 
 body {
     width: 100%;
@@ -70,6 +70,7 @@ a.lnk_logo{
 #main-menu ul li{
   display: inline-block;
   padding: 0.5em;
+  font-size: 0.8em;
 }
 #main-menu a{
   text-decoration: none;
@@ -211,21 +212,17 @@ h2.nome_obra{
   -o-width: 90%;
   -o-height:88%;
 
-  overflow: hidden;
 }
 
-.modal-img img{
-  max-height: 100%;
-  max-width: 100%;
-
-  height: 100%;
-} 
 /*
 .modal-img img, .obra img, .modal_obra img {
   max-height: 100%;
   max-width: 100%;
 } */
-.obra img, .modal_obra img {}
+.obra img, .modal_obra img {
+  max-height: 100%;
+  max-width: 100%;
+}
 .clear-miniobra{
   clear: both;
 }
@@ -350,4 +347,9 @@ div.obra div.relacionado-por {
 
 div.obra:hover div.relacionado-por {
     display: block;
+}
+
+.teste{
+  max-height: 100%;
+  max-width: 100%;
 }

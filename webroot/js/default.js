@@ -1,7 +1,16 @@
 jQuery(document).ready(
     function() {
-        jQuery('.fancybox').fancybox();
-        
+
+
+        jQuery('.fancybox').fancybox({
+          afterLoad : function(upcoming, current){
+            console.log(upcoming);
+            var altura = upcoming.height * 0.8;
+            jQuery('.obra img, .modal_obra img').css({'max-height' : altura});
+          }
+        });
+
+            
         jQuery(".tooltip-helper").tooltip({html : true});
         
         jQuery('#tab_buscas a').click(

@@ -73,7 +73,7 @@
           <p><?php echo $obra['Artista']['nome']; ?> (<?php echo h($obra['Obra']['ano_fim']); ?>)</p>
           <p><?php echo $obra['Obra']['nome']; ?></p>
         </div>
-        <div class="obra pull-left">
+        <div class="obra">
           <div class="modal-img">
             <?php echo $this->Html->image('obras/'.$relacionada['imagem']) ?>
           </div>
