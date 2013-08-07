@@ -17,7 +17,6 @@ class ObrasController extends AppController {
    */
 
   public $paginate = array();
-  //var $helpers = array('Session','Bar');
 
   public function index($letter = null) {
     parent::searchDataLoader();
@@ -77,7 +76,29 @@ class ObrasController extends AppController {
     $this->Obra->recursive = 0;
     $data = $this->request->query;
     
-    $this->Session->write('SearchQuery', http_build_query($this->request->query));
+    /**
+     * When the request is made it can have:
+     * 
+     *  1 - First letter 
+     *  2 - PassedArgs
+     *  3 - Query string
+     *
+     */
+    
+    
+    $search_url = "";
+    foreach($this->passedArgs as $k => $v){
+      if(is_int($k)){
+        $search_url .= $v . "/";
+      } else {
+        $search_url .= $k . ":" . $v . "/";
+      }
+    }
+    //die(pr($this->passedArgs));
+    $search_url .=  '?' . http_build_query($this->request->query);
+    //die($search_url);    
+
+    $this->Session->write('SearchQuery', $search_url);
 
     if($this->request->is('get') && !empty($data)) {
       if(isset($data['Search']['type']) && $data['Search']['type'] == 'fast'){
@@ -91,29 +112,29 @@ class ObrasController extends AppController {
           }
         }
         $this->paginate = array(
-                                'fields' => array(
-                                                  'Obra.id', 
-                                                  'Obra.nome', 
-                                                  'Obra.imagem', 
-                                                  'Artista.id',
-                                                  'Artista.nome', 
-                                                  'Obra.ano_inicio', 
-                                                  'Obra.ano_fim'),
-                                'conditions' => array(
-                                                      'OR' => array(
-                                                                    'Artista.nome LIKE' => '%' . $query . '%',
-                                                                    'Obra.nome LIKE' => '%' . $query . '%',
-                                                                    'Obra.descricao LIKE' => '%' . $query . '%',
-                                                                    'Obra.tags LIKE' => '%' . $query . '%',
-                                                                    'Obra.ano_inicio LIKE' => '%' . $query . '%',
-                                                                    'Obra.ano_fim LIKE' => '%' . $query . '%',
-                                                                    'Instituicao.nome LIKE' => '%' . $query . '%',
-                                                                    'Iconografia.nome LIKE' => '%' . $query . '%',
-                                                                    ),
-                                                      'AND' => $and,
-                                                      ),
-                                'order' => 'Artista.nome asc',
-                                );
+          'fields' => array(
+            'Obra.id', 
+            'Obra.nome', 
+            'Obra.imagem', 
+            'Artista.id',
+            'Artista.nome', 
+            'Obra.ano_inicio', 
+            'Obra.ano_fim'),
+          'conditions' => array(
+            'OR' => array(
+              'Artista.nome LIKE' => '%' . $query . '%',
+              'Obra.nome LIKE' => '%' . $query . '%',
+              'Obra.descricao LIKE' => '%' . $query . '%',
+              'Obra.tags LIKE' => '%' . $query . '%',
+              'Obra.ano_inicio LIKE' => '%' . $query . '%',
+              'Obra.ano_fim LIKE' => '%' . $query . '%',
+              'Instituicao.nome LIKE' => '%' . $query . '%',
+              'Iconografia.nome LIKE' => '%' . $query . '%',
+            ),
+            'AND' => $and,
+          ),
+          'order' => 'Artista.nome asc',
+        );
       } else if(isset($data['Search']['type']) && $data['Search']['type'] == 'advanced') {
         $query = $data['Search'];
         
