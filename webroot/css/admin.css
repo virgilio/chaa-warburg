@@ -79,6 +79,17 @@
 #select-iconografia div, #select-artista div {
   display: inline-block;
 }
+
+#select-artista div.error-message {
+    display: block;
+    /*background-color: #d14641;*/
+    background-color: #fdd;
+    border-radius: 7px;
+    padding: 6px 2px;
+    margin: 5px auto;
+    text-align: center;
+}
+
 /*Add/edit obra*/
 .fieldset-data{
   background-color: #f5f5f5;

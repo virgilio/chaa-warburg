@@ -28,20 +28,40 @@
 <div class="bbody container insert-img">
 
   <!-- upload form -->
-  <?php echo $this->Form->create('Obra', array('enctype' =>
-  'multipart/form-data', 'action' => 'insert', 'onsubmit' => 'return checkForm()')); ?>
-<!--  <form id="uploadForm" enctype="multipart/form-data" method="post"
+  <?php 
+     echo $this->Form->create('Obra', 
+                              array('enctype' =>
+                                    'multipart/form-data', 
+                                    'action' => 'insert', 
+                                    'onsubmit' => 'return checkForm()')); ?>
+  <!--  <form id="uploadForm" enctype="multipart/form-data" method="post"
         action="/warburg/obras/insert" onsubmit="return checkForm()">
     <!-- hidden crop params -->
     <?php echo $this->Form->input('nome', array('type' => 'textarea', 'class'=>'input-xxlarge','label' => 'Nome da imagem')); ?>
+    
+    <span id="select-artista">
+      <?php 
+        echo $this->Form->input(
+          'artista_id',
+          array('label' => false, 
+                'class' => 'input_chosen', 
+                'empty'  => true,
+                'data-placeholder' => 'Selecione o artista')); 
+      ?>
+    </span>
+    
     <input type="hidden" id="x1" name="data[Thumbnail][x1]" />
     <input type="hidden" id="y1" name="data[Thumbnail][y1]" />
     <input type="hidden" id="x2" name="data[Thumbnail][x2]" />
     <input type="hidden" id="y2" name="data[Thumbnail][y2]" />
 
     <h4>Escolha a imagem para Upload</h4>
-    <?php echo $this->Form->input('imagem', array('type' => 'file', 'id' =>
-    'image_file', 'onchange' => 'fileSelectHandler()')); ?>
+    <?php 
+      echo $this->Form->input('imagem', 
+                              array('type' => 'file', 
+                                    'id' =>   'image_file', 
+                                    'onchange' => 'fileSelectHandler()')); 
+    ?>
 
     <div class="error"></div>
 

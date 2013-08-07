@@ -143,10 +143,10 @@ class AppController extends Controller {
     }
     $this->set('cidades_list', json_encode($cidades_list));
 
-    $ano_min = $this->Obra->query('select min(ano_inicio) from obras');
-    $this->set('ano_min', $ano_min[0][0]["min(ano_inicio)"]);
-    $ano_max = $this->Obra->query('select max(ano_fim) from obras');
-    $this->set('ano_max', $ano_max[0][0]["max(ano_fim)"]);
+    $ano_min = $this->Obra->query('select least(min(ano_inicio), min(ano_fim)) as min from obras');
+    $this->set('ano_min', $ano_min[0][0]["min"]);
+    $ano_max = $this->Obra->query('select greatest(max(ano_inicio), max(ano_fim)) as max from obras');
+    $this->set('ano_max', $ano_max[0][0]["max"]);
 
     if(isset($this->passedArgs['sort']) && 'Artista.nome' == $this->passedArgs['sort']){
       $letters = $this->Obra->query('SELECT DISTINCT SUBSTRING(`nome`, 1, 1) FROM `artistas` ORDER BY `nome`');

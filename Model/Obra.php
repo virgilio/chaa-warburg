@@ -24,97 +24,95 @@ class Obra extends AppModel {
  * @var array
  */
   public $validate = array(
-                           'nome' => array(
-                                           'notempty' => array(
-                                                               'rule' => array('notempty'),
-                                                               //'message' => 'Your custom message here',
-                                                               //'allowEmpty' => false,
-                                                               //'required' => false,
-                                                               //'last' => false, // Stop validation after this rule
-                                                               //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                                                               ),
-                                           ),
-                           'imagem' => array(
-                                             'notempty' => array(
-                                                                 'rule' => array('notempty'),
-                                                                 //'message' => 'Your custom message here',
-                                                                 //'allowEmpty' => false,
-                                                                 //'required' => false,
-                                                                 //'last' => false, // Stop validation after this rule
-                                                                 //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                                                                 ),
-                                             ),
-                           'tamanho_obra' => array(
-                                                   //'notempty' => array(
-                                                   //'rule' => array('notempty'),
-                                                   //'message' => 'Your custom message here',
-                                                   //'allowEmpty' => false,
-                                                   //'required' => false,
-                                                   //'last' => false, // Stop validation after this rule
-                                                   //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                                                   //),
-		),
-                           'descricao' => array(
-                                                //'notempty' => array(
-                                                //'rule' => array('notempty'),
-                                                //'message' => 'Your custom message here',
-                                                //'allowEmpty' => false,
-                                                //'required' => false,
-                                                //'last' => false, // Stop validation after this rule
-                                                //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                                                //),
-		),
-                           'tags' => array(
-                                           //'notempty' => array(
-                                           //'rule' => array('notempty'),
-                                           //'message' => 'Your custom message here',
-                                           //'allowEmpty' => false,
-                                           //'required' => false,
-                                           //'last' => false, // Stop validation after this rule
-                                           //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                                           //),
-		),
-                           'obra_tipos_id' => array(
-                                                    'numeric' => array(
-                                                                       'rule' => array('numeric'),
-                                                                       //'message' => 'Your custom message here',
-                                                                       'allowEmpty' => true,
-                                                                       //'required' => false,
-                                                                       //'last' => false, // Stop validation after this rule
-                                                                       //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                                                                       ),
-                                                    ),
-                           'instituicao_id' => array(
-                                                     'numeric' => array(
-                                                                        'rule' => array('numeric'),
-                                                                        //'message' => 'Your custom message here',
-                                                                        'allowEmpty' => true,
-                                                                        //'required' => false,
-                                                                        //'last' => false, // Stop validation after this rule
-                                                                        //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                                                                        ),
-                                                     ),
-                           'artista_id' => array(
-                                                 'numeric' => array(
-                                                                    'rule' => array('numeric'),
-                                                                    //'message' => 'Your custom message here',
-                                                                    'allowEmpty' => true,
-                                                                    //'required' => false,
-                                                                    //'last' => false, // Stop validation after this rule
-                                                                    //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                                                                    ),
-                                                 ),
-                           'iconografia_id' => array(
-                                                     'numeric' => array(
-                                                                        'rule' => array('numeric'),
-                                                                        //'message' => 'Your custom message here',
-                                                                        'allowEmpty' => true,
-                                                                        //'required' => false,
-                                                                        //'last' => false, // Stop validation after this rule
-                                                                        //'on' => 'create', // Limit validation to 'create' or 'update' operations
-                                                                        ),
-                                                     ),
-                           );
+    'nome' => array(
+      'rule' => 'notEmpty',
+      'message' => 'Insira um Nome para obra',
+    ),
+    
+    'imagem' => array(
+      'notempty' => array(
+        'rule' => array('notempty'),
+        //'message' => 'Your custom message here',
+        //'allowEmpty' => false,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      ),
+    ),
+    'tamanho_obra' => array(
+      //'notempty' => array(
+      //'rule' => array('notempty'),
+      //'message' => 'Your custom message here',
+      //'allowEmpty' => false,
+      //'required' => false,
+      //'last' => false, // Stop validation after this rule
+      //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      //),
+    ),
+    'descricao' => array(
+      //'notempty' => array(
+      //'rule' => array('notempty'),
+      //'message' => 'Your custom message here',
+      //'allowEmpty' => false,
+      //'required' => false,
+      //'last' => false, // Stop validation after this rule
+      //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      //),
+    ),
+    'tags' => array(
+      //'notempty' => array(
+      //'rule' => array('notempty'),
+      //'message' => 'Your custom message here',
+      //'allowEmpty' => false,
+      //'required' => false,
+      //'last' => false, // Stop validation after this rule
+      //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      //),
+    ),
+    'obra_tipos_id' => array(
+      'numeric' => array(
+        'rule' => array('numeric'),
+        //'message' => 'Your custom message here',
+        'allowEmpty' => true,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      ),
+    ),
+    'instituicao_id' => array(
+      'numeric' => array(
+        'rule' => array('numeric'),
+        //'message' => 'Your custom message here',
+        'allowEmpty' => true,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      ),
+    ),
+    'artista_id' => array(
+      'notempty' => array(
+        'rule' => array('notEmpty'),
+        'allowEmpty' => false,
+        'required' => true,
+        'message' => "Selecione um Artista"
+      ),
+      'numeric' => array(
+        'rule' => array('numeric'),
+        'allowEmpty' => false,
+        'required' => true,
+      ),
+    ),
+    'iconografia_id' => array(
+      'numeric' => array(
+        'rule' => array('numeric'),
+        //'message' => 'Your custom message here',
+        'allowEmpty' => true,
+        //'required' => false,
+        //'last' => false, // Stop validation after this rule
+        //'on' => 'create', // Limit validation to 'create' or 'update' operations
+      ),
+    ),
+  );
 
   //The Associations below have been created with all possible keys, those that are not needed can be removed
 

@@ -125,9 +125,14 @@
         <label class="control-label" for="artista_id">Artista</label>
         <div class="controls">
           <span id="select-artista">
-            <?php echo $this->Form->input('artista_id',
-            array('label' => '', 'class' => 'input_chosen', 'empty'  => true,
-            'data-placeholder' => 'Selecione o artista')); ?>
+            <?php 
+              echo $this->Form->input(
+                'artista_id',
+                array('label' => false, 
+                      'class' => 'input_chosen', 
+                      'empty'  => true,
+                      'data-placeholder' => 'Selecione o artista')); 
+            ?>
           </span>
           <ul class="unstyled inline pull-right">
             <li>                
@@ -248,7 +253,9 @@
                   <input 
                      type="radio" name="data[Obra][ante_post_quam]" 
                      id="ObraAntePostQuam0" value="0"
-                     <?php echo $this->request->data['Obra']['ante_post_quam'] == 0 ? "checked" : ""; ?>    
+                     <?php 
+                       echo $this->request->data['Obra']['ante_post_quam'] == 0 ? "checked" : ""; 
+                     ?>    
                      />
                 </div>
               </div>

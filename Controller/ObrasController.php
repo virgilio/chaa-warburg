@@ -17,6 +17,7 @@ class ObrasController extends AppController {
    */
 
   public $paginate = array();
+  //var $helpers = array('Session','Bar');
 
   public function index($letter = null) {
     parent::searchDataLoader();
@@ -76,6 +77,8 @@ class ObrasController extends AppController {
     $this->Obra->recursive = 0;
     $data = $this->request->query;
     
+    $this->Session->write('SearchQuery', http_build_query($this->request->query));
+
     if($this->request->is('get') && !empty($data)) {
       if(isset($data['Search']['type']) && $data['Search']['type'] == 'fast'){
         $query = $data['Search']['query'];
@@ -300,26 +303,29 @@ class ObrasController extends AppController {
     $this->Obra->Behaviors->load('Containable');
     
     $result = $this->Obra->find('first', array(
-                                               'conditions' => array('Obra.' . $this->Obra->primaryKey => $id),
-                                               'contain' => array(
-                                                                  'Artista' => array('fields' => array('id', 'nome')),
-                                                                  'Instituicao' => array(
-                                                                                         'Cidade' => array('Pais')
-                                                                                         ),
-                                                                  'Iconografia',
-                                                                  'ObraTipo',
-                                                                  ),
-                                               )
-                                );
+      'conditions' => array('Obra.' . $this->Obra->primaryKey => $id),
+      'contain' => array(
+        'Artista' => array('fields' => array('id', 'nome')),
+        'Instituicao' => array(
+          'Cidade' => array('Pais')
+        ),
+        'Iconografia',
+        'ObraTipo',
+      ),
+    ));
     $this->loadModel('ObrasRelacionada');
     $this->ObrasRelacionada->Behaviors->load('Containable');
-    $this->ObrasRelacionada->bindModel(array('belongsTo' => array('User', 'Obra',  'Relacionada' => array(
-                                                                                                          'className' => 'Obra',
-                                                                                                          'foreignKey' => 'relacionada_id',
-                                                                                                          'conditions' => '',
-                                                                                                          'fields' => '',
-                                                                                                          'order' => ''
-                                                                                                          ),)));
+    $this->ObrasRelacionada->bindModel(
+      array('belongsTo' => array(
+        'User', 
+        'Obra',  
+        'Relacionada' => array(
+          'className' => 'Obra',
+          'foreignKey' => 'relacionada_id',
+          'conditions' => '',
+          'fields' => '',
+          'order' => ''
+        ),)));
     $relacionadas = $this->ObrasRelacionada->find('all', array(
                                                                'conditions' => array('or' => array(
                                                                                                    'ObrasRelacionada.relacionada_id' => $id, 
@@ -373,6 +379,8 @@ class ObrasController extends AppController {
         $this->Session->setFlash(__('A obra não pode ser salva, tente novamente'));
       }
     }
+    $artistas = $this->Obra->Artista->find('list');
+    $this->set(compact('artistas'));
   }
         
   /**
@@ -389,7 +397,7 @@ class ObrasController extends AppController {
     if ($this->request->is('post') || $this->request->is('put')) {
       $data = $this->request->data;
       if(!isset($this->request->data['Obra']['ante_post_quam'])) {
-        $this->request->data['Obra']['ante_post_quam'] = NULL;
+        $this->request->data['Obra']['ante_post_quam'] = 2;
       }
       if($this->request->data['Obra']['imagem']['error'] == 0){ //Nova imagem
         $this->request->data['Obra']['imagem'] =  $this->processFile($this->request->data['Obra']['imagem'], 
@@ -430,52 +438,54 @@ class ObrasController extends AppController {
       } else {
         $this->Session->setFlash(__('A obra não foi salva. Por favor, tente novamente.'));
       }
-    } else {
-      $this->Obra->Behaviors->load('Containable');
-      $result = $this->Obra->find('first', array(
-                                                 'conditions' => array('Obra.' . $this->Obra->primaryKey => $id),
-                                                 'contain' => array(
-                                                                    'Artista' => array('fields' => array('id', 'nome')),
-                                                                    'Instituicao' => array(
-                                                                                           'Cidade' => array('Pais')
-                                                                                           ),
-                                                                    'Iconografia',
-                                                                    'ObraTipo',
-                                                                    'Thumbnail',
-                                                                    'Relacionada' => array(
-                                                                                           'Artista' => array('id', 'nome'),
-                                                                                           ),
-                                                                    'Relacionada2' => array(
-                                                                                            'Artista' => array('id', 'nome'),
-                                                                                            ),
-                                                                    ),
-                                                 )
-                                  );
+    } //else {
+    $this->Obra->Behaviors->load('Containable');
+    $result = $this->Obra->find('first', array(
+      'conditions' => array('Obra.' . $this->Obra->primaryKey => $id),
+      'contain' => array(
+        'Artista' => array('fields' => array('id', 'nome')),
+        'Instituicao' => array(
+          'Cidade' => array('Pais')
+        ),
+        'Iconografia',
+        'ObraTipo',
+        'Thumbnail',
+        'Relacionada' => array(
+          'Artista' => array('id', 'nome'),
+        ),
+        'Relacionada2' => array(
+          'Artista' => array('id', 'nome'),
+        ),
+      ),
+    ));
       
-      if(!empty($result['Obra']['ano_inicio'])){
-        if($result['Obra']['ano_inicio'] == 0) {
-          $result['Obra']['ano_inicio_signal'] = 0;
-        } else if($result['Obra']['ano_inicio'] < 0){
-          $result['Obra']['ano_inicio_signal'] = -1;
-          $result['Obra']['ano_inicio'] = -1 * $result['Obra']['ano_inicio'];
-        } else {
-          $result['Obra']['ano_inicio_signal'] = 1;
-        }
+    if(!empty($result['Obra']['ano_inicio'])){
+      if($result['Obra']['ano_inicio'] == 0) {
+        $result['Obra']['ano_inicio_signal'] = 0;
+      } else if($result['Obra']['ano_inicio'] < 0){
+        $result['Obra']['ano_inicio_signal'] = -1;
+        $result['Obra']['ano_inicio'] = -1 * $result['Obra']['ano_inicio'];
+      } else {
+        $result['Obra']['ano_inicio_signal'] = 1;
       }
-      
-      if(!empty($result['Obra']['ano_fim'])){
-        if($result['Obra']['ano_fim'] == 0) {
-          $result['Obra']['ano_fim_signal'] = 0;
-        } else if($result['Obra']['ano_fim'] < 0){
-          $result['Obra']['ano_fim_signal'] = -1;
-          $result['Obra']['ano_fim'] = -1 * $result['Obra']['ano_fim'];
-        } else {
-          $result['Obra']['ano_fim_signal'] = 1;
-      }
-      }
-      $this->request->data = $result;
     }
+      
+    if(!empty($result['Obra']['ano_fim'])){
+      if($result['Obra']['ano_fim'] == 0) {
+        $result['Obra']['ano_fim_signal'] = 0;
+      } else if($result['Obra']['ano_fim'] < 0){
+        $result['Obra']['ano_fim_signal'] = -1;
+        $result['Obra']['ano_fim'] = -1 * $result['Obra']['ano_fim'];
+      } else {
+        $result['Obra']['ano_fim_signal'] = 1;
+      }
+    }
+    $this->request->data = $result;
+    //}
     
+    if($result['Obra']['ante_post_quam'])
+      //die(pr($result));
+
     $obraTipos = $this->Obra->ObraTipo->find('list');
 
     $this->loadModel('Pais');
@@ -483,15 +493,15 @@ class ObrasController extends AppController {
     $this->loadModel('Instituicao');
     $cidades = $this->Cidade->find('all', 
                                    array(
-                                         'fields' => 'Cidade.id, Cidade.nome, Pais.nome',
-                                         'recursive' => 1
-                                         )
-                                   );
+                                     'fields' => 'Cidade.id, Cidade.nome, Pais.nome',
+                                     'recursive' => 1
+                                   )
+    );
     $cidades = Set::combine($cidades, '{n}.Cidade.id', array('{0} - {1}', '{n}.Cidade.nome', '{n}.Pais.nome'));
     $instituicoes = $this->Obra->Instituicao->find('all', array(
-                                                                'fields' => 'Instituicao.id, Instituicao.nome, Cidade.nome',
-                                                                'recursive' => 0
-                                                                ));
+      'fields' => 'Instituicao.id, Instituicao.nome, Cidade.nome',
+      'recursive' => 0
+    ));
     $instituicoes = Set::combine($instituicoes, 
                                  '{n}.Instituicao.id', 
                                  array('{0} - {1}', '{n}.Instituicao.nome', '{n}.Cidade.nome'));
@@ -502,13 +512,13 @@ class ObrasController extends AppController {
     
     $this->Obra->Relacionada->Behaviors->load('Containable');
     $relacionadas = $this->Obra->Relacionada->find('list', array(
-                                                                 'fields' => array(
-                                                                                   'Relacionada.id', 
-                                                                                   'Relacionada.nome', 
-                                                                                   'Artista.nome'
-                                                                                   ),
-                                                                 'contain' => array('Artista'),
-                                                                 ));
+      'fields' => array(
+        'Relacionada.id', 
+        'Relacionada.nome', 
+        'Artista.nome'
+      ),
+      'contain' => array('Artista'),
+    ));
 
 
     foreach($result['Relacionada'] as $rel){
@@ -521,7 +531,8 @@ class ObrasController extends AppController {
 
     unset($relacionadas[$result['Obra']['id']]);
 
-    $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 'artistas', 'iconografias', 'relacionadas'));
+    $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 
+                       'artistas', 'iconografias', 'relacionadas'));
   }
 
   /**

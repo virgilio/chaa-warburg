@@ -1,4 +1,7 @@
-<?php echo $this->element('buscas'); ?>
+<?php 
+  //echo $this->Session->read('SearchQuery');
+  echo $this->element('buscas'); 
+?>
 <h1>Detalhes da obra</h1>
 
 <div class="obra_container">
