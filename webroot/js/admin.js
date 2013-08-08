@@ -16,7 +16,7 @@ jQuery(document).ready(
 
 bkLib.onDomLoaded(
     function(){
-        var myEditor = new nicEditor({fullPanel : true })
+        var myEditor = new nicEditor({fullPanel : true, iconsPath : '/chaa-warburg/img/nicEditorIcons.gif' })
             .panelInstance('ObraDescricao')
             .panelInstance('ArtistaBiografia');
 

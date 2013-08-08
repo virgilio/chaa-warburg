@@ -55,7 +55,7 @@
     <div class="control-group">
       <label class="control-label" for="role">Usuário Ativo</label>
       <div class="controls">
-        <div class="switch"
+        <div class="make-switch"
              data-on="success" 
              data-off="danger"  
              data-on-label="<i class='icon-ok icon-white'></i>" 

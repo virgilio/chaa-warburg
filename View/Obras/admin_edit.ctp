@@ -1,14 +1,14 @@
 <?php 
-   $this->Html->script("main.js", array("inline" => false));
-   $this->Html->script("jquery.Jcrop.min.js", array("inline" => false));
-   $this->Html->script("script.js", array("inline" => false));
-   $this->Html->script("nicedit/nicEdit.js", array("inline" => false));
-   $this->Html->css('jquery.Jcrop.min.css', null, array("inline" => false));
-   $this->Html->script("ajax-relacionadas.js", array("inline" => false));
-
-   $this->Html->css('bootstrapSwitch.css', null, array('inline' =>
-   false)); 
-   $this->Html->script('bootstrapSwitch.min.js', array('inline' => false));
+  $this->Html->script("main.js", array("inline" => false));
+  $this->Html->script("jquery.Jcrop.min.js", array("inline" => false));
+  $this->Html->script("script.js", array("inline" => false));
+  $this->Html->script("nicedit/nicEdit.js", array("inline" => false));
+  $this->Html->css('jquery.Jcrop.min.css', null, array("inline" => false));
+  $this->Html->script("ajax-relacionadas.js", array("inline" => false));
+  
+  $this->Html->css('bootstrapSwitch.css', null, array('inline' =>
+                                                      false)); 
+  $this->Html->script('bootstrapSwitch.min.js', array('inline' => false));
 ?>
 <style type="text/css">
   .jcrop img {max-width: none;}

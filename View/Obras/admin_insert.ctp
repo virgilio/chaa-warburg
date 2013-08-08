@@ -4,6 +4,7 @@
    $this->Html->script("script.js", array("inline" => false));
    $this->Html->script("step-bar.js", array("inline" => false));
    $this->Html->css('jquery.Jcrop.min.css', null, array("inline" => false));
+   $this->Html->script("nicedit/nicEdit.js", array("inline" => false));
 ?>
 
 <ul class="nav nav-tabs" id="step-bar">
@@ -39,16 +40,27 @@
     <!-- hidden crop params -->
     <?php echo $this->Form->input('nome', array('type' => 'textarea', 'class'=>'input-xxlarge','label' => 'Nome da imagem')); ?>
     
-    <span id="select-artista">
-      <?php 
-        echo $this->Form->input(
-          'artista_id',
-          array('label' => false, 
-                'class' => 'input_chosen', 
-                'empty'  => true,
-                'data-placeholder' => 'Selecione o artista')); 
-      ?>
-    </span>
+    <div class="control-group">
+      <label class="control-label" for="artista_id">Artista</label>
+      <div class="controls">
+        <span id="select-artista">
+          <?php 
+            echo $this->Form->input(
+              'artista_id',
+              array('label' => false, 
+                    'class' => 'input_chosen', 
+                    'empty'  => true,
+                    'data-placeholder' => 'Selecione o artista')); 
+          ?>
+        </span>
+        <ul class="unstyled inline pull-right">
+          <li>                
+            <a href="#add-artista" role="button" class="btn btn-info"
+               data-toggle="modal">Novo Artista</a>
+          </li>
+        </ul>
+      </div>
+    </div>
     
     <input type="hidden" id="x1" name="data[Thumbnail][x1]" />
     <input type="hidden" id="y1" name="data[Thumbnail][y1]" />
@@ -82,3 +94,9 @@
     </div>
   </form>
 </div>
+
+<?php echo $this->element('addmodal', 
+                          array('titulo' => 'Adicionar Artista', 
+                                'form' => 'artista')); ?>
+
+<?php $this->Html->script("admin_insert.js", array("inline" => false)); ?>

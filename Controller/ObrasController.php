@@ -384,7 +384,10 @@ class ObrasController extends AppController {
       $data = $this->request->data;
 
       $obra['nome'] =  $data['Obra']['nome'];
-      $obra['imagem'] =  $this->processFile($data['Obra']['imagem'], $data['Thumbnail']);
+      $obra['artista_id'] = $data['Obra']['artista_id'];
+      $obra['imagem'] = $this->processFile(
+        $data['Obra']['imagem'], $data['Thumbnail']);
+
       $obra['tamanho_obra'] = $data['Thumbnail']['filedim'];
       $obra['user_id'] = $this->Auth->user('id');
       $this->Obra->create();
@@ -395,9 +398,10 @@ class ObrasController extends AppController {
         $this->Obra->Thumbnail->save($data['Thumbnail']);
         
         $this->Session->setFlash(__('A Imagem foi salva!'));
-        $this->redirect(array('action' => 'edit', $this->Obra->id));                          
+        $this->redirect(array('action' => 'edit', $this->Obra->id));
       } else {
-        $this->Session->setFlash(__('A obra não pode ser salva, tente novamente'));
+        $this->Session->setFlash(
+          __('A obra não pode ser salva, tente novamente'));
       }
     }
     $artistas = $this->Obra->Artista->find('list');
@@ -420,27 +424,34 @@ class ObrasController extends AppController {
       if(!isset($this->request->data['Obra']['ante_post_quam'])) {
         $this->request->data['Obra']['ante_post_quam'] = 2;
       }
-      if($this->request->data['Obra']['imagem']['error'] == 0){ //Nova imagem
-        $this->request->data['Obra']['imagem'] =  $this->processFile($this->request->data['Obra']['imagem'], 
-                                                                     $this->request->data['Thumbnail']);
+      if($this->request->data['Obra']['imagem']['error'] == 0){ 
+        //Nova imagem
+        $this->request->data['Obra']['imagem'] =  
+          $this->processFile($this->request->data['Obra']['imagem'], 
+                             $this->request->data['Thumbnail']);
         
       } else { //Mesma imagem utilizada, só cria thumb
         if(!empty($this->request->data['Thumbnail']['w'])){
           $this->Obra->id = $this->request->data['Obra']['id'];
-          $this->createThumbnail((WWW_ROOT . "img/obras/" . $this->Obra->field('imagem')), 
-                                 $this->request->data['Thumbnail'], 
-                                 (WWW_ROOT . "img/obras/thumbs/" . $this->Obra->field('imagem')));
+          $this->createThumbnail(
+            (WWW_ROOT . "img/obras/" . $this->Obra->field('imagem')), 
+            $this->request->data['Thumbnail'], 
+            (WWW_ROOT 
+             . "img/obras/thumbs/" 
+             . $this->Obra->field('imagem')));
         }              
         unset($this->request->data['Obra']['imagem']);
       }
       
       if(!empty($this->request->data['Obra']['ano_inicio'])){
         $this->request->data['Obra']['ano_inicio'] = 
-          $this->request->data['Obra']['ano_inicio'] * $this->request->data['Obra']['ano_inicio_signal'];
+          $this->request->data['Obra']['ano_inicio'] 
+          * $this->request->data['Obra']['ano_inicio_signal'];
       }
       if(!empty($this->request->data['Obra']['ano_fim'])){
         $this->request->data['Obra']['ano_fim'] = 
-          $this->request->data['Obra']['ano_fim'] * $this->request->data['Obra']['ano_fim_signal'];
+          $this->request->data['Obra']['ano_fim'] 
+          * $this->request->data['Obra']['ano_fim_signal'];
       }
       
       if ($this->Obra->save($this->request->data)) {
@@ -457,7 +468,8 @@ class ObrasController extends AppController {
         
         $this->redirect(array('action' => 'index'));
       } else {
-        $this->Session->setFlash(__('A obra não foi salva. Por favor, tente novamente.'));
+        $this->Session->setFlash(
+          __('A obra não foi salva. Por favor, tente novamente.'));
       }
     } //else {
     $this->Obra->Behaviors->load('Containable');
@@ -479,7 +491,7 @@ class ObrasController extends AppController {
         ),
       ),
     ));
-      
+    
     if(!empty($result['Obra']['ano_inicio'])){
       if($result['Obra']['ano_inicio'] == 0) {
         $result['Obra']['ano_inicio_signal'] = 0;
@@ -512,20 +524,28 @@ class ObrasController extends AppController {
     $this->loadModel('Pais');
     $this->loadModel('Cidade');
     $this->loadModel('Instituicao');
-    $cidades = $this->Cidade->find('all', 
-                                   array(
-                                     'fields' => 'Cidade.id, Cidade.nome, Pais.nome',
-                                     'recursive' => 1
-                                   )
+    $cidades = $this->Cidade->find(
+      'all', 
+      array(
+        'fields' => 'Cidade.id, Cidade.nome, Pais.nome',
+        'recursive' => 1
+      )
     );
-    $cidades = Set::combine($cidades, '{n}.Cidade.id', array('{0} - {1}', '{n}.Cidade.nome', '{n}.Pais.nome'));
+    $cidades = Set::combine($cidades, 
+                            '{n}.Cidade.id', 
+                            array(
+                              '{0} - {1}', 
+                              '{n}.Cidade.nome', '{n}.Pais.nome'));
     $instituicoes = $this->Obra->Instituicao->find('all', array(
       'fields' => 'Instituicao.id, Instituicao.nome, Cidade.nome',
       'recursive' => 0
     ));
     $instituicoes = Set::combine($instituicoes, 
                                  '{n}.Instituicao.id', 
-                                 array('{0} - {1}', '{n}.Instituicao.nome', '{n}.Cidade.nome'));
+                                 array(
+                                   '{0} - {1}', 
+                                   '{n}.Instituicao.nome', 
+                                   '{n}.Cidade.nome'));
 
     $paises = $this->Pais->find('list');    
     $artistas = $this->Obra->Artista->find('list');

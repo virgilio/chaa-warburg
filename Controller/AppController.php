@@ -24,6 +24,7 @@
  */
 App::uses('Controller', 'Controller');
 App::uses('AuthComponent', 'Controller/Component');
+App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Application Controller
