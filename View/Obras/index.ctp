@@ -27,7 +27,8 @@
       </p>
       <p class="nome-artista">
         <?php if(!empty($obra['Artista']['nome'])) {
-                echo $this->Html->link($obra['Artista']['nome'], 
+                echo $this->Html->link(
+                  h(substr($obra['Artista']['nome'], 0, 40)) . (strlen($obra['Artista']['nome']) > 40 ? '...' : ''),
                 array('controller' => 'artistas', 'action' => 'view',
                 $obra['Artista']['id']));
               } else {
