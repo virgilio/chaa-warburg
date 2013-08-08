@@ -33,6 +33,14 @@
         <p>
             <?php echo $this->Html->link('[DOWNLOAD DA OBRA]', '/img/obras/'.$obra['Obra']['imagem'], array('target' => 'blank')); ?>
         </p>
+        <p>
+          <?php 
+            $murl = $this->Session->read('SearchQuery');
+            echo $this->Html->link('[VOLTAR PARA A PESQUISA INICIAL]', 
+                                   '/obras/search/' . $murl,
+                                   array('escape' => false)); 
+          ?>
+        </p>
         <p class="obra_descricao">
             <?php echo ($obra['Obra']['descricao']); ?>
         </p>
