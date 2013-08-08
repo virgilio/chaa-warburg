@@ -16,14 +16,16 @@
             <?php 
               if(h($obra['Obra']['incerta']) == 1) {
                 echo '(data incerta)';
-              } elseif (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_inicio'] == null)) {
-                  echo '(sem data)';
-                } else {
-                  echo '(';
-                  echo (h($obra['Obra']['circa']) == 1) ? 'Circa ' : ''; 
-                  echo (h($obra['Obra']['ano_inicio']) != 0) ? h($obra['Obra']['ano_inicio']) . ' - ': ''; 
-                  echo h($obra['Obra']['ano_fim']); 
-                  echo ')';
+              } elseif (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_fim'] == null)) {
+                echo '(sem data)';
+              } else {
+                echo '(';
+                echo (h($obra['Obra']['ante_post_quam']) == 0) ? 'ante quam ' : ''; 
+                echo (h($obra['Obra']['ante_post_quam']) == 1) ? 'post quam ' : ''; 
+                echo (h($obra['Obra']['circa']) == 1) ? 'circa ' : ''; 
+                echo (h($obra['Obra']['ano_inicio']) != 0) ? h($obra['Obra']['ano_inicio']) . ' - ': ''; 
+                echo h($obra['Obra']['ano_fim']); 
+                echo ')';
               }             
             ?>
         </p>
