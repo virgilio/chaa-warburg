@@ -36,10 +36,13 @@
               }
         ?>
         (<?php 
-                    if(!empty($obra['Obra']['ano_inicio'])) {
-                      echo $obra['Obra']['ano_inicio'] ?>
-                - 
-                      <?php } ?><?php echo h($obra['Obra']['ano_fim']); ?>)
+            if (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_inicio'] == null)) {
+                echo 'sem data';
+              } else {
+                echo (h($obra['Obra']['ano_inicio']) != 0) ? h($obra['Obra']['ano_inicio']) . ' - ': ''; 
+                echo h($obra['Obra']['ano_fim']); 
+            };             
+        ?>)
       </p>  
     </div>
     <?php endforeach; ?>
