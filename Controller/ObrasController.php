@@ -172,7 +172,8 @@ class ObrasController extends AppController {
           $cidadesQuery = $this->getCidadeIdsQuery($query, $paisQuery);
 
           $instituicaoQuery = '';
-          $instituicaoQuery = 'Obra.instituicao_id IN (' . $this->getInstituicaoIdsQuery($cidadesQuery) . ')';
+          $instituicaoQuery = 'Obra.instituicao_id IN (' 
+            . $this->getInstituicaoIdsQuery($cidadesQuery) . ')';
           $or = array_merge(array($instituicaoQuery), $or);
         }
 
@@ -184,21 +185,32 @@ class ObrasController extends AppController {
         if(!empty($data['Iconografia']))
           $and['Obra.iconografia_id'] = $data['Iconografia'];
 
-        if(!empty($query['inicio'])){
-          $and['Obra.ano_inicio >= ?'] = array($query['inicio']);
+        if(!empty($query['inicio']) && empty($query['ano'])){
+          $or['Obra.ano_inicio BETWEEN ? AND ?'] = 
+            array(
+              $query['inicio'], 
+              $query['fim'],
+            );
         }
 
-        if(!empty($query['fim'])){
-          $and['Obra.ano_fim <= ?'] = array($query['fim']);
+        if(!empty($query['fim']) && empty($query['ano']) ){
+          $or['Obra.ano_fim BETWEEN ? AND ?'] = 
+            array(
+              $query['inicio'], 
+              $query['fim'],
+            );
         }
         
         if(!empty($query['ano'])){
           $or['Obra.ano_fim'] = $query['ano'];
           $or['Obra.ano_inicio'] = $query['ano'];
-        }
+        } else {
+          $or['Obra.ano_fim'] = NULL;
+        }        
         
         if($letter != null){
-          if(isset($this->passedArgs['sort']) && 'Artista.nome' == $this->passedArgs['sort']){
+          if(isset($this->passedArgs['sort']) 
+             && 'Artista.nome' == $this->passedArgs['sort']){
             $and['Artista.nome REGEXP'] = '^' . $letter;
           } else {
             $and['Obra.nome REGEXP'] = '^' . $letter;
@@ -206,20 +218,20 @@ class ObrasController extends AppController {
         }
         
         $this->paginate = array(
-                                'fields' => array(
-                                                  'Obra.id', 
-                                                  'Obra.nome', 
-                                                  'Obra.imagem', 
-                                                  'Artista.id',
-                                                  'Artista.nome', 
-                                                  'Obra.ano_inicio', 
-                                                  'Obra.ano_fim'),
-                                'conditions' => array(
-                                                      'OR' => $or,
-                                                      'AND' => $and
-                                                      ),
-                                'order' => 'Artista.nome asc',
-                                );
+          'fields' => array(
+            'Obra.id', 
+            'Obra.nome', 
+            'Obra.imagem', 
+            'Artista.id',
+            'Artista.nome', 
+            'Obra.ano_inicio', 
+            'Obra.ano_fim'),
+          'conditions' => array(
+            'AND' => $and,
+            'OR' => $or,
+          ),
+          'order' => 'Artista.nome asc',
+        );
       } else {
         $this->Session->setFlash(__('Busca inválida'));
       }
