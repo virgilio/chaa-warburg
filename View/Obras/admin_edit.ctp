@@ -19,8 +19,12 @@
   }
 </style>
 
-<h2>Editar obra <?php echo h(substr($this->request->data['Obra']['nome'], 0, 40))
-  . (strlen($this->request->data['Obra']['nome']) > 40 ? '...' : ''); ?></h2>
+<h2>Editar obra 
+  <?php 
+    echo h(substr($this->request->data['Obra']['nome'], 0, 40))
+    . (strlen($this->request->data['Obra']['nome']) > 40 ? '...' : ''); 
+  ?>
+</h2>
 
 <?php echo $this->Form->create('Obra', array('enctype' =>
 'multipart/form-data', 'class' => 'form-horizontal')); ?>
@@ -70,15 +74,21 @@
       <div class="row">
         <div class="span8">
           <h3>Editar imagem e miniatura</h3>
-          <?php echo $this->Form->input('imagem', 
-            array('type' => 'file', 'id' =>
-                  'image_file', 
-                  'onchange' => 'fileSelectHandler()')); ?>
+          <?php 
+            echo $this->Form->input(
+              'imagem', 
+              array('type' => 'file', 'id' =>
+                    'image_file', 
+                    'onchange' => 'fileSelectHandler()')); ?>
         </div>
         <div class="span12">
           <label>Miniatura atual</label>
-          <?php echo $this->Html->image(('obras/thumbs/' . $this->Form->value('Obra.imagem')), 
-          array('alt' => $this->Form->value('Obra.imagem'), 'border' => '0', 'class' => 'img-polaroid'));
+          <?php 
+            echo $this->Html->image(
+              ('obras/thumbs/' . $this->Form->value('Obra.imagem')), 
+              array('alt' => $this->Form->value('Obra.imagem'), 
+                    'border' => '0', 
+                    'class' => 'img-polaroid'));
           ?>
         </div>
       </div>
@@ -87,18 +97,26 @@
         <div class="span6" style="height: auto">
           <h4>Selecione a miniatura desejada</h4>
           <div class="jcrop" id="image-box">            
-            <?php echo $this->Html->image(('obras/' . $this->Form->value('Obra.imagem')), 
-            array('alt' => $this->Form->value('Obra.imagem'), 'border' =>
-            '0', 'id' => 'preview', 'onload' => 'loadPreview()'));
+            <?php 
+              echo $this->Html->image(
+                ('obras/' . $this->Form->value('Obra.imagem')), 
+                array('alt' => $this->Form->value('Obra.imagem'), 
+                      'border' => '0', 
+                      'id' => 'preview', 
+                      'onload' => 'loadPreview()'));
             ?>               
           </div>
         </div>
-        <input type="hidden" id="filesize" name="data[Thumbnail][filesize]" />
-        <input type="hidden" id="filetype" name="data[Thumbnail][filetype]" />
-        <input type="hidden" id="filedim" name="data[Thumbnail][filedim]" />
-        <input type="hidden" id="w" name="data[Thumbnail][w]" />
-        <input type="hidden" id="h" name="data[Thumbnail][h]" />
-        
+        <input type="hidden" 
+               id="filesize" name="data[Thumbnail][filesize]" />
+        <input type="hidden" 
+               id="filetype" name="data[Thumbnail][filetype]" />
+        <input type="hidden" 
+               id="filedim" name="data[Thumbnail][filedim]" />
+        <input type="hidden" 
+               id="w" name="data[Thumbnail][w]" />
+        <input type="hidden" 
+               id="h" name="data[Thumbnail][h]" />
       </div>
     </fieldset>
   </div>
@@ -107,8 +125,6 @@
   <!-- Início step2 -->
   <div id="edit-img-step2" class="tab-pane active">
     <fieldset>
-      
-
       <h3>Informações da obra</h3>
       <div class="control-group">
         <label class="control-label" for="nome">Nome da obra</label>

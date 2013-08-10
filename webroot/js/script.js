@@ -12,42 +12,36 @@
 var jcrop_api, boundx, boundy;
 
 
-var loadPreview = function(){
-    $('#preview').Jcrop({
-                            minSize: [150, 90], // min crop size
-                            aspectRatio : 15 / 9, // keep aspect ratio 1:1
-                            bgFade: true, // use fade effect
-                            bgOpacity: .3, // fade opacity
-                            onChange: updateInfo,
-                            onSelect: updateInfo,
-                            onRelease: clearInfo,
-                            boxWidth: 900 
-                            //                                boxHeight: 400
-                        }, function(){
-                            // use the Jcrop API to get the real image size
-                            var bounds = this.getBounds();
-                            boundx = bounds[0];
-                            boundy = bounds[1];
-                            
-                            // Store the Jcrop API in the jcrop_api variable
-                            jcrop_api = this;
-                            /*console.log($('#x1').val()  
-                                        + ' -- ' 
-                                        +   $('#y1').val()  
-                                        + ' -- ' 
-                                        + $('#x2').val() 
-                                        + ' -- ' 
-                                        +  $('#y2').val());
-                            console.log(boundx + '--' + boundy);*/
-                            jcrop_api.setSelect([
-                                                    validNumber($('#x1').val()), 
-                                                    validNumber($('#y1').val()), 
-                                                    validNumber($('#x2').val()), 
-                                                    validNumber($('#y2').val()) 
-                                                ]);
-                            //console.log(jcrop_api.tellSelect());
-                        });
-};
+var loadPreview = 
+    function(){
+        $('#preview')
+            .Jcrop({
+                       minSize: [150, 90], // min crop size
+                       aspectRatio : 15 / 9, // keep aspect ratio 1:1
+                       bgFade: true, // use fade effect
+                       bgOpacity: .3, // fade opacity
+                       onChange: updateInfo,
+                       onSelect: updateInfo,
+                       onRelease: clearInfo,
+                       boxWidth: 900 
+                   }, function(){
+                       // use the Jcrop API to get the real image size
+                       var bounds = this.getBounds();
+                       boundx = bounds[0];
+                       boundy = bounds[1];
+                       
+                       // Store the Jcrop API in the jcrop_api variable
+                       jcrop_api = this;
+                       jcrop_api
+                           .setSelect([
+                                          validNumber($('#x1').val()), 
+                                          validNumber($('#y1').val()), 
+                                          validNumber($('#x2').val()), 
+                                          validNumber($('#y2').val()) 
+                                      ]);
+                       //console.log(jcrop_api.tellSelect());
+                   });
+    };
 
 
 // convert bytes into friendly format
@@ -68,7 +62,8 @@ function validNumber(n){
 // check for selected crop region
 function checkForm() {
     if (parseInt($('#w').val())) return true;
-    $('.error').html('Por favor, selecione uma imagem e um miniatura').show();
+    $('.error').html('Por favor, selecione uma imagem e um miniatura')
+        .show();
     return false;
 };
 
@@ -98,13 +93,19 @@ function fileSelectHandler() {
     // check for image type (jpg and png are allowed)
     var rFilter = /^(image\/jpeg|image\/png)$/i;
     if (! rFilter.test(oFile.type)) {
-        $('.error').html('Por favor selecione um arquivo válido de imagem (jpg, png)').show();
+        $('.error')
+            .html('Por favor selecione um arquivo '
+                  + 'válido de imagem (jpg, png)')
+            .show();
         return;
     }
 
     // check for file size
     if (oFile.size > 25 * 1024 * 1024) {
-        $('.error').html('O arquivo é muito grande (maior que 25Mb), entre em contato com o administrador').show();
+        $('.error')
+            .html('O arquivo é muito grande (maior que 25Mb), '
+                  + 'entre em contato com o administrador')
+            .show();
         return;
     }
 
@@ -114,51 +115,56 @@ function fileSelectHandler() {
     // prepare HTML5 FileReader
     var oReader = new FileReader();
     oReader.onload = function(e) {
-
-        // e.target.result contains the DataURL which we can use as a source of the image
+        // e.target.result contains the DataURL which we can use as 
+        // a source of the image
         oImage.style.height = 'auto';
         oImage.src = e.target.result;
         oImage.onload = function () { // onload event handler            
-
             // display step 2
             $('.step2').fadeIn(500);
             // display some basic image info
             var sResultFileSize = bytesToSize(oFile.size);
             $('#filesize').val(sResultFileSize);
             $('#filetype').val(oFile.type);
-            $('#filedim').val(oImage.naturalWidth + ' x ' + oImage.naturalHeight);
+            $('#filedim').val(oImage.naturalWidth 
+                              + ' x ' 
+                              + oImage.naturalHeight);
             
-            // Create variables (in this scope) to hold the Jcrop API and image size
+            // Create variables (in this scope) to hold the Jcrop API 
+            // and image size
             
             // destroy Jcrop if it is existed
             if (typeof jcrop_api != 'undefined') {
                 // console.log('wheee!');
                 jcrop_api.destroy();
             }
-//            jcrop_api.destroy();
+            // jcrop_api.destroy();
             
             // initialize Jcrop
-            $('#preview').Jcrop({
-                                    minSize: [150, 90], // min crop size
-                                    aspectRatio : 15 / 9, // keep aspect ratio 1:1
-                                    bgFade: true, // use fade effect
-                                    bgOpacity: .3, // fade opacity
-                                    onChange: updateInfo,
-                                    onSelect: updateInfo,
-                                    onRelease: clearInfo,
-                                    boxWidth: 900
-                                }, function(){
-                                    // use the Jcrop API to get the real image size
-                                    var bounds = this.getBounds();
-                                    boundx = bounds[0];
-                                    boundy = bounds[1];
-                                    
-                                    // Store the Jcrop API in the jcrop_api variable
-                                    jcrop_api = this;
-                                });
+            $('#preview')
+                .Jcrop({
+                           minSize: [150, 90], // min crop size
+                           aspectRatio : 15 / 9, // keep aspect ratio 1:1
+                           bgFade: true, // use fade effect
+                           bgOpacity: .3, // fade opacity
+                           onChange: updateInfo,
+                           onSelect: updateInfo,
+                           onRelease: clearInfo,
+                           boxWidth: 900
+                       }, function(){
+                           // use the Jcrop API to get the real image size
+                           var bounds = this.getBounds();
+                           boundx = bounds[0];
+                           boundy = bounds[1];
+                           
+                           // Store the Jcrop API in the jcrop_api variable
+                           jcrop_api = this;
+                       });
         };
     };
+
     
     // read selected file as DataURL
     oReader.readAsDataURL(oFile);
 }
+
