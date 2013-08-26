@@ -26,7 +26,16 @@
             <div id="img_<?php echo $obra['id'] ?>" style="display: none;" class="modal_obra">
                 <div>
                     <p><?php echo $this->Html->image(('obras/'.$obra['imagem']), array('alt' => '', 'border' => '0')); ?></p>
-                    <p><?php echo $artista['Artista']['nome']; ?> (<?php echo h($obra['ano_fim']); ?>)</p>
+                    <p><?php echo $artista['Artista']['nome']; ?>
+                    (<?php 
+                        if (($obra['ano_inicio'] == null) && ($obra['ano_fim'] == null)) {
+                            echo 'sem data';
+                          } else {
+                            echo (h($obra['ano_inicio']) != 0) ? h($obra['ano_inicio']) . ' - ': ''; 
+                            echo h($obra['ano_fim']); 
+                        };             
+                    ?>)
+                    </p>
                     <p><?php echo $obra['nome']; ?></p>
                 </div>
             </div>
@@ -38,7 +47,14 @@
                 ?>
             </p>
             <p class="nome-artista">
-                (<?php echo h($obra['ano_fim']); ?>)
+                (<?php 
+                    if (($obra['ano_inicio'] == null) && ($obra['ano_fim'] == null)) {
+                        echo 'sem data';
+                      } else {
+                        echo (h($obra['ano_inicio']) != 0) ? h($obra['ano_inicio']) . ' - ': ''; 
+                        echo h($obra['ano_fim']); 
+                    };             
+                ?>)
             </p>
         </div>
 	<?php endforeach; ?>

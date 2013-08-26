@@ -111,11 +111,11 @@ $this->request->query['Search']['type'] : 'fast'; ?>
             </div>
           </div>
           <div class="control-group">
-            <label class="control-label" for="tags">Tipo de obra</label>
+            <label class="control-label" for="tags">Técnica</label>
             <div class="controls">
               <?php echo $this->Form->input('ObraTipo',
               array('empty' => '', 'label' => '', 'class' => 'input_chosena',
-              'data-placeholder' => 'Selecione o tipo de obra', 'value' =>
+              'data-placeholder' => 'Selecione a técnica da obra', 'value' =>
               (isset($data['ObraTipo']) ? $data['ObraTipo'] : ""))); ?>
             </div>
           </div>

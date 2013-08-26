@@ -3,9 +3,12 @@ jQuery(document).ready(
 
 
         jQuery('.fancybox').fancybox({
+          // width : '100%',
+          // height : '100%',
           afterLoad : function(upcoming, current){
             console.log(upcoming);
             var altura = upcoming.height * 0.8;
+            //var altura = jQuery("fancybox-wrap").height();
             jQuery('.obra img, .modal_obra img').css({'max-height' : altura});
           }
         });

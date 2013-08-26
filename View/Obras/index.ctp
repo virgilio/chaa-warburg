@@ -36,7 +36,7 @@
               }
         ?>
         (<?php 
-            if (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_inicio'] == null)) {
+            if (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_fim'] == null)) {
                 echo 'sem data';
               } else {
                 echo (h($obra['Obra']['ano_inicio']) != 0) ? h($obra['Obra']['ano_inicio']) . ' - ': ''; 

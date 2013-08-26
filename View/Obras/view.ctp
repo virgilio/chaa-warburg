@@ -82,14 +82,32 @@
             <?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']),
           array('alt' => '', 'border' => '0',)); ?>
           </div>
-          <p><?php echo $obra['Artista']['nome']; ?> (<?php echo h($obra['Obra']['ano_fim']); ?>)</p>
+          <p><?php echo $obra['Artista']['nome']; ?>
+            (<?php 
+            if (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_fim'] == null)) {
+                echo 'sem data';
+              } else {
+                echo (h($obra['Obra']['ano_inicio']) != 0) ? h($obra['Obra']['ano_inicio']) . ' - ': ''; 
+                echo h($obra['Obra']['ano_fim']); 
+            };             
+            ?>)
+          </p>
           <p><?php echo $obra['Obra']['nome']; ?></p>
         </div>
         <div class="obra">
           <div class="modal-img">
             <?php echo $this->Html->image('obras/'.$relacionada['imagem']) ?>
           </div>
-          <p><?php echo $relacionada['Artista']['nome']; ?> (<?php echo h($relacionada['ano_fim']); ?>)</p>
+          <p><?php echo $relacionada['Artista']['nome']; ?>
+            (<?php 
+            if (($relacionada['ano_inicio'] == null) && ($relacionada['ano_fim'] == null)) {
+                echo 'sem data';
+              } else {
+                echo (h($relacionada['ano_inicio']) != 0) ? h($relacionada['ano_inicio']) . ' - ': ''; 
+                echo h($relacionada['ano_fim']); 
+            };             
+            ?>)
+          </p>
           <p>
             <?php echo $this->Html->link(
             h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
@@ -125,7 +143,14 @@
         array('escape' => false,
               'title' => ('Ir para perfil do autor'),
               'target' => '_blank')); ?>
-        (<?php echo h($relacionada['ano_fim']); ?>)
+        (<?php 
+        if (($relacionada['ano_inicio'] == null) && ($relacionada['ano_fim'] == null)) {
+            echo 'sem data';
+          } else {
+            echo (h($relacionada['ano_inicio']) != 0) ? h($relacionada['ano_inicio']) . ' - ': ''; 
+            echo h($relacionada['ano_fim']); 
+        };             
+        ?>)
       </p>
     </div>
     <?php $i++;
