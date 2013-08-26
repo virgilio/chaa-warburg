@@ -20,6 +20,15 @@
 	<?php echo $this->Form->input('email', array('label' => '')); ?>		    
       </div>
     </div>
+    <div class="control-group">
+      <label class="control-label" for="role">Notificações por email</label>
+      <div class="controls">
+      <?php echo $this->Form->input('notification_level', array('options' => array('0'
+  => 'Nenhuma notificação', '1' => 'Apenas das minhas obras', '2' => 'De todas as obras'), 'label' => '')); ?>
+      </div>
+    </div>
+
+    
     <a href="#" class="offset2"
        onclick="jQuery('#change-password').toggle('fade'); return false;">
       <?php echo  __('Alterar Senha');?>
@@ -40,32 +49,32 @@
 	  'type' => 'password', 'required' => false)); ?>
         </div>
       </div>
+    
     </fieldset>
     
     <?php if($auth['role'] == 'admin'): ?>
-    <div class="control-group">
-      <label class="control-label" for="role">Papel</label>
-      <div class="controls">
-        
-	<?php echo $this->Form->input('role', array('options' => array('admin'
-	=> 'Admin', 'author' => 'Colaborador'), 'label' => '')); ?>
-      </div>
-    </div>
-    
-    <div class="control-group">
-      <label class="control-label" for="role">Usuário Ativo</label>
-      <div class="controls">
-        <div class="make-switch"
-             data-on="success" 
-             data-off="danger"  
-             data-on-label="<i class='icon-ok icon-white'></i>" 
-             data-off-label="<i class='icon-remove'></i>">
-          <?php echo $this->Form->input('active', array('label' => false,
-          'hiddenField' => true, 'div' => false)); ?>
+      <div class="control-group">
+        <label class="control-label" for="role">Papel</label>
+        <div class="controls">
+          
+  	   <?php echo $this->Form->input('role', array('options' => array('admin'
+  	=> 'Admin', 'author' => 'Colaborador'), 'label' => '')); ?>
         </div>
       </div>
-    </div>
-    
+      
+      <div class="control-group">
+        <label class="control-label" for="role">Usuário Ativo</label>
+        <div class="controls">
+          <div class="make-switch"
+               data-on="success" 
+               data-off="danger"  
+               data-on-label="<i class='icon-ok icon-white'></i>" 
+               data-off-label="<i class='icon-remove'></i>">
+            <?php echo $this->Form->input('active', array('label' => false,
+            'hiddenField' => true, 'div' => false)); ?>
+          </div>
+        </div>
+      </div>    
     <?php endif ?>
   </fieldset>
   <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn
