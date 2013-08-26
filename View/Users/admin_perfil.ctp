@@ -19,6 +19,13 @@
 	    <?php echo $this->Form->input('email', array('label' => '', 'style' => 'border: 0;')); ?>		    
           </div>
         </div>
+        <div class="control-group">
+          <label class="control-label" for="role">Notificações por email</label>
+          <div class="controls">
+          <?php echo $this->Form->input('notification_level', array('options' => array('0'
+      => 'Nenhuma notificação', '1' => 'Apenas das minhas obras', '2' => 'De todas as obras'), 'label' => '')); ?>
+          </div>
+        </div>  
         <!--<div class="control-group">
             <label class="control-label" for="email">Email</label>
             <div class="controls">
