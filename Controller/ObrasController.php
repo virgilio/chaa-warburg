@@ -2,6 +2,7 @@
 App::uses('AppController', 'Controller');
 App::uses('Sanitize', 'Utility');
 App::uses('AuthComponent', 'Controller/Component');
+App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Obras Controller
@@ -145,8 +146,10 @@ class ObrasController extends AppController {
           $and['Artista.nome LIKE'] = '%' . $query['artista'] . '%';
         
         if(!empty($query['obra'])){
-          $and['Obra.nome LIKE'] = '%' . $query['obra'] . '%';
-          $and['Obra.descricao LIKE'] = '%' . $query['obra'] . '%';
+          $and[0] = '(Obra.nome LIKE \'%' . $query['obra'] . '%\' OR Obra.descricao LIKE \'%' . $query['obra'] . '%\')';
+          //die(pr($and));
+          //$and['Obra.nome LIKE'] = '%' . $query['obra'] . '%';
+          //$and['Obra.descricao LIKE'] = '%' . $query['obra'] . '%';
         }
         if(!empty($query['instituicao']))
           $and['Instituicao.nome LIKE'] = '%' . $query['instituicao'] . '%';
@@ -255,18 +258,18 @@ class ObrasController extends AppController {
     
     $db = $this->Pais->getDataSource();
     $subQuery = $db->buildStatement(
-                                    array(
-                                          'fields'     => array('Pais.id'),
-                                          'table'      => $db->fullTableName($this->Pais),
-                                          'alias'      => 'Pais',
-                                          'limit'      => null,
-                                          'offset'     => null,
-                                          'joins'      => array(),
-                                          'conditions' => $csq,
-                                          'order'      => null,
-                                          'group'      => null
-                                          ),
-                                    $this->Pais);
+      array(
+        'fields'     => array('Pais.id'),
+        'table'      => $db->fullTableName($this->Pais),
+        'alias'      => 'Pais',
+        'limit'      => null,
+        'offset'     => null,
+        'joins'      => array(),
+        'conditions' => $csq,
+        'order'      => null,
+        'group'      => null
+      ),
+      $this->Pais);
     return $db->expression($subQuery)->value;
   }
 
@@ -410,7 +413,10 @@ class ObrasController extends AppController {
         $this->Obra->Thumbnail->save($data['Thumbnail']);
         
         $this->Session->setFlash(__('A Imagem foi salva!'));
+        $this->sendMail($this->Obra);
+
         $this->redirect(array('action' => 'edit', $this->Obra->id));
+        
       } else {
         $this->Session->setFlash(
           __('A obra não pode ser salva, tente novamente'));
@@ -418,6 +424,60 @@ class ObrasController extends AppController {
     }
     $artistas = $this->Obra->Artista->find('list');
     $this->set(compact('artistas'));
+  }
+
+  /**
+   * 
+   * sendMail method
+   *
+   * Sends mail to all users that 
+   * are admin users or has notification
+   * level equals to 2 and the current user
+   *
+   */
+
+  private function sendMail($obra){
+    $this->loadModel('User');
+    $this->User->recursive = -1;
+    $users = $this->User->find('all', 
+                      array(
+                        'fields' => array('User.id', 'User.nome', 'User.email'),
+                        'conditions' => array(
+                          'OR' => array(
+                            'User.role' => 'admin',
+                            'User.notification_level' => 2,
+                            'User.id' => $this->Auth->user('id'),
+                          ),
+                          'AND' => array(
+                            'User.notification_level >' => 0
+                          )
+                        )
+                      ));
+
+    // The users are selected, now, send mail to them!
+    $email = new CakeEmail();
+    $email->from(array('virgilio@mupi.me' => 'Virgílio Santos'));
+    $users = Set::combine($users, 
+                          "{n}.User.email",
+                          "{n}.User.nome",
+                          "{n}.User.id");    
+    $url = Router::url(array('controller' => 'obras', 'action' => 'view', $obra->field('id')), true);
+    foreach($users as $user) {
+      $email->to($user);
+      $email->subject('[CHAA-Warburg] Cadastro de nova obra [#' . $obra->field('id') . ']');
+
+      $email->send("
+Olá, 
+
+Foi cadastrada uma nova obra pelo usuário: " . $this->Auth->user('nome') . "
+
+Título: " . $obra->field('nome') . "
+
+Você pode acessá-la através do link: " . $url . "                  
+
+                 ");
+    }
+
   }
         
   /**

@@ -2,7 +2,8 @@
 <div class="artistas view">
 	<h2><?php echo h($artista['Artista']['nome']); ?></h2>
 	<div class="img_artista">
-		<?php echo $this->Html->image('artistas/'.(empty($artista['Artista']['imagem']) ? 'semthumb.jpg' : $artista['Artista']['imagem'])); 
+          <?php echo $this->Html->image('artistas/'.(empty($artista['Artista']['imagem']) ? 'semthumb.jpg' : $artista['Artista']['imagem']), 
+            array('onerror' => "this.src = '" . $this->webroot . "img/semthumb.jpg';")); 
         ?>
 	</div>
 	<div class="desc_artista">
