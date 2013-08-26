@@ -456,12 +456,12 @@ class ObrasController extends AppController {
 
     // The users are selected, now, send mail to them!
     $email = new CakeEmail();
-    $email->from(array('virgilio@mupi.me' => 'Virgílio Santos'));
+    $email->from(array('contato@chaa-unicamp.com.br' => 'Equipe Warburg'));
     $users = Set::combine($users, 
                           "{n}.User.email",
                           "{n}.User.nome",
                           "{n}.User.id");    
-    $url = Router::url(array('controller' => 'obras', 'action' => 'view', $obra->field('id')), true);
+    $url = Router::url(array('controller' => 'obras', 'action' => 'view', 'admin' => false, $obra->field('id')), true);
     foreach($users as $user) {
       $email->to($user);
       $email->subject('[CHAA-Warburg] Cadastro de nova obra [#' . $obra->field('id') . ']');
