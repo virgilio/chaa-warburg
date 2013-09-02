@@ -23,7 +23,7 @@
     <label class="control-label">Usuário</label>
     <div class="controls">
       <?php
-        echo $this->Form->input('user_id', array('label' => false));
+        echo $this->Form->input('user_id', array('label' => false, 'empty' => true));
       ?>
     </div>
   </div>
