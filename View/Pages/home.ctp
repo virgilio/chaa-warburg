@@ -17,13 +17,15 @@
         <div class="active item">
           <?php 
             echo $this->Html->link(
-              $this->Html->image('obras/' . $lastObras[0]['Obra']['imagem']).
+              $this->Html->image('obras/' . $lastObras[0]['Obra']['imagem']) .
               '
               <div class="carousel-caption">
                 <h4>'. $lastObras[0]['Obra']['nome'] .'</h4>
               </div>
               ',
-              array('controller' => 'obras', 'action' => 'view', $lastObras[0]['Obra']['id']), 
+              array('controller' => 'obras', 
+                    'action' => 'view', 
+                    $lastObras[0]['Obra']['id']), 
               array('escape'=>false));
             ?>
         </div>
@@ -36,7 +38,8 @@
                 <h4>'. $lastObras[1]['Obra']['nome'] .'</h4>
               </div>
               ',
-              array('controller' => 'obras', 'action' => 'view', $lastObras[1]['Obra']['id']), 
+              array('controller' => 'obras', 
+                    'action' => 'view', $lastObras[1]['Obra']['id']), 
               array('escape'=>false));
             ?>
         </div>
@@ -49,7 +52,8 @@
                 <h4>'. $lastObras[2]['Obra']['nome'] .'</h4>
               </div>
               ',
-              array('controller' => 'obras', 'action' => 'view', $lastObras[2]['Obra']['id']), 
+              array('controller' => 'obras', 
+                    'action' => 'view', $lastObras[2]['Obra']['id']), 
               array('escape'=>false));
             ?>
         </div>
@@ -62,7 +66,8 @@
                 <h4>'. $lastObras[3]['Obra']['nome'] .'</h4>
               </div>
               ',
-              array('controller' => 'obras', 'action' => 'view', $lastObras[3]['Obra']['id']), 
+              array('controller' => 'obras', 
+                    'action' => 'view', $lastObras[3]['Obra']['id']), 
               array('escape'=>false));
             ?>
         </div>
@@ -75,7 +80,8 @@
                 <h4>'. $lastObras[4]['Obra']['nome'] .'</h4>
               </div>
               ',
-              array('controller' => 'obras', 'action' => 'view', $lastObras[4]['Obra']['id']), 
+              array('controller' => 'obras', 
+                    'action' => 'view', $lastObras[4]['Obra']['id']), 
               array('escape'=>false));
             ?>
         </div>
@@ -86,4 +92,3 @@
     </div>
   </div>
 </div>
-

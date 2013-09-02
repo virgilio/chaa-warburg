@@ -16,4 +16,18 @@
       ?>
     </div>
   </div>
+  <?php
+    if('admin' == $auth['role']) {
+  ?>
+  <div class="control-group">
+    <label class="control-label">Usuário</label>
+    <div class="controls">
+      <?php
+        echo $this->Form->input('user_id', array('label' => false));
+      ?>
+    </div>
+  </div>
+  <?php
+    }
+  ?>
 </fieldset>

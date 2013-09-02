@@ -596,6 +596,8 @@ Você pode acessá-la através do link: " . $url . "
     $this->loadModel('Pais');
     $this->loadModel('Cidade');
     $this->loadModel('Instituicao');
+    $this->loadModel('User');
+
     $cidades = $this->Cidade->find(
       'all', 
       array(
@@ -622,6 +624,8 @@ Você pode acessá-la através do link: " . $url . "
     $paises = $this->Pais->find('list');    
     $artistas = $this->Obra->Artista->find('list');
     $iconografias = $this->Obra->Iconografia->find('list');
+
+    $users = $this->User->find('list');
     
     $this->Obra->Relacionada->Behaviors->load('Containable');
     $relacionadas = $this->Obra->Relacionada->find('list', array(
@@ -645,7 +649,7 @@ Você pode acessá-la através do link: " . $url . "
     unset($relacionadas[$result['Obra']['id']]);
 
     $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 
-                       'artistas', 'iconografias', 'relacionadas'));
+                       'artistas', 'iconografias', 'relacionadas', 'users'));
   }
 
   /**

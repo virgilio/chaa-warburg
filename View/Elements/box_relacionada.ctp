@@ -3,7 +3,11 @@
   <div class="btns-mini-obra">
     <a href="#edit-relacao" data-toggle="modal" class="relacionada-link-edit"
        data-id="<?php echo $relacionada['ObrasRelacionada']['id']; ?>"
-       data-descricao="<?php echo $relacionada['ObrasRelacionada']['descricao']; ?>">
+       data-descricao="<?php echo
+         $relacionada['ObrasRelacionada']['descricao']; ?>"
+       data-user-id="<?php echo
+         $relacionada['ObrasRelacionada']['user_id']; ?>"
+       >
        <i class="icon-edit-sign"></i>
     </a>
     <?php 

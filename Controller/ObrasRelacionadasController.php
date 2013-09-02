@@ -55,7 +55,8 @@ class ObrasRelacionadasController extends AppController {
         $this->set('relacionada', $relacionada);
         $this->set('relacao_id', $this->ObrasRelacionada->id);
         $this->set('relacao_descricao', $this->request->data['ObrasRelacionada']['descricao']);
-        
+        $this->set('relacao_user_id', $this->ObrasRelacionada->field('user_id'));
+
         $this->autoRender = false;
         $this->layout = 'ajax';
         $this->render(DS.'Elements'.DS.'box_relacionada_ajax');       
@@ -85,6 +86,7 @@ class ObrasRelacionadasController extends AppController {
       if ($this->ObrasRelacionada->save($this->request->data)) {
         $this->autoRender = false;
         $this->layout = 'ajax';
+        
         return '{"success" : "Descrição atualizada", "descricao" : "' . $data['ObrasRelacionada']['descricao'] . '"}';
       } else {
         $this->autoRender = false;

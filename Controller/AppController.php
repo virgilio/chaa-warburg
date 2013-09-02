@@ -98,7 +98,10 @@ class AppController extends Controller {
         $this->redirect($this->Auth->logout());
       }
       if('users' == $this->params['controller']){
-        if(('admin_edit' == $this->params['action'] || 'admin_index' == $this->params['action']) && $this->Auth->user('role') != 'admin'){
+        if(('admin_edit' == $this->params['action'] || 
+            'admin_index' == $this->params['action']) 
+           && $this->Auth->user('role') != 'admin'){
+          
           $this->Session->setFlash("Seu usuário não está autorizado a acessar essa área");
           $this->redirect(array('action' => 'perfil'));
         }

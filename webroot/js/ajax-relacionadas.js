@@ -35,6 +35,11 @@ jQuery(document).ready(
                            + "form textarea#ObrasRelacionadaDescricao")
                         .val(jQuery(this)
                              .attr('data-descricao'));
+
+                    jQuery("#edit-relacao "
+                           + "form select#ObrasRelacionadaUserId")
+                        .val(jQuery(this)
+                             .attr('data-user-id'));
                 });        
     });
 

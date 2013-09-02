@@ -357,9 +357,15 @@
         <label class="control-label" for="instituicao_id">Instituição</label>
         <div class="controls">
           <span id="select-instituicao" >
-            <?php echo $this->Form->input('instituicao_id',
-            array('label' => '', 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder'
-            => 'Selecione a Instituição')); ?>
+            <?php 
+              echo $this->Form->input('instituicao_id',
+                                      array('label' => false, 
+                                            'class' => 'input_chosen', 
+                                            'empty'  => true, 
+                                            'data-placeholder' => 
+                                            'Selecione a Instituição'
+                                      )); 
+            ?>
           </span>
           <ul class="unstyled inline pull-right">
             <li>
@@ -382,9 +388,16 @@
         <label class="control-label" for="tags">Iconografia</label>
         <div class="controls">
           <span id="select-iconografia">
-            <?php echo $this->Form->input('iconografia_id', 
-            array('label' => '', 'class' => 'input_chosen', 'empty'  => true, 'data-placeholder'
-            => 'Selecione a iconografia')); ?>
+            <?php 
+              echo $this->Form->input('iconografia_id', 
+                                      array(
+                                        'label' => false, 
+                                        'class' => 'input_chosen', 
+                                        'empty'  => true, 
+                                        'data-placeholder' => 
+                                        'Selecione a iconografia'
+                                      )); 
+            ?>
           </span>
           <ul class="unstyled inline pull-right">
             <li>                
@@ -405,30 +418,53 @@
           <h3>Adicionar imagem relacionada</h3>
           <div class="chosen-container">
             <?php 
-               echo $this->Form->input('get_imagem_url', array('type' => 'hidden',
-            'value' => Router::url(array('controller' => 'obras', 'action'
-            => 'get_imagem_by_id'))));
-            echo $this->Form->input('imagem_url', array('type' => 'hidden',
-            'value' => Router::url(array('admin' => false, 'controller' => '', 'action'
-            => 'img'))));
-            echo $this->Form->input('relacionadas', array('label' => false,
-            'type' => 'select', 'options' => $relacionadas,'data-placeholder' => 'Selecione a obra', 
-            'empty'  => true, 'class' => 'input-chosen'));
+              echo $this->Form->input(
+                'get_imagem_url', 
+                array('type' => 'hidden',
+                      'value' => Router::url(
+                        array('controller' => 'obras', 
+                              'action' => 'get_imagem_by_id')
+                      )
+                ));
+              echo $this->Form->input(
+                'imagem_url', 
+                array('type' => 'hidden',
+                      'value' => Router::url(
+                        array('admin' => false, 
+                              'controller' => '', 'action' => 'img')
+                      )
+                ));
+              
+              echo $this->Form->input(
+                'relacionadas', 
+                array('label' => false,
+                      'type' => 'select', 
+                      'options' => $relacionadas, 
+                      'data-placeholder' => 'Selecione a obra', 
+                      'empty'  => true, 
+                      'class' => 'input-chosen')
+              );
             ?>
           </div>
-          <a id="add-relacionada-button" href="#add-relacionada" role="button" class="btn  btn-info"
+          <a id="add-relacionada-button" 
+             href="#add-relacionada" role="button"
+             class="btn  btn-info"
              data-toggle="no-modal">Adicionar</a>
         </div>
         <div class="span3 thumbs-relacionadas">
           <label>Imagem principal</label>
-          <?php echo $this->Html->image(('obras/thumbs/' . $this->Form->value('Obra.imagem')), 
-          array('alt' => $this->Form->value('Obra.imagem'), 'border' => '0', 'class' => 'img-polaroid'));
+          <?php 
+                echo $this->Html->image(('obras/thumbs/' . $this->Form->value('Obra.imagem')), 
+                                        array('alt' => $this->Form->value('Obra.imagem'), 'border' => '0', 'class' => 'img-polaroid'));
           ?>
         </div>
         <div class="span3 thumbs-relacionadas">
           <label>Imagem selecionada</label>
-          <?php echo $this->Html->image('semthumb.jpg', 
-          array('id' => 'thumb-relacionada', 'alt' => 'Escolha uma imagem para relacionar', 'border' => '0', 'class' => 'img-polaroid'));
+          <?php 
+                echo $this->Html->image('semthumb.jpg', 
+                                        array('id' => 'thumb-relacionada', 
+                                              'alt' => 'Escolha uma imagem para relacionar', 
+                                              'border' => '0', 'class' => 'img-polaroid'));
           ?>
         </div>
       </div>
