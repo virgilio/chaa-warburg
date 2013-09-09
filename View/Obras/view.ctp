@@ -35,6 +35,9 @@
             <?php echo isset($obra['Instituicao']['Cidade']['Pais']['nome'])?$obra['Instituicao']['Cidade']['Pais']['nome']:''; ?>
         </p>
         <p>
+            <?php echo isset($obra['Obra']['tamanho_obra'])?'Dimensões da obra: '.$obra['Obra']['tamanho_obra']: ''; ?> 
+        </p>
+        <p>
             <?php echo $this->Html->link('[DOWNLOAD DA OBRA]', '/img/obras/'.$obra['Obra']['imagem'], array('target' => 'blank')); ?>
         </p>
         <p>
