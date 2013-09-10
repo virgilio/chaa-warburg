@@ -95,9 +95,8 @@ class ObrasController extends AppController {
         $search_url .= $k . ":" . $v . "/";
       }
     }
-    //die(pr($this->passedArgs));
+
     $search_url .=  '?' . http_build_query($this->request->query);
-    //die($search_url);    
 
     $this->Session->write('SearchQuery', $search_url);
 
@@ -145,6 +144,7 @@ class ObrasController extends AppController {
         if(!empty($query['artista']))
           $and['Artista.nome LIKE'] = '%' . $query['artista'] . '%';
         
+        
         if(!empty($query['obra'])){
           $and[0] = '(Obra.nome LIKE \'%' . $query['obra'] . '%\' OR Obra.descricao LIKE \'%' . $query['obra'] . '%\')';
           //die(pr($and));
@@ -177,7 +177,7 @@ class ObrasController extends AppController {
           $instituicaoQuery = '';
           $instituicaoQuery = 'Obra.instituicao_id IN (' 
             . $this->getInstituicaoIdsQuery($cidadesQuery) . ')';
-          $or = array_merge(array($instituicaoQuery), $or);
+          $and = array_merge(array($instituicaoQuery), $and);
         }
 
         if(!empty($query['tags']))
@@ -220,6 +220,8 @@ class ObrasController extends AppController {
           }
         }
         
+        //die(pr($and));
+
         $this->paginate = array(
           'fields' => array(
             'Obra.id', 
@@ -284,18 +286,18 @@ class ObrasController extends AppController {
         
     $db = $this->Cidade->getDataSource();
     $subQuery = $db->buildStatement(
-                                    array(
-                                          'fields'     => array('Cidade.id'),
-                                          'table'      => $db->fullTableName($this->Cidade),
-                                          'alias'      => 'Cidade',
-                                          'limit'      => null,
-                                          'offset'     => null,
-                                          'joins'      => array(),
-                                          'conditions' => array('OR' => $or),
-                                          'order'      => null,
-                                          'group'      => null
-                                          ),
-                                    $this->Cidade);
+      array(
+        'fields'     => array('Cidade.id'),
+        'table'      => $db->fullTableName($this->Cidade),
+        'alias'      => 'Cidade',
+        'limit'      => null,
+        'offset'     => null,
+        'joins'      => array(),
+        'conditions' => array('OR' => $or),
+        'order'      => null,
+        'group'      => null
+      ),
+      $this->Cidade);
     return $db->expression($subQuery)->value;
   }
   
@@ -306,18 +308,18 @@ class ObrasController extends AppController {
     
     $db = $this->Instituicao->getDataSource();
     $subQuery = $db->buildStatement(
-                                    array(
-                                          'fields'     => array('Instituicao.id'),
-                                          'table'      => $db->fullTableName($this->Instituicao),
-                                          'alias'      => 'Instituicao',
-                                          'limit'      => null,
-                                          'offset'     => null,
-                                          'joins'      => array(),
-                                          'conditions' => $conditions,
-                                          'order'      => null,
-                                          'group'      => null
-                                          ),
-                                    $this->Instituicao);
+      array(
+        'fields'     => array('Instituicao.id'),
+        'table'      => $db->fullTableName($this->Instituicao),
+        'alias'      => 'Instituicao',
+        'limit'      => null,
+        'offset'     => null,
+        'joins'      => array(),
+        'conditions' => $conditions,
+        'order'      => null,
+        'group'      => null
+      ),
+      $this->Instituicao);
     return $db->expression($subQuery)->value;
   }
             

@@ -122,61 +122,61 @@ class Obra extends AppModel {
    * @var array
    */
   public $belongsTo = array(
-                            'ObraTipo' => array(
-                                                'className' => 'ObraTipo',
-                                                'foreignKey' => 'obra_tipos_id',
-                                                'conditions' => '',
-                                                'fields' => '',
-                                                'order' => ''
-                                                ),
-                            'Instituicao' => array(
-                                                   'className' => 'Instituicao',
-                                                   'foreignKey' => 'instituicao_id',
-                                                   'conditions' => '',
-                                                   'fields' => '',
-                                                   'order' => ''
-                                                   ),
-                            'User' => array(
-                                            'className' => 'User',
-                                            'foreignKey' => 'user_id',
-                                            'conditions' => '',
-                                            'fields' => '',
-                                            'order' => ''
-                                            ),
-                            'Artista' => array(
-                                               'className' => 'Artista',
-                                               'foreignKey' => 'artista_id',
-                                               'conditions' => '',
-                                               'fields' => '',
-                                               'order' => ''
-                                               ),
-                            'Iconografia' => array(
-                                                   'className' => 'Iconografia',
-                                                   'foreignKey' => 'iconografia_id',
-                                                   'conditions' => '',
-                                                   'fields' => '',
-                                                   'order' => ''
-                                                   )
-                
-                            );
-
+    'ObraTipo' => array(
+      'className' => 'ObraTipo',
+      'foreignKey' => 'obra_tipos_id',
+      'conditions' => '',
+      'fields' => '',
+      'order' => ''
+    ),
+    'Instituicao' => array(
+      'className' => 'Instituicao',
+      'foreignKey' => 'instituicao_id',
+      'conditions' => '',
+      'fields' => '',
+      'order' => ''
+    ),
+    'User' => array(
+      'className' => 'User',
+      'foreignKey' => 'user_id',
+      'conditions' => '',
+      'fields' => '',
+      'order' => ''
+    ),
+    'Artista' => array(
+      'className' => 'Artista',
+      'foreignKey' => 'artista_id',
+      'conditions' => '',
+      'fields' => '',
+      'order' => ''
+    ),
+    'Iconografia' => array(
+      'className' => 'Iconografia',
+      'foreignKey' => 'iconografia_id',
+      'conditions' => '',
+      'fields' => '',
+      'order' => ''
+    )
+    
+  );
+  
   public $hasAndBelongsToMany = 
     array(
           'Relacionada' =>  array(
-                                  'className'  => 'Obra',
-                                  'joinTable'  => 'obras_relacionadas',
-                                  'foreignKey' => 'obra_id',
-                                  'associationForeignKey'  => 'relacionada_id',
-                                  'unique'=> true
-                                  ),
+            'className'  => 'Obra',
+            'joinTable'  => 'obras_relacionadas',
+            'foreignKey' => 'obra_id',
+            'associationForeignKey'  => 'relacionada_id',
+            'unique'=> true
+          ),
           'Relacionada2' => array(
-                                  'className'  => 'Obra',
-                                  'joinTable'  => 'obras_relacionadas',
-                                  'foreignKey' => 'relacionada_id',
-                                  'associationForeignKey'  => 'obra_id',
-                                  'unique'=> true
-                                  )
-          );
-
+            'className'  => 'Obra',
+            'joinTable'  => 'obras_relacionadas',
+            'foreignKey' => 'relacionada_id',
+            'associationForeignKey'  => 'obra_id',
+            'unique'=> true
+          )
+    );
+  
   public $hasOne = 'Thumbnail';       
 }
