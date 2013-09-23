@@ -23,8 +23,15 @@
     <div class="control-group">
       <label class="control-label" for="role">Notificações por email</label>
       <div class="controls">
-      <?php echo $this->Form->input('notification_level', array('options' => array('0'
-  => 'Nenhuma notificação', '1' => 'Apenas das minhas obras', '2' => 'De todas as obras'), 'label' => '')); ?>
+      <?php 
+          echo $this->Form->input('notification_level', 
+                                  array(
+                                    'options' => 
+                                    array('0' => 'Nenhuma notificação', 
+                                          '1' => 'Apenas das minhas obras', 
+                                          '2' => 'De todas as obras'), 
+                                    'label' => false)); 
+      ?>
       </div>
     </div>
 
@@ -87,12 +94,15 @@
   <div class="mini-obra">
     <a class="fancybox" 
        href="#img_<?php echo $obra['Obra']['id'] ?>" 
-       data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$obra['Obra']['id'].'_thumb.jpg'); ?>
+       data-fancybox-group="gallery">
+      <?php 
+        echo $this->Html->image('obras/thumbs/' . $obra['Obra']['imagem']); 
+      ?>
     </a>
 
     <div id="img_<?php echo $obra['Obra']['id'] ?>" style="display: none;" class="modal_obra">
       <div>
-	<p><?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']), array('alt' => 'oie', 'border' => '0')); ?></p>
+	<p><?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']), array('alt' => '', 'border' => '0')); ?></p>
 	<p><?php echo $obra['Artista']['nome']; ?> (<?php echo h($obra['Obra']['ano_fim']); ?>)</p>
 	<p><?php echo $obra['Obra']['nome']; ?></p>
       </div>

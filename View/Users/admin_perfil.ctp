@@ -79,7 +79,10 @@
     <h3><?php echo __('Obras cadastradas pelo usuário'); ?></h3>
     <?php foreach ($obras as $obra): ?>
     <div class="mini-obra">
-      <a class="fancybox" href="#img_<?php echo $obra['Obra']['id'] ?>" data-fancybox-group="gallery"><?php echo $this->Html->image('obras/'.$obra['Obra']['id'].'_thumb.jpg'); ?>
+      <a class="fancybox" 
+         href="#img_<?php echo $obra['Obra']['id'] ?>" 
+         data-fancybox-group="gallery">
+        <?php echo $this->Html->image('obras/thumbs/' . $obra['Obra']['imagem']); ?>
       </a>
 
       <div id="img_<?php echo $obra['Obra']['id'] ?>" style="display: none;" class="modal_obra">
