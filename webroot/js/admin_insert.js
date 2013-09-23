@@ -1,6 +1,6 @@
 bkLib.onDomLoaded(
     function(){
-        var myEditor = new nicEditor({fullPanel : true, iconsPath : '/chaa-warburg/img/nicEditorIcons.gif' })
+        var myEditor = new nicEditor({fullPanel : true, iconsPath : '/img/nicEditorIcons.gif' })
             .panelInstance('ArtistaBiografia');
         
         

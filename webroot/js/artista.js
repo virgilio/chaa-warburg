@@ -8,7 +8,7 @@ bkLib.onDomLoaded(
         var myEditor = new nicEditor(
             {
                 fullPanel : true, 
-                iconsPath : '/chaa-warburg/img/nicEditorIcons.gif' 
+                iconsPath : '/img/nicEditorIcons.gif' 
             }).panelInstance('ArtistaBiografia');
         /*myEditor.addEvent('add', function() {
          alert( myEditor.instanceById('ObraDescricao').getContent() );
