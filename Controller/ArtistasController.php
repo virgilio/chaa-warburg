@@ -12,8 +12,25 @@ class ArtistasController extends AppController {
    *
    * @return void
    */
+
+  public $paginate = array();
+
   public function admin_index() {
     $this->Artista->recursive = 0;
+    $data = $this->request->query;
+
+    if($this->request->is('get')
+       && !empty($data) && isset($data['Search']['filter'])){
+
+      $this->paginate['order'] = 'Artista.nome asc';
+      if('artista' == $data['Search']['filter']){
+        $this->paginate['conditions'] = array(
+          'Artista.nome LIKE' => '%' . $data['Search']['query'] . '%',
+        );
+      }
+    }
+      
+    
     $this->set('artistas', $this->paginate());
   }
 
@@ -30,9 +47,13 @@ class ArtistasController extends AppController {
     }
     
     parent::searchDataLoader();
-        
-    $options = array('conditions' => array('Artista.' . $this->Artista->primaryKey => $id));
-    $this->set('artista', $this->Artista->find('first', $options));
+    
+    $options = array(
+      'conditions' => array(
+        'Artista.' . $this->Artista->primaryKey => $id
+      ));
+    $this->set('artista', 
+               $this->Artista->find('first', $options));
   }
   
   public function admin_view($id = null) {
@@ -40,8 +61,11 @@ class ArtistasController extends AppController {
       throw new NotFoundException(__('Artista inválido'));
     }
 
-    $options = array('conditions' => array('Artista.' . $this->Artista->primaryKey => $id));
-    $this->set('artista', $this->Artista->find('first', $options));
+    $options = array('conditions' => array(
+      'Artista.' . $this->Artista->primaryKey => $id));
+    
+    $this->set(
+      'artista', $this->Artista->find('first', $options));
   }
 
   /**
@@ -53,8 +77,11 @@ class ArtistasController extends AppController {
     if ($this->request->is('post')) {
       $data = $this->request->data;
       
-      if(isset($data['Artista']['imagem']) && $data['Artista']['imagem']['error'] != 4){
-        $data['Artista']['imagem'] =  $this->processFile($data['Artista']['imagem']);
+      if(isset($data['Artista']['imagem']) 
+         && $data['Artista']['imagem']['error'] != 4){
+        
+        $data['Artista']['imagem'] =  
+          $this->processFile($data['Artista']['imagem']);
       } else {
         unset($data['Artista']['imagem']);
       }

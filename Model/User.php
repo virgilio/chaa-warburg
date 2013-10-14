@@ -91,7 +91,7 @@ class User extends AppModel {
   public $hasMany = array('Obra', 'ObrasRelacionada');
 
 
-  function &getInstance($user = null) {
+  static function &getInstance($user = null) {
     static $instance = array();
     
     if ($user) {
@@ -105,7 +105,7 @@ class User extends AppModel {
     return $instance[0];
   }
 
-  function store($user) {
+  static function store($user) {
     if (empty($user)) {
       return false;
     }

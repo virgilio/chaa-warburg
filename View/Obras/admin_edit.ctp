@@ -242,7 +242,7 @@
         <div class="span6">
           <div class="control-group">
               <label class="control-label" for="option1">
-                PostQuam (depois de)
+                Post quem (depois de)
               </label>
               <div class="controls">
                 <div id="" class="make-switch postantequam" 
@@ -258,7 +258,7 @@
                 </div>
               </div>
               <label class="control-label" for="option2">
-                AnteQuam (antes de)
+                Ante quem (antes de)
               </label>
               <div class="controls"> 
                 <div id="option2" class="make-switch postantequam" 

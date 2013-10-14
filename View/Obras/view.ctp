@@ -20,8 +20,8 @@
                 echo '(sem data)';
               } else {
                 echo '(';
-                echo (h($obra['Obra']['ante_post_quam']) == 0) ? 'ante quam ' : ''; 
-                echo (h($obra['Obra']['ante_post_quam']) == 1) ? 'post quam ' : ''; 
+                echo (h($obra['Obra']['ante_post_quam']) == 0) ? 'ante quem ' : ''; 
+                echo (h($obra['Obra']['ante_post_quam']) == 1) ? 'post quem ' : ''; 
                 echo (h($obra['Obra']['circa']) == 1) ? 'circa ' : ''; 
                 echo (h($obra['Obra']['ano_inicio']) != 0) ? h($obra['Obra']['ano_inicio']) . ' - ': ''; 
                 echo h($obra['Obra']['ano_fim']); 

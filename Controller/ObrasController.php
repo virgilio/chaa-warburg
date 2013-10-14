@@ -25,10 +25,13 @@ class ObrasController extends AppController {
     $this->Obra->recursive = 0;
 
     if($letter != null){
-      if(isset($this->passedArgs['sort']) && 'Artista.nome' == $this->passedArgs['sort']){
-        $this->paginate['Obra']['conditions'] = array('Artista.nome REGEXP' => '^' . $letter);
+      if(isset($this->passedArgs['sort']) 
+         && 'Artista.nome' == $this->passedArgs['sort']){
+        $this->paginate['Obra']['conditions'] = array(
+          'Artista.nome REGEXP' => '^' . $letter);
       } else {
-        $this->paginate['Obra']['conditions'] = array('Obra.nome REGEXP' => '^' . $letter);
+        $this->paginate['Obra']['conditions'] = array(
+          'Obra.nome REGEXP' => '^' . $letter);
       }
     }
 
@@ -43,20 +46,21 @@ class ObrasController extends AppController {
   public function admin_index() {
     $this->Obra->recursive = 0;
     $data = $this->request->query;
-    $this->paginate['Obra']['order'] = 'Artista.nome asc';
-    if($this->request->is('get') && !empty($data) && isset($data['Search']['filter'])){
+    $this->paginate = array();
+            
+    if($this->request->is('get') 
+       && !empty($data) && isset($data['Search']['filter'])){
+
+      $this->paginate['order'] = 'Obra.nome asc';
+
       if('artista' == $data['Search']['filter']){
-        $this->paginate = array(
-                                'conditions' => array(
-                                                      'Artista.id' => $data['Artista'],
-                                                      )
-                                );
+        $this->paginate['conditions'] = array(
+          'Artista.id' => $data['Artista'],
+        );
       } else if('obra' == $data['Search']['filter']){
-        $this->paginate = array(
-                                'conditions' => array(
-                                                      'Obra.nome LIKE' => '%' . $data['Search']['query'] . '%',
-                                                      )
-                                );
+        $this->paginate['conditions'] = array(
+          'Obra.nome LIKE' => '%' . $data['Search']['query'] . '%',
+        );
       }
     }
     $this->set('obras', $this->paginate());

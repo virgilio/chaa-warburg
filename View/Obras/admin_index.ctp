@@ -5,27 +5,37 @@
       <h2><?php echo __('Obras cadastradas'); ?></h2>
     </div>
     <div class="span4">
-      <?php echo $this->Html->link('Cadastrar obra', array('controller' => 'obras','action' => 'insert'), array('class' => 'btn_admin')); ?>
+      <?php 
+        echo $this->Html->link('Cadastrar obra', 
+                               array('controller' => 'obras',
+                                     'action' => 'insert'), 
+                               array('class' => 'btn_admin')); 
+      ?>
     </div>
   </div>
   <div class="row">
     <div class="span4">
       <?php 
-         echo $this->Form->create('Obra', array('type' => 'get', 'class' => 'form-horizontal')); ?>
+        echo $this->Form->create('Obra', 
+                                 array('type' => 'get', 
+                                       'class' => 'form-horizontal')); ?>
       <fieldset>
         <!-- Text input-->
-        <input type="hidden" name="Search[filter]" value="artista" /> 
+        <input type="hidden" name="Search[filter]" value="artista" />
         <?php
-           echo $this->Form->input('Artista', array('type' => 'select', 'label' => '',
-        'empty' => 'Filtrar por artista', 'onchange'=>'this.form.submit();',
-        'class' => 'input_chosen'));
+          echo $this->Form->input('Artista', 
+                                  array('type' => 'select', 'label' => false,
+                                        'empty' => 'Filtrar por artista', 
+                                        'onchange'=>'this.form.submit();',
+                                        'class' => 'input_chosen'));
         ?>
       </fieldset>
       <?php echo $this->Form->end(); ?>
     </div>
     <div class="span6">
       <?php 
-         echo $this->Form->create('Obra', array('type' => 'get')); ?>
+        echo $this->Form->create('Obra', array('type' => 'get')); 
+      ?>
       <fieldset>
         <!-- Text input-->
         <div class="controls">
