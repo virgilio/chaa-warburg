@@ -264,7 +264,7 @@ class ObrasController extends AppController {
             'AND' => $and,
             'OR' => $or,
           ),
-          //'order' => 'Artista.nome asc',
+          'order' => 'Artista.nome desc',
         );
       } else {
         $this->Session->setFlash(__('Busca inválida'));

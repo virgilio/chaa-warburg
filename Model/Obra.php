@@ -179,4 +179,19 @@ class Obra extends AppModel {
     );
   
   public $hasOne = 'Thumbnail';       
+
+
+  public function beforeFind($queryData) {
+    $sticky = array('Obra.nome' => 'ASC');
+
+    if (is_array($queryData['order'][0])) {
+      $queryData['order'][0] = $queryData['order'][0] + $sticky;
+    }
+    /*else {
+      $queryData['order'][0] = $sticky;
+      }*/
+
+    return $queryData;
+  }
+
 }
