@@ -1,26 +1,54 @@
-
-<?php $search_type = isset($this->request->query['Search']['type']) ?
-$this->request->query['Search']['type'] : 'fast'; ?>
+<?php 
+  $search_type = isset($this->request->query['Search']['type']) ?
+    $this->request->query['Search']['type'] : 'fast'; 
+?>
 <div class="buscas" id="tabs">
   <ul class="nav nav-tabs" id="tab_buscas">
-    <li class="<?php echo $search_type === 'fast' ? 'active' : '' ?>"><a href="#busca_rapida">Busca rápida</a></li>
-    <li class="<?php echo $search_type === 'advanced' ? 'active' : '' ?>"><a href="#busca_avancada">Busca avançada</a></li>
+    <li class="<?php echo $search_type === 'fast' ? 'active' : '' ?>">
+      <a href="#busca_rapida">Busca rápida</a>
+    </li>
+    <li class="<?php echo $search_type === 'advanced' ? 'active' : '' ?>">
+      <a href="#busca_avancada">Busca avançada</a>
+    </li>
   </ul>
   
   <div class="tab-content">             
-    <div class="tab-pane <?php echo $search_type === 'fast' ? 'active' : '' ?>" id="busca_rapida">
+    <div class="tab-pane <?php echo $search_type === 'fast' ? 'active' : '' ?>"
+         id="busca_rapida">
       <?php 
-         echo $this->Form->create('Obra', array('action' => 'search', 'type' => 'get', 'class' => 'form-horizontal')); ?>
+         echo $this->Form->create('Obra', 
+                                  array('action' => 'search', 
+                                        'type' => 'get', 
+                                        'class' => 'form-horizontal')); 
+      ?>
       <fieldset>
         <!-- Text input-->
         <div class="control-group">
           <label class="control-label" for="busca">Buscar</label>
           <div class="controls">
             <input type="hidden" name="Search[type]" value="fast" /> 
-            <input id="busca" name="Search[query]" type="text" placeholder=""
-                   class="input-large pull-left">
-	    <?php echo $this->Form->end(array('label' => 'Buscar', 'id' => 'singlebutton',
-	    'class' => 'btn btn-default pull-left')); ?>
+            <!--<input id="busca" name="Search[query]" 
+                   type="text" placeholder=""
+                   class="input-large pull-left">-->
+	    <?php 
+              $query_data = "";
+              if(isset($data['Search']['query']))
+                $query_data = $data['Search']['query'];
+              
+              echo $this->Form->input('Search[query]', 
+                                      array(
+                                        'label' => false, 
+                                        'id' => 'busca',
+                                        'class' => 'input-large pull-left',
+                                        'value' => $query_data,
+                                        'div' => false,
+                                      )
+              ); 
+              echo $this->Form->end(array(
+                'label' => 'Buscar', 
+                'id' => 'singlebutton',
+                'class' => 'btn btn-default pull-left')); 
+            ?>
           </div>
         </div>
       </fieldset>

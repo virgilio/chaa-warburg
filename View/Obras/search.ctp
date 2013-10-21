@@ -1,6 +1,6 @@
 <?php echo $this->element('buscas'); ?>
 <div class="obras index">
-    <h1><?php echo __('Lista de obras'); ?></h1>
+  <h1><?php echo __('Lista de obras'); ?></h1>
   <div class="span12 clearfix">
     <p style="float: left;">Ordenar por: </p>
     <ul class="unstyled inline clearfix">
@@ -10,36 +10,49 @@
     </ul>
   </div>
 
-    <?php foreach ($obras as $obra): ?>
-        <div class="mini-obra">
-            <?php 
-               echo $this->Html->link(
-                      $this->Html->image(('obras/thumbs/' . $obra['Obra']['imagem']), 
-                        array('alt' => $obra['Obra']['imagem'], 'border' => '0')), 
-                        array('controller' => 'obras', 'action' => 'view', $obra['Obra']['id']), 
-                        array('escape'=>false)); 
-/*echo $this->Html->link($this->Html->image(('obras/'.$obra['Obra']['id'].'_thumb.jpg'), array('alt' => 'oie', 'border' => '0')), array('controller' => 'obras', 'action' => 'view', $obra['Obra']['id']), array('escape'=>false));*/ ?>
-            <p>
-                <?php echo $this->Html->link(
-                    h(substr($obra['Obra']['nome'], 0, 40)) . (strlen($obra['Obra']['nome']) > 40 ? '...' : ''), 
-                    array('controller' => 'obras', 'action' => 'view', $obra['Obra']['id']), 
-                    array('escape'=>false)); 
-                ?>
-            </p>
-            <p class="nome-artista">
-                <?php echo $this->Html->link(
-                    h(substr($obra['Artista']['nome'], 0, 40)) . (strlen($obra['Artista']['nome']) > 40 ? '...' : ''),
-                array('controller' => 'artistas', 'action' => 'view',
-                $obra['Artista']['id'])); ?>
-                (<?php 
-                    if (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_fim'] == null)) {
-                        echo 'sem data';
-                      } else {
-                        echo (h($obra['Obra']['ano_inicio']) != 0) ? h($obra['Obra']['ano_inicio']) . ' - ': ''; 
-                        echo h($obra['Obra']['ano_fim']); 
-                    };             
-                ?>)
-            </p>
+  <?php foreach ($obras as $obra): ?>
+  <div class="mini-obra">
+    <?php 
+      echo $this->Html->link(
+        $this->Html->image(('obras/thumbs/' . $obra['Obra']['imagem']), 
+                           array('alt' => $obra['Obra']['imagem'], 
+                                 'border' => '0')), 
+        array('controller' => 'obras', 
+              'action' => 'view', 
+              $obra['Obra']['id']), 
+        array('escape'=>false)); 
+      /*echo $this->Html->link(
+        $this->Html->image(('obras/'.$obra['Obra']['id'].'_thumb.jpg'), 
+        array('alt' => 'oie', 'border' => '0')), 
+        array('controller' => 'obras', 
+        'action' => 'view', 
+        $obra['Obra']['id']), 
+        array('escape'=>false));*/
+    ?>
+    <p>
+      <?php 
+        echo $this->Html->link(
+          h(substr($obra['Obra']['nome'], 0, 40)) . (strlen($obra['Obra']['nome']) > 40 ? '...' : ''), 
+          array('controller' => 'obras', 'action' => 'view', $obra['Obra']['id']), 
+          array('escape'=>false)); 
+      ?>
+    </p>
+    <p class="nome-artista">
+      <?php 
+        echo $this->Html->link(
+          h(substr($obra['Artista']['nome'], 0, 40)) . (strlen($obra['Artista']['nome']) > 40 ? '...' : ''),
+          array('controller' => 'artistas', 'action' => 'view',
+                $obra['Artista']['id'])); 
+      ?>
+      (<?php 
+        if (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_fim'] == null)) {
+          echo 'sem data';
+        } else {
+          echo (h($obra['Obra']['ano_inicio']) != 0) ? h($obra['Obra']['ano_inicio']) . ' - ': ''; 
+          echo h($obra['Obra']['ano_fim']); 
+        };             
+      ?>)
+    </p>
             
         </div>
     <?php endforeach; ?>

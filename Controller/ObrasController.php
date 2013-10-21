@@ -11,13 +11,15 @@ App::uses('CakeEmail', 'Network/Email');
  */
 class ObrasController extends AppController {
 
+  public $components = array('Paginator');
+  public $paginate = array();
+
   /**
    * index method
    *
    * @return void
    */
-
-  public $paginate = array();
+  
 
   public function index($letter = null) {
     parent::searchDataLoader();
@@ -109,7 +111,8 @@ class ObrasController extends AppController {
         $query = $data['Search']['query'];
         $and = array();
         if($letter != null){
-          if(isset($this->passedArgs['sort']) && 'Artista.nome' == $this->passedArgs['sort']){
+          if(isset($this->passedArgs['sort']) 
+             && 'Artista.nome' == $this->passedArgs['sort']){
             $and['Artista.nome REGEXP'] = '^' . $letter;
           } else {
             $and['Obra.nome REGEXP'] = '^' . $letter;
@@ -150,7 +153,10 @@ class ObrasController extends AppController {
         
         
         if(!empty($query['obra'])){
-          $and[0] = '(Obra.nome LIKE \'%' . $query['obra'] . '%\' OR Obra.descricao LIKE \'%' . $query['obra'] . '%\')';
+          $and[0] = '(Obra.nome LIKE \'%' 
+            . $query['obra'] 
+            . '%\' OR Obra.descricao LIKE \'%' 
+            . $query['obra'] . '%\')';
           //die(pr($and));
           //$and['Obra.nome LIKE'] = '%' . $query['obra'] . '%';
           //$and['Obra.descricao LIKE'] = '%' . $query['obra'] . '%';
@@ -160,10 +166,11 @@ class ObrasController extends AppController {
         
         /**
          *  If there is city or country setted, we add a OR search 
-         *  on 'Obra.instituicao_id IN (ids)' too. To discover which ids, we should put
-         *  in the conditions array, we search for instituicoes which have
-         *  cidade_id that has Cidade.nome like $query['cidade'] or cidades
-         *  which has Cidade.pais_id which have Pais.nome like $query['pais']
+         *  on 'Obra.instituicao_id IN (ids)' too. To discover which ids, 
+         *  we should put in the conditions array, we search for instituicoes 
+         *  which have cidade_id that has Cidade.nome like $query['cidade'] or 
+         *  cidades which has Cidade.pais_id which have Pais.nome like 
+         *  $query['pais']
          *  
          */
 
@@ -189,6 +196,7 @@ class ObrasController extends AppController {
               
         if(!empty($data['ObraTipo']))
           $and['Obra.obra_tipos_id'] = $data['ObraTipo'];
+        
         if(!empty($data['Iconografia']))
           $and['Obra.iconografia_id'] = $data['Iconografia'];
 
