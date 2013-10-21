@@ -207,6 +207,12 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         <?php echo $this->fetch('content'); ?>
       </div>
       <div id="rodape">
+        <div class="numeros_warburg">
+        <h4>Dados sobre o Warburg</h4>
+        <p><label>Total de imagens cadastradas</label><span>5923</span></p>
+        <p><label>Total de relacionamentos</label><span>5923</span></p>
+        <p><label>Quantidade de pesquisadores</label><span>5923</span></p>
+      </div>
         © 1994-<?php echo date('Y'); ?>
         CHAA – Centro de História da Arte e Arqueologia |  
         <a href="mailto:martinho@chaa-unicamp.com.br">CONTATO</a> |

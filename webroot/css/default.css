@@ -356,3 +356,23 @@ div.obra:hover div.relacionado-por {
   max-height: 100%;
   max-width: 100%;
 }
+
+.numeros_warburg{
+  margin: 10px;
+  border-bottom: 1px solid #444;
+}
+.numeros_warburg h4{
+  /*color: #990000;*/
+}
+
+.numeros_warburg label{
+  display: inline-block;
+  width: 200px;
+  text-align: right;
+  margin-left: -34px;
+  margin-right: 12px;
+}
+.numeros_warburg span{
+  color: #FF1919;
+  font-weight: bold;
+}
