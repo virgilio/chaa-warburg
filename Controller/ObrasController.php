@@ -11,7 +11,6 @@ App::uses('CakeEmail', 'Network/Email');
  */
 class ObrasController extends AppController {
 
-  public $components = array('Paginator');
   public $paginate = array();
 
   /**
@@ -142,7 +141,8 @@ class ObrasController extends AppController {
           ),
           'order' => 'Artista.nome asc',
         );
-      } else if(isset($data['Search']['type']) && $data['Search']['type'] == 'advanced') {
+      } else if(isset($data['Search']['type']) 
+                && $data['Search']['type'] == 'advanced') {
         $query = $data['Search'];
         
         $or = array();
@@ -157,7 +157,6 @@ class ObrasController extends AppController {
             . $query['obra'] 
             . '%\' OR Obra.descricao LIKE \'%' 
             . $query['obra'] . '%\')';
-          //die(pr($and));
           //$and['Obra.nome LIKE'] = '%' . $query['obra'] . '%';
           //$and['Obra.descricao LIKE'] = '%' . $query['obra'] . '%';
         }
@@ -165,6 +164,7 @@ class ObrasController extends AppController {
           $and['Instituicao.nome LIKE'] = '%' . $query['instituicao'] . '%';
         
         /**
+         *
          *  If there is city or country setted, we add a OR search 
          *  on 'Obra.instituicao_id IN (ids)' too. To discover which ids, 
          *  we should put in the conditions array, we search for instituicoes 
@@ -200,7 +200,18 @@ class ObrasController extends AppController {
         if(!empty($data['Iconografia']))
           $and['Obra.iconografia_id'] = $data['Iconografia'];
 
-        if(!empty($query['inicio']) && empty($query['ano'])){
+        /**
+         * semdata
+         * case 0: Show only the images with no date set
+         * case 1: Show all images with or without dates
+         * if is not set, don't show images without dates
+         *       
+         */
+        
+        if(!empty($query['inicio']) && empty($query['ano'])
+           && ((isset($query['semdata']) 
+                && $query['semdata'] != 0) 
+               || !isset($query['semdata']))){
           $or['Obra.ano_inicio BETWEEN ? AND ?'] = 
             array(
               $query['inicio'], 
@@ -208,7 +219,11 @@ class ObrasController extends AppController {
             );
         }
 
-        if(!empty($query['fim']) && empty($query['ano']) ){
+        if(!empty($query['fim']) && empty($query['ano'])
+           && ((isset($query['semdata']) 
+                && $query['semdata'] != 0) 
+               || !isset($query['semdata']))){
+
           $or['Obra.ano_fim BETWEEN ? AND ?'] = 
             array(
               $query['inicio'], 
@@ -219,8 +234,12 @@ class ObrasController extends AppController {
         if(!empty($query['ano'])){
           $or['Obra.ano_fim'] = $query['ano'];
           $or['Obra.ano_inicio'] = $query['ano'];
-        } else {
+        } else if(isset($query['semdata']) 
+                  && $query['semdata'] == 1) {
           $or['Obra.ano_fim'] = NULL;
+        } else if(isset($query['semdata']) 
+                  && $query['semdata'] == 0){
+          $and['Obra.ano_fim'] = NULL;
         }        
         
         if($letter != null){
@@ -232,9 +251,7 @@ class ObrasController extends AppController {
           }
         }
         
-        //die(pr($and));
-
-        $this->paginate = array(
+        $this->paginate['Obra'] = array(
           'fields' => array(
             'Obra.id', 
             'Obra.nome', 
@@ -247,7 +264,7 @@ class ObrasController extends AppController {
             'AND' => $and,
             'OR' => $or,
           ),
-          'order' => 'Artista.nome asc',
+          //'order' => 'Artista.nome asc',
         );
       } else {
         $this->Session->setFlash(__('Busca inválida'));
@@ -377,17 +394,16 @@ class ObrasController extends AppController {
           'order' => ''
         ),)));
     $relacionadas = $this->ObrasRelacionada->find('all', array(
-                                                               'conditions' => array('or' => array(
-                                                                                                   'ObrasRelacionada.relacionada_id' => $id, 
-                                                                                                   'ObrasRelacionada.obra_id' => $id, 
-                                                                                                   )
-                                                                                     ),
-                                                               'contain' => array(
-                                                                                  'User', 
-                                                                                  'Obra' => array('Artista'),
-                                                                                  'Relacionada' => array('Artista'),
-                                                                                  ),
-                                                               ));
+      'conditions' => array('or' => array(
+        'ObrasRelacionada.relacionada_id' => $id, 
+        'ObrasRelacionada.obra_id' => $id, 
+      )),
+      'contain' => array(
+        'User', 
+        'Obra' => array('Artista'),
+        'Relacionada' => array('Artista'),
+      ),
+    ));
     $this->set('relacionadas', $relacionadas);
     $this->set('obra', $result);
   }
@@ -396,7 +412,8 @@ class ObrasController extends AppController {
     if (!$this->Obra->exists($id)) {
       throw new NotFoundException(__('Obra inválida'));
     }
-    $options = array('conditions' => array('Obra.' . $this->Obra->primaryKey => $id));
+    $options = array('conditions' => array(
+      'Obra.' . $this->Obra->primaryKey => $id));
     $this->set('obra', $this->Obra->find('first', $options));
   }
 

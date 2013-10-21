@@ -1,6 +1,11 @@
 <?php 
   $search_type = isset($this->request->query['Search']['type']) ?
     $this->request->query['Search']['type'] : 'fast'; 
+  
+  $this->Html->css('bootstrapSwitch.css', null, array('inline' =>
+                                                      false)); 
+  $this->Html->script('bootstrapSwitch.min.js', array('inline' => false));
+  $this->Html->script('buscas.js', array('inline' => false));
 ?>
 <div class="buscas" id="tabs">
   <ul class="nav nav-tabs" id="tab_buscas">
@@ -13,13 +18,16 @@
   </ul>
   
   <div class="tab-content">             
-    <div class="tab-pane <?php echo $search_type === 'fast' ? 'active' : '' ?>"
-         id="busca_rapida">
+    <div class="tab-pane 
+                <?php 
+                  echo $search_type === 'fast' ? 'active' : '' 
+                ?>"
+                id="busca_rapida">
       <?php 
-         echo $this->Form->create('Obra', 
-                                  array('action' => 'search', 
-                                        'type' => 'get', 
-                                        'class' => 'form-horizontal')); 
+        echo $this->Form->create('Obra', 
+                                 array('action' => 'search', 
+                                       'type' => 'get', 
+                                       'class' => 'form-horizontal')); 
       ?>
       <fieldset>
         <!-- Text input-->
@@ -30,7 +38,7 @@
             <!--<input id="busca" name="Search[query]" 
                    type="text" placeholder=""
                    class="input-large pull-left">-->
-	    <?php 
+            <?php 
               $query_data = "";
               if(isset($data['Search']['query']))
                 $query_data = $data['Search']['query'];
@@ -54,10 +62,18 @@
       </fieldset>
       <?php echo $this->Form->end(); ?>
     </div>
-    <div class="tab-pane <?php echo $search_type === 'advanced' ? 'active' : '' ?>" id="busca_avancada">
-      <?php echo $this->Form->create('Obra', array('action' => 'search', 'type'
-      => 'get', 'class' => 'form-horizontal')); 
-      $hasValues = isset($data['Search']) && 'advanced' === $data['Search']['type'];
+    <div class="tab-pane 
+                <?php 
+                  echo $search_type === 'advanced' ? 'active' : '' 
+                ?>" 
+                id="busca_avancada">
+      <?php 
+        echo $this->Form->create('Obra', 
+                                 array('action' => 'search', 
+                                       'type' => 'get', 
+                                       'class' => 'form-horizontal')); 
+        $hasValues = isset($data['Search']) 
+          && 'advanced' === $data['Search']['type'];
       ?>
       <input type="hidden" name="Search[type]" value="advanced" /> 
       <fieldset>
@@ -70,9 +86,14 @@
                      data-provide="typeahead" 
                      data-source='<?php echo h($artistas_list); ?>' 
                      autocomplete="off"
-                     value="<?php echo $hasValues ? $data['Search']['artista'] :
-                     ""; ?>"
-                     name="Search[artista]" type="text" placeholder="" class="input-large">
+                     value="<?php 
+                              echo $hasValues ? $data['Search']['artista'] :  
+                              '';
+                            ?>"
+                     name="Search[artista]" 
+                     type="text" 
+                     placeholder="" 
+                     class="input-large">
             </div>
           </div>
           <!-- Text input-->
@@ -81,7 +102,10 @@
             <div class="controls">
               <input id="obra" 
                      name="Search[obra]" 
-                     value="<?php echo $hasValues ? $data['Search']['obra'] : ""; ?>"
+                     value="<?php 
+                       echo $hasValues 
+                       ? $data['Search']['obra'] 
+                       : ""; ?>"
                      type="text" 
                      placeholder="" class="input-large">
             </div>
@@ -89,15 +113,19 @@
           
           <!-- Text input-->
           <div class="control-group">
-            <label class="control-label" for="instituicao">Instituição da obra</label>
+            <label class="control-label" 
+                   for="instituicao">Instituição da obra</label>
             <div class="controls">
               <input id="instituicao" 
                      data-provide="typeahead" 
                      autocomplete="off"
                      value="<?php echo $hasValues ?
-                     $data['Search']['instituicao'] : ""; ?>"
+                       $data['Search']['instituicao'] : ""; ?>"
                      data-source='<?php echo h($instituicoes_list); ?>' 
-                     name="Search[instituicao]" type="text" placeholder="" class="input-large">
+                     name="Search[instituicao]" 
+                     type="text" 
+                     placeholder="" 
+                     class="input-large">
             </div>
           </div>
           
@@ -108,9 +136,13 @@
               <input id="pais" 
                      data-provide="typeahead" 
                      autocomplete="off"
-                     value="<?php echo $hasValues ? $data['Search']['pais'] : ""; ?>"
+                     value="<?php echo $hasValues ? 
+                       $data['Search']['pais'] : ""; ?>"
                      data-source='<?php echo h($paises_list); ?>' 
-                     name="Search[pais]" type="text" placeholder="" class="input-large">
+                     name="Search[pais]" 
+                     type="text" 
+                     placeholder="" 
+                     class="input-large">
             </div>
           </div>
           
@@ -121,9 +153,13 @@
               <input id="cidade" 
                      data-provide="typeahead" 
                      autocomplete="off"
-                     value="<?php echo $hasValues ? $data['Search']['cidade'] : ""; ?>"
+                     value="<?php echo $hasValues ? 
+                       $data['Search']['cidade'] : ""; ?>"
                      data-source='<?php echo h($cidades_list); ?>' 
-                     name="Search[cidade]" type="text" placeholder="" class="input-large">
+                     name="Search[cidade]" 
+                     type="text" 
+                     placeholder="" 
+                     class="input-large">
             </div>
           </div>
         </div>
@@ -134,34 +170,104 @@
             <div class="controls">
               <input id="tags" 
                      name="Search[tags]" 
-                     value="<?php echo $hasValues ? $data['Search']['tags'] : ""; ?>"
-                     type="text" placeholder="" class="input-large">
+                     value="<?php echo $hasValues ? 
+                       $data['Search']['tags'] : ""; ?>"
+                     type="text" 
+                     placeholder="" 
+                     class="input-large">
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="tags">Técnica</label>
             <div class="controls">
-              <?php echo $this->Form->input('ObraTipo',
-              array('empty' => '', 'label' => '', 'class' => 'input_chosena',
-              'data-placeholder' => 'Selecione a técnica da obra', 'value' =>
-              (isset($data['ObraTipo']) ? $data['ObraTipo'] : ""))); ?>
+              <?php 
+                echo $this->Form->input(
+                  'ObraTipo',
+                  array('empty' => '', 
+                        'label' => false, 
+                        'class' => 'input_chosena',
+                        'data-placeholder' => 'Selecione a técnica da obra', 
+                        'value' =>
+                        (isset($data['ObraTipo']) 
+                         ? $data['ObraTipo'] 
+                         : ""))); 
+              ?>
             </div>
           </div>
           <div class="control-group">
             <label class="control-label" for="tags">Iconografia</label>
             <div class="controls">
-              <?php echo $this->Form->input('Iconografia', 
-              array('empty' => '', 'label' => '', 'class' => 'input_chosena',
-              'data-placeholder' => 'Selecione a iconografia', 'data-provide' =>
-              'typeahead', 'value' => (isset($data['Iconografia']) ? $data['Iconografia'] : ""))); ?>
+              <?php 
+                echo $this->Form->input(
+                  'Iconografia', 
+                  array('empty' => '', 
+                        'label' => false, 
+                        'class' => 'input_chosena',
+                        'data-placeholder' => 'Selecione a iconografia', 
+                        'data-provide' => 'typeahead', 
+                        'value' => (isset($data['Iconografia']) 
+                                    ? $data['Iconografia'] 
+                                    : ""))); 
+              ?>
             </div>
           </div>
+
           <div class="control-group">
             <label class="control-label" for="cidade">Ano</label>
             <div class="controls">
               <input id="ano" 
-                     value="<?php echo $hasValues ? $data['Search']['ano'] : ""; ?>"
-                     name="Search[ano]" type="text" placeholder="" class="input-large">
+                     value="<?php echo $hasValues 
+                       ? $data['Search']['ano'] : ""; ?>"
+                     name="Search[ano]" 
+                     type="text" placeholder="" 
+                     class="input-large">
+            </div>
+          </div>
+          <h5 class="span4 pull-right">Obras sem data</h5>
+          <div class="control-group">
+            <label class="control-label" for="option1">
+              Mostrar sem data
+            </label>
+            <div class="controls">
+              <div id="option1" class="make-switch showsemdata" 
+                   data-on="success" 
+                   data-off="danger" 
+                   data-on-label="<i class='icon-ok icon-white'></i>" 
+                   data-off-label="<i class='icon-remove'></i>">
+                <input 
+                   type="radio" name="Search[semdata]"
+                   id="SemData1" value="1"
+                   <?php 
+                       if(isset($data['Search']['semdata'])){
+                         echo $data['Search']['semdata'] == 1
+                         ? "checked" 
+                         : ""; 
+                       }
+                      ?>    
+                   />
+              </div>
+            </div>
+            <label class="control-label" for="option2">
+              Apenas sem data
+            </label>
+            <div class="controls"> 
+              <div id="option2" class="make-switch showsemdata" 
+                   data-on="success" 
+                   data-off="danger" 
+                   data-on-label="<i class='icon-ok icon-white'></i>" 
+                   data-off-label="<i class='icon-remove'></i>">
+                <input 
+                   type="radio" name="Search[semdata]" 
+                   id="SemData0" value="0"
+                   <?php 
+                       if(isset($data['Search']['semdata'])){
+                         echo $data['Search']['semdata'] == 0 
+                         ? "checked" 
+                         : ""; 
+                       }
+                   ?>    
+                   />
+              </div>
             </div>
           </div>
         </div>

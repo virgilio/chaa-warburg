@@ -241,41 +241,47 @@
         </div>
         <div class="span6">
           <div class="control-group">
-              <label class="control-label" for="option1">
-                Post quem (depois de)
-              </label>
-              <div class="controls">
-                <div id="" class="make-switch postantequam" 
-                data-on="success" 
-                data-off="danger" 
-                data-on-label="<i class='icon-ok icon-white'></i>" 
-                data-off-label="<i class='icon-remove'></i>">
-                  <input 
-                     type="radio" name="data[Obra][ante_post_quam]"
-                     id="ObraAntePostQuam1" value="1"
-                     <?php echo $this->request->data['Obra']['ante_post_quam'] == 1 ? "checked" : ""; ?>    
-                     />
+            <label class="control-label" for="option1">
+              Post quem (depois de)
+            </label>
+            <div class="controls">
+              <div id="" class="make-switch postantequam" 
+                   data-on="success" 
+                   data-off="danger" 
+                   data-on-label="<i class='icon-ok icon-white'></i>" 
+                   data-off-label="<i class='icon-remove'></i>">
+                <input 
+                   type="radio" name="data[Obra][ante_post_quam]"
+                   id="ObraAntePostQuam1" value="1"
+                   <?php 
+                     echo $this->request->data['Obra']['ante_post_quam'] == 1 
+                     ? "checked" 
+                     : ""; 
+                   ?>    
+                   />
                 </div>
-              </div>
-              <label class="control-label" for="option2">
-                Ante quem (antes de)
-              </label>
-              <div class="controls"> 
-                <div id="option2" class="make-switch postantequam" 
-                data-on="success" 
-                data-off="danger" 
-                data-on-label="<i class='icon-ok icon-white'></i>" 
-                data-off-label="<i class='icon-remove'></i>">
-                  <input 
-                     type="radio" name="data[Obra][ante_post_quam]" 
-                     id="ObraAntePostQuam0" value="0"
-                     <?php 
-                       echo $this->request->data['Obra']['ante_post_quam'] == 0 ? "checked" : ""; 
+            </div>
+            <label class="control-label" for="option2">
+              Ante quem (antes de)
+            </label>
+            <div class="controls"> 
+              <div id="option2" class="make-switch postantequam" 
+                   data-on="success" 
+                   data-off="danger" 
+                   data-on-label="<i class='icon-ok icon-white'></i>" 
+                   data-off-label="<i class='icon-remove'></i>">
+                <input 
+                   type="radio" name="data[Obra][ante_post_quam]" 
+                   id="ObraAntePostQuam0" value="0"
+                   <?php 
+                     echo $this->request->data['Obra']['ante_post_quam'] == 0 
+                     ? "checked" 
+                     : ""; 
                      ?>    
                      />
                 </div>
               </div>
-          </div>            
+          </div>
 
           <div class="control-group">
             <label class="control-label" for="circa">Circa</label>
@@ -285,12 +291,16 @@
                    data-off="danger"  
                    data-on-label="<i class='icon-ok icon-white'></i>" 
                    data-off-label="<i class='icon-remove'></i>">
-                <?php echo $this->Form->input('circa', array('label' => false,
-                   'hiddenField' => true, 'div' => false, )); ?>        
+                <?php 
+                  echo $this->Form->input('circa', 
+                                          array('label' => false,
+                                                'hiddenField' => true, 
+                                                'div' => false, )); 
+                ?>        
               </div>
             </div>
           </div>
-
+          
           <div class="control-group">
             <label class="control-label" for="incerta">Incerta</label>
             <div class="controls">
@@ -299,13 +309,18 @@
                    data-off="danger"  
                    data-on-label="<i class='icon-ok icon-white'></i>" 
                    data-off-label="<i class='icon-remove'></i>">
-                <?php echo $this->Form->input('incerta', array('label' => false, 'hiddenField' => true, 'div' => false)); ?>        
+                <?php 
+                  echo $this->Form->input('incerta', 
+                                          array('label' => false,
+                                                'hiddenField' => true, 
+                                                'div' => false)); 
+                ?>
               </div>
             </div>
           </div>
         </div>
-    </div> <!-- Fim do fieldset de data -->
-
+      </div> <!-- Fim do fieldset de data -->
+      
       <div class="control-group">
         <label class="control-label" for="tamanho_obra">Tamanho da obra</label>
         <div class="controls">
