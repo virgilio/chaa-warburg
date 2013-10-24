@@ -89,6 +89,16 @@ class AppController extends Controller {
       ));
     }    
     $this->set('auth', $this->Auth->user());
+
+    $this->loadModel('Obra');
+    $this->set('numObras', $this->Obra->find('count'));
+    
+    $this->loadModel('ObrasRelacionada');
+    $this->set('numRelacionamentos', $this->ObrasRelacionada->find('count'));
+
+    $this->loadModel('Users');
+    $this->set('numPesquisadores', $this->Users->find('count'));
+
   }
   
   function isAuthorized() {

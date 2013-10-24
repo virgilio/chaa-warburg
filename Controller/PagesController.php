@@ -85,6 +85,7 @@ class PagesController extends AppController {
                                      'limit' => 5, 
                                      'order' => 'Obra.created desc'));
     $this->set('lastObras', $obras);
+    /*
     $this->set('numObras', $this->Obra->find('count'));
     
     $this->loadModel('ObrasRelacionada');
@@ -92,7 +93,7 @@ class PagesController extends AppController {
 
     $this->loadModel('Users');
     $this->set('numPesquisadores', $this->Users->find('count'));
-    
+    */
     $this->set(compact('page', 'subpage', 'title_for_layout'));
     $this->render(implode('/', $path));
   }
