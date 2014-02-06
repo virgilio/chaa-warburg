@@ -4,12 +4,14 @@
             <h2><?php echo __('Lista de usuários'); ?></h2>
         </div>
         <div class="span4">
-          <?php 
-            echo $this->Html->link('Cadastrar usuário', 
-                               array('controller' => 'users',
-                                     'action' => 'register'), 
-                               array('class' => 'btn_admin')); 
-          ?>
+            <?php 
+                if($auth['role'] == 'admin'): 
+                    echo $this->Html->link('Cadastrar usuário', 
+                                           array('controller' => 'users',
+                                                 'action' => 'register'), 
+                                           array('class' => 'btn_admin')); 
+                endif;
+            ?>
         </div>
     </div>
 	<table class="lista_admin" cellpadding="0" cellspacing="0">

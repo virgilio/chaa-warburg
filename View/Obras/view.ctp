@@ -14,15 +14,17 @@
         <p>
             <?php echo($obra['ObraTipo']['nome']) ? $obra['ObraTipo']['nome'] . ' |' : ''; ?>
             <?php 
-              if(h($obra['Obra']['incerta']) == 1) {
-                echo '(data incerta)';
-              } elseif (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_fim'] == null)) {
+              //if(h($obra['Obra']['incerta']) == 1) {
+              //  echo '(data incerta)';
+              //} elseif (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_fim'] == null)) {
+              if (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_fim'] == null)) {
                 echo '(sem data)';
               } else {
                 echo '(';
                 echo (h($obra['Obra']['ante_post_quam']) == 0) ? 'ante quem ' : ''; 
                 echo (h($obra['Obra']['ante_post_quam']) == 1) ? 'post quem ' : ''; 
                 echo (h($obra['Obra']['circa']) == 1) ? 'circa ' : ''; 
+                echo (h($obra['Obra']['incerta']) == 1) ? 'data incerta ' : ''; 
                 echo (h($obra['Obra']['ano_inicio']) != 0) ? h($obra['Obra']['ano_inicio']) . ' - ': ''; 
                 echo h($obra['Obra']['ano_fim']); 
                 echo ')';
