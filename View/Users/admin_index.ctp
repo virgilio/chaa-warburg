@@ -1,5 +1,17 @@
 <div class="users index container">
-	<h2><?php echo __('Lista de usuários'); ?></h2>
+    <div class="row">
+        <div class="span8">
+            <h2><?php echo __('Lista de usuários'); ?></h2>
+        </div>
+        <div class="span4">
+          <?php 
+            echo $this->Html->link('Cadastrar usuário', 
+                               array('controller' => 'users',
+                                     'action' => 'register'), 
+                               array('class' => 'btn_admin')); 
+          ?>
+        </div>
+    </div>
 	<table class="lista_admin" cellpadding="0" cellspacing="0">
 	<tr>
 			<th><?php echo $this->Paginator->sort('nome'); ?></th>
