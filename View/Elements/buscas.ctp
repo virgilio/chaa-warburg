@@ -236,12 +236,14 @@
                    data-off-label="<i class='icon-remove'></i>">
                 <input 
                    type="radio" name="Search[semdata]"
-                   id="SemData1" value="1"
+                   id="SemData1" value="1" 
                    <?php 
                        if(isset($data['Search']['semdata'])){
                          echo $data['Search']['semdata'] == 1
                          ? "checked" 
                          : ""; 
+                       } else if (!isset($data['Search'])) { //No search at all
+                           echo "checked";
                        }
                       ?>    
                    />

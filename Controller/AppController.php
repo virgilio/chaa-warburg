@@ -109,7 +109,8 @@ class AppController extends Controller {
       }
       if('users' == $this->params['controller']){
         if(('admin_edit' == $this->params['action'] || 
-            'admin_index' == $this->params['action']) 
+            'admin_index' == $this->params['action'] ||
+            'admin_register' == $this->params['action']) 
            && $this->Auth->user('role') != 'admin'){
           
           $this->Session->setFlash("Seu usuário não está autorizado a acessar essa área");

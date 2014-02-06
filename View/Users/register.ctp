@@ -15,10 +15,10 @@
           </div>
         </div>
         <div class="control-group">
-          <label class="control-label" for="name">Seu Nome</label>
+          <label class="control-label" for="nome">Seu Nome</label>
           <div class="controls">
             <?php
-               echo $this->Form->input('name', array('label'=>false, 'placeholder' => 'seu nome')); 
+               echo $this->Form->input('nome', array('label'=>false, 'placeholder' => 'seu nome')); 
             ?>
           </div>
         </div>

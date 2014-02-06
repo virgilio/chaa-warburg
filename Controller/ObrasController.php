@@ -36,6 +36,9 @@ class ObrasController extends AppController {
       }
     }
 
+    $this->Obra->Behaviors->load('Containable');
+
+    $this->paginate['Obra']['contain'] = array('Artista');
     $this->paginate['Obra']['order'] = 'Artista.nome asc';
     $this->set('obras', $this->paginate());
     $obraTipos = $this->Obra->ObraTipo->find('list');
@@ -117,6 +120,12 @@ class ObrasController extends AppController {
             $and['Obra.nome REGEXP'] = '^' . $letter;
           }
         }
+        $queryArray = array(
+                'pais' => $query,
+                'cidade' => $query,
+                );
+        $paisQuery = $this->getPaisIdsQuery($queryArray);
+        $cidadesQuery = $this->getCidadeIdsQuery($queryArray, $paisQuery);
         $this->paginate = array(
           'fields' => array(
             'Obra.id', 
@@ -136,6 +145,8 @@ class ObrasController extends AppController {
               'Obra.ano_fim LIKE' => '%' . $query . '%',
               'Instituicao.nome LIKE' => '%' . $query . '%',
               'Iconografia.nome LIKE' => '%' . $query . '%',
+              'Instituicao.id IN (' . $this->getInstituicaoIdsQuery($cidadesQuery) . ')',
+        
             ),
             'AND' => $and,
           ),
@@ -271,6 +282,7 @@ class ObrasController extends AppController {
       }
     }
 
+    //pr($data);
     $this->set('data', $data);
     parent::searchDataLoader();
 
