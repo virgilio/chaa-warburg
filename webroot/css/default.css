@@ -367,12 +367,18 @@ div.obra:hover div.relacionado-por {
 
 .numeros_warburg label{
   display: inline-block;
-  width: 200px;
+  /*width: 200px;*/
   text-align: right;
-  margin-left: -34px;
-  margin-right: 12px;
+  /*margin-left: -34px;
+  margin-right: 12px;*/
 }
+
 .numeros_warburg span{
-  color: #FF1919;
+  /*color: #FF1919;*/
   font-weight: bold;
+}
+
+.numeros_warburg p {
+    display: inline;
+    margin-right: 25px;
 }
