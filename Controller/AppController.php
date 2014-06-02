@@ -96,8 +96,8 @@ class AppController extends Controller {
     $this->loadModel('ObrasRelacionada');
     $this->set('numRelacionamentos', $this->ObrasRelacionada->find('count'));
 
-    $this->loadModel('Users');
-    $this->set('numPesquisadores', $this->Users->find('count'));
+    $this->loadModel('Artista');
+    $this->set('numArtistas', $this->Artista->find('count'));
 
   }
   

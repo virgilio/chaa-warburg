@@ -97,8 +97,8 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
           <span><?php echo $numRelacionamentos; ?></span>
         </p>
         <p>
-          <label>Quantidade de pesquisadores</label>
-          <span><?php echo $numPesquisadores; ?></span>
+          <label>Total de Artistas Cadastrados</label>
+          <span><?php echo $numArtistas; ?></span>
         </p>
       </div>
       © 1994-<?php echo date('Y'); ?> CHAA – Centro de História da Arte e Arqueologia |  
