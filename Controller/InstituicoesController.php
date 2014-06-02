@@ -67,7 +67,7 @@ class InstituicoesController extends AppController {
           $instituicoes = $this->Instituicao->find('all', 
                                          array(
                                                'fields' => 'Instituicao.id, Instituicao.nome, Cidade.nome',
-                                               'recursive' => 1
+                                               'recursive' => 0
                                                )
                                          );
           $instituicoes = Set::combine($instituicoes, '{n}.Instituicao.id', array('{0} - {1}', '{n}.Instituicao.nome', '{n}.Cidade.nome'));
@@ -77,7 +77,7 @@ class InstituicoesController extends AppController {
 
           $this->autoRender = false;
           $this->layout = 'ajax';
-          $this->render(DS.'Elements'.DS.'select_instituicao');
+          return $this->render(DS.'Elements'.DS.'select_instituicao');
         }
       } else {
         if(!$this->request->is('ajax')) {

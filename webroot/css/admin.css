@@ -157,6 +157,7 @@
 .chosen-container{
   display: inline-block;
   width: 280px;
+  min-width: 220px !important;
 }
 
 .tab-content{

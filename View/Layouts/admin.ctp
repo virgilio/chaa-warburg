@@ -35,7 +35,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
       echo $this->Html->css('bootstrap.min');
       echo $this->Html->css('jquery.fancybox');
       echo $this->Html->css('font-awesome/css/font-awesome.min.css');
-      echo $this->Html->css('chosen');
+      echo $this->Html->css('chosen.min');
       echo $this->Html->css('default');
       echo $this->Html->css('admin');
       
