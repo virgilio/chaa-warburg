@@ -3,7 +3,10 @@
 
 <div class="obra_container">
     <div class="img_obra">
-        <?php echo $this->Html->link($this->Html->image('obras/'.$obra['Obra']['imagem']), '/img/obras/'.$obra['Obra']['imagem'], array('class' => 'sxyzoom swinxylens','escape'=>false)); 
+        <?php 
+                echo $this->Html->link($this->Html->image('obras/'.$obra['Obra']['imagem']), 
+                    '/img/obras/'.$obra['Obra']['imagem'], 
+                    array('class' => 'sxyzoom swinxylens','escape'=>false)); 
         ?>
     </div>
     <div class="info_obra">
@@ -97,7 +100,7 @@
             };             
             ?>)
           </p>
-          <p><?php echo $obra['Obra']['nome']; ?></p>
+          <p><?php echo h($obra['Obra']['nome']); ?></p>
         </div>
         <div class="obra">
           <div class="modal-img">
@@ -136,7 +139,7 @@
         h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
         array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
         array('escape' => false, 'class' => 'tooltip-helper', 
-              'title' => ('Ir para imagem <span>' . $relacionada['nome'] . '</span>'),
+              'title' => ('Ir para imagem <span>' . h($relacionada['nome']) . '</span>'),
               'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 
               'target' => '_blank')); 
         ?>
