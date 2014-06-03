@@ -154,10 +154,17 @@
 .chzn-container .chzn-drop{
   width: 274px;
 }
+
 .chosen-container{
   display: inline-block;
   width: 280px;
   min-width: 220px !important;
+}
+
+.modal-backdrop img {
+    position: absolute;
+    top: 40%;
+    left: 44%;
 }
 
 .tab-content{

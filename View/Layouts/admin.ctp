@@ -49,7 +49,11 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
       echo $this->fetch('meta');
       echo $this->fetch('css');
       echo $this->fetch('script');
+
     ?>
+    <script type="text/javascript">
+        var site_url = "<?php echo Router::url('/'); ?>";
+    </script>
   </head>
   <body>
     <div id="admin-container">
