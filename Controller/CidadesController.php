@@ -61,12 +61,10 @@ class CidadesController extends AppController {
           $this->redirect(array('action' => 'index'));
         } else {
           $cidades = $this->Cidade->find('all', 
-                                         array(
-                                               'fields' => 'Cidade.id, Cidade.nome, Pais.nome',
-                                               'recursive' => 1
-                                               )
-                                         );
-          $cidades_list = Set::combine($cidades, '{n}.Cidade.id', array('{0} - {1}', '{n}.Cidade.nome', '{n}.Pais.nome'));
+                  array('fields' => 'Cidade.id, Cidade.nome, Pais.nome',
+                      'recursive' => 0,));
+          $cidades_list = Set::combine($cidades, '{n}.Cidade.id', 
+                array('{0} - {1}', '{n}.Cidade.nome', '{n}.Pais.nome'));
           $this->set('cidades', $cidades_list);
 
           $this->set('cidade', $this->Cidade->id);
@@ -85,7 +83,7 @@ class CidadesController extends AppController {
         }
       }
     }
-    $paises = $this->Cidade->Pais->find('list');
+    $paises = $this->Cidade->Pais->find('list', array('order' => array('Pais.nome' => 'ASC')));
     $this->set(compact('paises'));
   }
 

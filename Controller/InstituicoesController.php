@@ -63,7 +63,8 @@ class InstituicoesController extends AppController {
                                 'recursive' => 0
                                 )
                             );
-                    $instituicoes = Set::combine($instituicoes, '{n}.Instituicao.id', array('{0} - {1}', '{n}.Instituicao.nome', '{n}.Cidade.nome'));
+                    $instituicoes = Set::combine($instituicoes, '{n}.Instituicao.id', 
+                            array('{0} - {1}', '{n}.Instituicao.nome', '{n}.Cidade.nome'));
                     $this->set('instituicoes', $instituicoes);
 
                     $this->set('instituicao', $this->Instituicao->id);
@@ -85,11 +86,12 @@ class InstituicoesController extends AppController {
 
         $this->loadModel('Pais');
         $this->loadModel('Cidade');
-        $paises = $this->Pais->find('list');
+        $paises = $this->Pais->find('list', array('order' => array('Pais.nome' => 'ASC')));
         $cidades = $this->Cidade->find('all',
                 array(
                     'fields' => 'Cidade.id, Cidade.nome, Pais.nome',
-                    'recursive' => 1
+                    'recursive' => 0,
+                    'order' => array('Cidade.nome' => 'ASC'), 
                     )
                 );
         $cidades_list = Set::combine($cidades, '{n}.Cidade.id', array('{0} - {1}', '{n}.Cidade.nome', '{n}.Pais.nome'));

@@ -52,11 +52,9 @@ class ObrasController extends AppController {
         $data = $this->request->query;
         $this->paginate = array();
 
+        $this->paginate['order'] = array('Obra.nome' => 'ASC');            
         if($this->request->is('get')
              && !empty($data) && isset($data['Search']['filter'])){
-
-            $this->paginate['order'] = 'Obra.nome asc';
-
             if('artista' == $data['Search']['filter']){
                 $this->paginate['conditions'] = array(
                     'Artista.id' => $data['Artista'],
@@ -69,7 +67,8 @@ class ObrasController extends AppController {
         }
         $this->set('obras', $this->paginate());
         $this->loadModel('Artista');
-        $this->set('artistas', $this->Artista->find('list'));
+        $this->set('artistas', $this->Artista->find('list', 
+                    array('order' => array('Artista.nome' => 'ASC'))));
     }
 
     public function admin_get_imagem_by_id($id = null) {
@@ -465,7 +464,8 @@ class ObrasController extends AppController {
                     __('A obra não pode ser salva, tente novamente'));
             }
         }
-        $artistas = $this->Obra->Artista->find('list');
+        $artistas = $this->Obra->Artista->find('list', 
+                array('order' => array('Artista.nome' => 'ASC')));
         $this->set(compact('artistas'));
     }
 
@@ -635,7 +635,8 @@ Você pode acessá-la através do link: " . $url . "
         if($result['Obra']['ante_post_quam'])
             //die(pr($result));
 
-        $obraTipos = $this->Obra->ObraTipo->find('list');
+        $obraTipos = $this->Obra->ObraTipo->find('list', 
+                array('order' => array('ObraTipo.nome' => 'ASC')));
 
         $this->loadModel('Pais');
         $this->loadModel('Cidade');
@@ -646,7 +647,8 @@ Você pode acessá-la através do link: " . $url . "
             'all',
             array(
                 'fields' => 'Cidade.id, Cidade.nome, Pais.nome',
-                'recursive' => 0
+                'recursive' => 0,
+                'order' => array('Cidade.nome' => 'ASC'),
             )
         );
         $cidades = Set::combine($cidades,
@@ -658,7 +660,8 @@ Você pode acessá-la através do link: " . $url . "
 
         $instituicoes = $this->Obra->Instituicao->find('all', array(
                     'fields' => 'Instituicao.id, Instituicao.nome, Cidade.nome',
-                    'recursive' => 0
+                    'recursive' => 0,
+                    'order' => array('Instituicao.nome' => 'ASC'),
         ));
         $instituicoes = Set::combine($instituicoes,
                 '{n}.Instituicao.id',
@@ -667,9 +670,12 @@ Você pode acessá-la através do link: " . $url . "
                     '{n}.Instituicao.nome',
                     '{n}.Cidade.nome'));
 
-        $paises = $this->Pais->find('list');
-        $artistas = $this->Obra->Artista->find('list');
-        $iconografias = $this->Obra->Iconografia->find('list');
+        $paises = $this->Pais->find('list', 
+                array('order' => array('Pais.nome' => 'ASC')));
+        $artistas = $this->Obra->Artista->find('list', 
+                array('order' => array('Artista.nome' => 'ASC')));
+        $iconografias = $this->Obra->Iconografia->find('list', 
+                array('order' => array('Iconografia.nome' => 'ASC')));
 
         $users = $this->User->find('list');
 
@@ -681,6 +687,7 @@ Você pode acessá-la através do link: " . $url . "
                 'Artista.nome'
             ),
             'contain' => array('Artista'),
+            'order' => array('Relacionada.nome' => 'ASC')
         ));
 
         foreach($result['Relacionada'] as $rel){
