@@ -13,7 +13,8 @@
 
 <div class="related">
 	<?php if (!empty($artista['Obra'])): ?>
-    <h3><?php echo __('Obras do artista'); ?></h3>
+    <h3><?php echo __('Obras do artista'); ?> <small>(<?php echo count($artista['Obra'])?> obras cadastradas)</small></h3>
+    
 	<?php
 		$i = 0;
 		foreach ($artista['Obra'] as $obra): ?>
