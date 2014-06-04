@@ -181,18 +181,12 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
             <li>
               <?php 
                 echo $this->Html->link(
-                  __('Página inicial do CHAA'), 
-                  'http://www.unicamp.br/chaa/'); ?>
-            </li>
-	    <li>
-              <?php 
-                echo $this->Html->link(
                   __('Lista de Obras'), 
                   array('controller' => 'obras', 
                         'admin' => false, 
                         'action' => 'index')); ?>
             </li>
-	    <li>
+            <li>
               <?php 
                 echo $this->Html->link(
                   'Sobre a busca',
@@ -203,6 +197,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
                 );
               ?>
             </li>
+            <li>
+              <?php 
+                echo $this->Html->link(
+                  __('Página inicial do CHAA'), 
+                  'http://www.unicamp.br/chaa/'); ?>
+            </li>
+
 	  </ul>
         </nav>
       </div>

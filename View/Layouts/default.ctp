@@ -69,13 +69,13 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
       <nav id="main-menu">
 	<ul>
 	  <li><?php echo $this->Html->link(__('Administração'), array('controller' => 'users', 'action' => 'login')); ?></li>
-	  <li><?php echo $this->Html->link(__('Página inicial do CHAA'), 'http://www.unicamp.br/chaa/'); ?></li>
 	  <li><?php echo $this->Html->link(__('Lista de Obras'), array('controller' => 'obras', 'action' => 'index')); ?></li>
 	  <li><?php echo $this->Html->link('Sobre a busca',
                                            array('controller' => 'pages', 'action' => 'sobre-busca'),
                                            array('escape' => false)
-            );
-          ?></li>
+              );?></li>
+
+	  <li><?php echo $this->Html->link(__('Página inicial do CHAA'), 'http://www.unicamp.br/chaa/'); ?></li>
 	</ul>
       </nav>
     </div>
