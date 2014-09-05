@@ -82,7 +82,7 @@ class PagesController extends AppController {
                                                        'Obra.imagem', 
                                                        'Obra.nome', 
                                                        'Obra.id'), 
-                                     'limit' => 5, 
+                                     'limit' => 15, 
                                      'order' => 'Obra.created desc'));
     $this->set('lastObras', $obras);
     /*
