@@ -83,6 +83,7 @@ class PagesController extends AppController {
                                                        'Obra.nome', 
                                                        'Obra.id'), 
                                      'limit' => 15, 
+                                     'recursive' => -1,
                                      'order' => 'Obra.created desc'));
     $this->set('lastObras', $obras);
     /*
