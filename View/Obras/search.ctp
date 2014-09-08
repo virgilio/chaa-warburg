@@ -14,7 +14,7 @@
   <div class="mini-obra">
     <?php 
       echo $this->Html->link(
-        $this->Html->image(('obras/thumbs/' . $obra['Obra']['imagem']), 
+        $this->Html->image(('obras/mini/' . $obra['Obra']['imagem']), 
                            array('alt' => $obra['Obra']['imagem'], 
                                  'border' => '0')), 
         array('controller' => 'obras', 

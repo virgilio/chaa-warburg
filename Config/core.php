@@ -346,3 +346,5 @@ Cache::config('_cake_model_', array(
 	'serialize' => ($engine === 'File'),
 	'duration' => $duration
 ));
+
+define('MINI_IMAGE_WIDTH', 228);

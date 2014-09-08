@@ -26,7 +26,7 @@
         <?php 
                echo $this->Html->link($this->Html->image(
                       Configure::read('debug') >= 1 ? ('http://warburg.chaa-unicamp.com.br/img/obras/' . $obra['Obra']['imagem']) :
-                      ('obras/thumbs/' . $obra['Obra']['imagem']), 
+                      ('obras/mini/' . $obra['Obra']['imagem']), 
                         array('alt' => $obra['Obra']['imagem'], 'border' => '0')), 
                         array('controller' => 'obras', 'action' => 'view', $obra['Obra']['id']), 
                         array('escape'=>false)); 

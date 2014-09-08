@@ -82,7 +82,7 @@
       <a class="fancybox" 
          href="#img_<?php echo $obra['Obra']['id'] ?>" 
          data-fancybox-group="gallery">
-        <?php echo $this->Html->image('obras/thumbs/' . $obra['Obra']['imagem']); ?>
+        <?php echo $this->Html->image('obras/mini/' . $obra['Obra']['imagem']); ?>
       </a>
 
       <div id="img_<?php echo $obra['Obra']['id'] ?>" style="display: none;" class="modal_obra">

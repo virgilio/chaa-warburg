@@ -22,7 +22,7 @@
   <a class="fancybox" 
      href="#img_<?php echo $relacionada['id'] ?>" 
      data-fancybox-group="gallery">
-    <?php echo $this->Html->image('obras/thumbs/' . $relacionada['imagem']); ?>
+    <?php echo $this->Html->image('obras/mini/' . $relacionada['imagem']); ?>
   </a>
   
   <div id="img_<?php echo $relacionada['id'] ?>" style="display: none;" class="modal_relacionadas">

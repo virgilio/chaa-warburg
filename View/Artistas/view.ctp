@@ -22,7 +22,7 @@
 		  <a class="fancybox" 
                      href="#img_<?php echo $obra['id'] ?>" 
                      data-fancybox-group="gallery">
-                    <?php echo $this->Html->image('obras/thumbs/' . $obra['imagem']); ?>
+                    <?php echo $this->Html->image('obras/mini/' . $obra['imagem']); ?>
                   </a>
 
             <div id="img_<?php echo $obra['id'] ?>" style="display: none;" class="modal_obra">

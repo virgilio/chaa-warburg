@@ -96,7 +96,7 @@
        href="#img_<?php echo $obra['Obra']['id'] ?>" 
        data-fancybox-group="gallery">
       <?php 
-        echo $this->Html->image('obras/thumbs/' . $obra['Obra']['imagem']); 
+        echo $this->Html->image('obras/mini/' . $obra['Obra']['imagem']); 
       ?>
     </a>
 

@@ -1,9 +1,10 @@
 <?php 
   $this->Html->script("main.js", array("inline" => false));
-  $this->Html->script("jquery.Jcrop.min.js", array("inline" => false));
-  $this->Html->script("script.js", array("inline" => false));
+  //$this->Html->script("jquery.Jcrop.min.js", array("inline" => false));
+  //$this->Html->script("script.js", array("inline" => false));
+  $this->Html->script("image_handler.js", array("inline" => false));
   $this->Html->script("nicedit/nicEdit.js", array("inline" => false));
-  $this->Html->css('jquery.Jcrop.min.css', null, array("inline" => false));
+  //$this->Html->css('jquery.Jcrop.min.css', null, array("inline" => false));
   $this->Html->script("ajax-relacionadas.js", array("inline" => false));
   
   $this->Html->css('bootstrapSwitch.css', null, array('inline' =>
@@ -11,7 +12,7 @@
   $this->Html->script('bootstrapSwitch.min.js', array('inline' => false));
 ?>
 <style type="text/css">
-  .jcrop img {max-width: none;}
+  .jcrop img {max-width: 100%;}
   input[type=number]::-webkit-inner-spin-button,
   input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -58,68 +59,68 @@
   </li>
 </ul>
 
-<input type="hidden" id="x1" name="data[Thumbnail][x1]" 
+<!--<input type="hidden" id="x1" name="data[Thumbnail][x1]" 
        value="<?php echo $this->request->data['Thumbnail']['x1']; ?>" />
 <input type="hidden" id="y1" name="data[Thumbnail][y1]" 
        value="<?php echo $this->request->data['Thumbnail']['y1']; ?>" />
 <input type="hidden" id="x2" name="data[Thumbnail][x2]" 
        value="<?php echo $this->request->data['Thumbnail']['x2']; ?>" />
 <input type="hidden" id="y2" name="data[Thumbnail][y2]" 
-       value="<?php echo $this->request->data['Thumbnail']['y2']; ?>" />
+       value="<?php echo $this->request->data['Thumbnail']['y2']; ?>" />-->
 
 
 <?php echo $this->Form->input('id'); ?>
 
 <div class="obras form tab-content">
   <!-- Início step1 -->    
-  <div id="edit-img-step1" class="tab-pane container">
+  <div id="edit-img-step1" class="tab-pane container-fluid">
     <fieldset>
-      <div class="row">
+      <div class="row-fluid">
         <div class="span8">
-          <h3>Editar imagem e miniatura</h3>
+          <h3>Editar imagem</h3>
           <?php 
             echo $this->Form->input(
               'imagem', 
               array('type' => 'file', 'id' =>
                     'image_file', 
-                    'onchange' => 'fileSelectHandler()')); ?>
+                    'onchange' => 'ImageHandler.fileSelectHandler()')); ?>
         </div>
+<!--
         <div class="span12">
           <label>Miniatura atual</label>
           <?php 
             echo $this->Html->image(
-              ('obras/thumbs/' . $this->Form->value('Obra.imagem')), 
+              ('obras/mini/' . $this->Form->value('Obra.imagem')), 
               array('alt' => $this->Form->value('Obra.imagem'), 
                     'border' => '0', 
                     'class' => 'img-polaroid'));
           ?>
         </div>
+-->
       </div>
-      <div class="row">
+      <div class="row-fluid">
         <!--<div class="step2 span6 offset2">-->
-        <div class="span6" style="height: auto">
-          <h4>Selecione a miniatura desejada</h4>
-          <div class="jcrop" id="image-box">            
+          <h4>Imagem selecionada</h4>
+          <div class="span10 jcrop" id="image-box">            
             <?php 
               echo $this->Html->image(
                 ('obras/' . $this->Form->value('Obra.imagem')), 
                 array('alt' => $this->Form->value('Obra.imagem'), 
                       'border' => '0', 
-                      'id' => 'preview', 
-                      'onload' => 'loadPreview()'));
+                      'id' => 'preview',
+                    ));
             ?>               
           </div>
-        </div>
         <input type="hidden" 
                id="filesize" name="data[Thumbnail][filesize]" />
         <input type="hidden" 
                id="filetype" name="data[Thumbnail][filetype]" />
         <input type="hidden" 
                id="filedim" name="data[Thumbnail][filedim]" />
-        <input type="hidden" 
+        <!--<input type="hidden" 
                id="w" name="data[Thumbnail][w]" />
         <input type="hidden" 
-               id="h" name="data[Thumbnail][h]" />
+               id="h" name="data[Thumbnail][h]" />-->
       </div>
     </fieldset>
   </div>
@@ -472,7 +473,7 @@
         <div class="span3 thumbs-relacionadas">
           <label>Imagem principal</label>
           <?php 
-                echo $this->Html->image(('obras/thumbs/' . $this->Form->value('Obra.imagem')), 
+                echo $this->Html->image(('obras/mini/' . $this->Form->value('Obra.imagem')), 
                                         array('alt' => $this->Form->value('Obra.imagem'), 'border' => '0', 'class' => 'img-polaroid'));
           ?>
         </div>

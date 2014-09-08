@@ -450,13 +450,15 @@ class ObrasController extends AppController {
             $obra['user_id'] = $this->Auth->user('id');
             $this->Obra->create();
             if ($this->Obra->save($obra)) {
-                $this->Obra->Thumbnail->create();
+                /*$this->Obra->Thumbnail->create();
 
                 $data['Thumbnail']['obra_id'] = $this->Obra->id;
-                $this->Obra->Thumbnail->save($data['Thumbnail']);
+                $this->Obra->Thumbnail->save($data['Thumbnail']);*/
 
                 $this->Session->setFlash(__('A Imagem foi salva!'));
-                $this->sendMail($this->Obra);
+                if(Configure::read('debug') < 1){
+                    $this->sendMail($this->Obra);
+                }
 
                 $this->redirect(array('action' => 'edit', $this->Obra->id));
 
@@ -759,8 +761,49 @@ Você pode acessá-la através do link: " . $url . "
         return strrchr($uploaded['name'],".");
     }
 
-
     private function processFile($uploaded, $thumb){
+        $uploaded['name'] = strtolower(str_replace(" ", "-", $uploaded['name']));
+
+
+        $up_dir = WWW_ROOT . "img/obras";
+        $thumb_up_dir = WWW_ROOT . "img/obras/mini";
+
+        $target_path = $up_dir . DS . $uploaded['name'];
+        $thumb_target_path = $thumb_up_dir . DS . $uploaded['name'];
+
+        //temp path without the ext
+        $temp_path = substr($target_path, 0, 
+            strlen($target_path) - strlen($this->_ext($uploaded))); 
+        //temp path without the ext
+        $thumb_temp_path = substr($thumb_target_path, 0, 
+            strlen($thumb_target_path) - strlen($this->_ext($uploaded)));
+
+        $i = 1;
+        while(file_exists($target_path)){
+            $target_path = $temp_path . "-" . $i . $this->_ext($uploaded);
+            $thumb_target_path = $thumb_temp_path . "-" . $i . 
+                $this->_ext($uploaded);
+            $i++;
+        }
+
+        $save_data = array();
+
+        if(move_uploaded_file($uploaded['tmp_name'], $target_path)){
+            //Final File Name
+            $finalFile = basename($target_path);
+            @chmod($target_path, 0644);
+            $this->createThumbnail($target_path, $thumb, $thumb_target_path);
+        } else {
+             $this->Session->setFlash(__('ObrasController::processFile() - Unable to save temp file to file system.'));
+             $this->redirect(array('action' => 'index'));
+        }
+        return $finalFile;
+    }
+
+    /**
+    * this function is deprecated
+    */
+    private function oldProcessFile($uploaded, $thumb){
         $uploaded['name'] = strtolower(str_replace(" ", "-", $uploaded['name']));
 
 
@@ -769,9 +812,14 @@ Você pode acessá-la através do link: " . $url . "
 
         $target_path = $up_dir . DS . $uploaded['name'];
         $thumb_target_path = $thumb_up_dir . DS . $uploaded['name'];
+        
+        //temp path without the ext
+        $temp_path = substr($target_path, 0, strlen($target_path) - 
+            strlen($this->_ext($uploaded))); 
 
-        $temp_path = substr($target_path, 0, strlen($target_path) - strlen($this->_ext($uploaded))); //temp path without the ext
-        $thumb_temp_path = substr($thumb_target_path, 0, strlen($thumb_target_path) - strlen($this->_ext($uploaded))); //temp path without the ext
+        //temp path without the ext
+        $thumb_temp_path = substr($thumb_target_path, 0, 
+            strlen($thumb_target_path) - strlen($this->_ext($uploaded))); 
 
         $i = 1;
         while(file_exists($target_path)){
@@ -794,8 +842,71 @@ Você pode acessá-la através do link: " . $url . "
         return $finalFile;
     }
 
-
     private function createThumbnail($sTempFileName, $thumb, $target){
+        if (file_exists($sTempFileName) && filesize($sTempFileName) > 0) {
+
+            list($width, $height, $type) = getimagesize($sTempFileName);
+
+            // check for image type
+            switch($type) {
+            case IMAGETYPE_JPEG:
+                $sExt = '.jpg';
+                $vImg = imagecreatefromjpeg($sTempFileName);
+                break;
+            case IMAGETYPE_GIF:
+                $sExt = '.gif';
+                $vImg = @imagecreatefromgif($sTempFileName);
+                break;
+            case IMAGETYPE_PNG:
+                $sExt = '.png';
+                $vImg = imagecreatefrompng($sTempFileName);
+                break;
+            default:
+                return;
+            }
+
+            // Get the 
+            $thumb['w'] = MINI_IMAGE_WIDTH;
+            $thumb['h'] = $height * MINI_IMAGE_WIDTH / $width;
+            // create a new true color image
+            $vDstImg = imagecreatetruecolor((int)$thumb['w'], (int)$thumb['h']);
+            if(!$vDstImg) return false;
+
+            // copy and resize part of an image with resampling
+            /*
+                imagecopyresampled ($dst_image, $src_image,
+                $dst_x, $dst_y,
+                $src_x, $src_y,
+                $dst_w, $dst_h,
+                $src_w, $src_h )
+            */
+
+            imagecopyresampled($vDstImg, $vImg,
+                    0, 0, 0, 0,
+                    (int)$thumb['w'], (int)$thumb['h'],
+                    $width, $height);
+
+            // define a result image filename
+            //$sResultFileName = $sTempFileName . $sExt;
+            //                      die($target);
+            $sResultFileName = $target;
+
+            // output image to file
+            if('.jpg' === $sExt) {
+                $iJpgQuality = 90;
+                imagejpeg($vDstImg, $sResultFileName, $iJpgQuality);
+                //@unlink($sTempFileName);
+            } else {
+                imagepng($vDstImg, $sResultFileName);
+            }
+        }
+    }
+
+    /**
+    * this function is deprecated
+    */
+
+    private function oldCreateThumbnail($sTempFileName, $thumb, $target){
         if (file_exists($sTempFileName) && filesize($sTempFileName) > 0) {
             $aSize = getimagesize($sTempFileName); // try to obtain image info
             if (!$aSize) {
@@ -855,8 +966,4 @@ Você pode acessá-la através do link: " . $url . "
             }
         }
     }
-
-
-
-
 }
