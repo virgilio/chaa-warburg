@@ -80,18 +80,42 @@ a.lnk_logo{
 #main-menu a:hover{
   color: #990000;
 }
-.mini-obra{
-  height: 240px;
+.obra-column {
+    width: 240px;
+    padding: 0;
+    margin: 0;
+    float: left;
 }
-.mini-obra, .mini-obra-related{
+.mini-obra{
+  /*height: 240px;*/
+}
+.mini-obra, .mini-obra-related {
+    float: left;
+    width: 228px;
+    text-align: center;
+    padding: 0px;
+    margin: 4px 6px;
+    background-color: #eee;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.22);
+}
+
+.mini-obra-related img, .mini-obra img {
+    -webkit-border-radius: 10px 10px 0 0;
+    -moz-border-radius: 10px 10px 0 0;
+    border-radius: 10px 10px 0 0; 
+}
+/*.mini-obra, .mini-obra-related{
   float: left;
   width: 192px;
   text-align: center;
   padding: 10px;
   margin: 0 14px;
-}
+}*/
 .mini-obra p, .mini-obra-related p{
-  padding: 10px 0;
+  padding: 10px 5px;
 }
 .mini-obra-related a {
     display: block;
@@ -153,6 +177,7 @@ a.lnk_logo{
 .related{
   clear: both;
   display: table;
+  margin-bottom: 20px;
 }
 .related h3{
   color: #990000;

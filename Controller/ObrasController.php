@@ -12,13 +12,14 @@ App::uses('CakeEmail', 'Network/Email');
 class ObrasController extends AppController {
 
     public $paginate = array();
+    public $components = array('RequestHandler');
+
 
     /**
      * index method
      *
      * @return void
      */
-
 
     public function index($letter = null) {
         parent::searchDataLoader();

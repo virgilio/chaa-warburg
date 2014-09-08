@@ -62,106 +62,153 @@
 
 
 <div class="related">
-  <?php $i = 0;
-        if (!empty($relacionadas)): ?>
-    <h3><?php echo __('Imagens Relacionadas'); ?></h3>
-    <?php foreach ($relacionadas as $relacionada):         ?>
-    <?php 
-       $user = $relacionada['User'];
-       $relacao = $relacionada['ObrasRelacionada'];
-       if($relacionada['ObrasRelacionada']['obra_id'] == $obra['Obra']['id']){
-         $relacionada = $relacionada['Relacionada'];
-       } else {
-         $relacionada = $relacionada['Obra'];
-       }
-       ?>
-    <div class="mini-obra-related <?php echo ($i%4 == 0) ? 'clear-miniobra':''; ?>">
-      <a class="fancybox tooltip-helper" 
-         href="#img_<?php echo $relacionada['id'] ?>" 
-         data-toggle="tootip"
-         title="Clique para comparar imagens"
-         data-fancybox-group="gallery">
-        <?php echo $this->Html->image('obras/'.$relacionada['imagem']); ?>
-      </a>
+<?php 
+    $i = 0;
+    if (!empty($relacionadas)):  
+        $keys = array_keys($relacionadas);
+        $columns = array();
+        $columns[0] = array_filter($keys, function($item){return $item % 4 == 0;});
+        $columns[1] = array_filter($keys, function($item){return $item % 4 == 1;});
+        $columns[2] = array_filter($keys, function($item){return $item % 4 == 2;});
+        $columns[3] = array_filter($keys, function($item){return $item % 4 == 3;});
+?>
+    <h3 id="related"><?php echo __('Imagens Relacionadas'); ?></h3>
+    <div id="image-wrapper">
+<?php 
+        foreach ($columns as $column): 
+?>
+        <div class="obra-column"> 
+<?php 
+            foreach ($column as $item): 
+                $relacionada = $relacionadas[$item];   
+                $user = $relacionada['User'];
+                $relacao = $relacionada['ObrasRelacionada'];
+                if($relacionada['ObrasRelacionada']['obra_id'] == $obra['Obra']['id']){
+                    $relacionada = $relacionada['Relacionada'];
+                } else {
+                    $relacionada = $relacionada['Obra'];
+                }
+?>
+            <div class="mini-obra-related <?php echo ($i%4 == 0) ? 'clear-miniobra':''; ?>">
+                <a class="fancybox tooltip-helper" 
+                    href="#img_<?php echo $relacionada['id'] ?>" 
+                    data-toggle="tootip"
+                    title="Clique para comparar imagens"
+                    data-fancybox-group="gallery">
+<?php 
+                echo $this->Html->image(
+                    Configure::read('debug') >= 1 ? 
+                    ('http://warburg.chaa-unicamp.com.br/img/obras/' . $relacionada['imagem']) : 
+                    'obras/' . $relacionada['imagem']); 
+?>
+                </a>
       
-      <div id="img_<?php echo $relacionada['id'] ?>" style="display: none;" class="modal_relacionadas">
-        <div class="obra">
-          <div class="modal-img">
-            <?php echo $this->Html->image(('obras/'.$obra['Obra']['imagem']),
-          array('alt' => '', 'border' => '0',)); ?>
-          </div>
-          <p><?php echo $obra['Artista']['nome']; ?>
+                <div id="img_<?php echo $relacionada['id'] ?>" 
+                    style="display: none;" class="modal_relacionadas">
+                    <div class="obra">
+                        <div class="modal-img">
+<?php 
+                echo $this->Html->image(('obras/'.$obra['Obra']['imagem']),
+                    array('alt' => '', 'border' => '0',)); 
+?>
+                        </div>
+                        <p><?php echo $obra['Artista']['nome']; ?>
             (<?php 
-            if (($obra['Obra']['ano_inicio'] == null) && ($obra['Obra']['ano_fim'] == null)) {
-                echo 'sem data';
-              } else {
-                echo (h($obra['Obra']['ano_inicio']) != 0) ? h($obra['Obra']['ano_inicio']) . ' - ': ''; 
-                echo h($obra['Obra']['ano_fim']); 
-            };             
+                if (($obra['Obra']['ano_inicio'] == null) 
+                    && ($obra['Obra']['ano_fim'] == null)) {
+                    echo 'sem data';
+                } else {
+                    echo (h($obra['Obra']['ano_inicio']) != 0) ? 
+                        h($obra['Obra']['ano_inicio']) . ' - ': ''; 
+                    echo h($obra['Obra']['ano_fim']); 
+                };             
             ?>)
-          </p>
-          <p><?php echo h($obra['Obra']['nome']); ?></p>
-        </div>
-        <div class="obra">
-          <div class="modal-img">
-            <?php echo $this->Html->image('obras/'.$relacionada['imagem']) ?>
-          </div>
-          <p><?php echo $relacionada['Artista']['nome']; ?>
+                        </p>
+                        <p><?php echo h($obra['Obra']['nome']); ?></p>
+                    </div>
+                    <div class="obra">
+                        <div class="modal-img">
+<?php 
+                echo $this->Html->image('obras/'.$relacionada['imagem']) 
+?>
+                        </div>
+                        <p><?php echo $relacionada['Artista']['nome']; ?>
             (<?php 
-            if (($relacionada['ano_inicio'] == null) && ($relacionada['ano_fim'] == null)) {
-                echo 'sem data';
-              } else {
-                echo (h($relacionada['ano_inicio']) != 0) ? h($relacionada['ano_inicio']) . ' - ': ''; 
-                echo h($relacionada['ano_fim']); 
-            };             
+                if (($relacionada['ano_inicio'] == null) 
+                    && ($relacionada['ano_fim'] == null)) {
+                    echo 'sem data';
+                } else {
+                    echo (h($relacionada['ano_inicio']) != 0) ? 
+                        h($relacionada['ano_inicio']) . ' - ': ''; 
+                    echo h($relacionada['ano_fim']); 
+                };             
             ?>)
-          </p>
-          <p>
-            <?php echo $this->Html->link(
-            h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
-            array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
-            array('escape'=>false)); 
-            ?>
-          </p>
-          <div class="clearfix relacionado-por" style="">
-            <h5> Relação proposta por: 
-              <?php echo $user['nome']; ?>
-            </h5>
-            <p>
-              <?php echo $relacao['descricao']; ?>
-            </p>
-          </div>
-          
-        </div>
-      </div>
-      <p>
-        <?php echo $this->Html->link(
-        h(substr($relacionada['nome'], 0, 40)) . (strlen($relacionada['nome']) > 40 ? '...' : ''), 
-        array('controller' => 'obras', 'action' => 'view', $relacionada['id']), 
-        array('escape' => false, 'class' => 'tooltip-helper', 
-              'title' => ('Ir para imagem <span>' . h($relacionada['nome']) . '</span>'),
-              'data-placement' => 'bottom', 'data-toggle' => 'tooltip', 
-              'target' => '_blank')); 
-        ?>
-      </p>
-      <p class="nome-artista">
-        <?php echo $this->Html->link($relacionada['Artista']['nome'],
-        array('controller' => 'artistas', 'action' => 'view',
-        $relacionada['Artista']['id']), 
-        array('escape' => false,
-              'title' => ('Ir para perfil do autor'),
-              'target' => '_blank')); ?>
+                        </p>
+                        <p>
+<?php 
+                echo $this->Html->link(
+                    h(substr($relacionada['nome'], 0, 40)) . 
+                    (strlen($relacionada['nome']) > 40 ? '...' : ''), 
+                    array('controller' => 'obras', 'action' => 'view', 
+                        $relacionada['id']), 
+                    array('escape'=>false)); 
+?>
+                        </p>
+                        <div class="clearfix relacionado-por" style="">
+                            <h5> Relação proposta por: 
+                                <?php echo $user['nome']; ?>
+                            </h5>
+                            <p>
+                                <?php echo $relacao['descricao']; ?>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <p>
+<?php 
+                echo $this->Html->link(
+                    h(substr($relacionada['nome'], 0, 40)) . 
+                        (strlen($relacionada['nome']) > 40 ? '...' : ''), 
+                        array('controller' => 'obras', 'action' => 'view', 
+                            $relacionada['id']), 
+                        array('escape' => false, 'class' => 'tooltip-helper', 
+                            'title' => ('Ir para imagem <span>' . 
+                                h($relacionada['nome']) . '</span>'),
+                            'data-placement' => 'bottom', 
+                            'data-toggle' => 'tooltip', 'target' => '_blank')); 
+?>
+                </p>
+                <p class="nome-artista">
+<?php 
+                echo $this->Html->link($relacionada['Artista']['nome'],
+                    array('controller' => 'artistas', 'action' => 'view',
+                        $relacionada['Artista']['id']), 
+                    array('escape' => false,
+                        'title' => ('Ir para perfil do autor'),
+                        'target' => '_blank')); 
+?>
         (<?php 
-        if (($relacionada['ano_inicio'] == null) && ($relacionada['ano_fim'] == null)) {
-            echo 'sem data';
-          } else {
-            echo (h($relacionada['ano_inicio']) != 0) ? h($relacionada['ano_inicio']) . ' - ': ''; 
-            echo h($relacionada['ano_fim']); 
-        };             
+                if (($relacionada['ano_inicio'] == null) 
+                    && ($relacionada['ano_fim'] == null)) {
+                    echo 'sem data';
+                } else {
+                    echo (h($relacionada['ano_inicio']) != 0) ? 
+                        h($relacionada['ano_inicio']) . ' - ': ''; 
+                    echo h($relacionada['ano_fim']); 
+                };             
         ?>)
-      </p>
-    </div>
-    <?php $i++;
-          endforeach; ?>
-    <?php endif; ?>
+                </p>
+            </div> <!-- end obra -->
+<?php 
+                $i++;
+            endforeach; 
+?>
+        </div> <!-- column end -->
+<?php 
+        endforeach; 
+?>
+    </div> <!-- image-wrapper end -->
+<?php 
+    endif; 
+?>
 </div>
