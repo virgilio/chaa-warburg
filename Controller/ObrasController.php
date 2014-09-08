@@ -856,45 +856,7 @@ Você pode acessá-la através do link: " . $url . "
         }
     }
 
-    /*public function add() {
-        if ($this->request->is('post')) {
-        $this->Obra->create();
-        if ($this->Obra->save($this->request->data)) {
-        $this->Session->setFlash(__('The obra has been saved'));
-        $this->redirect(array('action' => 'index'));
-        } else {
-        $this->Session->setFlash(__('A obra não foi salva. Por favor, tente novamente.'));
-        }
-        }
-        $obraTipos = $this->Obra->ObraTipo->find('list');
-        $iconografias = $this->Obra->Iconografia->find('list');
-        $instituicoes = $this->Obra->Instituicao->find('list');
-        $paises = $this->Obra->Pais->find('list');
-        $cidades = $this->Obra->Cidade->find('list');
-        $artistas = $this->Obra->Artista->find('list');
-        $relacionadas = $this->Obra->Relacionada->find('list');
-        $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 'artistas', 'iconografias', 'relacionadas'));
-        }
 
-        public function admin_add() {
-        if ($this->request->is('post')) {
-        $this->Obra->create();
-        if ($this->Obra->save($this->request->data)) {
-        $this->Session->setFlash(__('The obra has been saved'));
-        $this->redirect(array('action' => 'index'));
-        } else {
-        $this->Session->setFlash(__('A obra não foi salva. Por favor, tente novamente.'));
-        }
-        }
-        $obraTipos = $this->Obra->ObraTipo->find('list');
-        $instituicoes = $this->Obra->Instituicao->find('list');
-        $paises = $this->Obra->Pais->find('list');
-        $cidades = $this->Obra->Cidade->find('list');
-        $artistas = $this->Obra->Artista->find('list');
-        $iconografias = $this->Obra->Iconografia->find('list');
-        $relacionadas = $this->Obra->Relacionada->find('list');
-        $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades', 'artistas', 'iconografias', 'relacionadas'));
-        }*/
 
 
 }
