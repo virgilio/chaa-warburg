@@ -747,7 +747,7 @@ Você pode acessá-la através do link: " . $url . "
         if (!$this->Obra->exists()) {
             throw new NotFoundException(__('Obra inválida'));
         }
-        $this->request->onlyAllow('post', 'delete');
+        $this->request->allowMethod('post', 'delete');
         if ($this->Obra->delete()) {
             $this->Session->setFlash(__('Obra deletada'));
             $this->redirect(array('action' => 'index'));

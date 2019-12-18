@@ -103,7 +103,7 @@ class PaisesController extends AppController {
 		if (!$this->Pais->exists()) {
 			throw new NotFoundException(__('País inválido'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Pais->delete()) {
 			$this->Session->setFlash(__('País deletado'));
 			$this->redirect(array('action' => 'index'));

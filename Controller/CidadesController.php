@@ -125,7 +125,7 @@ class CidadesController extends AppController {
 		if (!$this->Cidade->exists()) {
 			throw new NotFoundException(__('Cidade inválida'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Cidade->delete()) {
 			$this->Session->setFlash(__('Cidade deletada'));
 			$this->redirect(array('action' => 'index'));

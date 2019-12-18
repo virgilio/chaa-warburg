@@ -157,7 +157,7 @@ class ArtistasController extends AppController {
         if (!$this->Artista->exists()) {
             throw new NotFoundException(__('Artista inválido'));
         }
-        $this->request->onlyAllow('post', 'delete');
+        $this->request->allowMethod('post', 'delete');
         if ($this->Artista->delete()) {
             $this->Session->setFlash(__('Artista deletado'));
             $this->redirect(array('action' => 'index'));
