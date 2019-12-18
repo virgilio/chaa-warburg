@@ -23,11 +23,12 @@
                   echo $search_type === 'fast' ? 'active' : '' 
                 ?>"
                 id="busca_rapida">
-      <?php 
-        echo $this->Form->create('Obra', 
-                                 array('action' => 'search', 
-                                       'type' => 'get', 
-                                       'class' => 'form-horizontal')); 
+      <?php
+        echo $this->Form->create(false, array(
+            'url' => ('controller' => 'obras', 'action' => 'search'),
+            'type' => 'get',
+            'class' => 'form-horizontal'
+        ));
       ?>
       <fieldset>
         <!-- Text input-->
@@ -67,13 +68,13 @@
                   echo $search_type === 'advanced' ? 'active' : '' 
                 ?>" 
                 id="busca_avancada">
-      <?php 
-        echo $this->Form->create('Obra', 
-                                 array('action' => 'search', 
-                                       'type' => 'get', 
-                                       'class' => 'form-horizontal')); 
-        $hasValues = isset($data['Search']) 
-          && 'advanced' === $data['Search']['type'];
+      <?php
+        echo $this->Form->create(false, array(
+            'url' => array('controller' => 'obras', 'action' => 'search'),
+            'type' => 'get',
+            'class' => 'form-horizontal'
+        ));
+        $hasValues = isset($data['Search']) && 'advanced' === $data['Search']['type'];
       ?>
       <input type="hidden" name="Search[type]" value="advanced" /> 
       <fieldset>

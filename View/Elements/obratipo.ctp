@@ -1,9 +1,11 @@
 <?php $this->Html->script("ajax-add-inline.js", array("inline" => false)); ?>
-<?php echo $this->Form->create('ObraTipo', 
-                array('class' => 'form-horizontal', 
-                      'action' => 'add',
-                      'onsubmit' => 'return addObraTipo(this);')); ?>
-
+<?php
+    echo $this->Form->create(false, array(
+        'class' => 'form-horizontal',
+        'url' => array('controller' => 'obra_tipos','action' => 'add'),
+        'onsubmit' => 'return addObraTipo(this);'
+    ));
+?>
 <fieldset>
   <div class="control-group">
     <label class="control-label" for="nome">Nome da técnica</label>

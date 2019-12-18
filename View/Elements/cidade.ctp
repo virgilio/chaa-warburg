@@ -1,8 +1,11 @@
 <?php $this->Html->script("ajax-add-inline.js", array("inline" => false)); ?>
-<?php echo $this->Form->create('Cidade', 
-                array('class' => 'form-horizontal', 
-                      'action' => 'add',
-                      'onsubmit' => 'return addCidade(this);')); ?>
+<?php
+    echo $this->Form->create(false, array(
+        'class' => 'form-horizontal',
+        'url' => array('controller' => 'cidades', 'action' => 'add'),
+        'onsubmit' => 'return addCidade(this);'
+    ));
+?>
 <fieldset>
   <div class="control-group">
     <label class="control-label" for="nome">Nome da cidade</label>

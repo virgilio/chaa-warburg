@@ -1,8 +1,9 @@
 <?php
-  echo $this->Form->create('ObrasRelacionada', 
-          array('class' => 'form-horizontal', 
-                'action' => 'edit',
-                'onsubmit' => 'return editRelacao(this);')); 
+    echo $this->Form->create(false, array(
+        'class' => 'form-horizontal',
+        'url' => array('controller' => 'obras_relacionadas', 'action' => 'edit'),
+        'onsubmit' => 'return editRelacao(this);'
+    ));
 ?>
 <fieldset>
   <?php

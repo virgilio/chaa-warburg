@@ -1,12 +1,15 @@
-<?php 
+<?php
   $this->Html->script('fileHandler.js', array('inline' => false));
   $this->Html->script("ajax-add-inline.js", array("inline" => false));
 ?>
-<?php echo $this->Form->create('Artista', 
-                         array('enctype' => 'multipart/form-data', 
-                               'class' => 'form-horizontal', 
-                               'action' => 'add',
-                               'onsubmit' => 'return addArtista(this);')); ?>
+<?php
+    echo $this->Form->create(false, array(
+        'enctype' => 'multipart/form-data',
+        'class' => 'form-horizontal',
+        'url' => array('controller' => 'artistas', 'action' => 'add'),
+        'onsubmit' => 'return addArtista(this);'
+    ));
+?>
 <div>
   <fieldset>
     <div class="row-fluid">

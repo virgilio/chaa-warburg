@@ -1,8 +1,11 @@
 <?php $this->Html->script("ajax-add-inline.js", array("inline" => false)); ?>
-<?php echo $this->Form->create('Iconografia', 
-                array('class' => 'form-horizontal', 
-                      'action' => 'add',
-                      'onsubmit' => 'return addIconografia(this);')); ?>
+<?php
+    echo $this->Form->create(false, array(
+        'class' => 'form-horizontal',
+        'url' => array('controller' => 'iconografias', 'action' => 'add'),
+        'onsubmit' => 'return addIconografia(this);'
+    ));
+?>
 <fieldset>
   <div class="control-group">
     <label class="control-label" for="nome">Nome da iconografia</label>
