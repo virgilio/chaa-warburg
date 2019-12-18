@@ -89,7 +89,7 @@ class ArtistasController extends AppController {
             $this->Artista->create();
 
             if ($this->Artista->save($data)) {
-                $this->Session->setFlash(__('O artista foi salvo!'));
+                $this->Flash->set(__('O artista foi salvo!'));
                 if(!$this->request->is('ajax')) {
                     $this->redirect(array('action' => 'index'));
                 } else {
@@ -104,7 +104,7 @@ class ArtistasController extends AppController {
                 }
             } else {
                 if(!$this->request->is('ajax')) {
-                    $this->Session->setFlash(__('O artista não foi salvo. Por favor, tente novamente.'));
+                    $this->Flash->set(__('O artista não foi salvo. Por favor, tente novamente.'));
                 } else {
                     $this->autoRender = false;
                     $this->layout = 'ajax';
@@ -134,10 +134,10 @@ class ArtistasController extends AppController {
             }
 
             if ($this->Artista->save($this->request->data)) {
-                $this->Session->setFlash(__('Artista salvo'));
+                $this->Flash->set(__('Artista salvo'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('O artista não foi salvo. Por favor, tente novamente.'));
+                $this->Flash->set(__('O artista não foi salvo. Por favor, tente novamente.'));
             }
         } else {
             $options = array('conditions' => array('Artista.' . $this->Artista->primaryKey => $id));
@@ -159,10 +159,10 @@ class ArtistasController extends AppController {
         }
         $this->request->allowMethod('post', 'delete');
         if ($this->Artista->delete()) {
-            $this->Session->setFlash(__('Artista deletado'));
+            $this->Flash->set(__('Artista deletado'));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('O artista não foi deletado'));
+        $this->Flash->set(__('O artista não foi deletado'));
         $this->redirect(array('action' => 'index'));
     }
 
@@ -194,7 +194,7 @@ class ArtistasController extends AppController {
             $finalFile = basename($target_path);
             @chmod($target_path, 0644);
         } else {
-            $this->Session->setFlash(__("ArtistasController::processFile() -
+            $this->Flash->set(__("ArtistasController::processFile() -
                         Unable to save temp file to file system.
                         (" . $target_path . ")"));
             $this->redirect(array('action' => 'index'));

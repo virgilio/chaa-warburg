@@ -41,10 +41,10 @@ class IconografiasController extends AppController {
 		if ($this->request->is('post')) {
 			$this->Iconografia->create();
 			if ($this->Iconografia->save($this->request->data)) {
-				$this->Session->setFlash(__('The iconografia has been saved'));
+				$this->Flash->set(__('The iconografia has been saved'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The iconografia could not be saved. Please, try again.'));
+				$this->Flash->set(__('The iconografia could not be saved. Please, try again.'));
 			}
 		}
                 }*/
@@ -53,7 +53,7 @@ class IconografiasController extends AppController {
           if ($this->request->is('post')) {
             $this->Iconografia->create();
             if ($this->Iconografia->save($this->request->data)) {
-              $this->Session->setFlash(__('Iconografia salva'));
+              $this->Flash->set(__('Iconografia salva'));
               if(!$this->request->is('ajax')) {
                 $this->redirect(array('action' => 'index'));
               } else {
@@ -69,7 +69,7 @@ class IconografiasController extends AppController {
               }
             } else {
               if(!$this->request->is('ajax')) {
-                $this->Session->setFlash(__('A iconografia não pode ser salva. Por favor, tente novamente.'));
+                $this->Flash->set(__('A iconografia não pode ser salva. Por favor, tente novamente.'));
               } else {
                 $this->autoRender = false;
                 $this->layout = 'ajax';
@@ -92,10 +92,10 @@ class IconografiasController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Iconografia->save($this->request->data)) {
-				$this->Session->setFlash(__('A iconografia foi salva!'));
+				$this->Flash->set(__('A iconografia foi salva!'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('A iconografia não pode ser salva. Por favor, tente novamente.'));
+				$this->Flash->set(__('A iconografia não pode ser salva. Por favor, tente novamente.'));
 			}
 		} else {
 			$options = array('conditions' => array('Iconografia.' . $this->Iconografia->primaryKey => $id));
@@ -117,10 +117,10 @@ class IconografiasController extends AppController {
 		}
 		$this->request->allowMethod('post', 'delete');
 		if ($this->Iconografia->delete()) {
-			$this->Session->setFlash(__('Iconografia deletada'));
+			$this->Flash->set(__('Iconografia deletada'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('Iconografia não foi deletada'));
+		$this->Flash->set(__('Iconografia não foi deletada'));
 		$this->redirect(array('action' => 'index'));
 	}
 }
