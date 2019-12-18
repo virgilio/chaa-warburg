@@ -25,7 +25,7 @@
                 id="busca_rapida">
       <?php
         echo $this->Form->create(false, array(
-            'url' => ('controller' => 'obras', 'action' => 'search'),
+            'url' => array('controller' => 'obras', 'action' => 'search'),
             'type' => 'get',
             'class' => 'form-horizontal'
         ));
