@@ -111,7 +111,7 @@ class ObraTiposController extends AppController {
     if (!$this->ObraTipo->exists()) {
       throw new NotFoundException(__('Técnica inválida'));
     }
-    $this->request->onlyAllow('post', 'delete');
+    $this->request->allowMethod('post', 'delete');
     if ($this->ObraTipo->delete()) {
       $this->Session->setFlash(__('Técnica deletada'));
       $this->redirect(array('action' => 'index'));

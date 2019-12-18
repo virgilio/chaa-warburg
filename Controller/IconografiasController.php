@@ -115,7 +115,7 @@ class IconografiasController extends AppController {
 		if (!$this->Iconografia->exists()) {
 			throw new NotFoundException(__('Iconografia inválida'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Iconografia->delete()) {
 			$this->Session->setFlash(__('Iconografia deletada'));
 			$this->redirect(array('action' => 'index'));

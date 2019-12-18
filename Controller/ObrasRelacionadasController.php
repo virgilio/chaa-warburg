@@ -108,7 +108,7 @@ class ObrasRelacionadasController extends AppController {
     if (!$this->ObrasRelacionada->exists()) {
       throw new NotFoundException(__('Obra relacionada inválida'));
     }
-    $this->request->onlyAllow('post', 'delete');
+    $this->request->allowMethod('post', 'delete');
     if ($this->ObrasRelacionada->delete()) {
       //$this->Session->setFlash(__('Obras relacionada deleted'));
       //$this->redirect(array('action' => 'index'));

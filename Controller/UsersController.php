@@ -208,7 +208,7 @@ class UsersController extends AppController {
         if (!$this->User->exists()) {
             throw new NotFoundException(__('Usuário inválido'));
         }
-        $this->request->onlyAllow('post', 'delete');
+        $this->request->allowMethod('post', 'delete');
         if ($this->User->delete()) {
             $this->Session->setFlash(__('Usuário deletado'));
             $this->redirect(array('action' => 'index'));

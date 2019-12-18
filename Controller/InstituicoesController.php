@@ -141,7 +141,7 @@ class InstituicoesController extends AppController {
         if (!$this->Instituicao->exists()) {
             throw new NotFoundException(__('Instituição inválida'));
         }
-        $this->request->onlyAllow('post', 'delete');
+        $this->request->allowMethod('post', 'delete');
         if ($this->Instituicao->delete()) {
             $this->Session->setFlash(__('Instituição deletada'));
             $this->redirect(array('action' => 'index'));
