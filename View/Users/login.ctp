@@ -1,6 +1,6 @@
 <?php $this->Html->css('login.css', null, array("inline" => false)); ?>
 <div class="users form container">
-<?php echo $this->Session->flash('auth'); ?>
+<?php echo $this->Flash->render('auth'); ?>
 <?php echo $this->Form->create('User', array('class' => 'form-horizontal'));?>
     <fieldset>
         <legend><?php echo __('Insira seu email e senha'); ?></legend>

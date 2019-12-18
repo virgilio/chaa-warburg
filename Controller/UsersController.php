@@ -15,7 +15,7 @@ class UsersController extends AppController {
 
         if ($this->request->is('post')) {
             if($this->request->data['User']['password'] != $this->request->data['User']['password_confirm']){
-                $this->Session->setFlash("Problemas na confirmação de senha");
+                $this->Flash->set("Problemas na confirmação de senha");
             } else {
                 $this->request->data['User']['active'] = 0; 
                 $this->request->data['User']['role'] = "author";
@@ -32,7 +32,7 @@ class UsersController extends AppController {
     public function admin_register(){
         if ($this->request->is('post')) {
             if($this->request->data['User']['password'] != $this->request->data['User']['password_confirm']){
-                $this->Session->setFlash("Problemas na confirmação de senha");
+                $this->Flash->set("Problemas na confirmação de senha");
             } else {
                 //$this->request->data['User']['active'] = 0; 
                 //$this->request->data['User']['role'] = "author";
@@ -42,7 +42,7 @@ class UsersController extends AppController {
                     $this->request->data['User'] = array_merge($this->request->data['User'], array('id' => $id));
                     //$this->Auth->login($this->request->data['User']);
                 } else {
-                    $this->Session->setFlash("Problemas ao inserir usuário");
+                    $this->Flash->set("Problemas ao inserir usuário");
                     return;
                 }
                 return $this->redirect(array("action" => "edit", $id));
@@ -55,7 +55,7 @@ class UsersController extends AppController {
             $this->redirect($this->Auth->loginRedirect);
         } else {
             if($this->request->is('post'))
-                $this->Session->setFlash(__('Senha ou usuário inválidos. Tente novamente.'));
+                $this->Flash->set(__('Senha ou usuário inválidos. Tente novamente.'));
         }
     }
 
@@ -98,10 +98,10 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
         $this->User->create();
         if ($this->User->save($this->request->data)) {
-        $this->Session->setFlash(__('The user has been saved'));
+        $this->Flash->set(__('The user has been saved'));
         $this->redirect(array('action' => 'index'));
         } else {
-        $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+        $this->Flash->set(__('The user could not be saved. Please, try again.'));
         }
         }
         }
@@ -121,7 +121,7 @@ class UsersController extends AppController {
             );
     public function admin_edit($id = null) {
         if (!$this->User->hasAny(array('User.id' => $id))) {
-            $this->Session->setFlash(__('Usuário não encontrado'));
+            $this->Flash->set(__('Usuário não encontrado'));
             $this->redirect(array('action' => 'index'));
         }
         if ($this->request->is('post') || $this->request->is('put')) {
@@ -133,10 +133,10 @@ class UsersController extends AppController {
 
             $this->User->id = $this->request->data['User']['id'];
             if($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('Usuário salvo com sucesso!'));
+                $this->Flash->set(__('Usuário salvo com sucesso!'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('Erro ao salvar usuário, por favor tente novamente'));
+                $this->Flash->set(__('Erro ao salvar usuário, por favor tente novamente'));
             }
         } else {
             $options = array('conditions' => array('User.' . $this->User->primaryKey => $id), 'recursive' => 0);
@@ -166,9 +166,9 @@ class UsersController extends AppController {
             }
             unset($this->request->data['User']['password']);
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__('Usuário salvo com sucesso!'));
+                $this->Flash->set(__('Usuário salvo com sucesso!'));
             } else {
-                $this->Session->setFlash(__('Erro ao salvar usuário, por favor tente novamente'));
+                $this->Flash->set(__('Erro ao salvar usuário, por favor tente novamente'));
             }
         } 
 
@@ -185,10 +185,10 @@ class UsersController extends AppController {
         if (!empty($this->data)) {
             //$this->User->id = $this->Auth->user('id');
             if ($this->User->save($this->data)) {
-                $this->Session->setFlash(__('Senha alterada com sucesso'));
+                $this->Flash->set(__('Senha alterada com sucesso'));
                 $this->redirect(array('action' => 'perfil'));
             } else {
-                $this->Session->setFlash(__('Erro ao alterar senha, favor tente novamente'));
+                $this->Flash->set(__('Erro ao alterar senha, favor tente novamente'));
                 $this->redirect(array('action' => 'perfil'));        
             }
         } else {
@@ -210,10 +210,10 @@ class UsersController extends AppController {
         }
         $this->request->allowMethod('post', 'delete');
         if ($this->User->delete()) {
-            $this->Session->setFlash(__('Usuário deletado'));
+            $this->Flash->set(__('Usuário deletado'));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('O usuário não foi deletado'));
+        $this->Flash->set(__('O usuário não foi deletado'));
         $this->redirect(array('action' => 'index'));
     }
 }

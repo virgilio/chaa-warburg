@@ -110,7 +110,7 @@ class ObrasRelacionadasController extends AppController {
     }
     $this->request->allowMethod('post', 'delete');
     if ($this->ObrasRelacionada->delete()) {
-      //$this->Session->setFlash(__('Obras relacionada deleted'));
+      //$this->Flash->set(__('Obras relacionada deleted'));
       //$this->redirect(array('action' => 'index'));
       $this->autoRender = false;
       return '{"result" : "success"}';       

@@ -46,7 +46,7 @@ class ObraTiposController extends AppController {
     if ($this->request->is('post')) {
       $this->ObraTipo->create();
       if ($this->ObraTipo->save($this->request->data)) {
-        $this->Session->setFlash(__('A técnica foi salva'));
+        $this->Flash->set(__('A técnica foi salva'));
         if(!$this->request->is('ajax')) {
           $this->redirect(array('action' => 'index'));
         } else {
@@ -64,7 +64,7 @@ class ObraTiposController extends AppController {
         }
       } else {
         if(!$this->request->is('ajax')) {
-          $this->Session->setFlash(__('A técnica não pode ser salva. Por favor, tente novamente.'));
+          $this->Flash->set(__('A técnica não pode ser salva. Por favor, tente novamente.'));
         } else {
           $this->autoRender = false;
           $this->layout = 'ajax';
@@ -88,10 +88,10 @@ class ObraTiposController extends AppController {
     }
     if ($this->request->is('post') || $this->request->is('put')) {
       if ($this->ObraTipo->save($this->request->data)) {
-        $this->Session->setFlash(__('A técnica foi salva com sucesso!'));
+        $this->Flash->set(__('A técnica foi salva com sucesso!'));
         $this->redirect(array('action' => 'index'));
       } else {
-        $this->Session->setFlash(__('A técnica não foi salva. Por favor, tente novamente.'));
+        $this->Flash->set(__('A técnica não foi salva. Por favor, tente novamente.'));
       }
     } else {
       $options = array('conditions' => array('ObraTipo.' . $this->ObraTipo->primaryKey => $id));
@@ -113,10 +113,10 @@ class ObraTiposController extends AppController {
     }
     $this->request->allowMethod('post', 'delete');
     if ($this->ObraTipo->delete()) {
-      $this->Session->setFlash(__('Técnica deletada'));
+      $this->Flash->set(__('Técnica deletada'));
       $this->redirect(array('action' => 'index'));
     }
-    $this->Session->setFlash(__('Técnica não deletada'));
+    $this->Flash->set(__('Técnica não deletada'));
     $this->redirect(array('action' => 'index'));
   }
 }

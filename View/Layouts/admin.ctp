@@ -208,7 +208,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         </nav>
       </div>
       <div id="content">      
-        <?php echo $this->Session->flash(); ?>
+        <?php echo $this->Flash->render(); ?>
         <?php echo $this->fetch('content'); ?>
       </div>
       <div id="rodape">
