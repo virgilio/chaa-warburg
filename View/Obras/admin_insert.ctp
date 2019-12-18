@@ -27,16 +27,16 @@
         </li>
     </ul>
 <!-- upload form -->
-<?php 
-    echo $this->Form->create('Obra', 
-        array('enctype' =>
-            'multipart/form-data', 
-            'action' => 'insert', 
-            'onsubmit' => 'return ImageHandler.checkForm()')); 
-?> 
-<?php 
-    echo $this->Form->submit('Enviar', array('class' => 
-        'btn btn-large btn-success pull-right')); 
+<?php
+    echo $this->Form->create(false, array(
+        'enctype' =>'multipart/form-data',
+        'url' => array('controller' => 'obras', 'action' => 'insert'),
+        'onsubmit' => 'return ImageHandler.checkForm()'
+    ));
+?>
+<?php
+    echo $this->Form->submit('Enviar', array('class' =>
+        'btn btn-large btn-success pull-right'));
 ?>
 
     <div class="row-fluid">

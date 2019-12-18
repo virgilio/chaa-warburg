@@ -1,8 +1,11 @@
 <?php $this->Html->script("ajax-relacionadas.js", array("inline" => false)); ?>
-<?php echo $this->Form->create('ObrasRelacionada', 
-  array('class' => 'form-horizontal', 
-        'action' => 'add',
-        'onsubmit' => 'return addRelacionada(this);')); ?>
+<?php
+    echo $this->Form->create(false, array(
+        'class' => 'form-horizontal',
+        'url' => array('controller' => 'obras_relacionadas', 'action' => 'add'),
+        'onsubmit' => 'return addRelacionada(this);'
+    ));
+?>
 <fieldset>
   <?php
     echo $this->Form->input(
