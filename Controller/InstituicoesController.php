@@ -41,10 +41,10 @@ class InstituicoesController extends AppController {
       if ($this->request->is('post')) {
       $this->Instituicao->create();
       if ($this->Instituicao->save($this->request->data)) {
-      $this->Session->setFlash(__('The instituicao has been saved'));
+      $this->Flash->set(__('The instituicao has been saved'));
       $this->redirect(array('action' => 'index'));
       } else {
-      $this->Session->setFlash(__('The instituicao could not be saved. Please, try again.'));
+      $this->Flash->set(__('The instituicao could not be saved. Please, try again.'));
       }
       }*/
 
@@ -53,7 +53,7 @@ class InstituicoesController extends AppController {
         if ($this->request->is('post')) {
             $this->Instituicao->create();
             if ($this->Instituicao->save($this->request->data)) {
-                $this->Session->setFlash(__('A Instituicao foi salva!'));
+                $this->Flash->set(__('A Instituicao foi salva!'));
                 if(!$this->request->is('ajax')) {
                     $this->redirect(array('action' => 'index'));
                 } else {
@@ -75,7 +75,7 @@ class InstituicoesController extends AppController {
                 }
             } else {
                 if(!$this->request->is('ajax')) {
-                    $this->Session->setFlash(__('A instituição não pode ser salva. Por favor, tente novamente.'));
+                    $this->Flash->set(__('A instituição não pode ser salva. Por favor, tente novamente.'));
                 } else {
                     $this->autoRender = false;
                     $this->layout = 'ajax';
@@ -112,10 +112,10 @@ class InstituicoesController extends AppController {
         }
         if ($this->request->is('post') || $this->request->is('put')) {
             if ($this->Instituicao->save($this->request->data)) {
-                $this->Session->setFlash(__('A instituição foi salva!'));
+                $this->Flash->set(__('A instituição foi salva!'));
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(__('A instituição não foi salva. Por favor, tente novamente.'));
+                $this->Flash->set(__('A instituição não foi salva. Por favor, tente novamente.'));
             }
         } else {
             $options = array('conditions' => array('Instituicao.' . $this->Instituicao->primaryKey => $id));
@@ -141,12 +141,12 @@ class InstituicoesController extends AppController {
         if (!$this->Instituicao->exists()) {
             throw new NotFoundException(__('Instituição inválida'));
         }
-        $this->request->onlyAllow('post', 'delete');
+        $this->request->allowMethod('post', 'delete');
         if ($this->Instituicao->delete()) {
-            $this->Session->setFlash(__('Instituição deletada'));
+            $this->Flash->set(__('Instituição deletada'));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('A instituição não foi deletada!'));
+        $this->Flash->set(__('A instituição não foi deletada!'));
         $this->redirect(array('action' => 'index'));
     }
 }

@@ -7,7 +7,12 @@
   <div class="row-fluid">
     <div class="register span12 form_login"> 
       <div class="area">
-        <?php echo $this->Form->create('User', array('action' => '/register','class'=>'form-horizontal')); ?>
+        <?php
+            echo $this->Form->create(false, array(
+                'url' => array('controller' => 'users', 'action' => 'register'),
+                'class'=>'form-horizontal'
+            ));
+        ?>
         <div class="heading">
           <h4 class="form-heading">Criar nova conta</h4>
         </div>

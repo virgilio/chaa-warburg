@@ -41,10 +41,10 @@ class CidadesController extends AppController {
           if ($this->request->is('post')) {
             $this->Cidade->create();
             if ($this->Cidade->save($this->request->data)) {
-              $this->Session->setFlash(__('The cidade has been saved'));
+              $this->Flash->set(__('The cidade has been saved'));
               $this->redirect(array('action' => 'index'));
             } else {
-              $this->Session->setFlash(__('The cidade could not be saved. Please, try again.'));
+              $this->Flash->set(__('The cidade could not be saved. Please, try again.'));
             }
           }
           $paises = $this->Cidade->Pais->find('list');
@@ -56,7 +56,7 @@ class CidadesController extends AppController {
     if ($this->request->is('post')) {
       $this->Cidade->create();
       if ($this->Cidade->save($this->request->data)) {
-        $this->Session->setFlash(__('A Cidade foi salva!'));
+        $this->Flash->set(__('A Cidade foi salva!'));
         if(!$this->request->is('ajax')) {
           $this->redirect(array('action' => 'index'));
         } else {
@@ -75,7 +75,7 @@ class CidadesController extends AppController {
         }
       } else {
         if(!$this->request->is('ajax')) {
-          $this->Session->setFlash(__('A cidade não pode ser salva. Por favor, tente novamente.'));
+          $this->Flash->set(__('A cidade não pode ser salva. Por favor, tente novamente.'));
         } else {
           $this->autoRender = false;
           $this->layout = 'ajax';
@@ -100,10 +100,10 @@ class CidadesController extends AppController {
     }
     if ($this->request->is('post') || $this->request->is('put')) {
       if ($this->Cidade->save($this->request->data)) {
-        $this->Session->setFlash(__('A cidade foi salva!'));
+        $this->Flash->set(__('A cidade foi salva!'));
         $this->redirect(array('action' => 'index'));
       } else {
-        $this->Session->setFlash(__('A cidade não foi salva. Por favor, tente novamente.'));
+        $this->Flash->set(__('A cidade não foi salva. Por favor, tente novamente.'));
       }
     } else {
       $options = array('conditions' => array('Cidade.' . $this->Cidade->primaryKey => $id));
@@ -125,12 +125,12 @@ class CidadesController extends AppController {
 		if (!$this->Cidade->exists()) {
 			throw new NotFoundException(__('Cidade inválida'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Cidade->delete()) {
-			$this->Session->setFlash(__('Cidade deletada'));
+			$this->Flash->set(__('Cidade deletada'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('A cidade não foi deletada.'));
+		$this->Flash->set(__('A cidade não foi deletada.'));
 		$this->redirect(array('action' => 'index'));
 	}
 }

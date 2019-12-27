@@ -24,7 +24,10 @@
 		</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Editar'), array('action' => 'edit', $instituicao['Instituicao']['id'])); ?>
-			<?php echo $this->Form->postLink(__('Deletar'), array('action' => 'delete', $instituicao['Instituicao']['id']), null, __('Tem certeza que deseja deletar # %s?', $instituicao['Instituicao']['id'])); ?>
+            <?php echo $this->Form->postLink(
+                __('Deletar'),
+                array('action' => 'delete', $instituicao['Instituicao']['id']),
+                array('confirm' => __('Tem certeza que deseja deletar # %s?', $instituicao['Instituicao']['id']))); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>

@@ -25,7 +25,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
     <?php echo $this->Html->charset(); ?>
     <title>
       [Administração] Warburg - Banco Comparativo de Imagens:
-      <?php echo $title_for_layout; ?>
+      <?php echo $this->fetch('title'); ?>
     </title>
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8;" />
     <link href='http://fonts.googleapis.com/css?family=Average' rel='stylesheet' type='text/css'>
@@ -208,7 +208,7 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
         </nav>
       </div>
       <div id="content">      
-        <?php echo $this->Session->flash(); ?>
+        <?php echo $this->Flash->render(); ?>
         <?php echo $this->fetch('content'); ?>
       </div>
       <div id="rodape">

@@ -24,6 +24,7 @@
  */
 App::uses('Controller', 'Controller');
 App::uses('AuthComponent', 'Controller/Component');
+App::uses('FlashComponent', 'Controller/Component');
 App::uses('CakeEmail', 'Network/Email');
 
 /**
@@ -67,6 +68,7 @@ class AppController extends Controller {
         'authorize' => array('Controller'),
         'authError' => 'Você não está autorizado(a) a entrar aqui.'
       ),
+      'Flash',
     );
   
   function beforeFilter() {
@@ -104,7 +106,7 @@ class AppController extends Controller {
   function isAuthorized() {
     if (!empty($this->params['prefix']) && $this->params['prefix'] == 'admin') {
       if(!$this->Auth->user('active')) {
-        $this->Session->setFlash("Seu usuário não está ativo, favor entrar em contato com o Administrador");
+        $this->Flash->set("Seu usuário não está ativo, favor entrar em contato com o Administrador");
         $this->redirect($this->Auth->logout());
       }
       if('users' == $this->params['controller']){
@@ -113,7 +115,7 @@ class AppController extends Controller {
             'admin_register' == $this->params['action']) 
            && $this->Auth->user('role') != 'admin'){
           
-          $this->Session->setFlash("Seu usuário não está autorizado a acessar essa área");
+          $this->Flash->set("Seu usuário não está autorizado a acessar essa área");
           $this->redirect(array('action' => 'perfil'));
         }
       }

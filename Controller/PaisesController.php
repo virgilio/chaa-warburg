@@ -41,7 +41,7 @@ class PaisesController extends AppController {
           if ($this->request->is('post')) {
             $this->Pais->create();
             if ($this->Pais->save($this->request->data)) {
-              $this->Session->setFlash(__('O país foi salvo com sucesso'));
+              $this->Flash->set(__('O país foi salvo com sucesso'));
               if(!$this->request->is('ajax')) {
                 $this->redirect(array('action' => 'index'));
               } else {
@@ -57,7 +57,7 @@ class PaisesController extends AppController {
               }
             } else {
               if(!$this->request->is('ajax')) {
-                $this->Session->setFlash(__('O país não pode ser salvo. Por favor, tente novamente.'));
+                $this->Flash->set(__('O país não pode ser salvo. Por favor, tente novamente.'));
               } else {
                 $this->autoRender = false;
                 $this->layout = 'ajax';
@@ -80,10 +80,10 @@ class PaisesController extends AppController {
 		}
 		if ($this->request->is('post') || $this->request->is('put')) {
 			if ($this->Pais->save($this->request->data)) {
-				$this->Session->setFlash(__('O país foi salvo com sucesso!'));
+				$this->Flash->set(__('O país foi salvo com sucesso!'));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('O país não pode ser salvo. Por favor, tente novamente.'));
+				$this->Flash->set(__('O país não pode ser salvo. Por favor, tente novamente.'));
 			}
 		} else {
 			$options = array('conditions' => array('Pais.' . $this->Pais->primaryKey => $id));
@@ -103,12 +103,12 @@ class PaisesController extends AppController {
 		if (!$this->Pais->exists()) {
 			throw new NotFoundException(__('País inválido'));
 		}
-		$this->request->onlyAllow('post', 'delete');
+		$this->request->allowMethod('post', 'delete');
 		if ($this->Pais->delete()) {
-			$this->Session->setFlash(__('País deletado'));
+			$this->Flash->set(__('País deletado'));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->Session->setFlash(__('O país não foi deletado.'));
+		$this->Flash->set(__('O país não foi deletado.'));
 		$this->redirect(array('action' => 'index'));
 	}
 }

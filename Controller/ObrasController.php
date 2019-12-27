@@ -278,7 +278,7 @@ class ObrasController extends AppController {
                     'order' => 'Artista.nome desc',
                 );
             } else {
-                $this->Session->setFlash(__('Busca inválida'));
+                $this->Flash->set(__('Busca inválida'));
             }
         }
 
@@ -455,7 +455,7 @@ class ObrasController extends AppController {
                 $data['Thumbnail']['obra_id'] = $this->Obra->id;
                 $this->Obra->Thumbnail->save($data['Thumbnail']);*/
 
-                $this->Session->setFlash(__('A Imagem foi salva!'));
+                $this->Flash->set(__('A Imagem foi salva!'));
                 if(Configure::read('debug') < 1){
                     $this->sendMail($this->Obra);
                 }
@@ -463,7 +463,7 @@ class ObrasController extends AppController {
                 $this->redirect(array('action' => 'edit', $this->Obra->id));
 
             } else {
-                $this->Session->setFlash(
+                $this->Flash->set(
                     __('A obra não pode ser salva, tente novamente'));
             }
         }
@@ -586,7 +586,7 @@ Você pode acessá-la através do link: " . $url . "
 
                 $this->redirect(array('action' => 'index'));
             } else {
-                $this->Session->setFlash(
+                $this->Flash->set(
                     __('A obra não foi salva. Por favor, tente novamente.'));
                 return;
             }
@@ -747,12 +747,12 @@ Você pode acessá-la através do link: " . $url . "
         if (!$this->Obra->exists()) {
             throw new NotFoundException(__('Obra inválida'));
         }
-        $this->request->onlyAllow('post', 'delete');
+        $this->request->allowMethod('post', 'delete');
         if ($this->Obra->delete()) {
-            $this->Session->setFlash(__('Obra deletada'));
+            $this->Flash->set(__('Obra deletada'));
             $this->redirect(array('action' => 'index'));
         }
-        $this->Session->setFlash(__('A obra não foi deletada'));
+        $this->Flash->set(__('A obra não foi deletada'));
         $this->redirect(array('action' => 'index'));
     }
 
@@ -794,7 +794,7 @@ Você pode acessá-la através do link: " . $url . "
             @chmod($target_path, 0644);
             $this->createThumbnail($target_path, $thumb, $thumb_target_path);
         } else {
-             $this->Session->setFlash(__('ObrasController::processFile() - Unable to save temp file to file system.'));
+             $this->Flash->set(__('ObrasController::processFile() - Unable to save temp file to file system.'));
              $this->redirect(array('action' => 'index'));
         }
         return $finalFile;
@@ -836,7 +836,7 @@ Você pode acessá-la através do link: " . $url . "
             @chmod($target_path, 0644);
             $this->createThumbnail($target_path, $thumb, $thumb_target_path);
         } else {
-             $this->Session->setFlash(__('ObrasController::processFile() - Unable to save temp file to file system.'));
+             $this->Flash->set(__('ObrasController::processFile() - Unable to save temp file to file system.'));
              $this->redirect(array('action' => 'index'));
         }
         return $finalFile;
