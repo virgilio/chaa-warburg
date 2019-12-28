@@ -1,0 +1,22 @@
+version: "3"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/apache/Dockerfile
+    volumes:
+      - ./app:/var/www/html/app
+    ports:
+      - 8000:80
+  db:
+    image: mysql:5.5.54
+    volumes:
+        - db-data:/var/lib/mysql
+    environment:
+        MYSQL_DATABASE: cakephp_db
+        MYSQL_ROOT_PASSWORD: root_password
+
+volumes:
+  db-data:
+    external: false

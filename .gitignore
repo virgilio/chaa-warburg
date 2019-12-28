@@ -8,3 +8,4 @@ app/[Cc]onfig/database.php
 *~
 webroot/img/obras/
 webroot/img/artistas/
+node_modules
