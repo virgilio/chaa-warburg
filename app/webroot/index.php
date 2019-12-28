@@ -86,7 +86,7 @@ if (php_sapi_name() == 'cli-server') {
 
 if (!defined('CAKE_CORE_INCLUDE_PATH')) {
 	if (function_exists('ini_set')) {
-        ini_set('include_path', "/var/www/html/cake2.3" . DS . 'lib' . PATH_SEPARATOR . ini_get('include_path'));
+        ini_set('include_path', "/opt/Vendor/cakephp/cakephp" . DS . 'lib' . PATH_SEPARATOR . ini_get('include_path'));
 	}
 	if (!include ('Cake' . DS . 'bootstrap.php')) {
 		$failed = true;
