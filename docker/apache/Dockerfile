@@ -15,7 +15,7 @@ COPY app /var/www/html/app
 COPY docker/apache/composer.json /opt/composer.json
 
 WORKDIR /opt
-RUN composer install
+RUN composer install --no-interaction --no-progress --quiet
 
 WORKDIR /var/www/html/app
 

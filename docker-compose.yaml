@@ -9,13 +9,15 @@ services:
       - ./app:/var/www/html/app
     ports:
       - 8000:80
+    env_file:
+        - ./docker/apache/.env
   db:
     image: mysql:5.5.54
     volumes:
         - db-data:/var/lib/mysql
-    environment:
-        MYSQL_DATABASE: cakephp_db
-        MYSQL_ROOT_PASSWORD: root_password
+        - ./docker/db/initdb:/docker-entrypoint-initdb.d/
+    env_file:
+        - ./docker/db/.env
 
 volumes:
   db-data:
