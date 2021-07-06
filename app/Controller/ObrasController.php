@@ -48,12 +48,34 @@ class ObrasController extends AppController {
         $this->set('iconografias', $iconografias);
     }
 
+    public function index_filtered() {
+        $this->Obra->recursive = -1;
+        $fields = array('Obra.id', 'Obra.nome');
+        if(isset($this->request->query['filter'])) {
+            $obras = $this->Obra->find(
+                'all',
+                array(
+                    'fields' =>  $fields,
+                    'conditions' => array(
+                        'Obra.nome like' =>
+                            '%' . $this->request->query['filter'] . '%'
+                    ),
+                ));
+        } else {
+            $obras = $this->Obra->find(
+                'all',
+                array('fields' =>  $fields, 'limit' => 10)
+            );
+        }
+        $this->set('obras', $obras);
+    }
+
     public function admin_index() {
         $this->Obra->recursive = 0;
         $data = $this->request->query;
         $this->paginate = array();
 
-        $this->paginate['order'] = array('Obra.nome' => 'ASC');            
+        $this->paginate['order'] = array('Obra.nome' => 'ASC');
         if($this->request->is('get')
              && !empty($data) && isset($data['Search']['filter'])){
             if('artista' == $data['Search']['filter']){
@@ -68,7 +90,7 @@ class ObrasController extends AppController {
         }
         $this->set('obras', $this->paginate());
         $this->loadModel('Artista');
-        $this->set('artistas', $this->Artista->find('list', 
+        $this->set('artistas', $this->Artista->find('list',
                     array('order' => array('Artista.nome' => 'ASC'))));
     }
 
@@ -467,7 +489,7 @@ class ObrasController extends AppController {
                     __('A obra não pode ser salva, tente novamente'));
             }
         }
-        $artistas = $this->Obra->Artista->find('list', 
+        $artistas = $this->Obra->Artista->find('list',
                 array('order' => array('Artista.nome' => 'ASC')));
         $this->set(compact('artistas'));
     }
@@ -638,7 +660,7 @@ Você pode acessá-la através do link: " . $url . "
         if($result['Obra']['ante_post_quam'])
             //die(pr($result));
 
-        $obraTipos = $this->Obra->ObraTipo->find('list', 
+        $obraTipos = $this->Obra->ObraTipo->find('list',
                 array('order' => array('ObraTipo.nome' => 'ASC')));
 
         $this->loadModel('Pais');
@@ -673,11 +695,11 @@ Você pode acessá-la através do link: " . $url . "
                     '{n}.Instituicao.nome',
                     '{n}.Cidade.nome'));
 
-        $paises = $this->Pais->find('list', 
+        $paises = $this->Pais->find('list',
                 array('order' => array('Pais.nome' => 'ASC')));
-        $artistas = $this->Obra->Artista->find('list', 
+        $artistas = $this->Obra->Artista->find('list',
                 array('order' => array('Artista.nome' => 'ASC')));
-        $iconografias = $this->Obra->Iconografia->find('list', 
+        $iconografias = $this->Obra->Iconografia->find('list',
                 array('order' => array('Iconografia.nome' => 'ASC')));
 
         $users = $this->User->find('list');
@@ -772,16 +794,16 @@ Você pode acessá-la através do link: " . $url . "
         $thumb_target_path = $thumb_up_dir . DS . $uploaded['name'];
 
         //temp path without the ext
-        $temp_path = substr($target_path, 0, 
-            strlen($target_path) - strlen($this->_ext($uploaded))); 
+        $temp_path = substr($target_path, 0,
+            strlen($target_path) - strlen($this->_ext($uploaded)));
         //temp path without the ext
-        $thumb_temp_path = substr($thumb_target_path, 0, 
+        $thumb_temp_path = substr($thumb_target_path, 0,
             strlen($thumb_target_path) - strlen($this->_ext($uploaded)));
 
         $i = 1;
         while(file_exists($target_path)){
             $target_path = $temp_path . "-" . $i . $this->_ext($uploaded);
-            $thumb_target_path = $thumb_temp_path . "-" . $i . 
+            $thumb_target_path = $thumb_temp_path . "-" . $i .
                 $this->_ext($uploaded);
             $i++;
         }
@@ -812,14 +834,14 @@ Você pode acessá-la através do link: " . $url . "
 
         $target_path = $up_dir . DS . $uploaded['name'];
         $thumb_target_path = $thumb_up_dir . DS . $uploaded['name'];
-        
-        //temp path without the ext
-        $temp_path = substr($target_path, 0, strlen($target_path) - 
-            strlen($this->_ext($uploaded))); 
 
         //temp path without the ext
-        $thumb_temp_path = substr($thumb_target_path, 0, 
-            strlen($thumb_target_path) - strlen($this->_ext($uploaded))); 
+        $temp_path = substr($target_path, 0, strlen($target_path) -
+            strlen($this->_ext($uploaded)));
+
+        //temp path without the ext
+        $thumb_temp_path = substr($thumb_target_path, 0,
+            strlen($thumb_target_path) - strlen($this->_ext($uploaded)));
 
         $i = 1;
         while(file_exists($target_path)){
@@ -865,7 +887,7 @@ Você pode acessá-la através do link: " . $url . "
                 return;
             }
 
-            // Get the 
+            // Get the
             $thumb['w'] = MINI_IMAGE_WIDTH;
             $thumb['h'] = $height * MINI_IMAGE_WIDTH / $width;
             // create a new true color image

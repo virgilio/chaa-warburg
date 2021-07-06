@@ -21,7 +21,7 @@ WORKDIR /var/www/html/app
 
 # Create tmp directory and make it writable by the web server
 RUN mkdir -p tmp/cache/models tmp/cache/persistent && \
-    chown -R :www-data tmp \
+    chown -R www-data:www-data tmp \
     && chmod -R 770 tmp
 
 RUN a2enmod rewrite \

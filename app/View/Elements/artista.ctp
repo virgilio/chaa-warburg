@@ -40,7 +40,7 @@
           <label class="control-label" for="biografia">Biografia</label>
           <div class="controls">
             <?php echo $this->Form->input('biografia',
-            array('label' => false,  'class' => 'span9')); ?>
+            array('type' => 'textarea', 'label' => false, 'id' => 'ArtistaBiografia', 'class' => 'span9')); ?>
           </div>
         </div>
       </div>
