@@ -14,8 +14,9 @@ services:
     networks:
       - default
   db:
-    image: mysql:5.5.54
+    image: mysql:8.0.21
     volumes:
+        - ./docker/db/my.cnf:/etc/mysql/conf.d/custom.cnf
         - db-data:/var/lib/mysql
         - ./docker/db/initdb:/docker-entrypoint-initdb.d/
     env_file:
