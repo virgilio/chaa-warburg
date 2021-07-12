@@ -7,7 +7,8 @@
         'enctype' => 'multipart/form-data',
         'class' => 'form-horizontal',
         'url' => array('controller' => 'artistas', 'action' => 'add'),
-        'onsubmit' => 'return addArtista(this);'
+        'onsubmit' => 'return addArtista(this);',
+        'id' => 'ArtistaAddForm'
     ));
 ?>
 <div>
@@ -17,19 +18,19 @@
         <div class="control-group">
           <label class="control-label" for="nome">Nome do artista</label>
           <div class="controls">
-	    <?php echo $this->Form->input('nome', array('label' => '')); ?>		    
+	    <?php echo $this->Form->input('Artista.nome', array('label' => '')); ?>
           </div>
         </div>
         <div class="control-group row-fluid">
           <label class="control-label" for="imagem">Imagem</label>
           <div class="controls">
-            <?php echo $this->Form->input('imagem', array('label' => false, 'type' => 'file', 'id' =>
+            <?php echo $this->Form->input('Artista.imagem', array('label' => false, 'type' => 'file', 'id' =>
             'image_file_show', 'onchange' => 'fileHandler()')); ?>
           </div>
         </div>
       </div>
       <div class="span6">
-        <img 
+        <img
            src="" class="span4 img-polaroid"
            style="position: relative;" id="preview_show" />
       </div>
@@ -39,7 +40,7 @@
         <div class="controlgroup">
           <label class="control-label" for="biografia">Biografia</label>
           <div class="controls">
-            <?php echo $this->Form->input('biografia',
+            <?php echo $this->Form->input('Artista.biografia',
             array('type' => 'textarea', 'label' => false, 'id' => 'ArtistaBiografia', 'class' => 'span9')); ?>
           </div>
         </div>

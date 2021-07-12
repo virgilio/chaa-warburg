@@ -8,37 +8,50 @@
         <div class="control-group">
           <label class="control-label" for="nome">Nome</label>
           <div class="controls">
-	    <?php 
+	    <?php
                echo $this->Form->input('nome', array('label' => '', 'style' => 'border: 0;'));
-            ?>		    
+            ?>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="email">Email</label>
           <div class="controls">
-	    <?php echo $this->Form->input('email', array('label' => '', 'style' => 'border: 0;')); ?>		    
+	    <?php echo $this->Form->input('email', array('label' => '', 'style' => 'border: 0;')); ?>
           </div>
         </div>
         <div class="control-group">
           <label class="control-label" for="role">Notificações por email</label>
           <div class="controls">
-          <?php echo $this->Form->input('notification_level', array('options' => array('0'
-      => 'Nenhuma notificação', '1' => 'Apenas das minhas obras', '2' => 'De todas as obras'), 'label' => '')); ?>
+            <?php
+              echo $this->Form->input('notification_level', array(
+                'options' => array(
+                  '0' => 'Nenhuma notificação',
+                  '1' => 'Apenas das minhas obras',
+                  '2' => 'De todas as obras'
+                ),
+                'label' => '')
+              );
+            ?>
           </div>
-        </div>  
+        </div>
         <!--<div class="control-group">
             <label class="control-label" for="email">Email</label>
             <div class="controls">
-	      <?php echo $this->Form->input('shortbio', array('label' => '', 'style' => 'border: 0;')); ?>		    
+	      <?php echo $this->Form->input('shortbio', array('label' => '', 'style' => 'border: 0;')); ?>
             </div>
         </div>-->
       </fieldset>
       <?php echo $this->Form->end(array('label' => 'Salvar', 'class' => 'btn
       offset5 btn-success')); ?>
-    </div>    
+    </div>
     <div class="span6">
-      <?php echo $this->Form->create('User', array('action' => 'change_password', 'class' => 'form-horizontal')); ?>
-      
+      <?php
+        echo $this->Form->create('User', array(
+          'url' => 'change_password',
+          'class' => 'form-horizontal'
+        ));
+      ?>
+
       <legend>
         <a href="#"
            onclick="jQuery('#change-password').toggle('fade');">
@@ -79,8 +92,8 @@
     <h3><?php echo __('Obras cadastradas pelo usuário'); ?></h3>
     <?php foreach ($obras as $obra): ?>
     <div class="mini-obra">
-      <a class="fancybox" 
-         href="#img_<?php echo $obra['Obra']['id'] ?>" 
+      <a class="fancybox"
+         href="#img_<?php echo $obra['Obra']['id'] ?>"
          data-fancybox-group="gallery">
         <?php echo $this->Html->image('obras/mini/' . $obra['Obra']['imagem']); ?>
       </a>
@@ -94,9 +107,9 @@
       </div>
       <p>
 	<?php echo $this->Html->link(
-	h(substr($obra['Obra']['nome'], 0, 40)) . (strlen($obra['Obra']['nome']) > 40 ? '...' : ''), 
-	array('controller' => 'obras', 'action' => 'view', $obra['Obra']['id']), 
-	array('escape'=>false)); 
+	h(substr($obra['Obra']['nome'], 0, 40)) . (strlen($obra['Obra']['nome']) > 40 ? '...' : ''),
+	array('controller' => 'obras', 'action' => 'view', $obra['Obra']['id']),
+	array('escape'=>false));
 	?>
       </p>
       <p class="nome-artista">
@@ -111,7 +124,7 @@
            echo $this->Paginator->counter(array(
         'format' => __('Página {:page} de {:pages}, mostrando {:current} obras de {:count}')
         ));
-        ?>  
+        ?>
       </p>
       <p>
         <?php

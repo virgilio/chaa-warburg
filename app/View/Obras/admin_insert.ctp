@@ -1,4 +1,4 @@
-<?php 
+<?php
     $this->Html->script("main.js", array("inline" => false));
     //$this->Html->script("jquery.Jcrop.min.js", array("inline" => false));
     //$this->Html->script("script.js", array("inline" => false));
@@ -12,12 +12,12 @@
     <ul class="nav nav-tabs" id="step-bar">
         <li class="active">
             <a href="#edit-img-step1">
-               <i class="icon-picture"></i> Imagem 
+               <i class="icon-picture"></i> Imagem
             </a>
         </li>
         <li class="disabled">
             <a href="#">
-                <i class="icon-file-text-alt"></i> Informações 
+                <i class="icon-file-text-alt"></i> Informações
             </a>
         </li>
         <li class="disabled">
@@ -41,11 +41,11 @@
 
     <div class="row-fluid">
     <!-- hidden crop params -->
-<?php 
+<?php
     echo $this->Form->input(
-        'nome', 
+        'Obra.nome',
         array(
-            'type' => 'textarea', 
+            'type' => 'textarea',
             'class'=>'input-xxlarge',
             'rows' => 2,
             'label' => 'Nome da imagem')); ?>
@@ -54,39 +54,40 @@
             <label class="control-label" for="artista_id">Artista</label>
             <div class="controls">
                 <span id="select-artista">
-<?php 
+<?php
     echo $this->Form->input(
-        'artista_id',
-        array('label' => false, 
-            'class' => 'input_chosen', 
+        'Obra.artista_id',
+        array('label' => false,
+            'class' => 'input_chosen',
             'empty'  => true,
-            'data-placeholder' => 'Selecione o artista')); 
+            'data-placeholder' => 'Selecione o artista'));
 ?>
                 </span>
                 <ul class="unstyled inline pull-right">
-                    <li>                
+                    <li>
                         <a href="#add-artista" role="button" class="btn btn-info"
                             data-toggle="modal">Novo Artista</a>
                     </li>
                 </ul>
         </div>
         <h4>Escolha a imagem para Upload</h4>
-<?php 
-    echo $this->Form->input('imagem', 
-        array('type' => 'file', 
-            'id' =>   'image_file', 
-            'onchange' => 'ImageHandler.fileSelectHandler()')); 
+<?php
+    echo $this->Form->input(
+        'Obra.imagem',
+        array('type' => 'file',
+            'id' =>   'image_file',
+            'onchange' => 'ImageHandler.fileSelectHandler()'));
 ?>
 
         <div class="error"></div>
     </div>
     <div class="row-fluid">
         <div class="span6" style="height: auto">
-            <div class="jcrop" id="image-box">            
-<?php 
+            <div class="jcrop" id="image-box">
+<?php
     echo $this->Html->image(
-        'semthumb.jpg', 
-        array('id' => 'preview', 
+        'semthumb.jpg',
+        array('id' => 'preview',
             'class' => 'img-polaroid'));?>
             </div>
         </div>
@@ -96,9 +97,9 @@
     </div>
 </div>
 <?php echo $this->Form->end(); ?>
-<?php 
-    echo $this->element('addmodal', 
-        array('titulo' => 'Adicionar Artista', 
+<?php
+    echo $this->element('addmodal',
+        array('titulo' => 'Adicionar Artista',
             'form' => 'artista')); ?>
 
 <?php $this->Html->script("admin_insert.js", array("inline" => false)); ?>

@@ -453,7 +453,6 @@
                               'controller' => '', 'action' => 'img')
                       )
                 ));
-              
               echo $this->Form->input(
                 'relacionadas', 
                 array('label' => false,
