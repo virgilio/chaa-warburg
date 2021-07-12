@@ -24,7 +24,7 @@ class Cidade extends AppModel {
   public $validate = array(
     'nome' => array(
       'notempty' => array(
-        'rule' => array('notempty'),
+        'rule' => array('notblank'),
         //'message' => 'Your custom message here',
         //'allowEmpty' => false,
         //'required' => false,

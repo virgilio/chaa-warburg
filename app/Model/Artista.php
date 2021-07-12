@@ -22,7 +22,7 @@ class Artista extends AppModel {
 	public $validate = array(
 		'nome' => array(
 			'notempty' => array(
-				'rule' => array('notempty'),
+				'rule' => array('notblank'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -32,7 +32,7 @@ class Artista extends AppModel {
 		),
 		'imagem' => array(
                                   //'notempty' => array(
-                                  //'rule' => array('notempty'),
+                                  //'rule' => array('notblank'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -42,7 +42,7 @@ class Artista extends AppModel {
 		),
 		'biografia' => array(
                                      //'notempty' => array(
-                                     //'rule' => array('notempty'),
+                                     //'rule' => array('notblank'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,

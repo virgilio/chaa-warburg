@@ -23,7 +23,7 @@ class User extends AppModel {
           'nome' => array (
                  'notempty' => array(
                        'rule' => 
-                       array('notempty'),
+                       array('notblank'),
                        ),
                            ),
           'email' => array(
@@ -33,11 +33,11 @@ class User extends AppModel {
                 ),
           'password' => array(
                               'required' => array(
-                                                  'rule' => array('notEmpty'),
+                                                  'rule' => array('notBlank'),
                                                   'message' => 'Insira a senha'
                                                   ),
                               'notempty' => array(
-                                                  'rule' => array('notempty'),
+                                                  'rule' => array('notblank'),
                                                   ),
                               ),
           'password_confirm'  => array(

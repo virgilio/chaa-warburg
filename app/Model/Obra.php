@@ -25,13 +25,13 @@ class Obra extends AppModel {
  */
   public $validate = array(
     'nome' => array(
-      'rule' => 'notEmpty',
+      'rule' => 'notBlank',
       'message' => 'Insira um Nome para obra',
     ),
     
     'imagem' => array(
       'notempty' => array(
-        'rule' => array('notempty'),
+        'rule' => array('notblank'),
         //'message' => 'Your custom message here',
         //'allowEmpty' => false,
         //'required' => false,
@@ -41,7 +41,7 @@ class Obra extends AppModel {
     ),
     'tamanho_obra' => array(
       //'notempty' => array(
-      //'rule' => array('notempty'),
+      //'rule' => array('notblank'),
       //'message' => 'Your custom message here',
       //'allowEmpty' => false,
       //'required' => false,
@@ -51,7 +51,7 @@ class Obra extends AppModel {
     ),
     'descricao' => array(
       //'notempty' => array(
-      //'rule' => array('notempty'),
+      //'rule' => array('notblank'),
       //'message' => 'Your custom message here',
       //'allowEmpty' => false,
       //'required' => false,
@@ -61,7 +61,7 @@ class Obra extends AppModel {
     ),
     'tags' => array(
       //'notempty' => array(
-      //'rule' => array('notempty'),
+      //'rule' => array('notblank'),
       //'message' => 'Your custom message here',
       //'allowEmpty' => false,
       //'required' => false,
@@ -91,7 +91,7 @@ class Obra extends AppModel {
     ),
     'artista_id' => array(
       'notempty' => array(
-        'rule' => array('notEmpty'),
+        'rule' => array('notBlank'),
         'allowEmpty' => false,
         'required' => true,
         'message' => "Selecione um Artista"
