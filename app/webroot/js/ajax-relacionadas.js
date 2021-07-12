@@ -2,8 +2,8 @@ var selected;
 var chosen;
 jQuery(document).ready(
     function(){
+        chosen = jQuery("#ObraRelacionadas").chosen()
 
-        chosen = jQuery("#ObraRelacionadas").chosen();
         var relacionadas_debouncer = null;
         jQuery("#ObraRelacionadas_chosen .chosen-search input")
             .keyup(function (e) {
@@ -14,16 +14,18 @@ jQuery(document).ready(
                     if (e.target.value.length > 1) {
                         loadRelacionadasSearch(e.target);
                     }
-                }, 500);
+                }, 1500);
             });
+
         jQuery("#ObraRelacionadas")
             .change(
-                function(){
+                function(e){
                     var img = getThumbImage(jQuery(this).val());
                     jQuery("#ObrasRelacionadaRelacionadaId")
                         .val(jQuery(this).val());
                     selected = jQuery(this).val();
                 });
+
         jQuery("#add-relacionada-button")
             .click(
                 function(){
@@ -74,7 +76,6 @@ var removeRelacionada =
                 url:  url,
                 type: 'post',
                 success: function (msg) {
-                    console.log(msg);
                     try {
                         msg = jQuery.parseJSON(msg);
                     } catch (x) {
@@ -92,21 +93,35 @@ var removeRelacionada =
             });
     };
 
+var updateRelacionadaSelect =
+    function(data = []){
+        data = data.length == 0 ? {empty: {empty: ''}} : data;
+        $('#ObraRelacionadas').empty();
+        for (group in data){
+            var optGroup = document.createElement('optgroup');
+            optGroup.label = group;
+            for (id in data[group]) {
+                var opt = document.createElement('option');
+                opt.innerHTML = data[group][id];
+                opt.value = [id];
+                optGroup.append(opt);
+            }
+            jQuery("#ObraRelacionadas").append(optGroup);
+        };
+        jQuery("#ObraRelacionadas").trigger('chosen:updated');
+        jQuery("#ObraRelacionadas").trigger('chosen:activate');
+    }
+
 var loadRelacionadasSearch =
     function (target) {
-        var filter = target.value;
+        let filter = target.value;
+        let obraId = jQuery("#ObraId").val();
+
         jQuery.ajax({
-            url: `/obras/index_filtered.json?filter=${filter}`,
+            url: `/obras/index_filtered.json?current=${obraId}&filter=${filter}`,
             type: 'get',
             success: function (data) {
-                $('#ObraRelacionadas').empty();
-                data.forEach(function (item) {
-                    jQuery("#ObraRelacionadas").append(
-                        '<option value="' + item.Obra.id + '">' + item.Obra.nome + '</option>'
-                    )
-                });
-                jQuery("#ObraRelacionadas").trigger('chosen:updated');
-                jQuery("#ObraRelacionadas").trigger('chosen:activate');
+                updateRelacionadaSelect(data);
                 target.value = filter;
             }
         });
@@ -176,8 +191,8 @@ var addRelacionada =
 
                     jQuery("#ObraRelacionadas option[value=" + selected + "]")
                         .attr('disabled','disabled');
-                    jQuery("#ObraRelacionadas").val('');
-                    chosen.trigger("liszt:updated");
+
+                    updateRelacionadaSelect();
                 }
             });
         return false;

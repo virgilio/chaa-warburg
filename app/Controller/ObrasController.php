@@ -48,25 +48,58 @@ class ObrasController extends AppController {
         $this->set('iconografias', $iconografias);
     }
 
-    public function index_filtered() {
-        $this->Obra->recursive = -1;
-        $fields = array('Obra.id', 'Obra.nome');
-        if(isset($this->request->query['filter'])) {
-            $obras = $this->Obra->find(
-                'all',
+    private function fetchRelacionadas($current = null) {
+        $relacionadas = $this->Obra->find('list' , array(
+            'fields' => array('ObrasRelacionada.obra_id', 'ObrasRelacionada.relacionada_id', 'ObrasRelacionada.id'),
+            'joins' => array(
                 array(
-                    'fields' =>  $fields,
+                    'table' => 'obras_relacionadas',
+                    'alias' => 'ObrasRelacionada',
+                    'type' => 'LEFT',
                     'conditions' => array(
-                        'Obra.nome like' =>
-                            '%' . $this->request->query['filter'] . '%'
-                    ),
-                ));
-        } else {
-            $obras = $this->Obra->find(
-                'all',
-                array('fields' =>  $fields, 'limit' => 10)
-            );
+                        'or' => array(
+                            'Obra.id = ObrasRelacionada.obra_id',
+                            'Obra.id = ObrasRelacionada.relacionada_id'
+                        )
+                    )
+                )
+            ),
+            'conditions' => array('Obra.id' => $current),
+        ));
+        $exclude = array();
+        foreach($relacionadas as $_relacionadas){
+            foreach($_relacionadas as $key => $value) {
+                array_push($exclude, $key, $value);
+            }
         }
+        return array_unique($exclude);
+    }
+
+
+    public function index_filtered() {
+        $this->Obra->Behaviors->load('Containable');
+        $query_params =  array(
+            'fields' => array(
+                'Obra.id',
+                'Obra.nome',
+                'Artista.nome'
+            ),
+            'contain' => array('Artista'),
+            'order' => array('Obra.nome' => 'ASC'),
+            'conditions' => array()
+        );
+        if(isset($this->request->query['filter'])) {
+            $query_params['conditions'] =  array(
+                'Obra.nome like' => '%' . $this->request->query['filter'] . '%'
+            );
+        } else {
+            $query_params['limit'] = 10;
+        }
+        if(isset($this->request->query['current'])){
+            $exclude = $this->fetchRelacionadas($this->request->query['current']);
+            $query_params['conditions']['NOT'] = array('Obra.id' => array_unique($exclude));
+        }
+        $obras = $this->Obra->find('list', $query_params);
         $this->set('obras', $obras);
     }
 
@@ -315,7 +348,6 @@ class ObrasController extends AppController {
         $this->set('obraTipos', $obraTipos);
         $this->set('iconografias', $iconografias);
     }
-
 
     private function getPaisIdsQuery($query) {
         $this->loadModel('Pais');
@@ -704,27 +736,28 @@ Você pode acessá-la através do link: " . $url . "
 
         $users = $this->User->find('list');
 
-        $this->Obra->Relacionada->Behaviors->load('Containable');
-        $relacionadas = $this->Obra->Relacionada->find('list', array(
-            'fields' => array(
-                'Relacionada.id',
-                'Relacionada.nome',
-                'Artista.nome'
-            ),
-            'contain' => array('Artista'),
-            'order' => array('Relacionada.nome' => 'ASC')
-        ));
+        // $this->Obra->Relacionada->Behaviors->load('Containable');
+        // $relacionadas = $this->Obra->Relacionada->find('list', array(
+        //     'fields' => array(
+        //         'Relacionada.id',
+        //         'Relacionada.nome',
+        //         'Artista.nome'
+        //     ),
+        //     'contain' => array('Artista'),
+        //     'order' => array('Relacionada.nome' => 'ASC'),
+        //     'limit' => 10
+        // ));
 
-        foreach($result['Relacionada'] as $rel){
-            unset($relacionadas[$rel['id']]);
-        }
+        // foreach($result['Relacionada'] as $rel){
+        //     unset($relacionadas[$rel['id']]);
+        // }
 
-        foreach($result['Relacionada2'] as $rel){
-            unset($relacionadas[$rel['id']]);
-        }
+        // foreach($result['Relacionada2'] as $rel){
+        //     unset($relacionadas[$rel['id']]);
+        // }
 
-        unset($relacionadas[$result['Obra']['id']]);
-
+        // unset($relacionadas[$result['Obra']['id']]);
+        $relacionadas = array();
         $this->set(compact('obraTipos', 'instituicoes', 'paises', 'cidades',
                     'artistas', 'iconografias', 'relacionadas', 'users'));
 
