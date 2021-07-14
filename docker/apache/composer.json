@@ -1,0 +1,10 @@
+{
+    "name": "virgilio/chaa-warburg",
+    "require": {
+        "cakephp/cakephp": "2.10.*",
+        "cakephp/debug_kit": "2.2.*"
+    },
+    "config": {
+        "vendor-dir": "/opt/Vendor"
+    }
+}

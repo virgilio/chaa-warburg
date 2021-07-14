@@ -1,0 +1,23 @@
+{
+  "name": "chaa-warburg",
+  "version": "1.0.0",
+  "description": "chaa-warburg ============",
+  "main": "index.js",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/virgilio/chaa-warburg.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/virgilio/chaa-warburg/issues"
+  },
+  "homepage": "https://github.com/virgilio/chaa-warburg#readme"
+}
