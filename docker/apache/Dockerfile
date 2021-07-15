@@ -19,18 +19,15 @@ RUN composer install --no-interaction --no-progress --quiet
 
 WORKDIR /var/www/html/app
 
-# Create tmp directory and make it writable by the web server
-RUN mkdir -p tmp/cache/models tmp/cache/persistent && \
-    chown -R www-data:www-data tmp \
-    && chmod -R 770 tmp
+RUN mkdir -p /var/www/html/app/tmp/cache/models
+RUN mkdir -p /var/www/html/app/tmp/cache/persistent
+RUN mkdir -p /var/www/html/app/webroot/img/artistas
+RUN mkdir -p /var/www/html/app/webroot/img/obras
+RUN mkdir -p /var/www/html/app/webroot/img/obras/mini
+RUN mkdir -p /var/www/html/app/webroot/img/obras/thumbs
 
-RUN mkdir -p app/webroot/img/{artistas, obras} && \
-    chown -R www-data:www-data app/webroot/img/{artistas, obras}
+RUN chown -R www-data:www-data /var/www/html/app
+RUN chmod -R 770 tmp
 
-RUN mkdir -p app/webroot/img/obras/{mini,thumbs} && \
-    chown -R www-data:www-data app/webroot/img/obras/{mini,thumbs}
-
-RUN a2enmod rewrite \
-  && service apache2 restart
-
+RUN a2enmod rewrite && service apache2 restart
 EXPOSE 80
